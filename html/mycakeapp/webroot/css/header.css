@@ -9,6 +9,7 @@ header {
     color: #ffffff;
     background-color:#262626;
     letter-spacing: 1px;
+    padding: 25px 0;
 }
 
 .header-container,.header-nav-list,.header-wrap-first{
@@ -19,7 +20,6 @@ header {
 .header-container {
     width: 90%;
     margin: 0 auto;
-    justify-content: space-between;
 }
 
 #header-text-quel{
@@ -30,8 +30,11 @@ header {
     font-size: 16px;
     font-weight: bold;
 }
+.header-nav-list{
+    margin-left: 140px;
+}
 .header-nav-list li {
-    padding-right: 32px;
+    padding-right: 60px;
     letter-spacing: 1px;
     list-style: none;
 }
