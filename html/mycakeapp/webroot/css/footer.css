@@ -1,0 +1,35 @@
+.foot {
+    width: 100%;
+    min-width: 1080px;
+    height: 168px;
+    color: #ffffff;
+    background-color: #262626;
+    align-content: center;
+}
+.footer-container {
+    display: flex;
+    padding-top: 75.6px;
+}
+.footer-nav-list {
+    display: flex;
+    list-style-type: none;
+}
+.footer-title {
+    font-size: 16px;
+    font-weight: bold;
+    margin-left: 140px;
+    margin-right: 162px;
+}
+.footer-nav-list li {
+    padding-right: 32px;
+    letter-spacing: 1.12px;
+}
+.footer-nav-list-after::after {
+    content: "|";
+    padding-left: 33px;
+}
+
+a {
+    text-decoration: none;
+    color: #ffffff;
+}
