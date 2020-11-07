@@ -52,7 +52,7 @@ class UsersTable extends Table
             ->allowEmptyString('id', null, 'create');
 
         $validator
-            ->email('email', 'メールアドレスが間違っているようです。')
+            ->email('email', false, 'メールアドレスが間違っているようです。')
             ->requirePresence('email', 'create')
             ->notEmptyString('email', '空白になっています。');
 
