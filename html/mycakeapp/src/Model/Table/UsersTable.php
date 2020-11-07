@@ -70,12 +70,7 @@ class UsersTable extends Table
 
         $validator
             ->scalar('check_password')
-            ->add('check_password', [
-                'comWith' => [
-                    'rule' =>  ['compareWith','password_check'],
-                    'message' => 'パスワードが一致していません'
-                ]
-            ]);
+            ->equalToField('check_password', 'password', 'パスワードが一致していません。');
 
         $validator
             ->date('birthdate')
