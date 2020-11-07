@@ -52,15 +52,15 @@ class UsersTable extends Table
             ->allowEmptyString('id', null, 'create');
 
         $validator
-            ->email('email')
+            ->email('email', 'メールアドレスが間違っているようです。')
             ->requirePresence('email', 'create')
-            ->notEmptyString('email');
+            ->notEmptyString('email', '空白になっています。');
 
         $validator
-            ->scalar('password')
-            ->maxLength('password', 100)
+            ->scalar('password', 'パスワードに使用できない文字が入っています。半角英数字で入力してください。')
+            ->maxLength('password', 100, 'パスワードは4文字以上、13文字以下にしてください。')
             ->requirePresence('password', 'create')
-            ->notEmptyString('password');
+            ->notEmptyString('password', '空白になっています。');
 
         $validator
             ->date('birthdate')
