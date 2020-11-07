@@ -69,6 +69,15 @@ class UsersTable extends Table
                 'message' => 'パスワードに使えない文字が入力されています']]);
 
         $validator
+            ->scalar('check_password')
+            ->add('check_password', [
+                'comWith' => [
+                    'rule' =>  ['compareWith','password_check'],
+                    'message' => 'パスワードが一致していません'
+                ]
+            ]);
+
+        $validator
             ->date('birthdate')
             ->requirePresence('birthdate', 'create')
             ->notEmptyDate('birthdate');
