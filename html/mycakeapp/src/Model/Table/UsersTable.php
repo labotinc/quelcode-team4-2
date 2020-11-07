@@ -57,10 +57,16 @@ class UsersTable extends Table
             ->notEmptyString('email', '空白になっています。');
 
         $validator
-            ->scalar('password', 'パスワードに使用できない文字が入っています。半角英数字で入力してください。')
+            ->scalar('password')
             ->lengthBetween('password', [4, 13], 'パスワードは4文字以上、13文字以下にしてください。')
             ->requirePresence('password', 'create')
-            ->notEmptyString('password', '空白になっています。');
+            ->notEmptyString('password', '空白になっています。')
+            ->add('password', [
+                'alphaNumeric' => [
+                'rule' => function ($value, $context) {
+                    return preg_match('/^[a-zA-Z0-9]+$/', $value) ? true : false;
+                    },
+                'message' => 'パスワードに使えない文字が入力されています']]);
 
         $validator
             ->date('birthdate')
