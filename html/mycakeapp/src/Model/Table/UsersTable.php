@@ -58,8 +58,7 @@ class UsersTable extends Table
 
         $validator
             ->scalar('password', 'パスワードに使用できない文字が入っています。半角英数字で入力してください。')
-            ->maxLength('password', 13, 'パスワードは4文字以上、13文字以下にしてください。')
-            ->minLength('password', 4, 'パスワードは4文字以上、13文字以下にしてください。')
+            ->lengthBetween('password', [4, 13], 'パスワードは4文字以上、13文字以下にしてください。')
             ->requirePresence('password', 'create')
             ->notEmptyString('password', '空白になっています。');
 
