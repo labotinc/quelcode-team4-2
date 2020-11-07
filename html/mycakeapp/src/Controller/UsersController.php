@@ -1,7 +1,9 @@
 <?php
+
 namespace App\Controller;
 
 use App\Controller\AppController;
+use Cake\Mailer\Email;
 
 /**
  * Users Controller
@@ -50,6 +52,16 @@ class UsersController extends AppController
         $user = $this->Users->newEntity();
         if ($this->request->is('post')) {
             $user = $this->Users->patchEntity($user, $this->request->getData());
+            // パスワードを暗号化
+            $cypherMethod = 'aes-128-cbc';
+            $key = 'González';
+            // 方式に応じたIV(初期化ベクトル)に必要な長さを取得
+            $ivLength = openssl_cipher_iv_length($cypherMethod);
+            // IV を自動生成
+            $iv = openssl_random_pseudo_bytes($ivLength);
+            // OPENSSL_RAW_DATA と OPENSSL_ZERO_PADDING を指定可
+            $options = 0;
+            $user['password'] = openssl_encrypt($user['password'], $cypherMethod, $key, $options, $iv);
             if ($this->Users->save($user)) {
                 $this->Flash->success(__('The user has been saved.'));
 
