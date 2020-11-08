@@ -17,6 +17,7 @@
         <?php
             echo $this->Form->control('email');
             echo $this->Form->control('password');
+            echo $this->Form->control('check_password', ['type' => 'password']);
             echo $this->Form->control('birthdate');
             echo $this->Form->control('sex');
             echo $this->Form->control('is_deleted');
