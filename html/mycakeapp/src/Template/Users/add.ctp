@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\User $user
@@ -11,16 +12,16 @@
     </ul>
 </nav>
 <div class="users form large-9 medium-8 columns content">
-    <?= $this->Form->create($user) ?>
+    <?= $this->Form->create($user, ['novalidate' => true]) ?>
     <fieldset>
         <legend><?= __('Add User') ?></legend>
         <?php
-            echo $this->Form->control('email');
-            echo $this->Form->control('password');
-            echo $this->Form->control('check_password', ['type' => 'password']);
-            echo $this->Form->control('birthdate');
-            echo $this->Form->control('sex');
-            echo $this->Form->control('is_deleted');
+        echo $this->Form->control('email');
+        echo $this->Form->control('password');
+        echo $this->Form->control('check_password', ['type' => 'password']);
+        echo $this->Form->control('birthdate');
+        echo $this->Form->control('sex');
+        echo $this->Form->control('is_deleted');
         ?>
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>
