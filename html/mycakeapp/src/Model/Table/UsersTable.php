@@ -64,7 +64,7 @@ class UsersTable extends Table
             ->add('password', [
                 'alphaNumeric' => [
                 'rule' => function ($value, $context) {
-                    return preg_match('/^[a-zA-Z0-9]+$/', $value) ? true : false;
+                    return preg_match('/\A[a-zA-Z0-9]\z/', $value) ? true : false;
                     },
                 'message' => 'パスワードに使えない文字が入力されています']]);
 
