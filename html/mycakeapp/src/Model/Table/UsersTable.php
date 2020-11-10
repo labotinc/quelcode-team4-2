@@ -52,15 +52,25 @@ class UsersTable extends Table
             ->allowEmptyString('id', null, 'create');
 
         $validator
-            ->email('email')
+            ->email('email', false, 'メールアドレスが間違っているようです。')
             ->requirePresence('email', 'create')
-            ->notEmptyString('email');
+            ->notEmptyString('email', '空白になっています。');
 
         $validator
             ->scalar('password')
-            ->maxLength('password', 100)
+            ->lengthBetween('password', [4, 13], 'パスワードは4文字以上、13文字以下にしてください。')
             ->requirePresence('password', 'create')
-            ->notEmptyString('password');
+            ->notEmptyString('password', '空白になっています。')
+            ->add('password', [
+                'alphaNumeric' => [
+                'rule' => function ($value, $context) {
+                    return preg_match("/\A[0-9A-Za-z]*\z/", $value) ? true : false;
+                    },
+                'message' => 'パスワードに使えない文字が入力されています']]);
+
+        $validator
+            ->scalar('check_password')
+            ->equalToField('check_password', 'password', 'パスワードが一致していません。');
 
         $validator
             ->date('birthdate')
@@ -70,7 +80,8 @@ class UsersTable extends Table
         $validator
             ->scalar('sex')
             ->maxLength('sex', 1)
-            ->notEmptyString('sex');
+            ->notEmptyString('sex')
+            ->inList('sex', [0, 1, 2, 9], '誤った番号が選択されています');
 
         $validator
             ->boolean('is_deleted')
