@@ -16,5 +16,7 @@
         'maxYear' => date('Y'),
         'minYear' => date('Y') - 100
     ]); ?>
+     <?= $this->Form->select('性別',['0'=>'不明','1'=>'男','2'=>'女'],['empty'=>'性別']);?>
+    <?= $this->Form->submit('会員登録'); ?>
     <?= $this->Form->end(); ?>
 </div>
