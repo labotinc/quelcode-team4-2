@@ -2,6 +2,9 @@
 ##########################
 # /config/app.php
 /config/.env
+# schema-dump-default.lockをコミット対象から除外 #
+# このファイルは直前のマイグレーション操作を残すものであり、都度コミットするべきではないので除外します #
+/config/Migrations/schema-dump-default.lock
 /logs/*
 /tmp/*
 /vendor/*
