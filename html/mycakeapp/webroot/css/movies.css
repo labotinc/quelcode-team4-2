@@ -1,0 +1,81 @@
+@charset "UTF-8";
+
+/**
+* プロパティの記述順序
+* 1 ボックスの詳細(content, padding, border, margin)
+* 2 content詳細(font-sizeなど。大体は「文字」「色」「背景」の順番)
+*/
+
+
+html, body {
+    width: 100%;
+    background-color: #EBEBEB;
+}
+
+
+bodyの子要素の子要素 {
+    width: 100%;
+    min-width: 1080px;
+    margin: 0 auto;
+}
+
+/**
+* 全ボタン共通
+*/
+input {
+    display: inline-block;
+    box-shadow: 0 2px 2px #00000014;
+    text-align: center;
+    font-size: 16px;
+}
+
+/**
+* @ボタン 最大サイズボタン(名称仮)基本設計書P24等に登場
+*/
+input ボタン {
+    width: 336px;
+    height: 48px;
+    border: 3px #F5AE0B;
+    font-family: Noto Sans;
+    font-weight: bold;
+    letter-spacing: 0.44px;
+    color: #FFFFFF;
+    background: #F5AE0B 0% 0% no-repeat padding-box;
+}
+
+/**
+* @ボタン 中サイズボタン(仮)基本設計書P51等に登場
+*/
+input 決定ボタン {
+    width: 192px;
+    height: 48px;
+    font-family: GothamMedium;
+    letter-spacing: 0.44px;
+    color: #FFFFFF;
+    background: #F5AE0B 0% 0% no-repeat padding-box;
+}
+
+/**
+* @ボタン キャンセルボタン(仮)基本設計書P51等に登場
+*/
+input キャンセリングボタン {
+    width: 128px;
+    height: 48px;
+    font-family: GothamMedium;
+    letter-spacing: 0.44px;
+    color: #707070;
+    background: #EFEFEF 0% 0% no-repeat padding-box;
+}
+
+/**
+* @ボタン 他ボタン基本設計書P33,34ページに登場
+*/
+
+input 幅自由に伸びるボタン {
+    padding: 8px 16px 9px 18px;
+    font-family: Noto Sans;
+    font-weight: 600;
+    letter-spacing: 0.25px;
+    color: #FFFFFF;
+    background: #F5AE0B 0% 0% no-repeat padding-box;
+}
