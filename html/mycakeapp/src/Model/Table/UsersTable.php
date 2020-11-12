@@ -70,6 +70,7 @@ class UsersTable extends Table
 
         $validator
             ->scalar('check_password')
+            ->notEmptyString('check_password', '空白になっています。')
             ->equalToField('check_password', 'password', 'パスワードが一致していません。');
 
         $validator
@@ -80,8 +81,8 @@ class UsersTable extends Table
         $validator
             ->scalar('sex')
             ->maxLength('sex', 1)
-            ->notEmptyString('sex')
-            ->inList('sex', [0, 1, 2, 9], '誤った番号が選択されています');
+            ->notEmptyString('sex', '性別を選択して下さい。')
+            ->inList('sex', ['0', '1', '2', '9']);
 
         $validator
             ->boolean('is_deleted')
