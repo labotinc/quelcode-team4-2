@@ -24,7 +24,7 @@ class CreateMovieSchedules extends AbstractMigration
             'null' => false,
         ]);
         $table->addColumn('is_playable', 'boolean', [
-            'default' => null,
+            'default' => false,
             'null' => false,
         ]);
         $table->addColumn('created', 'datetime', [
