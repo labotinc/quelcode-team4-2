@@ -70,6 +70,7 @@ class UsersTable extends Table
 
         $validator
             ->scalar('check_password')
+            ->notEmptyString('check_password', '空白になっています。')
             ->equalToField('check_password', 'password', 'パスワードが一致していません。');
 
         $validator
