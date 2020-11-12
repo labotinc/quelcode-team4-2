@@ -24,8 +24,6 @@
     margin: 0 auto 40px;
 }
 
-/* ボタンの修飾 */
-
 .email-form, .password-form, .check-password {
     width: 336px;
     height: 36px;
