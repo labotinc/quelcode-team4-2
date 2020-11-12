@@ -67,6 +67,7 @@ class UsersController extends AppController
      * @return \Cake\Http\Response|null Redirects on successful thanks, renders view otherwise.
      */
     public function thanks() {
+        $this->layout = 'main';
 
     }
 
