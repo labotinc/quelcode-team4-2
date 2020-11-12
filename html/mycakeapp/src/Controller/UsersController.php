@@ -62,6 +62,11 @@ class UsersController extends AppController
         $this->set(compact('user'));
     }
 
+    public function thanks()
+    {
+        $this->layout = 'main';
+    }
+
     /**
      * Edit method
      *
