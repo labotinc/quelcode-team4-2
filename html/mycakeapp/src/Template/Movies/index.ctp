@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Movie[]|\Cake\Collection\CollectionInterface $movies
@@ -8,6 +9,8 @@
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
         <li><?= $this->Html->link(__('New Movie'), ['action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('List Movie Schedules'), ['controller' => 'MovieSchedules', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New Movie Schedules'), ['controller' => 'MovieSchedules', 'action' => 'add']) ?></li>
     </ul>
 </nav>
 <div class="movies index large-9 medium-8 columns content">
@@ -28,23 +31,23 @@
             </tr>
         </thead>
         <tbody>
-            <?php foreach ($movies as $movie): ?>
-            <tr>
-                <td><?= $this->Number->format($movie->id) ?></td>
-                <td><?= h($movie->title) ?></td>
-                <td><?= h($movie->thumbnail_path) ?></td>
-                <td><?= $this->Number->format($movie->total_minutes_with_trailer) ?></td>
-                <td><?= h($movie->screening_start_date) ?></td>
-                <td><?= h($movie->screening_end_date) ?></td>
-                <td><?= h($movie->is_screened) ?></td>
-                <td><?= h($movie->created) ?></td>
-                <td><?= h($movie->modified) ?></td>
-                <td class="actions">
-                    <?= $this->Html->link(__('View'), ['action' => 'view', $movie->id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['action' => 'edit', $movie->id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $movie->id], ['confirm' => __('Are you sure you want to delete # {0}?', $movie->id)]) ?>
-                </td>
-            </tr>
+            <?php foreach ($movies as $movie) : ?>
+                <tr>
+                    <td><?= $this->Number->format($movie->id) ?></td>
+                    <td><?= h($movie->title) ?></td>
+                    <td><?= h($movie->thumbnail_path) ?></td>
+                    <td><?= $this->Number->format($movie->total_minutes_with_trailer) ?></td>
+                    <td><?= h($movie->screening_start_date) ?></td>
+                    <td><?= h($movie->screening_end_date) ?></td>
+                    <td><?= h($movie->is_screened) ?></td>
+                    <td><?= h($movie->created) ?></td>
+                    <td><?= h($movie->modified) ?></td>
+                    <td class="actions">
+                        <?= $this->Html->link(__('View'), ['action' => 'view', $movie->id]) ?>
+                        <?= $this->Html->link(__('Edit'), ['action' => 'edit', $movie->id]) ?>
+                        <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $movie->id], ['confirm' => __('Are you sure you want to delete # {0}?', $movie->id)]) ?>
+                    </td>
+                </tr>
             <?php endforeach; ?>
         </tbody>
     </table>
