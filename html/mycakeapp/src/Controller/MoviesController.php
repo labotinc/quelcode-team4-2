@@ -55,11 +55,9 @@ class MoviesController extends AppController
         // →その後にそのIDを使用して"id.拡張子"の形式で画像を保存
         // →保存したエンティティに上書き
         if ($this->request->is('post')) {
-
             //thumbnail_pathは配列なので先に取り出す。
             $thumbnail_data_array = $this->request->getData('thumbnail_path');
             $thumbnail_filename = $thumbnail_data_array['name'];
-
             // $movieにフォームの送信内容を反映（thumbnail_pathは後で更新する）
             $movie = $this->Movies->patchEntity($movie, [
                 'title' => $this->request->getData('title'),
@@ -91,7 +89,8 @@ class MoviesController extends AppController
                     // トップページ（index）に移動
                     return $this->redirect(['action' => 'index']);
                 }
-            }            // 失敗時のメッセージ
+            }
+            // 失敗時のメッセージ
             $this->Flash->error(__('保存に失敗しました。もう一度入力下さい。'));
         }
         $this->set(compact('movie'));
@@ -110,13 +109,32 @@ class MoviesController extends AppController
             'contain' => [],
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $movie = $this->Movies->patchEntity($movie, $this->request->getData());
+            // 以下はaddと同様の操作
+            $thumbnail_data_array = $this->request->getData('thumbnail_path');
+            $thumbnail_filename = $thumbnail_data_array['name'];
+            $movie = $this->Movies->patchEntity($movie, [
+                'title' => $this->request->getData('title'),
+                'thumbnail_path' => $thumbnail_filename,
+                'total_minutes_with_trailer' => $this->request->getData('total_minutes_with_trailer'),
+                'screening_start_date' => $this->request->getData('screening_start_date'),
+                'screening_end_date' => $this->request->getData('screening_end_date'),
+                'is_screened' => $this->request->getData('is_screened')
+            ]);
             if ($this->Movies->save($movie)) {
-                $this->Flash->success(__('The movie has been saved.'));
-
-                return $this->redirect(['action' => 'index']);
+                $thumbnail_file_extension = pathinfo($thumbnail_filename, PATHINFO_EXTENSION);
+                $thumbnail_path_id = $movie->id;
+                $webroot_img_path = realpath(WWW_ROOT . "img/MovieThumbnails");
+                $thumbnail_file_path = $webroot_img_path . "/" . $thumbnail_path_id . "." . $thumbnail_file_extension;
+                $movie_update = $this->Movies->patchEntity($movie, [
+                    'thumbnail_path' => $thumbnail_file_path,
+                ]);
+                if ($this->Movies->save($movie_update)) {
+                    move_uploaded_file($thumbnail_data_array['tmp_name'], $thumbnail_file_path);
+                    $this->Flash->success(__('保存しました。'));
+                    return $this->redirect(['action' => 'index']);
+                }
             }
-            $this->Flash->error(__('The movie could not be saved. Please, try again.'));
+            $this->Flash->error(__('保存に失敗しました。もう一度入力下さい。'));
         }
         $this->set(compact('movie'));
     }
