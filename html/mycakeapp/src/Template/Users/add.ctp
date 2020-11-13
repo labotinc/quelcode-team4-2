@@ -1,59 +1,29 @@
-<section>
-    <h1 class="heading">会員登録</h1>
-    <div class="wrapper">
-        <div class="container">
-            <?= $this->Form->create($user, [
-                'type' => 'post',
-                'url' => ['controller' => 'Users', 'action' => 'add'],
-                'novalidate' => true
-            ]) ?>
-            <?= $this->Form->control('email', [
-                'placeholder' => 'メールアドレス',
-                'label' => false,
-                'class' => 'email-form'
-            ]) ?>
-            <?= $this->Form->control('password', [
-                'placeholder' => 'パスワード',
-                'label' => false,
-                'class' => 'password-form'
-            ]) ?>
-            <?= $this->Form->control('check_password', [
-                'type' => 'password',
-                'placeholder' => 'パスワード（確認用）',
-                'label' => false,
-                'class' => 'check-password'
-            ]) ?>
-            <?= $this->Form->label(
-                'birthdate',
-                '生年月日',
-                ['class' => 'birthday']
-            ) ?>
+<?php
 
-            <?= $this->Form->control('birthdate', [
-                'type' => 'date',
-                'label' => false,
-                'dateFormat' => 'YMD',
-                'monthNames' => false,
-                'maxYear' => date('Y'),
-                'minYear' => date('Y') - 100
-            ]) ?>
-            <div class="sexuality">
-                <?= $this->Form->select(
-                    'sex',
-                    [
-                        '1' => '男性',
-                        '2' => '女性',
-                        '9' => 'その他'
-                    ],
-                    [
-                        'empty' => '性別',
-                        'default' => '性別'
-                    ]
-                ) ?>
-                <?= $this->Form->error('sex') ?>
-            </div>
-            <?= $this->Form->submit('会員登録', ['class' => 'ragistration']) ?>
-            <?= $this->Form->end() ?>
-        </div>
-    </div>
-</section>
+/**
+ * @var \App\View\AppView $this
+ * @var \App\Model\Entity\User $user
+ */
+?>
+<nav class="large-3 medium-4 columns" id="actions-sidebar">
+    <ul class="side-nav">
+        <li class="heading"><?= __('Actions') ?></li>
+        <li><?= $this->Html->link(__('List Users'), ['action' => 'index']) ?></li>
+    </ul>
+</nav>
+<div class="users form large-9 medium-8 columns content">
+    <?= $this->Form->create($user, ['novalidate' => true]) ?>
+    <fieldset>
+        <legend><?= __('Add User') ?></legend>
+        <?php
+        echo $this->Form->control('email');
+        echo $this->Form->control('password');
+        echo $this->Form->control('check_password', ['type' => 'password']);
+        echo $this->Form->control('birthdate');
+        echo $this->Form->control('sex');
+        echo $this->Form->control('is_deleted');
+        ?>
+    </fieldset>
+    <?= $this->Form->button(__('Submit')) ?>
+    <?= $this->Form->end() ?>
+    
