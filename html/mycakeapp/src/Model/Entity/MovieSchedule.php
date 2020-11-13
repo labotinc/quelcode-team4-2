@@ -1,7 +1,9 @@
 <?php
+
 namespace App\Model\Entity;
 
 use Cake\ORM\Entity;
+use Cake\I18n\Time;
 
 /**
  * MovieSchedule Entity
@@ -34,4 +36,15 @@ class MovieSchedule extends Entity
         'modified' => true,
         'movie' => true,
     ];
+
+
+    protected function _setScreeningStartDatetime($screening_start_datetime)
+    {
+        $now = Time::now();
+        if ($screening_start_datetime > $now) {
+            return $screening_start_datetime;
+        } //else {
+            //return $this->getError('screening_start_datetime', ['過去のスケジュールは登録できません']);
+        //} エンティティクラスでエラーキャッチができず、save時にエラーキャッチしていたのでルールチェッカーでエラー処理
+    }
 }
