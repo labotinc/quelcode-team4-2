@@ -29,7 +29,7 @@ class CreateBookings extends AbstractMigration
             'null' => false,
         ]);
         $table->addColumn('is_cancelled', 'boolean', [
-            'default' => null,
+            'default' => 0,
             'null' => false,
         ]);
         $table->addColumn('created', 'datetime', [
