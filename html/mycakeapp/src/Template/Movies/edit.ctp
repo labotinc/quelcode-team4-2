@@ -15,6 +15,8 @@
             )
             ?></li>
         <li><?= $this->Html->link(__('List Movies'), ['action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('List Movie Schedules'), ['controller' => 'MovieSchedules', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New Movie Schedules'), ['controller' => 'MovieSchedules', 'action' => 'add']) ?></li>
     </ul>
 </nav>
 <div class="movies form large-9 medium-8 columns content">
