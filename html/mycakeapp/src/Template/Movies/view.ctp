@@ -28,6 +28,18 @@
             <td><?= h($movie->thumbnail_path) ?></td>
         </tr>
         <tr>
+            <!-- サムネイルを表示（大きさは実画像を元に変更予定） -->
+            <th scope="row"><?= __('Thumbnail') ?></th>
+            <td><?= $this->Html->image(
+                    "MovieThumbnails/" . pathinfo($movie->thumbnail_path, PATHINFO_BASENAME),
+                    array(
+                        'width' => '300',
+                        'height' => '200',
+                        'alt' => h($movie->thumbnail_path)
+                    )
+                ); ?></td>
+        </tr>
+        <tr>
             <th scope="row"><?= __('Id') ?></th>
             <td><?= $this->Number->format($movie->id) ?></td>
         </tr>

@@ -21,6 +21,7 @@
                 <th scope="col"><?= $this->Paginator->sort('id') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('title') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('thumbnail_path') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('thumbnail') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('total_minutes_with_trailer') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('screening_start_date') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('screening_end_date') ?></th>
@@ -36,6 +37,14 @@
                     <td><?= $this->Number->format($movie->id) ?></td>
                     <td><?= h($movie->title) ?></td>
                     <td><?= h($movie->thumbnail_path) ?></td>
+                    <td><?= $this->Html->image(
+                            "MovieThumbnails/" . pathinfo($movie->thumbnail_path, PATHINFO_BASENAME),
+                            array(
+                                'width' => '200',
+                                'height' => '100',
+                                'alt' => h($movie->thumbnail_path)
+                            )
+                        ); ?></td>
                     <td><?= $this->Number->format($movie->total_minutes_with_trailer) ?></td>
                     <td><?= h($movie->screening_start_date) ?></td>
                     <td><?= h($movie->screening_end_date) ?></td>
