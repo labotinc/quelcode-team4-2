@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Model\Table;
 
 use Cake\ORM\Query;
@@ -61,7 +62,7 @@ class MovieSchedulesTable extends Table
         $validator
             ->dateTime('screening_start_datetime')
             ->requirePresence('screening_start_datetime', 'create')
-            ->notEmptyDateTime('screening_start_datetime');
+            ->notEmptyDateTime('screening_start_datetime', '上映開始時刻を入力してください');
 
         $validator
             ->boolean('is_playable')
@@ -77,11 +78,23 @@ class MovieSchedulesTable extends Table
      *
      * @param \Cake\ORM\RulesChecker $rules The rules object to be modified.
      * @return \Cake\ORM\RulesChecker
+     * 
+     * エンティティを新たに作成する時、過去のスケジュールを作成できないようルールを追加
      */
     public function buildRules(RulesChecker $rules)
     {
         $rules->add($rules->existsIn(['movie_id'], 'Movies'));
-
+        $rules->addCreate(
+            function ($entity, $options) {
+                if ($entity->getErrors('screening_start_datetime')) {
+                    return true;
+                }
+            },
+            [
+                'errorField' => 'screening_start_datetime',
+                'message' => '現在より過去のスケジュールを作成することはできません。'
+            ]
+        );
         return $rules;
     }
 }
