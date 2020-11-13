@@ -86,7 +86,7 @@ class BookingsTable extends Table
     public function buildRules(RulesChecker $rules)
     {
         $rules->add($rules->existsIn(['user_id'], 'Users'));
-        $rules->add($rules->existsIn(['schedule_id'], 'Schedules'));
+        $rules->add($rules->existsIn(['schedule_id'], 'MovieSchedules'));
 
         return $rules;
     }
