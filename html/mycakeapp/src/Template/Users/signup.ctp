@@ -4,7 +4,7 @@
         <div class="container">
             <?= $this->Form->create($user, [
                 'type' => 'post',
-                'url' => ['controller' => 'Users', 'action' => 'add'],
+                'url' => ['controller' => 'Users', 'action' => 'signup'],
                 'novalidate' => true
             ]) ?>
             <?= $this->Form->control('email', [
