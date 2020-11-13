@@ -45,7 +45,7 @@ class BookingsTable extends Table
             'foreignKey' => 'user_id',
             'joinType' => 'INNER',
         ]);
-        $this->belongsTo('Schedules', [
+        $this->belongsTo('MovieSchedules', [
             'foreignKey' => 'schedule_id',
             'joinType' => 'INNER',
         ]);
