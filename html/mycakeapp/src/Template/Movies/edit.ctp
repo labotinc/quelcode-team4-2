@@ -29,7 +29,7 @@
             'thumbnail_path',
             [
                 'type' => 'file',
-                'label' => 'サムネイル画像　※有効ファイル形式：jpg　jpeg　png'
+                'label' => 'サムネイル画像 ※有効ファイル形式：jpg jpeg png'
             ]
         );
         echo $this->Form->control('total_minutes_with_trailer', ['label' => '予告編含む上映時間（分）']);
