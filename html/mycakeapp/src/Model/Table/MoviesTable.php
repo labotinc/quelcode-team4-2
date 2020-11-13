@@ -103,7 +103,7 @@ class MoviesTable extends Table
                         $end = Type::build('date')->marshal($value);
                         $start = Type::build('date')->marshal($start_time['data']['screening_start_date']);
                         //gt():「>」の条件を作成。つまり$end > $start
-                        return $end->gt($start);
+                        return $end->gte($start);
                     },
                     'message' => '終了日は開始日より後にしてください'
                 ]
