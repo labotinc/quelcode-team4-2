@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Model\Table;
 
 use Cake\ORM\Query;
@@ -83,5 +84,19 @@ class MovieSchedulesTable extends Table
         $rules->add($rules->existsIn(['movie_id'], 'Movies'));
 
         return $rules;
+    }
+
+
+    /**
+     * 映画の選択欄に、上映中のもののみ表示させるmethod
+     * @return Cake\ORM\Query　上映終了日が今日以降の映画レコードのidとtitleのリスト
+     */
+    public function findScreeningNow()
+    {
+        $today = date("Y-m-d 00:00:00");
+        $query = $this->Movies->find('list');
+        //$screeningNow = $query->select('title')->where(['screening_end_date' > $today]);
+        $screeningNow = $query->select('screening_end_date')->where(['screening_end_date >=' => $today]);
+        return $screeningNow;
     }
 }
