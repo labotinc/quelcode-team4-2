@@ -3,8 +3,11 @@
 
 // .ctpファイルのliタグについてるclass info-menuを取得
 const infoMenu = document.getElementsByClassName('info-menu');
+const scheduledDate = document.getElementById('scheduled-date');
 
-
+if (infoMenu.classList === undefined) {
+    infoMenu[0].classList.add('info-menu-active')
+}
 // 各日付をイベントリスナーに登録
 for (var i = 0; i < infoMenu.length; i++) {
     infoMenuAction(infoMenu[i], i);
@@ -15,8 +18,10 @@ function infoMenuAction(infoMenuDOM, infoMenuId) {
     infoMenuDOM.addEventListener("click", function () {
         // thisは、クリックされたオブジェクト
         // クリックされた日付と配列番号を呼び出してinfo-menu-activeクラスの追加と削除
-        this.classList.toggle('info-menu-active');
 
+        this.classList.add('info-menu-active');
+        console.log(this.classList);
+        scheduledDate.innerHTML = (this.innerHTML);
         // クリックされていないボタンにinfo-menu-activeがついていたら外す
         for (var i = 0; i < infoMenu.length; i++) {
             if (infoMenuId !== i) {

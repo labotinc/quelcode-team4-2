@@ -19,7 +19,7 @@
         </ul>
 
         <!-- 今は適当に日付入れてあとからヘルパー -->
-        <p class="scheduled-date">00月00日(月)</p>
+        <p id="scheduled-date"><?php echo $weekDate[0] ?></p>
         <div class="movie-list">
             <div class="movie-list-head">
                 <p class="movie-title">タイトルタイトル</p>

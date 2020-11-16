@@ -13,6 +13,7 @@ class MoviesInfoController extends AppController
 
     {
         $this->layout = 'main';
+        // ================ 日付について start ================
         $week = array("日", "月", "火", "水", "木", "金", "土", "日", "月", "火", "水", "木", "金", "土");
         $countWeek = count($week);
         $today = date("Y-m-d H:i:s");
@@ -22,6 +23,7 @@ class MoviesInfoController extends AppController
             $weekNumber = ((int)$week[date("w")]) + $i;
             $weekDate[] = date("m月d日" . "(" . $week[$weekNumber] . ")", $timestamp);
         }
+        // ================ 日付について end ================
         $this->set(compact('weekDate'));
     }
 }
