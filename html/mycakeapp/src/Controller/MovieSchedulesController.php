@@ -60,7 +60,7 @@ class MovieSchedulesController extends AppController
             }
             $this->Flash->error(__('The movie schedule could not be saved. Please, try again.'));
         }
-        $movies = $this->MovieSchedules->findScreeningNow();
+        $movies = $this->MovieSchedules->findScreeningsNotEnd();
         $this->set(compact('movieSchedule', 'movies'));
     }
 
