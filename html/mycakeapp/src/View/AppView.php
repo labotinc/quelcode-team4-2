@@ -1,4 +1,5 @@
 <?php
+
 /**
  * CakePHP(tm) : Rapid Development Framework (https://cakephp.org)
  * Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
@@ -11,6 +12,7 @@
  * @since     3.0.0
  * @license   https://opensource.org/licenses/mit-license.php MIT License
  */
+
 namespace App\View;
 
 use Cake\View\View;
@@ -36,5 +38,12 @@ class AppView extends View
      */
     public function initialize()
     {
+        // Formヘルパーの設定を変更することでラジオボタンのlabelの位置を変更
+        $this->Form->setTemplates([
+            'inputContainer' => '{{content}}',
+            'nestingLabel' => '{{hidden}}{{input}}<label{{attrs}}>{{text}}</label>',
+            // hiddenFieldが必要な場合は消去してください。
+            'hiddenField' => false,
+        ]);
     }
 }

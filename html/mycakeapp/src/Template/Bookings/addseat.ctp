@@ -5,6 +5,7 @@
  * @var \App\Model\Entity\Booking $booking
  */
 ?>
+<?= $this->Html->css('bookings', ['block' => true]); ?>
 <section>
   <h1 class="heading">座席予約</h1>
   <div class="wrapper">
@@ -25,24 +26,24 @@
       ?>
       <table class="movie-seats">
         <thead>
-          <tr>
+          <tr class="movie-seats-line">
             <th></th>
-            <th>A</th>
-            <th>B</th>
-            <th>C</th>
-            <th>D</th>
-            <th>E</th>
-            <th>F</th>
-            <th>G</th>
-            <th>H</th>
-            <th>I</th>
-            <th>J</th>
-            <th>K</th>
+            <th class="table-text">A</th>
+            <th class="table-text">B</th>
+            <th class="table-text">C</th>
+            <th class="table-text">D</th>
+            <th class="table-text">E</th>
+            <th class="table-text">F</th>
+            <th class="table-text">G</th>
+            <th class="table-text">H</th>
+            <th class="table-text">I</th>
+            <th class="table-text">J</th>
+            <th class="table-text">K</th>
             <th></th>
           </tr>
         </thead>
-        <tr>
-          <th>1</th>
+        <tr class="movie-seats-line">
+          <th class="table-text">1</th>
           <th><?= $this->Form->radio('seat_number', [['value' => 'A1', 'text' => '']]) ?></th>
           <th><?= $this->Form->radio('seat_number', [['value' => 'A2', 'text' => '']]) ?></th>
           <th><?= $this->Form->radio('seat_number', [['value' => 'A3', 'text' => '']]) ?></th>
@@ -54,10 +55,10 @@
           <th><?= $this->Form->radio('seat_number', [['value' => 'A9', 'text' => '']]) ?></th>
           <th><?= $this->Form->radio('seat_number', [['value' => 'A10', 'text' => '']]) ?></th>
           <th><?= $this->Form->radio('seat_number', [['value' => 'A11', 'text' => '']]) ?></th>
-          <th>1</th>
+          <th class="table-text">1</th>
         </tr>
-        <tr>
-          <th>2</th>
+        <tr class="movie-seats-line">
+          <th class="table-text">2</th>
           <th><?= $this->Form->radio('seat_number', [['value' => 'B1', 'text' => '']]) ?></th>
           <th><?= $this->Form->radio('seat_number', [['value' => 'B2', 'text' => '']]) ?></th>
           <th><?= $this->Form->radio('seat_number', [['value' => 'B3', 'text' => '']]) ?></th>
@@ -69,10 +70,10 @@
           <th><?= $this->Form->radio('seat_number', [['value' => 'B9', 'text' => '']]) ?></th>
           <th><?= $this->Form->radio('seat_number', [['value' => 'B10', 'text' => '']]) ?></th>
           <th><?= $this->Form->radio('seat_number', [['value' => 'B11', 'text' => '']]) ?></th>
-          <th>2</th>
+          <th class="table-text">2</th>
         </tr>
-        <tr>
-          <th>3</th>
+        <tr class="movie-seats-line">
+          <th class="table-text">3</th>
           <th><?= $this->Form->radio('seat_number', [['value' => 'C1', 'text' => '']]) ?></th>
           <th><?= $this->Form->radio('seat_number', [['value' => 'C2', 'text' => '']]) ?></th>
           <th><?= $this->Form->radio('seat_number', [['value' => 'C3', 'text' => '']]) ?></th>
@@ -84,10 +85,10 @@
           <th><?= $this->Form->radio('seat_number', [['value' => 'C9', 'text' => '']]) ?></th>
           <th><?= $this->Form->radio('seat_number', [['value' => 'C10', 'text' => '']]) ?></th>
           <th><?= $this->Form->radio('seat_number', [['value' => 'C11', 'text' => '']]) ?></th>
-          <th>3</th>
+          <th class="table-text">3</th>
         </tr>
-        <tr>
-          <th>4</th>
+        <tr class='movie-seats-line'>
+          <th class="table-text">4</th>
           <th><?= $this->Form->radio('seat_number', [['value' => 'D1', 'text' => '']]) ?></th>
           <th><?= $this->Form->radio('seat_number', [['value' => 'D2', 'text' => '']]) ?></th>
           <th><?= $this->Form->radio('seat_number', [['value' => 'D3', 'text' => '']]) ?></th>
@@ -99,10 +100,10 @@
           <th><?= $this->Form->radio('seat_number', [['value' => 'D9', 'text' => '']]) ?></th>
           <th><?= $this->Form->radio('seat_number', [['value' => 'D10', 'text' => '']]) ?></th>
           <th><?= $this->Form->radio('seat_number', [['value' => 'D11', 'text' => '']]) ?></th>
-          <th>4</th>
+          <th class="table-text">4</th>
         </tr>
-        <tr>
-          <th>5</th>
+        <tr class='movie-seats-line'>
+          <th class="table-text">5</th>
           <th><?= $this->Form->radio('seat_number', [['value' => 'E1', 'text' => '']]) ?></th>
           <th><?= $this->Form->radio('seat_number', [['value' => 'E2', 'text' => '']]) ?></th>
           <th><?= $this->Form->radio('seat_number', [['value' => 'E3', 'text' => '']]) ?></th>
@@ -114,10 +115,10 @@
           <th><?= $this->Form->radio('seat_number', [['value' => 'E9', 'text' => '']]) ?></th>
           <th><?= $this->Form->radio('seat_number', [['value' => 'E10', 'text' => '']]) ?></th>
           <th><?= $this->Form->radio('seat_number', [['value' => 'E11', 'text' => '']]) ?></th>
-          <th>5</th>
+          <th class="table-text">5</th>
         </tr>
-        <tr>
-          <th>6</th>
+        <tr class='movie-seats-line'>
+          <th class="table-text">6</th>
           <th><?= $this->Form->radio('seat_number', [['value' => 'F1', 'text' => '']]) ?></th>
           <th><?= $this->Form->radio('seat_number', [['value' => 'F2', 'text' => '']]) ?></th>
           <th><?= $this->Form->radio('seat_number', [['value' => 'F3', 'text' => '']]) ?></th>
@@ -129,10 +130,10 @@
           <th><?= $this->Form->radio('seat_number', [['value' => 'F9', 'text' => '']]) ?></th>
           <th><?= $this->Form->radio('seat_number', [['value' => 'F10', 'text' => '']]) ?></th>
           <th><?= $this->Form->radio('seat_number', [['value' => 'F11', 'text' => '']]) ?></th>
-          <th>6</th>
+          <th class="table-text">6</th>
         </tr>
-        <tr>
-          <th>7</th>
+        <tr class='movie-seats-line'>
+          <th class="table-text">7</th>
           <th><?= $this->Form->radio('seat_number', [['value' => 'G1', 'text' => '']]) ?></th>
           <th><?= $this->Form->radio('seat_number', [['value' => 'G2', 'text' => '']]) ?></th>
           <th><?= $this->Form->radio('seat_number', [['value' => 'G3', 'text' => '']]) ?></th>
@@ -144,10 +145,10 @@
           <th><?= $this->Form->radio('seat_number', [['value' => 'G9', 'text' => '']]) ?></th>
           <th><?= $this->Form->radio('seat_number', [['value' => 'G10', 'text' => '']]) ?></th>
           <th><?= $this->Form->radio('seat_number', [['value' => 'G11', 'text' => '']]) ?></th>
-          <th>7</th>
+          <th class="table-text">7</th>
         </tr>
-        <tr>
-          <th>8</th>
+        <tr class='movie-seats-line'>
+          <th class="table-text">8</th>
           <th><?= $this->Form->radio('seat_number', [['value' => 'H1', 'text' => '']]) ?></th>
           <th><?= $this->Form->radio('seat_number', [['value' => 'H2', 'text' => '']]) ?></th>
           <th><?= $this->Form->radio('seat_number', [['value' => 'H3', 'text' => '']]) ?></th>
@@ -159,7 +160,7 @@
           <th><?= $this->Form->radio('seat_number', [['value' => 'H9', 'text' => '']]) ?></th>
           <th><?= $this->Form->radio('seat_number', [['value' => 'H10', 'text' => '']]) ?></th>
           <th><?= $this->Form->radio('seat_number', [['value' => 'H11', 'text' => '']]) ?></th>
-          <th>8</th>
+          <th class="table-text">8</th>
         </tr>
       </table>
       <?= $this->Form->hidden('is_cancelled', ['value' => 0]); ?>
