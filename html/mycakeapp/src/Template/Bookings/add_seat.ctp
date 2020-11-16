@@ -12,7 +12,7 @@
     <div class="container">
       <?= $this->Form->create($booking, [
         'type' => 'post',
-        'url' => ['controller' => 'Bookings', 'action' => 'addseat'],
+        'url' => ['controller' => 'Bookings', 'action' => 'addSeat'],
         'novalidate' => true
       ]) ?>
       <?php
