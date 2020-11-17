@@ -165,7 +165,7 @@
       </table>
       <?= $this->Form->hidden('is_cancelled', ['value' => 0]); ?>
 
-      <?= $this->Form->submit('決定', ['class' => 'ragistration']) ?>
+      <?= $this->Form->submit('決定', ['class' => 'registration']) ?>
       <?= $this->Form->end() ?>
     </div>
   </div>
