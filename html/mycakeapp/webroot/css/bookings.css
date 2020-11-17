@@ -1,0 +1,118 @@
+.heading {
+    text-align: center;
+    color: #707070;
+    font-size: 25px;
+    letter-spacing: 0.89px;
+    line-height: 34px;
+    margin: 80px 0 39px 0;
+}
+
+.wrapper {
+    background: #ffffff;
+    width: 736px;
+    margin: 0 auto 60px;
+    text-align: center;
+    padding-top: 91px;
+}
+
+.container {
+    margin: 0 auto;
+    width: 496px;
+}
+
+.submit {
+    margin-top: 50px;
+    padding-bottom: 80px;
+}
+
+.registration {
+    width: 336px;
+    height: 48px;
+    border: 3px #f5ae0b;
+    font-family: Noto Sans;
+    font-size: 16px;
+    font-weight: bold;
+    letter-spacing: 0.44px;
+    color: #ffffff;
+    background: #f5ae0b 0% 0% no-repeat padding-box;
+}
+
+.error-message {
+    color: #f46161;
+    font-size: 11px;
+    margin: 8px auto;
+    width: 336px;
+    text-align: left;
+}
+
+/*-------------------tanks.ctpのcss---------------------------------*/
+
+.thanks-wrapper {
+    background: #ffffff;
+    width: 736px;
+    margin: 144px auto 367px;
+    text-align: center;
+    padding-top: 121px;
+}
+
+.thanks-heading {
+    color: #707070;
+    font-size: 25px;
+    margin-bottom: 30px;
+}
+
+.thanks-message {
+    color: #707070;
+    font-size: 14px;
+    line-height: 24px;
+}
+
+.button {
+    display: inline-block;
+    margin: 50px 0 120px;
+    width: 336px;
+    height: 48px;
+    line-height: 48px;
+    font-size: 16px;
+    letter-spacing: 0.44px;
+    background: #f5ae0b 0% 0% no-repeat padding-box;
+    box-shadow: 0px 3px 6px #00000036;
+    border: 3px solid #f5ae0b;
+    opacity: 1;
+}
+
+/*--- 座席一覧テーブル ---*/
+.movie-seats {
+    width: 496px;
+    height: 348px;
+    text-align: center;
+}
+
+tr {
+    vertical-align: inherit;
+}
+
+.table-text {
+    font-size: 13px;
+    color: #99918c;
+}
+
+input[type="radio"] {
+    display: none;
+}
+
+input[type="radio"]:checked + label {
+    background: #ffb100;
+}
+
+label {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    background: #c9c9c9 no-repeat;
+    border-radius: 3px;
+}
+
+label:hover {
+    background: #00000015;
+}
