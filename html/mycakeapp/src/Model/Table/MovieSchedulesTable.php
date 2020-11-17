@@ -84,4 +84,16 @@ class MovieSchedulesTable extends Table
 
         return $rules;
     }
+
+    /**
+     * 上映終了日が今日以降である映画のみのレコードをselectするメソッド
+     * @return Cake\ORM\Query 上映終了日が今日以降の映画レコードのidとtitleの結果セットオブジェクト
+     */
+    public function findScreeningsNotEnd()
+    {
+        $today = date("Y-m-d 00:00:00");
+        $query = $this->Movies->find('list');
+        $screeningsNotEnd = $query->where(['screening_end_date >=' => $today]);
+        return $screeningsNotEnd;
+    }
 }
