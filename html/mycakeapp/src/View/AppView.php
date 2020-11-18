@@ -38,12 +38,10 @@ class AppView extends View
      */
     public function initialize()
     {
-        // Formヘルパーの設定を変更することでラジオボタンのlabelの位置を変更
+        // Formヘルパーの設定を変更することでチェックボタンのlabelの位置を変更
         $this->Form->setTemplates([
             'inputContainer' => '{{content}}',
-            'nestingLabel' => '{{hidden}}{{input}}<label{{attrs}}>{{text}}</label>',
-            // hiddenFieldが必要な場合は消去してください。
-            'hiddenField' => false,
+            'nestingLabel' => '{{hidden}}{{input}}<label{{attrs}}>{{text}}</label>'
         ]);
     }
 }

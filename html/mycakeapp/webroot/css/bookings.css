@@ -97,7 +97,7 @@ tr {
     color: #99918c;
 }
 
-input[type="radio"] {
+/* input[type="radio"] {
     display: none;
 }
 
@@ -106,6 +106,49 @@ input[type="radio"]:checked + label {
 }
 
 input[type="radio"] + label {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    background: #c9c9c9 no-repeat;
+    border-radius: 3px;
+}
+
+label:hover {
+    background: #00000015;
+}
+
+.movie-seats th {
+    list-style-type: none;
+    font-size: 21px;
+    margin: 0 0 22px 0;
+} */
+/* .movie-seats th input[type="checkbox"] {
+    width: 25px;
+    height: 25px;
+    margin: -4px 5px 0 0;
+    display: inline-block;
+    vertical-align: middle;
+} */
+
+/* .movie-seats th label {
+    display: inline-block;
+    vertical-align: middle;
+    line-height: 20px;
+} */
+.movie-seats th.locked {
+    opacity: 0.75;
+    color: #aaa;
+}
+
+input[type="checkbox"] {
+    display: none;
+}
+
+input[type="checkbox"]:checked + label {
+    background: #ffb100;
+}
+
+input[type="checkbox"] + label {
     display: inline-block;
     width: 24px;
     height: 24px;
