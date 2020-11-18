@@ -135,7 +135,7 @@ label:hover {
     vertical-align: middle;
     line-height: 20px;
 } */
-.movie-seats th.locked {
+.locked {
     opacity: 0.75;
     color: #aaa;
 }
@@ -158,4 +158,9 @@ input[type="checkbox"] + label {
 
 label:hover {
     background: #00000015;
+}
+
+.table-text {
+    font-size: 13px;
+    color: #99918c;
 }

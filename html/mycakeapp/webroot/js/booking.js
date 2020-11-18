@@ -15,7 +15,7 @@ function click_cb(){
 			// チェックされていないチェックボックスをロックする
 			if(!$(this).children("input[type='checkbox']").prop('checked')){
 				$(this).children("input[type='checkbox']").prop('disabled',true);
-				$(this).addClass("locked");
+				$(this).children("label").addClass("locked");
 			}
 		});
 	}else{
@@ -23,7 +23,7 @@ function click_cb(){
 			// チェックされていないチェックボックスを選択可能にする
 			if(!$(this).children("input[type='checkbox']").prop('checked')){
 				$(this).children("input[type='checkbox']").removeAttr('disabled');
-				$(this).removeClass("locked");
+				$(this).children("label").removeClass("locked");
 			}
 		});
   }
