@@ -18,10 +18,9 @@ function infoMenuAction(infoMenuDOM, infoMenuId) {
     infoMenuDOM.addEventListener("click", function () {
         // thisは、クリックされたオブジェクト
         // クリックされた日付と配列番号を呼び出してinfo-menu-activeクラスの追加と削除
-
         this.classList.add('info-menu-active');
-        console.log(this.classList);
         scheduledDate.innerHTML = (this.innerHTML);
+
         // クリックされていないボタンにinfo-menu-activeがついていたら外す
         for (var i = 0; i < infoMenu.length; i++) {
             if (infoMenuId !== i) {
@@ -31,5 +30,26 @@ function infoMenuAction(infoMenuDOM, infoMenuId) {
                 }
             }
         }
+
+        $.ajax({
+            type: "GET",
+            url: "/MoviesInfo/ajaxTest",
+            dataType: "html",
+            // console.log($(infoMenuDOM).val());
+            data: {
+                time: $(infoMenuDOM).val()
+            },
+            success: function (response) {
+                //取得成功したら実行する処理
+                console.log("ファイルの取得に成功しました");
+                // phpから変えてきたのがresponse
+                // $('#tekitou').html("HTML-VALUE");
+                console.log(response);
+            },
+            error: function () {
+                //取得失敗時に実行する処理
+                console.log("何らかの理由で失敗しました");
+            }
+        });
     })
 }
