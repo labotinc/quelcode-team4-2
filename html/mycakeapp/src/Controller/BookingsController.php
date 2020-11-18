@@ -21,6 +21,8 @@ class BookingsController extends AppController
     {
         parent::initialize();
         $this->loadModel('Users');
+        $this->loadModel('MovieSchedules');
+        $this->loadModel('Movies');
         // ログインユーザー情報を取り出す→本来はログインユーザーを取り出す
         // 今回は仮ユーザーとして各自で登録するユーザーIDが1の情報を使用
         // なので、今回レビューを行う際はまずユーザーを一人登録してください。
@@ -84,34 +86,52 @@ class BookingsController extends AppController
     }
 
     // ユーザー操作画面
-    public function add_seat($schedules_id)
+    public function addSeat($schedule_id)
     {
+
+        $this->viewBuilder()->setLayout('main');
         // MovieSchedulesに存在しないIDのURLを直接入力されたときの処理
         try {
             // $schedules_idの$movie_scheduleを取得する
-            $movie_schedule = $this->MovieSchedules->get($schedules_id);
+            $movie_schedule = $this->MovieSchedules->get($schedule_id);
         } catch (Exception $e) {
             $this->Flash->set(__('不正なURLのため、リダイレクトしました。上映スケジュールページからアクセスしてください。'));
-            // ※トップページが作成されたらトップページをリダイレクト先にする。
-            return $this->redirect(['controller' => 'movie_info', 'action' => 'index']);
+            // ※トップページが作成されたら映画スケジュール画面をリダイレクト先にする。action先は未定。
+            return $this->redirect(['controller' => 'moviesinfo', 'action' => 'index']);
         }
-        $this->viewBuilder()->setLayout('main');
 
         $booking = $this->Bookings->newEntity();
         if ($this->request->is('post')) {
+            //dd($this->request->getData());
             $booking = $this->Bookings->patchEntity($booking, $this->request->getData());
             if ($this->Bookings->save($booking)) {
                 $this->Flash->success(__('The booking has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['action' => 'seat_confirmation', $booking->id]);
             }
             $this->Flash->error(__('The booking could not be saved. Please, try again.'));
         }
-        $users = $this->Bookings->Users->find('list', ['limit' => 200]);
-        $schedules = $this->Bookings->MovieSchedules->find('list', ['limit' => 200]);
-        $this->set(compact('booking', 'users', 'schedules'));
+        $this->set(compact('booking', 'movie_schedule'));
     }
 
+    // ユーザー確認画面
+    public function seatConfirmation($id)
+    {
+        $this->viewBuilder()->setLayout('main');
+        try {
+            $booking = $this->Bookings->get($id, [
+                'contain' => ['Users', 'MovieSchedules'],
+            ]);
+            $movie_id = $booking->movie_schedule['movie_id'];
+            $movie_info = $this->Movies->get($movie_id);
+        } catch (Exception $e) {
+            $this->Flash->set(__('不正なURLのため、リダイレクトしました。上映スケジュールページから再度アクセスしてください。'));
+            // ※トップページが作成されたら映画スケジュール画面をリダイレクト先にする。action先は未定。
+            return $this->redirect(['controller' => 'moviesinfo', 'action' => 'index']);
+        }
+
+        $this->set(compact('booking', 'movie_info'));
+    }
     /**
      * Edit method
      *
