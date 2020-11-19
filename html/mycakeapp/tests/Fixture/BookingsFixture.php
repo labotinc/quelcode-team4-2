@@ -22,6 +22,7 @@ class BookingsFixture extends TestFixture
         'is_cancelled' => ['type' => 'boolean', 'length' => null, 'null' => false, 'default' => '0', 'comment' => '', 'precision' => null],
         'created' => ['type' => 'datetime', 'length' => null, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null],
         'modified' => ['type' => 'datetime', 'length' => null, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null],
+        'is_main_booked' => ['type' => 'boolean', 'length' => null, 'null' => false, 'default' => '0', 'comment' => '', 'precision' => null],
         '_constraints' => [
             'primary' => ['type' => 'primary', 'columns' => ['id'], 'length' => []],
         ],
@@ -45,8 +46,9 @@ class BookingsFixture extends TestFixture
                 'schedule_id' => 1,
                 'seat_number' => 'Lo',
                 'is_cancelled' => 1,
-                'created' => '2020-11-13 16:11:32',
-                'modified' => '2020-11-13 16:11:32',
+                'created' => '2020-11-19 19:35:26',
+                'modified' => '2020-11-19 19:35:26',
+                'is_main_booked' => 1,
             ],
         ];
         parent::init();

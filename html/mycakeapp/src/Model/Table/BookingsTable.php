@@ -1,10 +1,12 @@
 <?php
+
 namespace App\Model\Table;
 
 use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
+use phpDocumentor\Reflection\Types\Integer;
 
 /**
  * Bookings Model
@@ -67,11 +69,15 @@ class BookingsTable extends Table
             ->scalar('seat_number')
             ->maxLength('seat_number', 2)
             ->requirePresence('seat_number', 'create')
-            ->notEmptyString('seat_number');
+            ->notEmptyString('seat_number', '座席を選択してください。');
 
         $validator
             ->boolean('is_cancelled')
             ->notEmptyString('is_cancelled');
+
+        $validator
+            ->boolean('is_main_booked')
+            ->notEmptyString('is_main_booked');
 
         return $validator;
     }
@@ -89,5 +95,13 @@ class BookingsTable extends Table
         $rules->add($rules->existsIn(['schedule_id'], 'MovieSchedules'));
 
         return $rules;
+    }
+
+    public function findBookingSeats(string $schedule_id)
+    {
+        $query = $this->find();
+        $seat_numbers = $query->enableHydration(false)->select(['seat_number'])->where(['schedule_id' => $schedule_id]);
+        $seat_numbers_array = $seat_numbers->toList();
+        return $seat_numbers_array;
     }
 }

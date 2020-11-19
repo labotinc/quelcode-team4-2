@@ -10,6 +10,8 @@
         <li><?= $this->Html->link(__('New Booking'), ['action' => 'add']) ?></li>
         <li><?= $this->Html->link(__('List Users'), ['controller' => 'Users', 'action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('New User'), ['controller' => 'Users', 'action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('List Movie Schedules'), ['controller' => 'MovieSchedules', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New Movie Schedule'), ['controller' => 'MovieSchedules', 'action' => 'add']) ?></li>
     </ul>
 </nav>
 <div class="bookings index large-9 medium-8 columns content">
@@ -24,6 +26,7 @@
                 <th scope="col"><?= $this->Paginator->sort('is_cancelled') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('created') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('modified') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('is_main_booked') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
             </tr>
         </thead>
@@ -32,11 +35,12 @@
             <tr>
                 <td><?= $this->Number->format($booking->id) ?></td>
                 <td><?= $booking->has('user') ? $this->Html->link($booking->user->id, ['controller' => 'Users', 'action' => 'view', $booking->user->id]) : '' ?></td>
-                <td><?= $this->Number->format($booking->schedule_id) ?></td>
+                <td><?= $booking->has('movie_schedule') ? $this->Html->link($booking->movie_schedule->id, ['controller' => 'MovieSchedules', 'action' => 'view', $booking->movie_schedule->id]) : '' ?></td>
                 <td><?= h($booking->seat_number) ?></td>
                 <td><?= h($booking->is_cancelled) ?></td>
                 <td><?= h($booking->created) ?></td>
                 <td><?= h($booking->modified) ?></td>
+                <td><?= h($booking->is_main_booked) ?></td>
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['action' => 'view', $booking->id]) ?>
                     <?= $this->Html->link(__('Edit'), ['action' => 'edit', $booking->id]) ?>
