@@ -42,12 +42,20 @@ input ボタン {
     background: #f5ae0b 0% 0% no-repeat padding-box;
 }
 
+.button {
+    box-shadow: 0 2px 2px #00000014;
+    text-align: center;
+    font-size: 16px;
+}
+
 /**
 * @ボタン 中サイズボタン(仮)基本設計書P51等に登場
 */
 .accept-button {
+    display: inline-block;
+    padding: 16px 0 16px 0;
     width: 192px;
-    height: 48px;
+    height: 12px;
     font-family: GothamMedium;
     letter-spacing: 0.44px;
     color: #ffffff;
@@ -57,9 +65,11 @@ input ボタン {
 /**
 * @ボタン キャンセルボタン(仮)基本設計書P51等に登場
 */
-a.cancel-button {
+.cancel-button {
+    display: inline-block;
+    padding: 16px 0 16px 0;
     width: 128px;
-    height: 48px;
+    height: 12px;
     font-family: GothamMedium;
     letter-spacing: 0.44px;
     color: #707070;

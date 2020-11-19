@@ -45,42 +45,6 @@
     text-align: left;
 }
 
-/*-------------------tanks.ctpのcss---------------------------------*/
-
-.thanks-wrapper {
-    background: #ffffff;
-    width: 736px;
-    margin: 144px auto 367px;
-    text-align: center;
-    padding-top: 121px;
-}
-
-.thanks-heading {
-    color: #707070;
-    font-size: 25px;
-    margin-bottom: 30px;
-}
-
-.thanks-message {
-    color: #707070;
-    font-size: 14px;
-    line-height: 24px;
-}
-
-.button {
-    display: inline-block;
-    margin: 50px 0 120px;
-    width: 336px;
-    height: 48px;
-    line-height: 48px;
-    font-size: 16px;
-    letter-spacing: 0.44px;
-    background: #f5ae0b 0% 0% no-repeat padding-box;
-    box-shadow: 0px 3px 6px #00000036;
-    border: 3px solid #f5ae0b;
-    opacity: 1;
-}
-
 /*--- 座席一覧テーブル ---*/
 .movie-seats {
     width: 496px;
@@ -97,44 +61,6 @@ tr {
     color: #99918c;
 }
 
-/* input[type="radio"] {
-    display: none;
-}
-
-input[type="radio"]:checked + label {
-    background: #ffb100;
-}
-
-input[type="radio"] + label {
-    display: inline-block;
-    width: 24px;
-    height: 24px;
-    background: #c9c9c9 no-repeat;
-    border-radius: 3px;
-}
-
-label:hover {
-    background: #00000015;
-}
-
-.movie-seats th {
-    list-style-type: none;
-    font-size: 21px;
-    margin: 0 0 22px 0;
-} */
-/* .movie-seats th input[type="checkbox"] {
-    width: 25px;
-    height: 25px;
-    margin: -4px 5px 0 0;
-    display: inline-block;
-    vertical-align: middle;
-} */
-
-/* .movie-seats th label {
-    display: inline-block;
-    vertical-align: middle;
-    line-height: 20px;
-} */
 .locked {
     opacity: 0.75;
     color: #aaa;
@@ -163,4 +89,64 @@ label:hover {
 .table-text {
     font-size: 13px;
     color: #99918c;
+}
+
+.reserved {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    background: #5a5858 no-repeat;
+    border-radius: 3px;
+}
+
+.non-reserved-sample .reserved-sample {
+    vertical-align: middle;
+}
+
+.reserved-sample {
+    padding: 10px 0 30px 0;
+}
+
+.non-reserved-sample::before {
+    content: "";
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    background: #c9c9c9 no-repeat;
+    border-radius: 3px;
+    position: relative;
+    top: 7px;
+}
+
+.reserved-sample::before {
+    content: "";
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    background: #5a5858 no-repeat;
+    border-radius: 3px;
+    position: relative;
+    top: 7px;
+}
+
+/* seat_confirmationページの実装 */
+.confirmation-container {
+    padding-bottom: 80px;
+}
+
+.movie,
+.user {
+    color: #707070;
+    font-weight: bold;
+    font-family: Noto Sans;
+}
+
+.title {
+    font-size: 18px;
+    padding-bottom: 8px;
+}
+
+.content {
+    font-size: 14px;
+    padding-bottom: 18px;
 }
