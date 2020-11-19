@@ -25,38 +25,26 @@ class MoviesInfoController extends AppController
 
     public function index()
     {
+        // ================ 日付について start ================
+        $today = date("Ymd H:i:s");
+        $today_w = date("w");
+        $week = array("日", "月", "火", "水", "木", "金", "土", "日", "月", "火", "水", "木", "金", "土");
+        $countWeek = count($week) - (int)$today_w;
 
-
-        // 'conditions' => ['movie_id' => 1]])->toArray();
-        // var_dump($MovieSchedules);
-
-        // var_dump($_POST);
-        if ($this->request->is('post')) {
+        for ($i = 0; $i < $countWeek; $i++) {
+            $timestamp = strtotime((string)$i . 'day ' . $today);
+            $weekNumber = $today_w + $i;
+            $weekDate[] = date("m月d日" . "(" . $week[$weekNumber] . ")", $timestamp);
+            $weekValue[] = $timestamp;
         }
-
-        $ajaxActiveTime = date("Y-m-d 00:00:00", 1605771688);
-        $ajaxActiveTimeEND = date("Y-m-d", 1605771688);
-
-
-        $MovieSchedules = $this->MovieSchedules->find('all')
-            // ->contain(['Movies'])
-            ->where([
-                'MovieSchedules.screening_start_datetime' => $ajaxActiveTimeEND
-                // 'MovieSchedules.screening_start_datetime <=' => $ajaxActiveTime
-            ])
-            ->toArray();
-
-
-
-        $this->set(compact('ajaxActiveTime', 'MovieSchedules'));
-        // $this->set(compact('weekDate', 'today'));
+        // ================ 日付について end ================
+        $this->set(compact('weekDate', 'weekValue', 'today'));
     }
 
     function ajaxTest()
     {
         $this->autoRender = FALSE;
         if ($this->request->is('ajax')) {
-            // いけた。これでajaxから値が届いた。
             // その日の始まり。
             $ajaxActiveTime = date("Y-m-d 00:00:00", $_GET['time']);
             // その日の終わり
@@ -67,20 +55,11 @@ class MoviesInfoController extends AppController
                 ->where([
                     'MovieSchedules.screening_start_datetime >=' => $ajaxActiveTime,
                     'MovieSchedules.screening_start_datetime <=' => $ajaxActiveTimeEND
-                ])
-                ->toArray();
+                ])->toArray();
 
-            // $bidrequest = $this->Bidrequests->find('all', [
-            // 	'conditions' => ['biditem_id' => $id],
-            // 	'contain' => ['Users'],
-            // 	'order' => ['price' => 'desc']
-            // ])->first();
-
-
-            echo json_encode($MovieSchedules);
-            // echo json_encode($ajaxActiveTime);
-            // echo json_encode($ajaxActiveTimeEND);
-            // echo json_encode($_GET['time']);
+            // JSON_UNESCAPED_UNICODEで文字化け回避
+            echo json_encode($MovieSchedules, JSON_UNESCAPED_UNICODE);
+            exit;
         }
     }
 }

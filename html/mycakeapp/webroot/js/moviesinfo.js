@@ -34,21 +34,27 @@ function infoMenuAction(infoMenuDOM, infoMenuId) {
         $.ajax({
             type: "GET",
             url: "/MoviesInfo/ajaxTest",
-            dataType: "html",
-            // console.log($(infoMenuDOM).val());
+            dataType: "json",
             data: {
                 time: $(infoMenuDOM).val()
             },
-            success: function (response) {
+            success: function (data) {
                 //取得成功したら実行する処理
                 console.log("ファイルの取得に成功しました");
-                // phpから変えてきたのがresponse
-                // $('#tekitou').html("HTML-VALUE");
-                console.log(response);
+                if (data.length === 0) {
+                    // スケジュールがなかったら
+                    console.log('値がありません。');
+                } else {
+                    // スケジュールがあったら
+                    console.log(data[0].movie.title);
+                }
             },
-            error: function () {
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
                 //取得失敗時に実行する処理
                 console.log("何らかの理由で失敗しました");
+                console.log("XMLHttpRequest : " + XMLHttpRequest.status);
+                console.log("textStatus     : " + textStatus);
+                console.log("errorThrown    : " + errorThrown.message);
             }
         });
     })
