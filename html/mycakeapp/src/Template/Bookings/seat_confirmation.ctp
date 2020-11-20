@@ -20,7 +20,7 @@
       <p class="movie content">
         <?= h($booking->movie_schedule->screening_start_datetime->format('H:i')), ' ~'; ?>
         <?= h($booking->movie_schedule->screening_start_datetime
-          ->addHours($movie_info->total_minutes_with_trailer) // 終了時間計算
+          ->addMinutes($movie_info->total_minutes_with_trailer) // 終了時間計算
           ->format('H:i'));
         ?>
       </p>
