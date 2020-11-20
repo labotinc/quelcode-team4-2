@@ -97,10 +97,17 @@ class BookingsTable extends Table
         return $rules;
     }
 
+    // ユーザーごとの予約済座席を検索
     public function findBookingSeats(string $schedule_id)
     {
         $query = $this->find();
-        $seat_numbers = $query->enableHydration(false)->select(['user_id', 'seat_number'])->where(['schedule_id' => $schedule_id]);
+        $seat_numbers = $query
+            // enableHydrationをfalseにすることで素の配列を取得できる
+            ->enableHydration(false)
+            ->select(['user_id', 'seat_number'])
+            ->where(['schedule_id' => $schedule_id]);
+        // toList()によって配列にする
+        // 参考:https://qiita.com/kojimetal666/items/41d23aa32dd2d88da8de
         $seat_numbers_array = $seat_numbers->toList();
         return $seat_numbers_array;
     }
@@ -109,7 +116,9 @@ class BookingsTable extends Table
     public function findBookedTemporary(string $schedule_id, string $authuser_id)
     {
         $query = $this->find();
-        $my_booked_temporary = $query->enableHydration(false)->select(['id', 'created'])
+        $my_booked_temporary = $query
+            ->enableHydration(false)
+            ->select(['id', 'created'])
             ->where([
                 'schedule_id' => $schedule_id,
                 'user_id' => $authuser_id,

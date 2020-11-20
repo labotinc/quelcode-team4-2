@@ -53,7 +53,10 @@ $column_alphabets = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K'];
           foreach ($checkbox_values_one as $value) {
             if ($value === $cancel_user_seat) { // P50から遷移した時に席を選択済にする
               echo "<th>";
-              echo $this->Form->control('seat_number', ['type' => 'checkbox', 'value' => $value, 'checked' => true, 'onclick' => 'click_cb()', 'hiddenField' => false, 'id' => $value, 'label' => '']);
+              echo $this->Form->control(
+                'seat_number',
+                ['type' => 'checkbox', 'value' => $value, 'checked' => true, 'onclick' => 'click_cb()', 'hiddenField' => false, 'id' => $value, 'label' => '']
+              );
               echo "</th>";
             } elseif (in_array($value, $booked_seats_array)) { // 予約済の席を選択できないようする
               echo "<th>";
@@ -61,7 +64,10 @@ $column_alphabets = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K'];
               echo "</th>";
             } else {
               echo "<th>";
-              echo $this->Form->control('seat_number', ['type' => 'checkbox', 'value' => $value, 'onclick' => 'click_cb()', 'hiddenField' => false, 'id' => $value, 'label' => '']);
+              echo $this->Form->control(
+                'seat_number',
+                ['type' => 'checkbox', 'value' => $value, 'onclick' => 'click_cb()', 'hiddenField' => false, 'id' => $value, 'label' => '']
+              );
               echo "</th>";
             }
           }
@@ -80,7 +86,10 @@ $column_alphabets = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K'];
           foreach ($checkbox_values_two as $value) {
             if ($value === $cancel_user_seat) {
               echo "<th>";
-              echo $this->Form->control('seat_number', ['type' => 'checkbox', 'value' => $value, 'checked' => true, 'onclick' => 'click_cb()', 'hiddenField' => false, 'id' => $value, 'label' => '']);
+              echo $this->Form->control(
+                'seat_number',
+                ['type' => 'checkbox', 'value' => $value, 'checked' => true, 'onclick' => 'click_cb()', 'hiddenField' => false, 'id' => $value, 'label' => '']
+              );
               echo "</th>";
             } elseif (in_array($value, $booked_seats_array)) {
               echo "<th>";
@@ -88,7 +97,10 @@ $column_alphabets = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K'];
               echo "</th>";
             } else {
               echo "<th>";
-              echo $this->Form->control('seat_number', ['type' => 'checkbox', 'value' => $value, 'onclick' => 'click_cb()', 'hiddenField' => false, 'id' => $value, 'label' => '']);
+              echo $this->Form->control(
+                'seat_number',
+                ['type' => 'checkbox', 'value' => $value, 'onclick' => 'click_cb()', 'hiddenField' => false, 'id' => $value, 'label' => '']
+              );
               echo "</th>";
             }
           }
@@ -105,7 +117,10 @@ $column_alphabets = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K'];
           foreach ($checkbox_values_three as $value) {
             if ($value === $cancel_user_seat) {
               echo "<th>";
-              echo $this->Form->control('seat_number', ['type' => 'checkbox', 'value' => $value, 'checked' => true, 'onclick' => 'click_cb()', 'hiddenField' => false, 'id' => $value, 'label' => '']);
+              echo $this->Form->control(
+                'seat_number',
+                ['type' => 'checkbox', 'value' => $value, 'checked' => true, 'onclick' => 'click_cb()', 'hiddenField' => false, 'id' => $value, 'label' => '']
+              );
               echo "</th>";
             } elseif (in_array($value, $booked_seats_array)) {
               echo "<th>";
@@ -113,7 +128,10 @@ $column_alphabets = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K'];
               echo "</th>";
             } else {
               echo "<th>";
-              echo $this->Form->control('seat_number', ['type' => 'checkbox', 'value' => $value, 'onclick' => 'click_cb()', 'hiddenField' => false, 'id' => $value, 'label' => '']);
+              echo $this->Form->control(
+                'seat_number',
+                ['type' => 'checkbox', 'value' => $value, 'onclick' => 'click_cb()', 'hiddenField' => false, 'id' => $value, 'label' => '']
+              );
               echo "</th>";
             }
           }
@@ -130,7 +148,10 @@ $column_alphabets = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K'];
           foreach ($checkbox_values_sixour as $value) {
             if ($value === $cancel_user_seat) {
               echo "<th>";
-              echo $this->Form->control('seat_number', ['type' => 'checkbox', 'value' => $value, 'checked' => true, 'onclick' => 'click_cb()', 'hiddenField' => false, 'id' => $value, 'label' => '']);
+              echo $this->Form->control(
+                'seat_number',
+                ['type' => 'checkbox', 'value' => $value, 'checked' => true, 'onclick' => 'click_cb()', 'hiddenField' => false, 'id' => $value, 'label' => '']
+              );
               echo "</th>";
             } elseif (in_array($value, $booked_seats_array)) {
               echo "<th>";
@@ -138,7 +159,10 @@ $column_alphabets = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K'];
               echo "</th>";
             } else {
               echo "<th>";
-              echo $this->Form->control('seat_number', ['type' => 'checkbox', 'value' => $value, 'onclick' => 'click_cb()', 'hiddenField' => false, 'id' => $value, 'label' => '']);
+              echo $this->Form->control(
+                'seat_number',
+                ['type' => 'checkbox', 'value' => $value, 'onclick' => 'click_cb()', 'hiddenField' => false, 'id' => $value, 'label' => '']
+              );
               echo "</th>";
             }
           }
@@ -155,7 +179,10 @@ $column_alphabets = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K'];
           foreach ($checkbox_values_sixive as $value) {
             if ($value === $cancel_user_seat) {
               echo "<th>";
-              echo $this->Form->control('seat_number', ['type' => 'checkbox', 'value' => $value, 'checked' => true, 'onclick' => 'click_cb()', 'hiddenField' => false, 'id' => $value, 'label' => '']);
+              echo $this->Form->control(
+                'seat_number',
+                ['type' => 'checkbox', 'value' => $value, 'checked' => true, 'onclick' => 'click_cb()', 'hiddenField' => false, 'id' => $value, 'label' => '']
+              );
               echo "</th>";
             } elseif (in_array($value, $booked_seats_array)) {
               echo "<th>";
@@ -163,7 +190,10 @@ $column_alphabets = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K'];
               echo "</th>";
             } else {
               echo "<th>";
-              echo $this->Form->control('seat_number', ['type' => 'checkbox', 'value' => $value, 'onclick' => 'click_cb()', 'hiddenField' => false, 'id' => $value, 'label' => '']);
+              echo $this->Form->control(
+                'seat_number',
+                ['type' => 'checkbox', 'value' => $value, 'onclick' => 'click_cb()', 'hiddenField' => false, 'id' => $value, 'label' => '']
+              );
               echo "</th>";
             }
           }
@@ -180,7 +210,10 @@ $column_alphabets = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K'];
           foreach ($checkbox_values_six as $value) {
             if ($value === $cancel_user_seat) {
               echo "<th>";
-              echo $this->Form->control('seat_number', ['type' => 'checkbox', 'value' => $value, 'checked' => true, 'onclick' => 'click_cb()', 'hiddenField' => false, 'id' => $value, 'label' => '']);
+              echo $this->Form->control(
+                'seat_number',
+                ['type' => 'checkbox', 'value' => $value, 'checked' => true, 'onclick' => 'click_cb()', 'hiddenField' => false, 'id' => $value, 'label' => '']
+              );
               echo "</th>";
             } elseif (in_array($value, $booked_seats_array)) {
               echo "<th>";
@@ -188,7 +221,10 @@ $column_alphabets = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K'];
               echo "</th>";
             } else {
               echo "<th>";
-              echo $this->Form->control('seat_number', ['type' => 'checkbox', 'value' => $value, 'onclick' => 'click_cb()', 'hiddenField' => false, 'id' => $value, 'label' => '']);
+              echo $this->Form->control(
+                'seat_number',
+                ['type' => 'checkbox', 'value' => $value, 'onclick' => 'click_cb()', 'hiddenField' => false, 'id' => $value, 'label' => '']
+              );
               echo "</th>";
             }
           }
@@ -205,7 +241,10 @@ $column_alphabets = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K'];
           foreach ($checkbox_values_seven as $value) {
             if ($value === $cancel_user_seat) {
               echo "<th>";
-              echo $this->Form->control('seat_number', ['type' => 'checkbox', 'value' => $value, 'checked' => true, 'onclick' => 'click_cb()', 'hiddenField' => false, 'id' => $value, 'label' => '']);
+              echo $this->Form->control(
+                'seat_number',
+                ['type' => 'checkbox', 'value' => $value, 'checked' => true, 'onclick' => 'click_cb()', 'hiddenField' => false, 'id' => $value, 'label' => '']
+              );
               echo "</th>";
             } elseif (in_array($value, $booked_seats_array)) {
               echo "<th>";
@@ -213,7 +252,10 @@ $column_alphabets = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K'];
               echo "</th>";
             } else {
               echo "<th>";
-              echo $this->Form->control('seat_number', ['type' => 'checkbox', 'value' => $value, 'onclick' => 'click_cb()', 'hiddenField' => false, 'id' => $value, 'label' => '']);
+              echo $this->Form->control(
+                'seat_number',
+                ['type' => 'checkbox', 'value' => $value, 'onclick' => 'click_cb()', 'hiddenField' => false, 'id' => $value, 'label' => '']
+              );
               echo "</th>";
             }
           }
@@ -230,7 +272,10 @@ $column_alphabets = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K'];
           foreach ($checkbox_values_eight as $value) {
             if ($value === $cancel_user_seat) {
               echo "<th>";
-              echo $this->Form->control('seat_number', ['type' => 'checkbox', 'value' => $value, 'checked' => true, 'onclick' => 'click_cb()', 'hiddenField' => false, 'id' => $value, 'label' => '']);
+              echo $this->Form->control(
+                'seat_number',
+                ['type' => 'checkbox', 'value' => $value, 'checked' => true, 'onclick' => 'click_cb()', 'hiddenField' => false, 'id' => $value, 'label' => '']
+              );
               echo "</th>";
             } elseif (in_array($value, $booked_seats_array)) {
               echo "<th>";
@@ -238,7 +283,10 @@ $column_alphabets = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K'];
               echo "</th>";
             } else {
               echo "<th>";
-              echo $this->Form->control('seat_number', ['type' => 'checkbox', 'value' => $value, 'onclick' => 'click_cb()', 'hiddenField' => false, 'id' => $value, 'label' => '']);
+              echo $this->Form->control(
+                'seat_number',
+                ['type' => 'checkbox', 'value' => $value, 'onclick' => 'click_cb()', 'hiddenField' => false, 'id' => $value, 'label' => '']
+              );
               echo "</th>";
             }
           }

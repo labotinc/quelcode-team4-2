@@ -2,7 +2,7 @@ let click_cb = () => {
 	//チェックカウント用変数
 	let check_count = 0;
 	// 箇所チェック数カウント
-	$(".movie-seats-line th").each(function(){
+	$(".movie-seats-line th").each(function() {
 		const parent_checkbox = $(this).children("input[type='checkbox']");
 		if(parent_checkbox.prop('checked')){
 			check_count = check_count+1;
