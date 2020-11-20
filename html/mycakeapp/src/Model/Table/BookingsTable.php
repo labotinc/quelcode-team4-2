@@ -100,8 +100,22 @@ class BookingsTable extends Table
     public function findBookingSeats(string $schedule_id)
     {
         $query = $this->find();
-        $seat_numbers = $query->enableHydration(false)->select(['seat_number'])->where(['schedule_id' => $schedule_id]);
+        $seat_numbers = $query->enableHydration(false)->select(['user_id', 'seat_number'])->where(['schedule_id' => $schedule_id]);
         $seat_numbers_array = $seat_numbers->toList();
         return $seat_numbers_array;
+    }
+
+    // ユーザーごとの仮予約を取得
+    public function findBookedTemporary(string $schedule_id, string $authuser_id)
+    {
+        $query = $this->find();
+        $my_booked_temporary = $query->enableHydration(false)->select(['id', 'created'])
+            ->where([
+                'schedule_id' => $schedule_id,
+                'user_id' => $authuser_id,
+                'is_main_booked' => false
+            ]);
+        $my_booked_temporary_array = $my_booked_temporary->toList();
+        return $my_booked_temporary_array;
     }
 }
