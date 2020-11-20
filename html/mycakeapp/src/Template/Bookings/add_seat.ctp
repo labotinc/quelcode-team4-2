@@ -51,7 +51,7 @@ $column_alphabets = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K'];
             array_push($checkbox_values_one, $column_alphabet . '1');
           }
           foreach ($checkbox_values_one as $value) {
-            if ($value === $cancel_user_seat) { // P51から遷移した時に席を選択済にする
+            if ($value === $cancel_user_seat) { // P50から遷移した時に席を選択済にする
               echo "<th>";
               echo $this->Form->control('seat_number', ['type' => 'checkbox', 'value' => $value, 'checked' => true, 'onclick' => 'click_cb()', 'hiddenField' => false, 'id' => $value, 'label' => '']);
               echo "</th>";
