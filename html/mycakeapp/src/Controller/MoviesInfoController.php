@@ -58,34 +58,7 @@ class MoviesInfoController extends AppController
         // ↑これで、selectして選べる
 
 
-        // その日にやる映画を取り出す
-
-        $Movies = $this->Movies->find('all')
-            ->select(['title', 'total_minutes_with_trailer', 'screening_end_date'])
-            ->where([
-                'screening_start_date <=' => '2020-11-21',
-                'screening_start_date >=' => '2020-11-21'
-            ])
-            ->toArray();
-
-
-
-        $MovieSchedules = $this->MovieSchedules->find('all')
-            ->select(['movie_id'])
-            ->toArray();
-
-        $MovieList[] = $Movies + $MovieSchedules;
-
-        // print_r($Movies);
-        // print("======================================================");
-        // print_r($MovieSchedules);
-        // print("======================================================");
-        // var_dump($MovieList);
-
-
-
-
-        $this->set(compact('weekDate', 'weekValue', 'today', 'MovieList'));
+        $this->set(compact('weekDate', 'weekValue', 'today'));
     }
 
     function ajaxTest()
@@ -94,50 +67,71 @@ class MoviesInfoController extends AppController
         if ($this->request->is('ajax')) {
             $ajaxData = date("Y-m-d", $_GET['time']);
 
+            // $MovieList = $this->Movies->find('all')
+            //     ->join([
+            //         'table' => 'movie_schedules',
+            //         'type' => 'INNER',
+            //         'conditions' => 'Movies.id = movie_schedules.movie_id',
+            //     ])
+            //     ->select([
+            //         'id' => 'Movies.title',
+            //         'title' => 'Movies.title',
+            //         'thumbnail_path' => 'Movies.thumbnail_path',
+            //         'total_minutes_with_trailer' => 'Movies.total_minutes_with_trailer',
+            //         'screening_end_date' => 'Movies.screening_end_date',
+            //         'screening_start_datetime' => 'movie_schedules.screening_start_datetime',
+            //     ])
+            //     ->where([
+            //         // 'Movies.id' =>  2,
+            //         'Movies.screening_start_date <=' =>  $ajaxData,
+            //         'Movies.screening_end_date >=' =>  $ajaxData
+            //     ])
+            //     ->toArray();
+            // echo json_encode($MovieList, JSON_UNESCAPED_UNICODE);
+
             $MovieList = $this->Movies->find('all')
-                // ->contain(['MovieSchedules'])
-                ->join([
-                    'table' => 'movie_schedules',
-                    'type' => 'INNER',
-                    'conditions' => 'Movies.id = movie_schedules.movie_id',
-                ])
-                ->select([
-                    'title' => 'Movies.title',
-                    'thumbnail_path' => 'Movies.thumbnail_path',
-                    'total_minutes_with_trailer' => 'Movies.total_minutes_with_trailer',
-                    'screening_end_date' => 'Movies.screening_end_date',
-                ])
                 ->where([
-                    'Movies.screening_start_date <=' =>  $ajaxData,
-                    'Movies.screening_end_date >=' =>  $ajaxData
+                    'screening_start_date <=' =>  $ajaxData,
+                    'screening_end_date >=' =>  $ajaxData
                 ])
                 ->toArray();
             echo json_encode($MovieList, JSON_UNESCAPED_UNICODE);
+            exit;
+        }
+    }
 
+
+
+    function ajaxHoge()
+    {
+        $this->autoRender = FALSE;
+        if ($this->request->is('ajax')) {
+            $Data = date("Y-m-d", $_GET['time']);
+
+            $hoge = $this->Movies->find('all')
+                ->select(['id'])
+                ->where([
+                    'screening_start_date <=' =>  $Data,
+                    'screening_end_date >=' =>  $Data
+                ])
+                ->toArray();
 
             // その日の始まり。
             $ajaxActiveTime = date("Y-m-d 00:00:00", $_GET['time']);
             // その日の終わり
             $ajaxActiveTimeEND = date("Y-m-d 23:59:59", $_GET['time']);
 
-            // $MovieSchedules = $this->MovieSchedules->find('all')
-            //     ->select([
-            //         'MovieSchedules.screening_start_datetime'
-            //     ])->where([
-            //         'MovieSchedules.screening_start_datetime >=' => $ajaxActiveTime,
-            //         'MovieSchedules.screening_start_datetime <=' => $ajaxActiveTimeEND
-            //     ])->toArray();
 
 
-            // $MovieSchedules = $this->MovieSchedules->find('all')
-            //     ->contain(['Movies'])
-            //     ->where([
-            //         'MovieSchedules.screening_start_datetime >=' => $ajaxActiveTime,
-            //         'MovieSchedules.screening_start_datetime <=' => $ajaxActiveTimeEND
-            //     ])->toArray();
+            $age = $this->MovieSchedules->find('all')
+                ->select(['movie_id', 'screening_start_datetime'])
+                // ->where([
+                //     'screening_start_date >=' =>  $ajaxActiveTime,
+                //     'screening_end_date <=' =>   $ajaxActiveTimeEND
+                // ])
+                ->toArray();
 
-            // JSON_UNESCAPED_UNICODEで文字化け回避
-            // echo json_encode($MovieSchedules, JSON_UNESCAPED_UNICODE);
+            echo json_encode($age, JSON_UNESCAPED_UNICODE);
             exit;
         }
     }
