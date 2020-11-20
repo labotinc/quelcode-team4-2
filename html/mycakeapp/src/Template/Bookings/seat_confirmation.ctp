@@ -14,10 +14,14 @@
       <p class="movie content"><?= h($movie_info->title) ?></p>
       <div class="movie title">上映時間</div>
       <p class="movie content">
-        <?=
-          // movie_infoページの公開時間を利用する
-          // 今はそのデータがないので現状は映画公開時間のみ記載しておきます
-          h($booking->movie_schedule->screening_start_datetime);
+        <?= h($booking->movie_schedule->screening_start_datetime->format('m月d日')); ?>
+        <?= '(', h($booking->movie_schedule->screening_start_week), ')', PHP_EOL; ?>
+      </p>
+      <p class="movie content">
+        <?= h($booking->movie_schedule->screening_start_datetime->format('H:i')), ' ~'; ?>
+        <?= h($booking->movie_schedule->screening_start_datetime
+          ->addHours($movie_info->total_minutes_with_trailer) // 終了時間計算
+          ->format('H:i'));
         ?>
       </p>
       <div class="movie title">座席番号</div>

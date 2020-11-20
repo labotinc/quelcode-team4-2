@@ -147,8 +147,7 @@ class BookingsController extends AppController
             // ※トップページが作成されたら映画スケジュール画面をリダイレクト先にする。action先は未定。
             return $this->redirect(['controller' => 'moviesinfo', 'action' => 'index']);
         }
-
-        $this->set(compact('booking', 'movie_info', 'schedule_id'));
+        $this->set(compact('booking', 'movie_info'));
     }
 
     // 基本設計P51でキャンセルボタンを押した時の処理
