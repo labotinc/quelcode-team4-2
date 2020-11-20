@@ -2,6 +2,7 @@
 
 ?>
 <?= $this->Html->css('moviesinfo.css'); ?>
+<li id=tekitou></li>
 <div class="movie-info-wrap">
     <div class="movie-info-menu">
         <p class="scheduel-text">上映スケジュール</p>
@@ -17,33 +18,46 @@
         </ul>
         <!-- 今は適当に日付入れてあとからヘルパー -->
         <p id="scheduled-date"><?php echo $weekDate[0] ?></p>
-        <div class="movie-list">
-            <div class="movie-list-head">
-                <p class="movie-title">タイトルタイトル</p>
-                <p class="movie-screening-time">[ 上映時間 : 100分 ]</p>
-                <p class="movie-scheduled-to-end">00月00日(金)終了予定</p>
-            </div>
-            <!-- ======================= 1block チケット購入 ======================= -->
-            <div class="movie-list-main">
-                <p class="movie-img"><img src="" alt="">img</p>
-                <div class="movie-schedule-for-the-day">
-                    <p class="movie-time">00:00~00:00</p>
-                    <p class="buy-button">予約購入</p>
+
+        <div id="test">
+
+
+            <div class="movie-list">
+                <div class="movie-list-head">
+                    <p class="movie-title">タイトルタイトル</p>
+                    <p class="movie-screening-time">[ 上映時間 : 100分 ]</p>
+                    <p class="movie-scheduled-to-end">00月00日(金)終了予定</p>
                 </div>
-                <div class="movie-schedule-for-the-day">
-                    <p class="movie-time">00:00~00:00</p>
-                    <p class="buy-button">予約購入</p>
-                </div>
-                <div class="movie-schedule-for-the-day">
-                    <p class="movie-time">00:00~00:00</p>
-                    <p class="buy-button">予約購入</p>
-                </div>
-                <div class="movie-schedule-for-the-day">
-                    <p class="movie-time">00:00~00:00</p>
-                    <p class="buy-button">予約購入</p>
+
+
+
+                <!-- ======================= 1block チケット購入 ======================= -->
+                <div class="movie-list-main">
+                    <p class="movie-img"><img src="" alt="">img</p>
+                    <div class="movie-schedule-for-the-day">
+                        <p class="movie-time">00:00~00:00</p>
+                        <p class="buy-button">予約購入</p>
+                    </div>
+                    <div class="movie-schedule-for-the-day">
+                        <p class="movie-time">00:00~00:00</p>
+                        <p class="buy-button">予約購入</p>
+                    </div>
+                    <div class="movie-schedule-for-the-day">
+                        <p class="movie-time">00:00~00:00</p>
+                        <p class="buy-button">予約購入</p>
+                    </div>
+                    <div class="movie-schedule-for-the-day">
+                        <p class="movie-time">00:00~00:00</p>
+                        <p class="buy-button">予約購入</p>
+                    </div>
                 </div>
             </div>
         </div>
+
+
+
+
+
     </div>
 </div>
 <?= $this->Html->script('moviesinfo.js') ?>
