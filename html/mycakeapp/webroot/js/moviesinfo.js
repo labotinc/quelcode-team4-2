@@ -52,8 +52,8 @@ function infoMenuAction(infoMenuDOM, infoMenuId) {
                     // スケジュールがあったら
                     $('#test').empty();
                     // console.log(data);
-                    for (let i = 0; i < data.length; i++) {
 
+                    for (let i = 0; i < data.length; i++) {
                         const endDate = new Date(data[i].screening_end_date);
                         const m = ("00" + (endDate.getMonth() + 1)).slice(-2);
                         const d = ("00" + endDate.getDate()).slice(-2);
@@ -70,13 +70,61 @@ function infoMenuAction(infoMenuDOM, infoMenuId) {
                                 .append($('<p>').addClass('movie-img')
                                     // data[i].thumbnail_path写真だけど今のところ許容
                                     .append($('<img>').attr('src', '').attr('alt', '')))));
-                    }
 
+
+
+                        // for分で毎回[]定義してた。盲点
+                        // Moviesのidを2個目のajaxに引き継ぐために利用
+                        if (i === 0) {
+                            var movieId = [];
+                            movieId.push(data[i].id);
+                        } else {
+                            movieId.push(data[i].id);
+                        }
+                    }
+                    // スケジュールを取り出すajax
+                    $.ajax({
+                        type: "GET",
+                        url: "/MoviesInfo/ajaxHoge",
+                        dataType: "json",
+                        data: {
+                            time: $(infoMenuDOM).val()
+                        },
+                        success: function (data) {
+                            //取得成功したら実行する処理
+                            console.log("ファイルの取得に成功しました");
+                            // // phpから変えてきたのがresponse
+                            if (data.length === 0) {
+                                // スケジュールがなかったら
+                                $('.movie-list-main').html('値がありません。');
+                                // $('#test').empty();
+                            } else {
+                                // スケジュールがあったら
+                                $('.movie-list-main').html('値がありません。');
+                                console.log(data);
+                                console.log(movieId);
+                                for (let j = 0; j < data.length; j++) {
+                                    for (let x = 0; x < data.length; x++) {
+                                        if (data[j].movie_id === movieId[x]) {
+                                            $('.movie-list-main').append($('<div>').addClass('movie-schedule-for-the-day')
+                                                .append($('<p>').html(data[j].movie_id).addClass('movie-time'))
+                                                .append($('<p>').html('予約購入').addClass('buy-button')));
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        error: function (XMLHttpRequest, textStatus, errorThrown) {
+                            //取得失敗時に実行する処理
+                            console.log("何らかの理由で失敗しました");
+                            console.log("XMLHttpRequest : " + XMLHttpRequest.status);
+                            console.log("textStatus     : " + textStatus);
+                            console.log("errorThrown    : " + errorThrown.message);
+                        }
+                    });
                     // 予約の時間
                     // for (let i = 0; i < data.length; i++) {
-                    //     $('.movie-list-main').append($('<div>').addClass('movie-schedule-for-the-day')
-                    //         .append($('<p>').html('00:00~00:00').addClass('movie-time'))
-                    //         .append($('<p>').html('予約購入').addClass('buy-button')));
+
                     // }
 
                 }
@@ -89,5 +137,11 @@ function infoMenuAction(infoMenuDOM, infoMenuId) {
                 console.log("errorThrown    : " + errorThrown.message);
             }
         });
+
+
+
+
+
+
     })
 }
