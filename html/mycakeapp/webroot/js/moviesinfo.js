@@ -31,103 +31,108 @@ function infoMenuAction(infoMenuDOM, infoMenuId) {
                 }
             }
         }
+
         // console.log($(infoMenuDOM).val());
+
+        // ここで宣言しないと使えない
         $.ajax({
             type: "GET",
-            url: "/MoviesInfo/ajaxTest",
+            url: "/MoviesInfo/ajaxHoge",
             dataType: "json",
-
             data: {
                 time: $(infoMenuDOM).val()
             },
             success: function (data) {
                 //取得成功したら実行する処理
-                console.log("ファイルの取得に成功しました");
-                // phpから変えてきたのがresponse
+                // console.log("ファイルの取得に成功しました");
+                // // phpから変えてきたのがresponse
                 if (data.length === 0) {
                     // スケジュールがなかったら
-                    console.log('値がありません。');
-                    $('#test').empty();
+                    $('.movie-list-main').html('値がありません。');
                 } else {
                     // スケジュールがあったら
-                    $('#test').empty();
                     // console.log(data);
+                    var moviescheduleData = data;
+                }
 
-                    for (let i = 0; i < data.length; i++) {
-                        const endDate = new Date(data[i].screening_end_date);
-                        const m = ("00" + (endDate.getMonth() + 1)).slice(-2);
-                        const d = ("00" + endDate.getDate()).slice(-2);
-                        const weekday_list = ['日', '月', '火', '水', '木', '金', '土'];
-                        const weekday = '(' + weekday_list[endDate.getDay()] + ')';
+                // console.log(moviescheduleData);
 
-                        // console.log(data[i].thumbnail_path);
-                        $('#test').append($('<div>').addClass('movie-list')
-                            .append($('<div>').addClass('movie-list-head')
-                                .append($('<p>').html(data[i].title).addClass('movie-title'))
-                                .append($('<p>').html('[上映時間:' + data[i].total_minutes_with_trailer + '分]').addClass('movie-screening-time'))
-                                .append($('<p>').html(m + "月" + d + "日" + weekday + '終了予定').addClass('movie-scheduled-to-end')))
-                            .append($('<div>').addClass('movie-list-main')
-                                .append($('<p>').addClass('movie-img')
-                                    // data[i].thumbnail_path写真だけど今のところ許容
-                                    .append($('<img>').attr('src', '').attr('alt', '')))));
+                $.ajax({
+                    type: "GET",
+                    url: "/MoviesInfo/ajaxTest",
+                    dataType: "json",
 
-
-
-                        // for分で毎回[]定義してた。盲点
-                        // Moviesのidを2個目のajaxに引き継ぐために利用
-                        if (i === 0) {
-                            var movieId = [];
-                            movieId.push(data[i].id);
+                    data: {
+                        time: $(infoMenuDOM).val()
+                    },
+                    success: function (data) {
+                        //取得成功したら実行する処理
+                        console.log("ファイルの取得に成功しました");
+                        // phpから変えてきたのがresponse
+                        if (data.length === 0) {
+                            // スケジュールがなかったら
+                            console.log('値がありません。');
+                            $('#test').empty();
                         } else {
-                            movieId.push(data[i].id);
-                        }
-                    }
-                    // スケジュールを取り出すajax
-                    $.ajax({
-                        type: "GET",
-                        url: "/MoviesInfo/ajaxHoge",
-                        dataType: "json",
-                        data: {
-                            time: $(infoMenuDOM).val()
-                        },
-                        success: function (data) {
-                            //取得成功したら実行する処理
-                            console.log("ファイルの取得に成功しました");
-                            // // phpから変えてきたのがresponse
-                            if (data.length === 0) {
-                                // スケジュールがなかったら
-                                $('.movie-list-main').html('値がありません。');
-                                // $('#test').empty();
-                            } else {
-                                // スケジュールがあったら
-                                $('.movie-list-main').html('値がありません。');
-                                console.log(data);
-                                console.log(movieId);
-                                for (let j = 0; j < data.length; j++) {
-                                    for (let x = 0; x < data.length; x++) {
-                                        if (data[j].movie_id === movieId[x]) {
-                                            $('.movie-list-main').append($('<div>').addClass('movie-schedule-for-the-day')
-                                                .append($('<p>').html(data[j].movie_id).addClass('movie-time'))
-                                                .append($('<p>').html('予約購入').addClass('buy-button')));
-                                        }
+                            // スケジュールがあったら
+                            $('#test').empty();
+                            console.log(data);
+                            for (let i = 0; i < data.length; i++) {
+
+                                const endDate = new Date(data[i].screening_end_date);
+                                const m = ("00" + (endDate.getMonth() + 1)).slice(-2);
+                                const d = ("00" + endDate.getDate()).slice(-2);
+                                const weekday_list = ['日', '月', '火', '水', '木', '金', '土'];
+                                const weekday = '(' + weekday_list[endDate.getDay()] + ')';
+
+                                // console.log(data[i].thumbnail_path);
+                                $('#test').append($('<div>').addClass('movie-list')
+                                    .append($('<div>').addClass('movie-list-head')
+                                        .append($('<p>').html(data[i].title).addClass('movie-title'))
+                                        .append($('<p>').html('[上映時間:' + data[i].total_minutes_with_trailer + '分]').addClass('movie-screening-time'))
+                                        .append($('<p>').html(m + "月" + d + "日" + weekday + '終了予定').addClass('movie-scheduled-to-end')))
+                                    .append($('<div>').addClass('movie-list-main')
+                                        .append($('<p>').addClass('movie-img')
+                                            // data[i].thumbnail_path写真だけど今のところ許容
+                                            .append($('<img>').attr('src', '').attr('alt', '')))));
+
+                                for (let j = 0; j < moviescheduleData.length; j++) {
+                                    if (data[i].id === moviescheduleData[j].movie_id) {
+                                        $('.movie-list-main').append($('<div>').addClass('movie-schedule-for-the-day')
+                                            .append($('<p>').html('00:00~00:00').addClass('movie-time'))
+                                            .append($('<p>').html('予約購入').addClass('buy-button')));
+                                        break
                                     }
                                 }
+
+
+
+                                // for分で毎回[]定義してた。盲点
+                                // Moviesのidを2個目のajaxに引き継ぐために利用
+                                // if (i === 0) {
+                                //     var movieId = [];
+                                //     movieId.push(data[i].id);
+                                // } else {
+                                //     movieId.push(data[i].id);
+                                // }
                             }
-                        },
-                        error: function (XMLHttpRequest, textStatus, errorThrown) {
-                            //取得失敗時に実行する処理
-                            console.log("何らかの理由で失敗しました");
-                            console.log("XMLHttpRequest : " + XMLHttpRequest.status);
-                            console.log("textStatus     : " + textStatus);
-                            console.log("errorThrown    : " + errorThrown.message);
+                            // スケジュールを取り出すajax
+
+                            // 予約の時間
+                            // for (let i = 0; i < data.length; i++) {
+
+                            // }
+
                         }
-                    });
-                    // 予約の時間
-                    // for (let i = 0; i < data.length; i++) {
-
-                    // }
-
-                }
+                    },
+                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                        //取得失敗時に実行する処理
+                        console.log("何らかの理由で失敗しました");
+                        console.log("XMLHttpRequest : " + XMLHttpRequest.status);
+                        console.log("textStatus     : " + textStatus);
+                        console.log("errorThrown    : " + errorThrown.message);
+                    }
+                });
             },
             error: function (XMLHttpRequest, textStatus, errorThrown) {
                 //取得失敗時に実行する処理
@@ -137,11 +142,5 @@ function infoMenuAction(infoMenuDOM, infoMenuId) {
                 console.log("errorThrown    : " + errorThrown.message);
             }
         });
-
-
-
-
-
-
     })
 }
