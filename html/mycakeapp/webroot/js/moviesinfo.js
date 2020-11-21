@@ -37,7 +37,7 @@ function infoMenuAction(infoMenuDOM, infoMenuId) {
         // ここで宣言しないと使えない
         $.ajax({
             type: "GET",
-            url: "/MoviesInfo/ajaxHoge",
+            url: "/MoviesInfo/ajaxMovieSchedules",
             dataType: "json",
             data: {
                 time: $(infoMenuDOM).val()
@@ -51,15 +51,14 @@ function infoMenuAction(infoMenuDOM, infoMenuId) {
                     $('.movie-list-main').html('値がありません。');
                 } else {
                     // スケジュールがあったら
-                    // console.log(data);
                     var moviescheduleData = data;
                 }
-
+                console.log(data);
                 // console.log(moviescheduleData);
 
                 $.ajax({
                     type: "GET",
-                    url: "/MoviesInfo/ajaxTest",
+                    url: "/MoviesInfo/ajaxMovieList",
                     dataType: "json",
 
                     data: {
@@ -76,7 +75,6 @@ function infoMenuAction(infoMenuDOM, infoMenuId) {
                         } else {
                             // スケジュールがあったら
                             $('#test').empty();
-                            console.log(data);
                             for (let i = 0; i < data.length; i++) {
 
                                 const endDate = new Date(data[i].screening_end_date);

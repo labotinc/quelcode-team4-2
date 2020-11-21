@@ -38,100 +38,41 @@ class MoviesInfoController extends AppController
             $weekValue[] = $timestamp;
         }
         // ================ 日付について end ================
-        // 1つの映画の複数のスケジュール（その日にやるやつを取りだそう）
-        // $MovieSchedules = $this->MovieSchedules->find('all')
-        //     ->contain(['Movies'])
-        //     ->join([
-        //         'table' => 'movies',
-        //         'type' => 'INNER',
-        //         'conditions' => 'movies.id = MovieSchedules.movie_id',
-        //     ])->select([
-        //         'id' => 'movies.id',
-        //         'title' => 'movies.title',
-        //         'screening_end_date' => 'movies.screening_end_date',
-
-        //     ])
-        //     // ->where(['movies.id' => 1])
-        //     ->toArray();
-        // var_dump($MovieSchedules);
-
-        // ↑これで、selectして選べる
-
 
         $this->set(compact('weekDate', 'weekValue', 'today'));
     }
 
-    function ajaxTest()
+    function ajaxMovieSchedules()
     {
         $this->autoRender = FALSE;
         if ($this->request->is('ajax')) {
-            $ajaxData = date("Y-m-d", $_GET['time']);
-
-            // $MovieList = $this->Movies->find('all')
-            //     ->join([
-            //         'table' => 'movie_schedules',
-            //         'type' => 'INNER',
-            //         'conditions' => 'Movies.id = movie_schedules.movie_id',
-            //     ])
-            //     ->select([
-            //         'id' => 'Movies.title',
-            //         'title' => 'Movies.title',
-            //         'thumbnail_path' => 'Movies.thumbnail_path',
-            //         'total_minutes_with_trailer' => 'Movies.total_minutes_with_trailer',
-            //         'screening_end_date' => 'Movies.screening_end_date',
-            //         'screening_start_datetime' => 'movie_schedules.screening_start_datetime',
-            //     ])
-            //     ->where([
-            //         // 'Movies.id' =>  2,
-            //         'Movies.screening_start_date <=' =>  $ajaxData,
-            //         'Movies.screening_end_date >=' =>  $ajaxData
-            //     ])
-            //     ->toArray();
-            // echo json_encode($MovieList, JSON_UNESCAPED_UNICODE);
-
-            $MovieList = $this->Movies->find('all')
+            $onThatDayMovieSchedules = $this->MovieSchedules->find('all')
+                ->select(['movie_id', 'screening_start_datetime'])
                 ->where([
-                    'screening_start_date <=' =>  $ajaxData,
-                    'screening_end_date >=' =>  $ajaxData
+                    'is_playable' => 1
                 ])
                 ->toArray();
-            echo json_encode($MovieList, JSON_UNESCAPED_UNICODE);
+
+            echo json_encode($onThatDayMovieSchedules, JSON_UNESCAPED_UNICODE);
             exit;
         }
     }
 
-
-
-    function ajaxHoge()
+    function ajaxMovieList()
     {
         $this->autoRender = FALSE;
         if ($this->request->is('ajax')) {
-            $Data = date("Y-m-d", $_GET['time']);
+            // $ajaxDataはクリックされた日付
+            $ajaxData = date("Y-m-d", $_GET['time']);
 
-            $hoge = $this->Movies->find('all')
-                ->select(['id'])
+            $MovieList = $this->Movies->find('all')
                 ->where([
-                    'screening_start_date <=' =>  $Data,
-                    'screening_end_date >=' =>  $Data
+                    // screening_start_dateとcreening_end_dateで$ajaxDataが上映期間に入っているか判定。
+                    'screening_start_date <=' =>  $ajaxData,
+                    'screening_end_date >=' =>  $ajaxData,
                 ])
                 ->toArray();
-
-            // その日の始まり。
-            $ajaxActiveTime = date("Y-m-d 00:00:00", $_GET['time']);
-            // その日の終わり
-            $ajaxActiveTimeEND = date("Y-m-d 23:59:59", $_GET['time']);
-
-
-
-            $age = $this->MovieSchedules->find('all')
-                ->select(['movie_id', 'screening_start_datetime'])
-                // ->where([
-                //     'screening_start_date >=' =>  $ajaxActiveTime,
-                //     'screening_end_date <=' =>   $ajaxActiveTimeEND
-                // ])
-                ->toArray();
-
-            echo json_encode($age, JSON_UNESCAPED_UNICODE);
+            echo json_encode($MovieList, JSON_UNESCAPED_UNICODE);
             exit;
         }
     }
