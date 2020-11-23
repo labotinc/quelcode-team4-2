@@ -36,19 +36,19 @@
                     <!-- ======================= 1block チケット購入 ======================= -->
                     <div class="movie-list-main">
                         <p class="movie-img"><?php echo $this->Html->image($info->thumbnail_path); ?></p>
-                        <?php $hoge = ''; ?>
+                        <?php $schedules_value = ''; ?>
                         <?php for ($i = 0; $i < count($onThatDayMovieSchedules); $i++) : ?>
                             <?php if ($info->id === $onThatDayMovieSchedules[$i]['movie_id']) : ?>
                                 <div class="movie-schedule-for-the-day">
                                     <p class="movie-time">00:00~00:00</p>
                                     <p class="buy-button">予約購入</p>
-                                    <?php $hoge = 'aa'; ?>
+                                    <?php $schedules_value = 'exists'; ?>
                                 </div>
-                            <?php elseif ($info->id !== $onThatDayMovieSchedules[$i]['movie_id'] && $hoge === '') : ?>
-                                <?php $hoge = 'bb'; ?>
+                            <?php elseif ($info->id !== $onThatDayMovieSchedules[$i]['movie_id'] && $schedules_value === '') : ?>
+                                <?php $schedules_value = 'none'; ?>
                             <?php endif; ?>
                         <?php endfor; ?>
-                        <?php if ($hoge === 'bb') : ?>
+                        <?php if ($schedules_value === 'none') : ?>
                             <p class="not-movie-schedule-for-the-day">Coming Soon...</p>
                         <?php endif; ?>
                     </div>
