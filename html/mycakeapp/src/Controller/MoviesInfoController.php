@@ -50,7 +50,7 @@ class MoviesInfoController extends AppController
 
 
         $onThatDayMovieSchedules = $this->MovieSchedules->find('all')
-            ->select(['movie_id', 'screening_start_datetime'])
+            ->select(['id', 'movie_id', 'screening_start_datetime'])
             ->where([
                 'is_playable' => 1
             ])
@@ -64,7 +64,7 @@ class MoviesInfoController extends AppController
         $this->autoRender = FALSE;
         if ($this->request->is('ajax')) {
             $onThatDayMovieSchedules = $this->MovieSchedules->find('all')
-                ->select(['movie_id', 'screening_start_datetime'])
+                ->select(['id', 'movie_id', 'screening_start_datetime'])
                 ->where([
                     'is_playable' => 1
                 ])

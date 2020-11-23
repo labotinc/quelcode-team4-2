@@ -94,7 +94,7 @@ function infoMenuAction(infoMenuDOM, infoMenuId) {
                                     if (data[i].id === moviescheduleData[j].movie_id) {
                                         $('.movie-list-main').append($('<div>').addClass('movie-schedule-for-the-day')
                                             .append($('<p>').html('00:00~00:00').addClass('movie-time'))
-                                            .append($('<p>').html('予約購入').addClass('buy-button')));
+                                            .append($('<form>', { action: "bookings/add_seat/" + moviescheduleData[j]['id'], method: '' }).append($('<p>').addClass('buy-button').append($('<button>').html('予約購入')))));
                                         break
                                     }
                                 }

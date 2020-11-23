@@ -39,11 +39,16 @@
                         <?php $schedules_value = ''; ?>
                         <?php for ($i = 0; $i < count($onThatDayMovieSchedules); $i++) : ?>
                             <?php if ($info->id === $onThatDayMovieSchedules[$i]['movie_id']) : ?>
+
                                 <div class="movie-schedule-for-the-day">
                                     <p class="movie-time">00:00~00:00</p>
-                                    <p class="buy-button">予約購入</p>
+
+                                    <?= $this->Form->create(null, ['type' => '', 'url' => ['controller' => 'bookings', 'action' => 'add_seat', $onThatDayMovieSchedules[$i]['id']]]) ?>
+                                    <p class="buy-button"><?php echo $this->Form->button(__('予約購入')) ?></p>
+                                    <?= $this->Form->end() ?>
                                     <?php $schedules_value = 'exists'; ?>
                                 </div>
+
                             <?php elseif ($info->id !== $onThatDayMovieSchedules[$i]['movie_id'] && $schedules_value === '') : ?>
                                 <?php $schedules_value = 'none'; ?>
                             <?php endif; ?>

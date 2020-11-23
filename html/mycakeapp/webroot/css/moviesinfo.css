@@ -125,6 +125,16 @@
 }
 
 .buy-button{
-    padding: 10px 20px;
     background-color: #D5D5D5;
+}
+
+.buy-button button{
+    padding: 10px 20px;
+    width: 100%;
+    background: none;
+	border: none;
+	outline: none;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
 }
