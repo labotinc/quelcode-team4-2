@@ -90,7 +90,6 @@ function infoMenuAction(infoMenuDOM, infoMenuId) {
                                             // data[i].thumbnail_path写真だけど今のところ許容
                                             .append($('<img>').attr('src', '/img/' + data[i].thumbnail_path).attr('alt', '')))));
 
-
                                 for (let j = 0; j < moviescheduleData.length; j++) {
                                     // ========= 始まり時刻 =========
                                     var date = new Date(moviescheduleData[j].screening_start_datetime);
