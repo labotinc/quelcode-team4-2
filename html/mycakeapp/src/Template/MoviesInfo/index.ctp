@@ -40,8 +40,26 @@
                         <?php for ($i = 0; $i < count($onThatDayMovieSchedules); $i++) : ?>
                             <?php if ($info->id === $onThatDayMovieSchedules[$i]['movie_id']) : ?>
                                 <div class="movie-schedule-for-the-day">
-                                    <p class="movie-time">00:00~00:00</p>
-                                    <?= $this->Form->create(null, ['type' => '', 'url' => ['controller' => 'bookings', 'action' => 'add_seat', $onThatDayMovieSchedules[$i]['id']]]) ?>
+
+                                    <?php
+                                    $start_timestamp = strtotime($onThatDayMovieSchedules[$i]['screening_start_datetime']);
+                                    $start_datetime = date('YmdHis', $start_timestamp);
+
+                                    $end_timestamp = strtotime($start_datetime . '+' . $info->total_minutes_with_trailer . 'minute');
+                                    $end_datetime = date('YmdHis', $end_timestamp);
+
+                                    $start_datetime_hour = substr($start_datetime, 8, 2);
+                                    $start_datetime_minutes = substr($start_datetime, 10, 2);
+
+                                    $end_datetime_hour = substr($end_datetime, 8, 2);
+                                    $end_datetime_minutes = substr($end_datetime, 10, 2);
+
+                                    $start_time = $start_datetime_hour . ':' . $start_datetime_minutes;
+                                    $end_time = $end_datetime_hour . ':' . $end_datetime_minutes;
+                                    ?>
+
+                                    <p class="movie-time"><?php echo ($start_time . '~' . $end_time) ?></p>
+                                    <?= $this->Form->create(null, ['type' => 'get', 'url' => ['controller' => 'bookings', 'action' => 'add_seat', $onThatDayMovieSchedules[$i]['id']]]) ?>
                                     <p class="buy-button"><?php echo $this->Form->button(__('予約購入')) ?></p>
                                     <?= $this->Form->end() ?>
                                     <?php $schedules_value = 'exists'; ?>

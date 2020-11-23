@@ -90,12 +90,35 @@ function infoMenuAction(infoMenuDOM, infoMenuId) {
                                             // data[i].thumbnail_path写真だけど今のところ許容
                                             .append($('<img>').attr('src', '/img/' + data[i].thumbnail_path).attr('alt', '')))));
 
+
                                 for (let j = 0; j < moviescheduleData.length; j++) {
+                                    // ========= 始まり時刻 =========
+                                    var date = new Date(moviescheduleData[j].screening_start_datetime);
+                                    var startHours = date.getHours();
+                                    var startMinutes = date.getMinutes();
+                                    if (startMinutes < 10) {
+                                        startMinutes = '0' + startMinutes;
+                                    }
+                                    if (startHours < 10) {
+                                        startHours = '0' + startHours;
+                                    }
+                                    // ========= 終了時刻 =========
+                                    var finishDateTime = date.setMinutes(date.getMinutes() + data[i].total_minutes_with_trailer);
+                                    var finishDate = new Date(finishDateTime);
+                                    var finishHours = finishDate.getHours();
+                                    var finishMinutes = finishDate.getMinutes();
+                                    if (finishHours < 10) {
+                                        finishHours = '0' + finishHours;
+                                    }
+                                    if (finishMinutes < 10) {
+                                        finishMinutes = '0' + finishMinutes;
+                                    }
+                                    const movieTime = startHours + ':' + startMinutes + '~' + finishHours + ':' + finishMinutes;
+                                    console.log(movieTime);
                                     if (data[i].id === moviescheduleData[j].movie_id) {
-                                        $('.movie-list-main').append($('<div>').addClass('movie-schedule-for-the-day')
-                                            .append($('<p>').html('00:00~00:00').addClass('movie-time'))
+                                        $('.movie-list-main').eq(i).append($('<div>').addClass('movie-schedule-for-the-day')
+                                            .append($('<p>').html(movieTime).addClass('movie-time'))
                                             .append($('<form>', { action: "bookings/add_seat/" + moviescheduleData[j]['id'], method: '' }).append($('<p>').addClass('buy-button').append($('<button>').html('予約購入')))));
-                                        break
                                     }
                                 }
                                 if ($('.movie-list-main')[i].childNodes.length <= 1) {
