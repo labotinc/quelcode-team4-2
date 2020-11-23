@@ -32,9 +32,6 @@ function infoMenuAction(infoMenuDOM, infoMenuId) {
             }
         }
 
-        // console.log($(infoMenuDOM).val());
-
-        // ここで宣言しないと使えない
         $.ajax({
             type: "GET",
             url: "/MoviesInfo/ajaxMovieSchedules",
@@ -53,8 +50,6 @@ function infoMenuAction(infoMenuDOM, infoMenuId) {
                     // スケジュールがあったら
                     var moviescheduleData = data;
                 }
-                console.log(data);
-                // console.log(moviescheduleData);
 
                 $.ajax({
                     type: "GET",
@@ -66,15 +61,17 @@ function infoMenuAction(infoMenuDOM, infoMenuId) {
                     },
                     success: function (data) {
                         //取得成功したら実行する処理
-                        console.log("ファイルの取得に成功しました");
+                        // console.log("ファイルの取得に成功しました");
                         // phpから変えてきたのがresponse
                         if (data.length === 0) {
                             // スケジュールがなかったら
                             console.log('値がありません。');
-                            $('#test').empty();
+                            $('#movie-main-area').empty();
+                            $('#movie-main-area').append($('<div>').html('Coming Soon...').addClass('not-movie-list'));
+
                         } else {
                             // スケジュールがあったら
-                            $('#test').empty();
+                            $('#movie-main-area').empty();
                             for (let i = 0; i < data.length; i++) {
 
                                 const endDate = new Date(data[i].screening_end_date);
@@ -83,16 +80,15 @@ function infoMenuAction(infoMenuDOM, infoMenuId) {
                                 const weekday_list = ['日', '月', '火', '水', '木', '金', '土'];
                                 const weekday = '(' + weekday_list[endDate.getDay()] + ')';
 
-                                // console.log(data[i].thumbnail_path);
-                                $('#test').append($('<div>').addClass('movie-list')
+                                $('#movie-main-area').append($('<div>').addClass('movie-list')
                                     .append($('<div>').addClass('movie-list-head')
                                         .append($('<p>').html(data[i].title).addClass('movie-title'))
-                                        .append($('<p>').html('[上映時間:' + data[i].total_minutes_with_trailer + '分]').addClass('movie-screening-time'))
+                                        .append($('<p>').html('[ 上映時間 : ' + data[i].total_minutes_with_trailer + '分 ]').addClass('movie-screening-time'))
                                         .append($('<p>').html(m + "月" + d + "日" + weekday + '終了予定').addClass('movie-scheduled-to-end')))
                                     .append($('<div>').addClass('movie-list-main')
                                         .append($('<p>').addClass('movie-img')
                                             // data[i].thumbnail_path写真だけど今のところ許容
-                                            .append($('<img>').attr('src', '').attr('alt', '')))));
+                                            .append($('<img>').attr('src', '/img/' + data[i].thumbnail_path).attr('alt', '')))));
 
                                 for (let j = 0; j < moviescheduleData.length; j++) {
                                     if (data[i].id === moviescheduleData[j].movie_id) {
@@ -102,25 +98,10 @@ function infoMenuAction(infoMenuDOM, infoMenuId) {
                                         break
                                     }
                                 }
-
-
-
-                                // for分で毎回[]定義してた。盲点
-                                // Moviesのidを2個目のajaxに引き継ぐために利用
-                                // if (i === 0) {
-                                //     var movieId = [];
-                                //     movieId.push(data[i].id);
-                                // } else {
-                                //     movieId.push(data[i].id);
-                                // }
+                                if ($('.movie-list-main')[i].childNodes.length <= 1) {
+                                    $('.movie-list-main').eq(i).wrap('<p />').append($('<p>').html('Coming Soon...').addClass('not-movie-schedule-for-the-day'));
+                                }
                             }
-                            // スケジュールを取り出すajax
-
-                            // 予約の時間
-                            // for (let i = 0; i < data.length; i++) {
-
-                            // }
-
                         }
                     },
                     error: function (XMLHttpRequest, textStatus, errorThrown) {

@@ -39,7 +39,24 @@ class MoviesInfoController extends AppController
         }
         // ================ 日付について end ================
 
-        $this->set(compact('weekDate', 'weekValue', 'today'));
+        $todayxData = date("Y-m-d");
+        $MovieList = $this->Movies->find('all')
+            ->where([
+                // screening_start_dateとcreening_end_dateで$ajaxDataが上映期間に入っているか判定。
+                'screening_start_date <=' =>  $todayxData,
+                'screening_end_date >=' =>  $todayxData,
+            ])
+            ->toArray();
+
+
+        $onThatDayMovieSchedules = $this->MovieSchedules->find('all')
+            ->select(['movie_id', 'screening_start_datetime'])
+            ->where([
+                'is_playable' => 1
+            ])
+            ->toArray();
+
+        $this->set(compact('weekDate', 'weekValue', 'MovieList', 'onThatDayMovieSchedules'));
     }
 
     function ajaxMovieSchedules()
