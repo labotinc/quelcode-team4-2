@@ -133,3 +133,20 @@ label:hover {
     font-size: 14px;
     padding-bottom: 18px;
 }
+
+.heading {
+    text-align: center;
+    color: #707070;
+    font-size: 25px;
+    letter-spacing: 0.89px;
+    line-height: 34px;
+    margin: 80px 0 39px 0;
+}
+
+.wrapper {
+    background: #ffffff;
+    width: 736px;
+    margin: 0 auto 60px;
+    text-align: center;
+    padding-top: 91px;
+}
