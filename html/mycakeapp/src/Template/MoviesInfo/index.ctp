@@ -65,7 +65,7 @@
 
                     <!-- ======================= 映画の画像 映画のスケジュール start ======================= -->
                     <div class="movie-list-main">
-                        <p class="movie-img"><?php echo $this->Html->image($info->thumbnail_path); ?></p>
+                        <p class="movie-img"><?= $this->Html->image("MovieThumbnails/" . pathinfo($info->thumbnail_path, PATHINFO_BASENAME), array('alt' => h($info->thumbnail_path))); ?></p>
                         <?php $schedules_value = ''; ?>
 
 

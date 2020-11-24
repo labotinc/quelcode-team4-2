@@ -105,10 +105,9 @@
     background-color: #D5D5D5;
 }
 
-.movie-img{
+.movie-img img{
     height:100px;
     width: 90px;
-    background-color: #ffffff;
 }
 
 .movie-schedule-for-the-day{
