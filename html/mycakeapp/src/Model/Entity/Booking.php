@@ -1,7 +1,9 @@
 <?php
+
 namespace App\Model\Entity;
 
 use Cake\ORM\Entity;
+use Cake\ORM\Query;
 
 /**
  * Booking Entity
@@ -37,5 +39,6 @@ class Booking extends Entity
         'modified' => true,
         'user' => true,
         'schedule' => true,
+        'is_main_booked' => true,
     ];
 }

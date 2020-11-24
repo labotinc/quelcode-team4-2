@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\MovieSchedule[]|\Cake\Collection\CollectionInterface $movieSchedules
@@ -10,6 +11,8 @@
         <li><?= $this->Html->link(__('New Movie Schedule'), ['action' => 'add']) ?></li>
         <li><?= $this->Html->link(__('List Movies'), ['controller' => 'Movies', 'action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('New Movie'), ['controller' => 'Movies', 'action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('List Bookings'), ['controller' => 'Bookings', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New Bookings'), ['controller' => 'Bookings', 'action' => 'add']) ?></li>
     </ul>
 </nav>
 <div class="movieSchedules index large-9 medium-8 columns content">
@@ -27,20 +30,20 @@
             </tr>
         </thead>
         <tbody>
-            <?php foreach ($movieSchedules as $movieSchedule): ?>
-            <tr>
-                <td><?= $this->Number->format($movieSchedule->id) ?></td>
-                <td><?= $movieSchedule->has('movie') ? $this->Html->link($movieSchedule->movie->title, ['controller' => 'Movies', 'action' => 'view', $movieSchedule->movie->id]) : '' ?></td>
-                <td><?= h($movieSchedule->screening_start_datetime) ?></td>
-                <td><?= h($movieSchedule->is_playable) ?></td>
-                <td><?= h($movieSchedule->created) ?></td>
-                <td><?= h($movieSchedule->modified) ?></td>
-                <td class="actions">
-                    <?= $this->Html->link(__('View'), ['action' => 'view', $movieSchedule->id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['action' => 'edit', $movieSchedule->id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $movieSchedule->id], ['confirm' => __('Are you sure you want to delete # {0}?', $movieSchedule->id)]) ?>
-                </td>
-            </tr>
+            <?php foreach ($movieSchedules as $movieSchedule) : ?>
+                <tr>
+                    <td><?= $this->Number->format($movieSchedule->id) ?></td>
+                    <td><?= $movieSchedule->has('movie') ? $this->Html->link($movieSchedule->movie->title, ['controller' => 'Movies', 'action' => 'view', $movieSchedule->movie->id]) : '' ?></td>
+                    <td><?= h($movieSchedule->screening_start_datetime) ?></td>
+                    <td><?= h($movieSchedule->is_playable) ?></td>
+                    <td><?= h($movieSchedule->created) ?></td>
+                    <td><?= h($movieSchedule->modified) ?></td>
+                    <td class="actions">
+                        <?= $this->Html->link(__('View'), ['action' => 'view', $movieSchedule->id]) ?>
+                        <?= $this->Html->link(__('Edit'), ['action' => 'edit', $movieSchedule->id]) ?>
+                        <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $movieSchedule->id], ['confirm' => __('Are you sure you want to delete # {0}?', $movieSchedule->id)]) ?>
+                    </td>
+                </tr>
             <?php endforeach; ?>
         </tbody>
     </table>

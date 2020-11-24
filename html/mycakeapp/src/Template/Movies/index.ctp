@@ -11,6 +11,8 @@
         <li><?= $this->Html->link(__('New Movie'), ['action' => 'add']) ?></li>
         <li><?= $this->Html->link(__('List Movie Schedules'), ['controller' => 'MovieSchedules', 'action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('New Movie Schedules'), ['controller' => 'MovieSchedules', 'action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('List Bookings'), ['controller' => 'Bookings', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New Bookings'), ['controller' => 'Bookings', 'action' => 'add']) ?></li>
     </ul>
 </nav>
 <div class="movies index large-9 medium-8 columns content">

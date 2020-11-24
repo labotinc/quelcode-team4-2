@@ -8,7 +8,7 @@
 }
 
 .wrapper {
-    background: #FFFFFF;
+    background: #ffffff;
     width: 736px;
     margin: 0 auto 60px;
     text-align: center;
@@ -20,11 +20,14 @@
     width: 336px;
 }
 
-.email, .password {
+.email,
+.password {
     margin: 0 auto 40px;
 }
 
-.email-form, .password-form, .check-password {
+.email-form,
+.password-form,
+.check-password {
     width: 336px;
     height: 36px;
     border-top: transparent;
@@ -65,20 +68,20 @@ select {
     padding-bottom: 50px;
 }
 
-.ragistration {
+.registration {
     width: 336px;
     height: 48px;
-    border: 3px #F5AE0B;
+    border: 3px #f5ae0b;
     font-family: Noto Sans;
     font-size: 16px;
     font-weight: bold;
     letter-spacing: 0.44px;
-    color: #FFFFFF;
-    background: #F5AE0B 0% 0% no-repeat padding-box;
+    color: #ffffff;
+    background: #f5ae0b 0% 0% no-repeat padding-box;
 }
 
 .error-message {
-    color: #F46161;
+    color: #f46161;
     font-size: 11px;
     margin: 8px auto;
     width: 336px;
@@ -88,7 +91,7 @@ select {
 /*-------------------tanks.ctpのcss---------------------------------*/
 
 .thanks-wrapper {
-    background: #FFFFFF;
+    background: #ffffff;
     width: 736px;
     margin: 144px auto 367px;
     text-align: center;
@@ -115,9 +118,9 @@ select {
     line-height: 48px;
     font-size: 16px;
     letter-spacing: 0.44px;
-    background: #F5AE0B 0% 0% no-repeat padding-box;
+    background: #f5ae0b 0% 0% no-repeat padding-box;
     box-shadow: 0px 3px 6px #00000036;
-    border: 3px solid #F5AE0B;
+    border: 3px solid #f5ae0b;
     opacity: 1;
 }
 

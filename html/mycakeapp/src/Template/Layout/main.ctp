@@ -10,7 +10,6 @@
     <?= $this->Html->css('normalize') ?>
     <?= $this->Html->css('header') ?>
     <?= $this->Html->css('footer') ?>
-    <?= $this->Html->css('users') ?>
     <?= $this->fetch('css') ?>
     <?= $this->fetch('script') ?>
 </head>
@@ -28,4 +27,5 @@
         <?= $this->element('footer') ?>
     </footer>
 </body>
+
 </html>

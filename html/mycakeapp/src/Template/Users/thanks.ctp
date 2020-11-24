@@ -1,3 +1,4 @@
+<?= $this->Html->css('users', ['block' => true]) ?>
 <section>
     <div class="thanks-wrapper">
         <h1 class="thanks-heading">会員登録完了</h1>

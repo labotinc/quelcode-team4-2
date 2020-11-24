@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Test\TestCase\Controller;
 
 use App\Controller\BookingsController;
@@ -22,8 +23,18 @@ class BookingsControllerTest extends TestCase
     public $fixtures = [
         'app.Bookings',
         'app.Users',
-        'app.Schedules',
+        'app.MovieSchedules',
     ];
+
+    /**
+     * Test initialize method
+     *
+     * @return void
+     */
+    public function testInitialize()
+    {
+        $this->markTestIncomplete('Not implemented yet.');
+    }
 
     /**
      * Test index method
@@ -51,6 +62,36 @@ class BookingsControllerTest extends TestCase
      * @return void
      */
     public function testAdd()
+    {
+        $this->markTestIncomplete('Not implemented yet.');
+    }
+
+    /**
+     * Test addSeat method
+     *
+     * @return void
+     */
+    public function testAddSeat()
+    {
+        $this->markTestIncomplete('Not implemented yet.');
+    }
+
+    /**
+     * Test seatConfirmation method
+     *
+     * @return void
+     */
+    public function testSeatConfirmation()
+    {
+        $this->markTestIncomplete('Not implemented yet.');
+    }
+
+    /**
+     * Test seatCancel method
+     *
+     * @return void
+     */
+    public function testSeatCancel()
     {
         $this->markTestIncomplete('Not implemented yet.');
     }
