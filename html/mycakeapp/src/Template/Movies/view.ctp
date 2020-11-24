@@ -31,7 +31,7 @@
             <!-- サムネイルを表示（大きさは実画像を元に変更予定） -->
             <th scope="row"><?= __('Thumbnail') ?></th>
             <td><?= $this->Html->image(
-                    "MovieThumbnails/" . pathinfo($movie->thumbnail_path, PATHINFO_BASENAME),
+                    $movie->thumbnail_path,
                     array(
                         'width' => '300',
                         'height' => '200',

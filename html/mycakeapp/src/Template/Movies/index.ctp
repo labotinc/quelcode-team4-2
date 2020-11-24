@@ -40,7 +40,7 @@
                     <td><?= h($movie->title) ?></td>
                     <td><?= h($movie->thumbnail_path) ?></td>
                     <td><?= $this->Html->image(
-                            "MovieThumbnails/" . pathinfo($movie->thumbnail_path, PATHINFO_BASENAME),
+                            $movie->thumbnail_path,
                             array(
                                 'width' => '200',
                                 'height' => '100',
