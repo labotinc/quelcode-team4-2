@@ -25,20 +25,26 @@
     color: #FFFFFF;
     text-align: center;
     width: 144px;
-    padding: 12px 0 48px;
+    height: 78px;
+    padding-top: 12px;
     position: relative;
 }
 
 .movie-info-menu span{
     position: absolute;
-    top: 4px;
+    top: 6px;
     right: 0;
-    height: 68px;
+    height: 78px;
     border-right: solid 1px #EBEBEB;
 }
 
 .info-menu{
     background-color: #7B7B7B;
+}
+
+.info-menu-sub{
+    margin-top: 10px;
+    font-size: 10px;
 }
 
 .info-menu-active{

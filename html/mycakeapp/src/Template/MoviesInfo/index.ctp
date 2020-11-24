@@ -5,15 +5,40 @@
 <div class="movie-info-wrap">
     <div class="movie-info-menu">
         <p class="scheduel-text">上映スケジュール</p>
-        <!-- spanは縦線 -->
+        <!-- ================== 日付が並んでいる部分 start ================== -->
         <ul>
-            <li class="info-menu" value="<?php echo $weekValue[0] ?>"><?php echo $weekDate[0] ?><span></span></li>
-            <li class="info-menu" value="<?php echo $weekValue[1] ?>"><?php echo $weekDate[1] ?><span></span></li>
-            <li class="info-menu" value="<?php echo $weekValue[2] ?>"><?php echo $weekDate[2] ?><span></span></li>
-            <li class="info-menu" value="<?php echo $weekValue[3] ?>"><?php echo $weekDate[3] ?><span></span></li>
-            <li class="info-menu" value="<?php echo $weekValue[4] ?>"><?php echo $weekDate[4] ?><span></span></li>
-            <li class="info-menu" value="<?php echo $weekValue[5] ?>"><?php echo $weekDate[5] ?><span></span></li>
-            <li class="info-menu" value="<?php echo $weekValue[6] ?>"><?php echo $weekDate[6] ?></li>
+            <?php for ($i = 0; $i < 7; $i++) : ?>
+                <?php if (strpos($weekDate[$i], '水') !== false && strpos($weekDate[$i], '01日') !== false) : ?>
+                    <li class="info-menu" value="<?php echo $weekValue[$i] ?>"><?php echo $weekDate[$i] ?>
+                        <p class="info-menu-sub">子供女性シニア割引</p>
+                        <p class="info-menu-sub">ファーストデイ割引</p>
+                        <?php if ($i !== 6) : ?>
+                            <!-- spanは縦線 -->
+                            <span></span>
+                        <?php endif; ?>
+                    </li>
+                <?php elseif (strpos($weekDate[$i], '水') !== false) : ?>
+                    <li class="info-menu" value="<?php echo $weekValue[$i] ?>"><?php echo $weekDate[$i] ?>
+                        <p class="info-menu-sub">子供女性シニア割引</p>
+                        <?php if ($i !== 6) : ?>
+                            <span></span>
+                        <?php endif; ?>
+                    <?php elseif (strpos($weekDate[$i], '01日') !== false) : ?>
+                    <li class="info-menu" value="<?php echo $weekValue[$i] ?>"><?php echo $weekDate[$i] ?>
+                        <p class="info-menu-sub">ファーストデイ割引</p>
+                        <?php if ($i !== 6) : ?>
+                            <span></span>
+                        <?php endif; ?>
+                    <?php else : ?>
+                    <li class="info-menu" value="<?php echo $weekValue[$i] ?>"><?php echo $weekDate[$i] ?>
+                        <?php if ($i !== 6) : ?>
+                            <span></span>
+                        <?php endif; ?>
+                    </li>
+                <?php endif; ?>
+            <?php endfor; ?>
+            <!-- ================== 日付が並んでいる部分 end ================== -->
+
         </ul>
         <p id="scheduled-date"><?php echo $weekDate[0] ?></p>
 
