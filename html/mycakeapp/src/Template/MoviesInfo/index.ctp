@@ -15,13 +15,15 @@
             <li class="info-menu" value="<?php echo $weekValue[5] ?>"><?php echo $weekDate[5] ?><span></span></li>
             <li class="info-menu" value="<?php echo $weekValue[6] ?>"><?php echo $weekDate[6] ?></li>
         </ul>
-        <!-- 今は適当に日付入れてあとからヘルパー -->
         <p id="scheduled-date"><?php echo $weekDate[0] ?></p>
 
         <div id="movie-main-area">
 
+            <!-- 映画の予定をforeachで取り出す -->
             <?php foreach ($MovieList as $info) : ?>
                 <div class="movie-list">
+
+                    <!-- =========== タイトル、上映時間 終了予定 start =========== -->
                     <div class="movie-list-head">
                         <p class="movie-title"><?= h($info->title) ?></p>
                         <p class="movie-screening-time">[ 上映時間 : <?= h($info->total_minutes_with_trailer) ?>分 ]</p>
@@ -33,14 +35,20 @@
                             ?>
                             <?= h($today . "(" . $week[$today_w] . ")終了予定") ?></p>
                     </div>
-                    <!-- ======================= 1block チケット購入 ======================= -->
+                    <!-- =========== タイトル、上映時間 終了予定 end =========== -->
+
+
+                    <!-- ======================= 映画の画像 映画のスケジュール start ======================= -->
                     <div class="movie-list-main">
                         <p class="movie-img"><?php echo $this->Html->image($info->thumbnail_path); ?></p>
                         <?php $schedules_value = ''; ?>
+
+
                         <?php for ($i = 0; $i < count($onThatDayMovieSchedules); $i++) : ?>
                             <?php if ($info->id === $onThatDayMovieSchedules[$i]['movie_id']) : ?>
                                 <div class="movie-schedule-for-the-day">
 
+                                    <!-- =========== 時間 start =========== -->
                                     <?php
                                     $start_timestamp = strtotime($onThatDayMovieSchedules[$i]['screening_start_datetime']);
                                     $start_datetime = date('YmdHis', $start_timestamp);
@@ -57,6 +65,7 @@
                                     $start_time = $start_datetime_hour . ':' . $start_datetime_minutes;
                                     $end_time = $end_datetime_hour . ':' . $end_datetime_minutes;
                                     ?>
+                                    <!-- =========== 時間 end =========== -->
 
                                     <p class="movie-time"><?php echo ($start_time . '~' . $end_time) ?></p>
                                     <p class="buy-button">
@@ -65,13 +74,17 @@
 
                                     <?php $schedules_value = 'exists'; ?>
                                 </div>
+                                <!-- $schedules_valueが'exists'だったらその映画のスケジュールが入っていると判断 -->
                             <?php elseif ($info->id !== $onThatDayMovieSchedules[$i]['movie_id'] && $schedules_value === '') : ?>
                                 <?php $schedules_value = 'none'; ?>
                             <?php endif; ?>
                         <?php endfor; ?>
+
+                        <!-- $schedules_valueが'none'だったらその映画のスケジュールが入っていないと判断 -->
                         <?php if ($schedules_value === 'none') : ?>
                             <p class="not-movie-schedule-for-the-day">Coming Soon...</p>
                         <?php endif; ?>
+                        <!-- ======================= 映画の画像 映画のスケジュール start ======================= -->
                     </div>
                 </div>
             <?php endforeach; ?>

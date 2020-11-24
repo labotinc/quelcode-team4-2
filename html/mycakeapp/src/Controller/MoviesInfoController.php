@@ -40,15 +40,18 @@ class MoviesInfoController extends AppController
         // ================ 日付について end ================
 
         $todayxData = date("Y-m-d");
+
+        // 映画テーブルを取り出す
         $MovieList = $this->Movies->find('all')
             ->where([
                 // screening_start_dateとcreening_end_dateで$ajaxDataが上映期間に入っているか判定。
                 'screening_start_date <=' =>  $todayxData,
                 'screening_end_date >=' =>  $todayxData,
+                'is_screened' => 1
             ])
             ->toArray();
 
-
+        // 映画のスケジュールを取り出す
         $onThatDayMovieSchedules = $this->MovieSchedules->find('all')
             ->select(['id', 'movie_id', 'screening_start_datetime'])
             ->where([
@@ -87,6 +90,7 @@ class MoviesInfoController extends AppController
                     // screening_start_dateとcreening_end_dateで$ajaxDataが上映期間に入っているか判定。
                     'screening_start_date <=' =>  $ajaxData,
                     'screening_end_date >=' =>  $ajaxData,
+                    'is_screened' => 1
                 ])
                 ->toArray();
             echo json_encode($MovieList, JSON_UNESCAPED_UNICODE);
