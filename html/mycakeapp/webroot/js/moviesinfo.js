@@ -42,9 +42,9 @@ function infoMenuAction(infoMenuDOM, infoMenuId) {
             success: function (data) {
                 //取得成功したら実行する処理
                 // console.log("ファイルの取得に成功しました");
-                // // phpから変えてきたのがresponse
+                // phpから変えてきたのがdata
                 if (data.length === 0) {
-                    // スケジュールがなかったら
+                    // クリックした日の日付を検索しスケジュールがなかったら
                     $('.movie-list-main').html('値がありません。');
                 } else {
                     // スケジュールがあったら
@@ -55,22 +55,22 @@ function infoMenuAction(infoMenuDOM, infoMenuId) {
                     type: "GET",
                     url: "/MoviesInfo/ajaxMovieList",
                     dataType: "json",
-
                     data: {
                         time: $(infoMenuDOM).val()
                     },
                     success: function (data) {
                         //取得成功したら実行する処理
                         // console.log("ファイルの取得に成功しました");
-                        // phpから変えてきたのがresponse
                         if (data.length === 0) {
-                            // スケジュールがなかったら
-                            console.log('値がありません。');
+                            //クリックした日の日付を検索し、映画がなかったら ==
+                            // イベントが発火したらとりあえず、ctpファイルの #movie-main-areaを消す
                             $('#movie-main-area').empty();
                             $('#movie-main-area').append($('<div>').html('Coming Soon...').addClass('not-movie-list'));
 
                         } else {
-                            // スケジュールがあったら
+                            // 映画があったら ==
+
+                            // イベントが発火したらとりあえず、ctpファイルの #movie-main-areaを消す
                             $('#movie-main-area').empty();
                             for (let i = 0; i < data.length; i++) {
 
@@ -80,6 +80,9 @@ function infoMenuAction(infoMenuDOM, infoMenuId) {
                                 const weekday_list = ['日', '月', '火', '水', '木', '金', '土'];
                                 const weekday = '(' + weekday_list[endDate.getDay()] + ')';
 
+
+                                // appendはタグを追加したい時などに使う
+                                // ========== 映画のタイトル、上映時間、終了予定、画像を書き込み start ==========
                                 $('#movie-main-area').append($('<div>').addClass('movie-list')
                                     .append($('<div>').addClass('movie-list-head')
                                         .append($('<p>').html(data[i].title).addClass('movie-title'))
@@ -87,11 +90,14 @@ function infoMenuAction(infoMenuDOM, infoMenuId) {
                                         .append($('<p>').html(m + "月" + d + "日" + weekday + '終了予定').addClass('movie-scheduled-to-end')))
                                     .append($('<div>').addClass('movie-list-main')
                                         .append($('<p>').addClass('movie-img')
-                                            // data[i].thumbnail_path写真だけど今のところ許容
+                                            // 画像パスは今のところ適当に入れているので許容
                                             .append($('<img>').attr('src', '/img/' + data[i].thumbnail_path).attr('alt', '')))));
+                                // ========== 映画のタイトル、上映時間、終了予定、画像を書き込み end ==========
+
+
 
                                 for (let j = 0; j < moviescheduleData.length; j++) {
-                                    // ========= 始まり時刻 =========
+                                    // ========= 始まり時刻 start =========
                                     var date = new Date(moviescheduleData[j].screening_start_datetime);
                                     var startHours = date.getHours();
                                     var startMinutes = date.getMinutes();
@@ -101,7 +107,8 @@ function infoMenuAction(infoMenuDOM, infoMenuId) {
                                     if (startHours < 10) {
                                         startHours = '0' + startHours;
                                     }
-                                    // ========= 終了時刻 =========
+                                    // ========= 始まり時刻 end =========
+                                    // ========= 終了時刻 start =========
                                     var finishDateTime = date.setMinutes(date.getMinutes() + data[i].total_minutes_with_trailer);
                                     var finishDate = new Date(finishDateTime);
                                     var finishHours = finishDate.getHours();
@@ -112,14 +119,22 @@ function infoMenuAction(infoMenuDOM, infoMenuId) {
                                     if (finishMinutes < 10) {
                                         finishMinutes = '0' + finishMinutes;
                                     }
+                                    // ========= 終了時刻 end =========
+
+                                    // 何時から何時まで映画があるかの部分を代入 ↓ (予約購入ボタンの上の時刻)
                                     const movieTime = startHours + ':' + startMinutes + '~' + finishHours + ':' + finishMinutes;
-                                    console.log(movieTime);
+
+
+                                    // 予約購入ボタン周辺の書き込みstart
                                     if (data[i].id === moviescheduleData[j].movie_id) {
+                                        // eq(i)で映画のリストを選んでいる。例えば$('.movie-list-main').eq(i)の$eq(i)が0だったら一番上に表示されている映画に書き込み
                                         $('.movie-list-main').eq(i).append($('<div>').addClass('movie-schedule-for-the-day')
                                             .append($('<p>').html(movieTime).addClass('movie-time'))
-                                            .append($('<form>', { action: "bookings/add_seat/" + moviescheduleData[j]['id'], method: '' }).append($('<p>').addClass('buy-button').append($('<button>').html('予約購入')))));
+                                            .append($('<p>').addClass('buy-button').append($('<a>').attr('href', 'bookings/add_seat/' + moviescheduleData[j]['id']).html('予約購入'))));
                                     }
+                                    // 予約購入ボタン周辺の書き込みend
                                 }
+                                // その映画のスケジュールがなかった場合の書き込み
                                 if ($('.movie-list-main')[i].childNodes.length <= 1) {
                                     $('.movie-list-main').eq(i).wrap('<p />').append($('<p>').html('Coming Soon...').addClass('not-movie-schedule-for-the-day'));
                                 }

@@ -58,10 +58,8 @@
                                     $end_time = $end_datetime_hour . ':' . $end_datetime_minutes;
                                     ?>
 
-                                    <p class="movie-time"><?php echo ($start_time . '~' . $end_time) ?></p>
-                                    <?= $this->Form->create(null, ['type' => 'get', 'url' => ['controller' => 'bookings', 'action' => 'add_seat', $onThatDayMovieSchedules[$i]['id']]]) ?>
-                                    <p class="buy-button"><?php echo $this->Form->button(__('予約購入')) ?></p>
-                                    <?= $this->Form->end() ?>
+                                    <p class="buy-button">
+                                        <?= $this->Html->link(__('予約購入'), ['controller' => 'bookings', 'action' => 'add_seat', $onThatDayMovieSchedules[$i]['id']]); ?></p>
                                     <?php $schedules_value = 'exists'; ?>
                                 </div>
                             <?php elseif ($info->id !== $onThatDayMovieSchedules[$i]['movie_id'] && $schedules_value === '') : ?>
