@@ -118,9 +118,17 @@ function infoMenuAction(infoMenuDOM, infoMenuId) {
                                     // 予約購入ボタン周辺の書き込みstart
                                     if (data[i].id === moviescheduleData[j].movie_id) {
                                         // eq(i)で映画のリストを選んでいる。例えば$('.movie-list-main').eq(i)の$eq(i)が0だったら一番上に表示されている映画に書き込み
-                                        $('.movie-list-main').eq(i).append($('<div>').addClass('movie-schedule-for-the-day')
-                                            .append($('<p>').html(movieTime).addClass('movie-time'))
-                                            .append($('<p>').addClass('buy-button').append($('<a>').attr('href', 'bookings/add_seat/' + moviescheduleData[j]['id']).html('予約購入'))));
+
+                                        if ((finishDate - new Date()) < 0) {
+                                            $('.movie-list-main').eq(i).append($('<div>').addClass('movie-schedule-for-the-day')
+                                                .append($('<p>').html(movieTime).addClass('movie-time'))
+                                                .append($('<p>').addClass('invalid-buy-button').html('受付終了')));
+                                        } else {
+                                            $('.movie-list-main').eq(i).append($('<div>').addClass('movie-schedule-for-the-day')
+                                                .append($('<p>').html(movieTime).addClass('movie-time'))
+                                                .append($('<p>').addClass('buy-button').append($('<a>').attr('href', 'bookings/add_seat/' + moviescheduleData[j]['id']).html('予約購入'))));
+                                        }
+
                                     }
                                     // 予約購入ボタン周辺の書き込みend
                                 }

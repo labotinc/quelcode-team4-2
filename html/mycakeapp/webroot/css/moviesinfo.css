@@ -141,3 +141,13 @@
     text-align: center;
     color: #111111;
 }
+
+.invalid-buy-button{
+    padding: 10px 0px;
+    width: 100%;
+    display: block;
+    text-align: center;
+    color: #ffffff;
+    background-color: #111111;
+    opacity: 0.3;
+}

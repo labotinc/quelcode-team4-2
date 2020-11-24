@@ -92,9 +92,14 @@
                                     <!-- =========== 時間 end =========== -->
 
                                     <p class="movie-time"><?php echo ($start_time . '~' . $end_time) ?></p>
-                                    <p class="buy-button">
-                                        <?= $this->Html->link(__('予約購入'), ['controller' => 'bookings', 'action' => 'add_seat', $ThatDaySchedules[$i]['id']]); ?>
-                                    </p>
+                                    <?php if (0 > ((int)$start_datetime - (int)date('YmdHis'))) : ?>
+                                        <p class="invalid-buy-button">受付終了</p>
+                                    <?php else : ?>
+                                        <p class="buy-button">
+                                            <?= $this->Html->link(__('予約購入'), ['controller' => 'bookings', 'action' => 'add_seat', $ThatDaySchedules[$i]['id']]); ?>
+                                        </p>
+                                    <?php endif; ?>
+
 
                                     <?php $schedules_value = 'exists'; ?>
                                 </div>
