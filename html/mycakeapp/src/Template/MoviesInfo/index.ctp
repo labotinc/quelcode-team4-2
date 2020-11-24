@@ -68,13 +68,13 @@
                         <p class="movie-img"><?= $this->Html->image("MovieThumbnails/" . pathinfo($info->thumbnail_path, PATHINFO_BASENAME), array('alt' => h($info->thumbnail_path))); ?></p>
 
                         <?php $schedules_value = ''; ?>
-                        <?php for ($i = 0; $i < count($onThatDayMovieSchedules); $i++) : ?>
-                            <?php if ($info->id === $onThatDayMovieSchedules[$i]['movie_id']) : ?>
+                        <?php for ($i = 0; $i < count($ThatDaySchedules); $i++) : ?>
+                            <?php if ($info->id === $ThatDaySchedules[$i]['movie_id']) : ?>
                                 <div class="movie-schedule-for-the-day">
 
                                     <!-- =========== 時間 start =========== -->
                                     <?php
-                                    $start_timestamp = strtotime($onThatDayMovieSchedules[$i]['screening_start_datetime']);
+                                    $start_timestamp = strtotime($ThatDaySchedules[$i]['screening_start_datetime']);
                                     $start_datetime = date('YmdHis', $start_timestamp);
 
                                     $end_timestamp = strtotime($start_datetime . '+' . $info->total_minutes_with_trailer . 'minute');
@@ -93,13 +93,13 @@
 
                                     <p class="movie-time"><?php echo ($start_time . '~' . $end_time) ?></p>
                                     <p class="buy-button">
-                                        <?= $this->Html->link(__('予約購入'), ['controller' => 'bookings', 'action' => 'add_seat', $onThatDayMovieSchedules[$i]['id']]); ?>
+                                        <?= $this->Html->link(__('予約購入'), ['controller' => 'bookings', 'action' => 'add_seat', $ThatDaySchedules[$i]['id']]); ?>
                                     </p>
 
                                     <?php $schedules_value = 'exists'; ?>
                                 </div>
                                 <!-- $schedules_valueが'exists'だったらその映画のスケジュールが入っていると判断 -->
-                            <?php elseif ($info->id !== $onThatDayMovieSchedules[$i]['movie_id'] && $schedules_value === '') : ?>
+                            <?php elseif ($info->id !== $ThatDaySchedules[$i]['movie_id'] && $schedules_value === '') : ?>
                                 <?php $schedules_value = 'none'; ?>
                             <?php endif; ?>
                         <?php endfor; ?>

@@ -50,7 +50,7 @@ class MoviesInfoController extends AppController
 
 
         // 映画のスケジュールを取り出す
-        $onThatDayMovieSchedules = $this->MovieSchedules->find('all')
+        $ThatDaySchedules = $this->MovieSchedules->find('all')
             ->select(['id', 'movie_id', 'screening_start_datetime'])
             ->where([
                 'screening_start_datetime >=' => date("Y-m-d 00:00:00"),
@@ -59,14 +59,14 @@ class MoviesInfoController extends AppController
             ])
             ->toArray();
 
-        $this->set(compact('weekDate', 'weekValue', 'MovieList', 'onThatDayMovieSchedules'));
+        $this->set(compact('weekDate', 'weekValue', 'MovieList', 'ThatDaySchedules'));
     }
 
     function ajaxMovieSchedules()
     {
         $this->autoRender = FALSE;
         if ($this->request->is('ajax')) {
-            $onThatDayMovieSchedules = $this->MovieSchedules->find('all')
+            $ThatDaySchedules = $this->MovieSchedules->find('all')
                 ->select(['id', 'movie_id', 'screening_start_datetime'])
                 ->where([
                     'screening_start_datetime >=' => date("Y-m-d 00:00:00", $_GET['time']),
@@ -75,7 +75,7 @@ class MoviesInfoController extends AppController
                 ])
                 ->toArray();
 
-            echo json_encode($onThatDayMovieSchedules, JSON_UNESCAPED_UNICODE);
+            echo json_encode($ThatDaySchedules, JSON_UNESCAPED_UNICODE);
             exit;
         }
     }
