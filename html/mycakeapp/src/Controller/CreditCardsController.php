@@ -20,7 +20,7 @@ class CreditCardsController extends AppController
     public function index()
     {
         $this->paginate = [
-            'contain' => ['Users'],
+            'contain' => ['Users', 'PaymentHistories'],
         ];
         $creditCards = $this->paginate($this->CreditCards);
 
@@ -37,7 +37,7 @@ class CreditCardsController extends AppController
     public function view($id = null)
     {
         $creditCard = $this->CreditCards->get($id, [
-            'contain' => ['Users'],
+            'contain' => ['Users', 'PaymentHistories'],
         ]);
 
         $this->set('creditCard', $creditCard);
@@ -61,7 +61,8 @@ class CreditCardsController extends AppController
             $this->Flash->error(__('The credit card could not be saved. Please, try again.'));
         }
         $users = $this->CreditCards->Users->find('list', ['limit' => 200]);
-        $this->set(compact('creditCard', 'users'));
+        $paymentHistories = $this->CreditCards->PaymentHistories->find('list', ['limit' => 200]);
+        $this->set(compact('creditCard', 'users', 'paymentHistories'));
     }
 
     /**
@@ -86,7 +87,8 @@ class CreditCardsController extends AppController
             $this->Flash->error(__('The credit card could not be saved. Please, try again.'));
         }
         $users = $this->CreditCards->Users->find('list', ['limit' => 200]);
-        $this->set(compact('creditCard', 'users'));
+        $paymentHistories = $this->CreditCards->PaymentHistories->find('list', ['limit' => 200]);
+        $this->set(compact('creditCard', 'users', 'paymentHistories'));
     }
 
     /**
