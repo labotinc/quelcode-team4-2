@@ -1,10 +1,15 @@
 <?php
+
 namespace App\Model\Table;
 
 use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
+// Typeクラスを追加
+use Cake\Database\Type;
+// Chronosクラスを追加
+use Cake\Chronos\Chronos;
 
 /**
  * MovieSchedules Model
@@ -61,7 +66,26 @@ class MovieSchedulesTable extends Table
         $validator
             ->dateTime('screening_start_datetime')
             ->requirePresence('screening_start_datetime', 'create')
-            ->notEmptyDateTime('screening_start_datetime');
+            ->notEmptyDateTime('screening_start_datetime')
+            ->add(
+                'screening_start_datetime',
+                'custom',
+                [
+                    'rule' => function ($value, $context) {
+                        //（参照:https://qiita.com/ichi404/items/b5cdc06d3fa605c732c1, https://book.cakephp.org/chronos/1/ja/index.html)
+                        // 日付比較をTypeクラスを用いて実装
+                        // Type::build('date')->でイミュータブル（変更不可）なdateオブジェクトを作成
+                        // marshal()でフォームで取得したデータを引数し、PHPの型に変換
+                        $now = Chronos::now();
+                        $screening_start_datetime = Type::build('date')->marshal($value);
+                        //gt():「>」の条件を作成
+                        return $screening_start_datetime->gte($now);
+                    },
+                    'message' => '終了日は開始日より後にしてください。',
+                    // create時のみバリデーションを効かせる
+                    'on' => 'create'
+                ]
+            );
 
         $validator
             ->boolean('is_playable')
