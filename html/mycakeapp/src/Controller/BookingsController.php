@@ -108,23 +108,6 @@ class BookingsController extends AppController
             $this->Users->get(1)->id
         );
 
-        // 映画が予約済だった場合は予約ページにリダイレクト
-        if (in_array($login_user_id, $booked_id_array)) {
-            // ログインユーザーの仮予約を取り出す。
-            foreach ($booked_temporary as $booked_tmp) {
-                $created_format = new Time($booked_tmp['created']);
-                // 15分以上経過している仮予約は削除する
-                if (!($created_format->wasWithinLast('15 minutes'))) {
-                    $booked_tmp_delete = $this->Bookings->get($booked_tmp['id']);
-                    $this->Bookings->delete($booked_tmp_delete);
-                    $this->Flash->set(__('仮予約から15分経過した予約を削除いたしました。再度予約をお願いします。'));
-                }
-            }
-            // ※ページが作成されたら映画スケジュール画面をリダイレクト先にする。action先は未定。
-            $this->redirect(['controller' => 'movies_info', 'action' => 'index']);
-            $this->Flash->set(__('お客様はすでに席を予約しております。座席を変更したい場合は予約をキャンセルして再度予約をお願いします。'));
-        }
-
         // セッションを取得する（p50から遷移された場合に選択していた座席を取得）
         $add_seat_session = $this->getRequest()->getSession();
 
@@ -138,6 +121,24 @@ class BookingsController extends AppController
             // ※ページが作成されたら映画スケジュール画面をリダイレクト先にする。action先は未定。
             $this->redirect(['controller' => 'moviesinfo', 'action' => 'index']);
         }
+
+        // 映画が予約済だった場合、映画上映フラグが立っていない→上映されていない映画を選択した場合は予約ページにリダイレクト
+        if (in_array($login_user_id, $booked_id_array) || !($movie_schedule->is_playable)) {
+            // ログインユーザーの仮予約を取り出す。
+            foreach ($booked_temporary as $booked_tmp) {
+                $created_format = new Time($booked_tmp['created']);
+                // 15分以上経過している仮予約は削除する
+                if (!($created_format->wasWithinLast('15 minutes'))) {
+                    $booked_tmp_delete = $this->Bookings->get($booked_tmp['id']);
+                    $this->Bookings->delete($booked_tmp_delete);
+                    $this->Flash->set(__('仮予約から15分経過した予約を削除いたしました。再度予約をお願いします。'));
+                }
+            }
+            // ※ページが作成されたら映画スケジュール画面をリダイレクト先にする。action先は未定。
+            $this->redirect(['controller' => 'movies_info', 'action' => 'index']);
+            $this->Flash->set(__('選択した劇場はすでに予約済か、劇場が中止となっている場合がございます。再度上映スケジュールページからご希望の上映を選択してください。'));
+        }
+
         $booking = $this->Bookings->newEntity();
 
         // P50からキャンセルボタンで遷移した場合の席番号の取得
