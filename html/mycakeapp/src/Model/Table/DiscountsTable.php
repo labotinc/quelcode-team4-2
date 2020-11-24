@@ -37,8 +37,9 @@ class DiscountsTable extends Table
         $this->setPrimaryKey('id');
 
         $this->addBehavior('Timestamp');
-
-        $this->belongsTo('payment_histories');
+        
+        //アソシエーションの設定をpayment_historiesテーブルができるまでエラー対策でコメントアウトしてあります
+        //$this->belongsTo('payment_histories');
     }
 
     /**
