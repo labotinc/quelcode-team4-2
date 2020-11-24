@@ -29,14 +29,14 @@ class MoviesInfoController extends AppController
         $today = date("Ymd H:i:s");
         $today_w = date("w");
         $week = array("日", "月", "火", "水", "木", "金", "土", "日", "月", "火", "水", "木", "金", "土");
-        $countWeek = count($week) - (int)$today_w;
 
-        for ($i = 0; $i < $countWeek; $i++) {
+        for ($i = 0; $i < 7; $i++) {
             $timestamp = strtotime((string)$i . 'day ' . $today);
             $weekNumber = $today_w + $i;
             $weekDate[] = date("m月d日" . "(" . $week[$weekNumber] . ")", $timestamp);
             $weekValue[] = $timestamp;
         }
+
         // ================ 日付について end ================
 
         $todayxData = date("Y-m-d");
