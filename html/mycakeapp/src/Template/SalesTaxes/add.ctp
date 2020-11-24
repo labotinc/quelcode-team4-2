@@ -15,7 +15,7 @@
     <fieldset>
         <legend><?= __('Add Sales Tax') ?></legend>
         <?php
-            echo '税率はパーセント表記かつ半角数字で入力してください（例　税率８%なら「８」を入力）';
+            echo '税率はパーセント表記かつ半角数字で入力してください（例　税率8%なら「8」を入力）';
             echo $this->Form->control('rate',['type'=>'text']);
             echo $this->Form->control('is_applied');
         ?>
