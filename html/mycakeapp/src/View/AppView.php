@@ -36,12 +36,4 @@ class AppView extends View
      *
      * @return void
      */
-    public function initialize()
-    {
-        // Formヘルパーの設定を変更することでチェックボタンのlabelの位置を変更
-        $this->Form->setTemplates([
-            'inputContainer' => '{{content}}',
-            'nestingLabel' => '{{hidden}}{{input}}<label{{attrs}}>{{text}}</label>'
-        ]);
-    }
 }

@@ -16,7 +16,14 @@ $column_alphabets = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K'];
     <div class="container">
       <div class="non-reserved-sample">予約可能</div>
       <div class="reserved-sample">予約済</div>
-      <?= $this->Form->create($booking, ['type' => 'post']) ?>
+      <?= $this->Form->create($booking, [
+        'type' => 'post',
+        // チェックボタンのlabelの位置を変更することでレイアウトを整える
+        'templates' => [
+          'inputContainer' => '{{content}}',
+          'nestingLabel' => '{{hidden}}{{input}}<label{{attrs}}>{{text}}</label>'
+        ]
+      ]); ?>
       <?php
       $errors = $booking->hasErrors();
       // ユーザーIDはログインユーザーから、映画スケジュールIDはDBから取得
