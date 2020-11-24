@@ -44,6 +44,8 @@ class PaymentHistoriesTable extends Table
         $this->setPrimaryKey('id');
 
         $this->addBehavior('Timestamp', [
+            // payment_request_createdの初期値を作成日時にするためにイベントを設定。
+            // 参考：https://book.cakephp.org/3/ja/orm/behaviors/timestamp.html#id2
             'events' => [
                 'Model.beforeSave' => [
                     'payment_request_created' => 'new',
