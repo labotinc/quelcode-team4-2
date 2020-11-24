@@ -41,15 +41,8 @@ function infoMenuAction(infoMenuDOM, infoMenuId) {
             },
             success: function (data) {
                 //取得成功したら実行する処理
-                // console.log("ファイルの取得に成功しました");
                 // phpから変えてきたのがdata
-                if (data.length === 0) {
-                    // クリックした日の日付を検索しスケジュールがなかったら
-                    $('.movie-list-main').html('値がありません。');
-                } else {
-                    // スケジュールがあったら
-                    var moviescheduleData = data;
-                }
+                var moviescheduleData = data;
 
                 $.ajax({
                     type: "GET",
@@ -60,13 +53,11 @@ function infoMenuAction(infoMenuDOM, infoMenuId) {
                     },
                     success: function (data) {
                         //取得成功したら実行する処理
-                        // console.log("ファイルの取得に成功しました");
                         if (data.length === 0) {
                             //クリックした日の日付を検索し、映画がなかったら ==
                             // イベントが発火したらとりあえず、ctpファイルの #movie-main-areaを消す
                             $('#movie-main-area').empty();
                             $('#movie-main-area').append($('<div>').html('Coming Soon...').addClass('not-movie-list'));
-
                         } else {
                             // 映画があったら ==
 
@@ -96,7 +87,6 @@ function infoMenuAction(infoMenuDOM, infoMenuId) {
                                 // ========== 映画のタイトル、上映時間、終了予定、画像を書き込み end ==========
 
 
-
                                 for (let j = 0; j < moviescheduleData.length; j++) {
                                     // ========= 始まり時刻 start =========
                                     var date = new Date(moviescheduleData[j].screening_start_datetime);
@@ -124,7 +114,6 @@ function infoMenuAction(infoMenuDOM, infoMenuId) {
 
                                     // 何時から何時まで映画があるかの部分を代入 ↓ (予約購入ボタンの上の時刻)
                                     const movieTime = startHours + ':' + startMinutes + '~' + finishHours + ':' + finishMinutes;
-
 
                                     // 予約購入ボタン周辺の書き込みstart
                                     if (data[i].id === moviescheduleData[j].movie_id) {

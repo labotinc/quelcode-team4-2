@@ -26,35 +26,35 @@ class MoviesInfoController extends AppController
     public function index()
     {
         // ================ 日付について start ================
-        $today = date("Ymd H:i:s");
-        $today_w = date("w");
+
         $week = array("日", "月", "火", "水", "木", "金", "土", "日", "月", "火", "水", "木", "金", "土");
 
         for ($i = 0; $i < 7; $i++) {
-            $timestamp = strtotime((string)$i . 'day ' . $today);
-            $weekNumber = $today_w + $i;
-            $weekDate[] = date("m月d日" . "(" . $week[$weekNumber] . ")", $timestamp);
-            $weekValue[] = $timestamp;
+            $weekNumber = date("w") + $i;
+            $weekDate[] = date("m月d日" . "(" . $week[$weekNumber] . ")", strtotime($i . " day"));
+            $weekValue[] = strtotime($i . " day" . date("Ymd H:i:s"));
         }
 
         // ================ 日付について end ================
 
-        $todayxData = date("Y-m-d");
 
         // 映画テーブルを取り出す
         $MovieList = $this->Movies->find('all')
             ->where([
                 // screening_start_dateとcreening_end_dateで$ajaxDataが上映期間に入っているか判定。
-                'screening_start_date <=' =>  $todayxData,
-                'screening_end_date >=' =>  $todayxData,
+                'screening_start_date <=' =>  date("Y-m-d"),
+                'screening_end_date >=' =>   date("Y-m-d"),
                 'is_screened' => 1
             ])
             ->toArray();
+
 
         // 映画のスケジュールを取り出す
         $onThatDayMovieSchedules = $this->MovieSchedules->find('all')
             ->select(['id', 'movie_id', 'screening_start_datetime'])
             ->where([
+                'screening_start_datetime >=' => date("Y-m-d 00:00:00"),
+                'screening_start_datetime <=' => date("Y-m-d 23:59:59"),
                 'is_playable' => 1
             ])
             ->toArray();
@@ -69,6 +69,8 @@ class MoviesInfoController extends AppController
             $onThatDayMovieSchedules = $this->MovieSchedules->find('all')
                 ->select(['id', 'movie_id', 'screening_start_datetime'])
                 ->where([
+                    'screening_start_datetime >=' => date("Y-m-d 00:00:00", $_GET['time']),
+                    'screening_start_datetime <=' => date("Y-m-d 23:59:59", $_GET['time']),
                     'is_playable' => 1
                 ])
                 ->toArray();
@@ -83,13 +85,13 @@ class MoviesInfoController extends AppController
         $this->autoRender = FALSE;
         if ($this->request->is('ajax')) {
             // $ajaxDataはクリックされた日付
-            $ajaxData = date("Y-m-d", $_GET['time']);
+            // $ajaxData = date("Y-m-d", $_GET['time']);
 
             $MovieList = $this->Movies->find('all')
                 ->where([
                     // screening_start_dateとcreening_end_dateで$ajaxDataが上映期間に入っているか判定。
-                    'screening_start_date <=' =>  $ajaxData,
-                    'screening_end_date >=' =>  $ajaxData,
+                    'screening_start_date <=' =>  date("Y-m-d", $_GET['time']),
+                    'screening_end_date >=' =>  date("Y-m-d", $_GET['time']),
                     'is_screened' => 1
                 ])
                 ->toArray();

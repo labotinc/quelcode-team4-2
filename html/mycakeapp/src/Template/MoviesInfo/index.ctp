@@ -66,9 +66,8 @@
                     <!-- ======================= 映画の画像 映画のスケジュール start ======================= -->
                     <div class="movie-list-main">
                         <p class="movie-img"><?= $this->Html->image("MovieThumbnails/" . pathinfo($info->thumbnail_path, PATHINFO_BASENAME), array('alt' => h($info->thumbnail_path))); ?></p>
+
                         <?php $schedules_value = ''; ?>
-
-
                         <?php for ($i = 0; $i < count($onThatDayMovieSchedules); $i++) : ?>
                             <?php if ($info->id === $onThatDayMovieSchedules[$i]['movie_id']) : ?>
                                 <div class="movie-schedule-for-the-day">
