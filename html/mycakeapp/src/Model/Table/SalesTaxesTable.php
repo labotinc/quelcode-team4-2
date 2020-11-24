@@ -54,9 +54,10 @@ class SalesTaxesTable extends Table
             ->allowEmptyString('id', null, 'create');
 
         $validator
-            ->integer('rate')
+            ->integer('rate','半角数字で入力してください')
             ->requirePresence('rate', 'create')
-            ->notEmptyString('rate');
+            ->notEmptyString('rate')
+            ->naturalNumber('rate','0以上の自然数を入力してください');
 
         $validator
             ->boolean('is_applied')
