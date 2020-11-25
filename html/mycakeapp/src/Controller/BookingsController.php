@@ -100,7 +100,7 @@ class BookingsController extends AppController
             // $schedules_idの$movie_scheduleを取得する
             $movie_schedule = $this->MovieSchedules->get($schedule_id);
         } catch (Exception $e) {
-            $this->Flash->set(__('不正なURLのため、リダイレクトしました。上映スケジュールページからアクセスしてください。'));
+            $this->Flash->set(__('不正なURLのため、リダイレクトしました。上映スケジュールページから再度予約してください。'));
             // ※ページが作成されたら映画スケジュール画面をリダイレクト先にする。action先は未定。
             return $this->redirect(['controller' => 'MoviesInfo', 'action' => 'schedule']);
         }
@@ -185,7 +185,7 @@ class BookingsController extends AppController
             $movie_info = $this->Movies->get($movie_id);
             $schedule_id = $booking->movie_schedule['id'];
         } catch (Exception $e) {
-            $this->Flash->set(__('不正なURLのため、リダイレクトしました。上映スケジュールページから再度アクセスしてください。'));
+            $this->Flash->set(__('不正なURLのため、リダイレクトしました。上映スケジュールページから再度予約してください。'));
             // ※トップページが作成されたら映画スケジュール画面をリダイレクト先にする。action先は未定。
             return $this->redirect(['controller' => 'MoviesInfo', 'action' => 'schedule']);
         }
