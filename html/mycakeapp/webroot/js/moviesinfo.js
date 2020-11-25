@@ -83,7 +83,7 @@ function infoMenuAction(infoMenuDOM, infoMenuId) {
                                         .append($('<p>').addClass('movie-img')
                                             // 画像パスは今のところ適当に入れているので許容
 
-                                            .append($('<img>').attr('src', '/img/MovieThumbnails/' + data[i].thumbnail_path).attr('alt', data[i].thumbnail_path)))));
+                                            .append($('<img>').attr('src', '/img/' + data[i].thumbnail_path).attr('alt', data[i].thumbnail_path)))));
                                 // ========== 映画のタイトル、上映時間、終了予定、画像を書き込み end ==========
 
 
