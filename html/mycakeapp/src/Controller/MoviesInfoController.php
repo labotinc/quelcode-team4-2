@@ -31,8 +31,14 @@ class MoviesInfoController extends AppController
     public function pricelist()
     {
 
-        $arrayDiscount = $this->Discounts->find('all')->toArray();
-        $arrayPrices = $this->Prices->find('all')->toArray();
+        $arrayDiscount = $this->Discounts->find('all')
+            ->where([
+                'is_applied' => 1
+            ])->toArray();
+        $arrayPrices = $this->Prices->find('all')
+            ->where([
+                'is_applied' => 1
+            ])->toArray();
 
         $this->set(compact('arrayPrices', 'arrayDiscount'));
     }
