@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Model\Table;
 
 use Cake\ORM\Query;
@@ -37,9 +38,8 @@ class DiscountsTable extends Table
         $this->setPrimaryKey('id');
 
         $this->addBehavior('Timestamp');
-        
-        //アソシエーションの設定をpayment_historiesテーブルができるまでエラー対策でコメントアウトしてあります
-        //$this->belongsTo('payment_histories');
+
+        $this->hasMany('PaymentHistories');
     }
 
     /**

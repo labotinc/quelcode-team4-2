@@ -1,21 +1,21 @@
 <?php
 namespace App\Test\TestCase\Model\Table;
 
-use App\Model\Table\CreditCardsTable;
+use App\Model\Table\PaymentHistoriesTable;
 use Cake\ORM\TableRegistry;
 use Cake\TestSuite\TestCase;
 
 /**
- * App\Model\Table\CreditCardsTable Test Case
+ * App\Model\Table\PaymentHistoriesTable Test Case
  */
-class CreditCardsTableTest extends TestCase
+class PaymentHistoriesTableTest extends TestCase
 {
     /**
      * Test subject
      *
-     * @var \App\Model\Table\CreditCardsTable
+     * @var \App\Model\Table\PaymentHistoriesTable
      */
-    public $CreditCards;
+    public $PaymentHistories;
 
     /**
      * Fixtures
@@ -23,9 +23,12 @@ class CreditCardsTableTest extends TestCase
      * @var array
      */
     public $fixtures = [
-        'app.CreditCards',
-        'app.Users',
         'app.PaymentHistories',
+        'app.Bookings',
+        'app.CreditCards',
+        'app.Prices',
+        'app.Discounts',
+        'app.SalesTaxes',
     ];
 
     /**
@@ -36,8 +39,8 @@ class CreditCardsTableTest extends TestCase
     public function setUp()
     {
         parent::setUp();
-        $config = TableRegistry::getTableLocator()->exists('CreditCards') ? [] : ['className' => CreditCardsTable::class];
-        $this->CreditCards = TableRegistry::getTableLocator()->get('CreditCards', $config);
+        $config = TableRegistry::getTableLocator()->exists('PaymentHistories') ? [] : ['className' => PaymentHistoriesTable::class];
+        $this->PaymentHistories = TableRegistry::getTableLocator()->get('PaymentHistories', $config);
     }
 
     /**
@@ -47,7 +50,7 @@ class CreditCardsTableTest extends TestCase
      */
     public function tearDown()
     {
-        unset($this->CreditCards);
+        unset($this->PaymentHistories);
 
         parent::tearDown();
     }

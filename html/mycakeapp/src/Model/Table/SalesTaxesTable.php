@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Model\Table;
 
 use Cake\ORM\Query;
@@ -37,8 +38,7 @@ class SalesTaxesTable extends Table
         $this->setPrimaryKey('id');
 
         $this->addBehavior('Timestamp');
-        //paymenthistoriesテーブル作成後コメントアウト解除
-        //$this->belongsTo('payment_histories');
+        $this->hasMany('PaymentHistories');
     }
 
     /**
@@ -54,10 +54,10 @@ class SalesTaxesTable extends Table
             ->allowEmptyString('id', null, 'create');
 
         $validator
-            ->integer('rate','半角数字で入力してください')
+            ->integer('rate', '半角数字で入力してください')
             ->requirePresence('rate', 'create')
             ->notEmptyString('rate')
-            ->naturalNumber('rate','0以上の自然数を入力してください');
+            ->naturalNumber('rate', '0以上の自然数を入力してください');
 
         $validator
             ->boolean('is_applied')

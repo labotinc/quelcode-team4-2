@@ -37,7 +37,7 @@ class PricesTable extends Table
         $this->setDisplayField('name');
         $this->setPrimaryKey('id');
 
-        // $this->belongTo('payment_histories');
+        $this->hasMany('PaymentHistories');
         $this->addBehavior('Timestamp');
     }
 
