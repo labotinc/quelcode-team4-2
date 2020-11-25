@@ -77,7 +77,7 @@ class MovieSchedulesTable extends Table
                         // Type::build('date')->でイミュータブル（変更不可）なdateオブジェクトを作成
                         // marshal()でフォームで取得したデータを引数し、PHPの型に変換
                         $now = Chronos::now();
-                        $screening_start_datetime = Type::build('date')->marshal($value);
+                        $screening_start_datetime = Type::build('datetime')->marshal($value);
                         //gt():「>」の条件を作成
                         return $screening_start_datetime->gte($now);
                     },

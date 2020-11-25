@@ -91,6 +91,19 @@ class BookingsController extends AppController
     // 座席予約のユーザー操作画面
     public function addSeat($schedule_id)
     {
+        // セッションを取得する（p50から遷移された場合に選択していた座席を取得）
+        $add_seat_session = $this->getRequest()->getSession();
+
+        $this->viewBuilder()->setLayout('main');
+        // MovieSchedulesに存在しないIDのURLを直接入力されたときの処理
+        try {
+            // $schedules_idの$movie_scheduleを取得する
+            $movie_schedule = $this->MovieSchedules->get($schedule_id);
+        } catch (Exception $e) {
+            $this->Flash->set(__('不正なURLのため、リダイレクトしました。上映スケジュールページから再度予約してください。'));
+            // ※ページが作成されたら映画スケジュール画面をリダイレクト先にする。action先は未定。
+            return $this->redirect(['controller' => 'MoviesInfo', 'action' => 'schedule']);
+        }
         // ログインユーザーID
         // 本来はログインユーザーIDを取得するため認証認可完了したらこっちを使う
         // $login_user_id=$this->Auth->user['id']
@@ -108,19 +121,7 @@ class BookingsController extends AppController
             $this->Users->get(1)->id
         );
 
-        // セッションを取得する（p50から遷移された場合に選択していた座席を取得）
-        $add_seat_session = $this->getRequest()->getSession();
 
-        $this->viewBuilder()->setLayout('main');
-        // MovieSchedulesに存在しないIDのURLを直接入力されたときの処理
-        try {
-            // $schedules_idの$movie_scheduleを取得する
-            $movie_schedule = $this->MovieSchedules->get($schedule_id);
-        } catch (Exception $e) {
-            $this->Flash->set(__('不正なURLのため、リダイレクトしました。上映スケジュールページからアクセスしてください。'));
-            // ※ページが作成されたら映画スケジュール画面をリダイレクト先にする。action先は未定。
-            $this->redirect(['controller' => 'moviesinfo', 'action' => 'index']);
-        }
 
         // 映画が予約済だった場合、映画上映フラグが立っていない→上映されていない映画を選択した場合は予約ページにリダイレクト
         if (in_array($login_user_id, $booked_id_array) || !($movie_schedule->is_playable)) {
@@ -135,8 +136,8 @@ class BookingsController extends AppController
                 }
             }
             // ※ページが作成されたら映画スケジュール画面をリダイレクト先にする。action先は未定。
-            $this->redirect(['controller' => 'movies_info', 'action' => 'index']);
-            $this->Flash->set(__('選択した劇場はすでに予約済か、劇場が中止となっている場合がございます。再度上映スケジュールページからご希望の上映を選択してください。'));
+            $this->redirect(['controller' => 'MoviesInfo', 'action' => 'schedule']);
+            $this->Flash->set(__('選択した劇場はすでに予約済か、中止となっている場合がございます。再度上映スケジュールページからご希望の上映を選択してください。'));
         }
 
         $booking = $this->Bookings->newEntity();
@@ -184,9 +185,9 @@ class BookingsController extends AppController
             $movie_info = $this->Movies->get($movie_id);
             $schedule_id = $booking->movie_schedule['id'];
         } catch (Exception $e) {
-            $this->Flash->set(__('不正なURLのため、リダイレクトしました。上映スケジュールページから再度アクセスしてください。'));
+            $this->Flash->set(__('不正なURLのため、リダイレクトしました。上映スケジュールページから再度予約してください。'));
             // ※トップページが作成されたら映画スケジュール画面をリダイレクト先にする。action先は未定。
-            return $this->redirect(['controller' => 'moviesinfo', 'action' => 'index']);
+            return $this->redirect(['controller' => 'MoviesInfo', 'action' => 'schedule']);
         }
         $this->set(compact('booking', 'movie_info'));
     }
@@ -206,7 +207,7 @@ class BookingsController extends AppController
         } catch (Exception $e) {
             $this->Flash->set(__('正常にキャンセル処理ができませんでした。カスタマーセンターまでお問い合わせください。'));
             // ※トップページが作成されたら映画スケジュール画面をリダイレクト先にする。action先は未定。
-            return $this->redirect(['controller' => 'moviesinfo', 'action' => 'index']);
+            return $this->redirect(['controller' => 'MoviesInfo', 'action' => 'schedule']);
         }
     }
 
