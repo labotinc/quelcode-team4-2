@@ -1,5 +1,7 @@
 <?= $this->Html->css('moviesinfo.css'); ?>
 <div class="movie-info-wrap">
+    <!-- sessionメッセージを表示する -->
+    <?= $this->Flash->render(); ?>
     <div class="movie-info-menu">
         <p class="scheduel-text">上映スケジュール</p>
         <!-- ================== 日付が並んでいる部分 start ================== -->
@@ -94,7 +96,10 @@
                                             <p class="invalid-buy-button">受付終了</p>
                                         <?php else : ?>
                                             <p class="buy-button">
-                                                <?= $this->Html->link(__('予約購入'), ['controller' => 'bookings', 'action' => 'add_seat', $ThatDaySchedules[$i]['id']]); ?>
+                                                <?= $this->Html->link(
+                                                    __("予約購入"),
+                                                    ['controller' => 'Bookings', 'action' => 'addSeat', $ThatDaySchedules[$i]['id']]
+                                                ); ?>
                                             </p>
                                         <?php endif; ?>
 

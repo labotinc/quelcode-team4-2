@@ -137,7 +137,7 @@ class BookingsController extends AppController
             }
             // ※ページが作成されたら映画スケジュール画面をリダイレクト先にする。action先は未定。
             $this->redirect(['controller' => 'MoviesInfo', 'action' => 'schedule']);
-            $this->Flash->set(__('選択した劇場はすでに予約済か、劇場が中止となっている場合がございます。再度上映スケジュールページからご希望の上映を選択してください。'));
+            $this->Flash->set(__('選択した劇場はすでに予約済か、中止となっている場合がございます。再度上映スケジュールページからご希望の上映を選択してください。'));
         }
 
         $booking = $this->Bookings->newEntity();
