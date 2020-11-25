@@ -153,10 +153,45 @@
 }
 
 /* ================ pricelist ここから ================ */
+header{
+    position: fixed;
+    top: 0px;
+    left: 0px;
+}
+
+footer{
+    position: fixed;
+    bottom: 0px;
+    right: 0px;
+}
+.list-wrap{
+    margin-top: 130px;
+    margin-left: 400px;
+}
+
 .list-wrap table{
-    width: 400px;
+    width: 450px;
 }
 .list-wrap .list-flex{
     display: flex;
     justify-content: space-between;
+    margin-bottom: 15px;
+    padding-bottom: 5px;
+    border-bottom: dotted 2px #ADADAD;
+}
+
+.list-wrap .list-flex td{
+    font-weight: bold;
+}
+
+.list-wrap .title{
+    font-size: 20px;
+    font-weight: bold;
+    border-left: solid 8px #ADADAD;
+    padding:8px 10px;
+    margin-bottom: 30px;
+}
+
+.list-wrap .price-list{
+    margin-bottom: 100px;
 }
