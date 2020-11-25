@@ -14,17 +14,20 @@
         </table>
     </div>
 
-    <div class="discount-list">
-        <p class="title">お得な割引サービス</p>
-        <table>
-            <tbody>
-                <?php foreach ($arrayDiscount as $discount) : ?>
-                    <tr class="list-flex">
-                        <td><?= h($discount->name) ?></td>
-                        <td><?= h($discount->price) ?> 円</td>
-                    </tr>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
-    </div>
+    <?php if (!empty($arrayDiscount)) : ?>
+        <div class="discount-list">
+            <p class="title">お得な割引サービス</p>
+            <table>
+                <tbody>
+                    <?php foreach ($arrayDiscount as $discount) : ?>
+                        <tr class="list-flex">
+                            <td><?= h($discount->name) ?></td>
+                            <td><?= h($discount->price) ?> 円</td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
+    <?php endif; ?>
+
 </div>
