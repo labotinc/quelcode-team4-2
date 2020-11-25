@@ -18,6 +18,8 @@ class MoviesInfoController extends AppController
         $this->loadComponent('Paginator');
         $this->loadModel('Movies');
         $this->loadModel('MovieSchedules');
+        $this->loadModel('Prices');
+        $this->loadModel('Discounts');
 
         // レイアウトをmainに変更
         $this->viewBuilder()->setLayout('main');
@@ -28,6 +30,11 @@ class MoviesInfoController extends AppController
 
     public function pricelist()
     {
+
+        $arrayDiscount = $this->Discounts->find('all')->toArray();
+        $arrayPrices = $this->Prices->find('all')->toArray();
+
+        $this->set(compact('arrayPrices', 'arrayDiscount'));
     }
 
     public function schedule()

@@ -5,10 +5,12 @@
         <p class="title">基本料金</p>
         <table>
             <tbody>
-                <tr class="list-flex">
-                    <td>hoge</td>
-                    <td>hoge</td>
-                </tr>
+                <?php foreach ($arrayPrices as $price) : ?>
+                    <tr class="list-flex">
+                        <td><?= h($price->name) ?></td>
+                        <td><?= h($price->price) ?></td>
+                    </tr>
+                <?php endforeach; ?>
             </tbody>
         </table>
 
@@ -18,10 +20,12 @@
         <p class="title">お得な割引サービス</p>
         <table>
             <tbody>
-                <tr class="list-flex">
-                    <td>hoge</td>
-                    <td>hoge</td>
-                </tr>
+                <?php foreach ($arrayDiscount as $discount) : ?>
+                    <tr class="list-flex">
+                        <td><?= h($discount->name) ?></td>
+                        <td><?= h($discount->price) ?></td>
+                    </tr>
+                <?php endforeach; ?>
             </tbody>
         </table>
     </div>
