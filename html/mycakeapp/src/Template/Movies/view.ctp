@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Movie $movie
@@ -11,6 +12,8 @@
         <li><?= $this->Form->postLink(__('Delete Movie'), ['action' => 'delete', $movie->id], ['confirm' => __('Are you sure you want to delete # {0}?', $movie->id)]) ?> </li>
         <li><?= $this->Html->link(__('List Movies'), ['action' => 'index']) ?> </li>
         <li><?= $this->Html->link(__('New Movie'), ['action' => 'add']) ?> </li>
+        <li><?= $this->Html->link(__('List Movie Schedules'), ['controller' => 'MovieSchedules', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New Movie Schedules'), ['controller' => 'MovieSchedules', 'action' => 'add']) ?></li>
     </ul>
 </nav>
 <div class="movies view large-9 medium-8 columns content">
@@ -23,6 +26,18 @@
         <tr>
             <th scope="row"><?= __('Thumbnail Path') ?></th>
             <td><?= h($movie->thumbnail_path) ?></td>
+        </tr>
+        <tr>
+            <!-- サムネイルを表示（大きさは実画像を元に変更予定） -->
+            <th scope="row"><?= __('Thumbnail') ?></th>
+            <td><?= $this->Html->image(
+                    $movie->thumbnail_path,
+                    array(
+                        'width' => '300',
+                        'height' => '200',
+                        'alt' => h($movie->thumbnail_path)
+                    )
+                ); ?></td>
         </tr>
         <tr>
             <th scope="row"><?= __('Id') ?></th>
