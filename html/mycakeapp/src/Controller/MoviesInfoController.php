@@ -26,6 +26,10 @@ class MoviesInfoController extends AppController
     {
     }
 
+    public function pricelist()
+    {
+    }
+
     public function schedule()
     {
         // ================ 日付について start ================
