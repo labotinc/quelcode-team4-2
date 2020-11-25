@@ -60,6 +60,9 @@ class MoviesInfoController extends AppController
                 'screening_start_datetime <=' => date("Y-m-d 23:59:59"),
                 'is_playable' => 1
             ])
+            ->order([
+                'screening_start_datetime' => 'asc'
+            ])
             ->toArray();
 
         $this->set(compact('weekDate', 'weekValue', 'MovieList', 'ThatDaySchedules'));
@@ -75,6 +78,9 @@ class MoviesInfoController extends AppController
                     'screening_start_datetime >=' => date("Y-m-d 00:00:00", $_GET['time']),
                     'screening_start_datetime <=' => date("Y-m-d 23:59:59", $_GET['time']),
                     'is_playable' => 1
+                ])
+                ->order([
+                    'screening_start_datetime' => 'asc'
                 ])
                 ->toArray();
 
