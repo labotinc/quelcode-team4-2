@@ -153,4 +153,10 @@
 }
 
 /* ================ pricelist ここから ================ */
-
+.list-wrap table{
+    width: 400px;
+}
+.list-wrap .list-flex{
+    display: flex;
+    justify-content: space-between;
+}
