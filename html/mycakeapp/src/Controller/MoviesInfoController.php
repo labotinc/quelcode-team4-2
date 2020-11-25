@@ -22,8 +22,11 @@ class MoviesInfoController extends AppController
         // レイアウトをmainに変更
         $this->viewBuilder()->setLayout('main');
     }
-
     public function index()
+    {
+    }
+
+    public function schedule()
     {
         // ================ 日付について start ================
 
