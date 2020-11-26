@@ -124,5 +124,6 @@ class CreditCardsController extends AppController
 
     public function complete() 
     {
+        $this->viewBuilder()->setLayout('main');
     }
 }
