@@ -69,7 +69,7 @@ class CreditCardsController extends AppController
                 if ($this->CreditCards->save($creditCard)) {
                     $this->Flash->success(__('The credit card has been saved.'));
                     
-                    return $this->redirect(['action' => 'index']);
+                    return $this->redirect(['action' => 'complete']);
                 }
             $this->Flash->error(__('The credit card could not be saved. Please, try again.'));
         }
@@ -120,5 +120,9 @@ class CreditCardsController extends AppController
         }
 
         return $this->redirect(['action' => 'index']);
+    }
+
+    public function complete() 
+    {
     }
 }
