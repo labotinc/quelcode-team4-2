@@ -9,8 +9,8 @@
             <?php for ($i = 0; $i < 7; $i++) : ?>
                 <?php if (strpos($weekDate[$i], '水') !== false && strpos($weekDate[$i], '01日') !== false) : ?>
                     <li class="info-menu" value="<?php echo $weekValue[$i] ?>"><?php echo $weekDate[$i] ?>
-                        <p class="info-menu-sub">子供女性シニア割引</p>
-                        <p class="info-menu-sub">ファーストデイ割引</p>
+                        <p class="info-menu-sub"><?php echo $senior[0]['name'] ?></p>
+                        <p class="info-menu-sub"><?php echo $firstDay[0]['name'] ?></p>
                         <?php if ($i !== 6) : ?>
                             <!-- spanは縦線 -->
                             <span></span>
@@ -18,13 +18,13 @@
                     </li>
                 <?php elseif (strpos($weekDate[$i], '水') !== false) : ?>
                     <li class="info-menu" value="<?php echo $weekValue[$i] ?>"><?php echo $weekDate[$i] ?>
-                        <p class="info-menu-sub">子供女性シニア割引</p>
+                        <p class="info-menu-sub"><?php echo $senior[0]['name'] ?></p>
                         <?php if ($i !== 6) : ?>
                             <span></span>
                         <?php endif; ?>
                     <?php elseif (strpos($weekDate[$i], '01日') !== false) : ?>
                     <li class="info-menu" value="<?php echo $weekValue[$i] ?>"><?php echo $weekDate[$i] ?>
-                        <p class="info-menu-sub">ファーストデイ割引</p>
+                        <p class="info-menu-sub"><?php echo $firstDay[0]['name'] ?></p>
                         <?php if ($i !== 6) : ?>
                             <span></span>
                         <?php endif; ?>
