@@ -14,7 +14,7 @@
         </table>
     </div>
 
-    <?php if (!empty($arrayDiscount)) : ?>
+    <?php if ($arrayDiscount) : ?>
         <div class="discount-list">
             <p class="title">お得な割引サービス</p>
             <table>
