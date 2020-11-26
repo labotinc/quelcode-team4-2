@@ -133,6 +133,9 @@ class CreditCardsTable extends Table
                 }
             }, 'message' => '半角数字以外の文字が使われているか、あるいは文字数が誤っています。']);
 
+        $validator
+            ->equals('confirm', 1, '利用規約に同意しなければ、登録することはできません。');
+
         return $validator;
     }
 
