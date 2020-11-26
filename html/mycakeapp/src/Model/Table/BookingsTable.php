@@ -116,14 +116,13 @@ class BookingsTable extends Table
     }
 
     // ユーザーごとの仮予約を取得
-    public function findBookedTemporary(string $schedule_id, string $authuser_id)
+    public function findBookedTemporary(string $authuser_id)
     {
         $query = $this->find();
         $my_booked_temporary = $query
             ->enableHydration(false)
             ->select(['id', 'created'])
             ->where([
-                'schedule_id' => $schedule_id,
                 'user_id' => $authuser_id,
                 'is_main_booked' => false,
                 'is_cancelled' => false

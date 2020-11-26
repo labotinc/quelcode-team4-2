@@ -88,7 +88,25 @@ class MoviesInfoController extends AppController
             ])
             ->toArray();
 
-        $this->set(compact('weekDate', 'weekValue', 'MovieList', 'ThatDaySchedules'));
+        // 割引テーブル
+        $firstDay = $this->Discounts->find('all')
+            ->where([
+                'is_applied' => true,
+                'name like' => '%' . 'ファーストデイ割引' . '%'
+            ])
+            ->limit(1)
+            ->toArray();
+
+        $senior = $this->Discounts->find('all')
+            ->where([
+                'is_applied' => true,
+                'name like' => '%' . '子供女性シニア割引' . '%'
+            ])
+            ->limit(1)
+            ->toArray();
+
+
+        $this->set(compact('weekDate', 'weekValue', 'MovieList', 'ThatDaySchedules', 'firstDay', 'senior'));
     }
 
     function ajaxMovieSchedules()

@@ -7,34 +7,38 @@
         <!-- ================== 日付が並んでいる部分 start ================== -->
         <ul>
             <?php for ($i = 0; $i < 7; $i++) : ?>
-                <?php if (strpos($weekDate[$i], '水') !== false && strpos($weekDate[$i], '01日') !== false) : ?>
-                    <li class="info-menu" value="<?php echo $weekValue[$i] ?>"><?php echo $weekDate[$i] ?>
-                        <p class="info-menu-sub">子供女性シニア割引</p>
-                        <p class="info-menu-sub">ファーストデイ割引</p>
-                        <?php if ($i !== 6) : ?>
-                            <!-- spanは縦線 -->
-                            <span></span>
+                <li class="info-menu" value="<?php echo $weekValue[$i] ?>"> <?php echo $weekDate[$i] ?>
+                    <?php if ($senior && $firstDay) : ?>
+
+
+                        <?php if (strpos($weekDate[$i], '水') !== false && strpos($weekDate[$i], '01日') !== false) : ?>
+                            <p class="info-menu-sub"><?php echo $senior[0]['name'] ?></p>
+                            <p class="info-menu-sub"><?php echo $firstDay[0]['name'] ?></p>
+                        <?php elseif (strpos($weekDate[$i], '水') !== false) : ?>
+                            <p class="info-menu-sub"><?php echo $senior[0]['name'] ?></p>
+                        <?php elseif (strpos($weekDate[$i], '01日') !== false) : ?>
+                            <p class="info-menu-sub"><?php echo $firstDay[0]['name'] ?></p>
                         <?php endif; ?>
-                    </li>
-                <?php elseif (strpos($weekDate[$i], '水') !== false) : ?>
-                    <li class="info-menu" value="<?php echo $weekValue[$i] ?>"><?php echo $weekDate[$i] ?>
-                        <p class="info-menu-sub">子供女性シニア割引</p>
-                        <?php if ($i !== 6) : ?>
-                            <span></span>
+
+
+                    <?php elseif (!$senior && $firstDay) : ?>
+                        <?php if (strpos($weekDate[$i], '01日') !== false) : ?>
+                            <p class="info-menu-sub"><?php echo $firstDay[0]['name'] ?></p>
                         <?php endif; ?>
-                    <?php elseif (strpos($weekDate[$i], '01日') !== false) : ?>
-                    <li class="info-menu" value="<?php echo $weekValue[$i] ?>"><?php echo $weekDate[$i] ?>
-                        <p class="info-menu-sub">ファーストデイ割引</p>
-                        <?php if ($i !== 6) : ?>
-                            <span></span>
+
+
+                    <?php elseif ($senior && !$firstDay) : ?>
+                        <?php if (strpos($weekDate[$i], '水') !== false) : ?>
+                            <p class="info-menu-sub"><?php echo $senior[0]['name'] ?></p>
                         <?php endif; ?>
-                    <?php else : ?>
-                    <li class="info-menu" value="<?php echo $weekValue[$i] ?>"><?php echo $weekDate[$i] ?>
-                        <?php if ($i !== 6) : ?>
-                            <span></span>
-                        <?php endif; ?>
-                    </li>
-                <?php endif; ?>
+                    <?php endif; ?>
+
+
+                    <?php if ($i !== 6) : ?>
+                        <!-- spanは縦線 -->
+                        <span></span>
+                    <?php endif; ?>
+                </li>
             <?php endfor; ?>
             <!-- ================== 日付が並んでいる部分 end ================== -->
 
