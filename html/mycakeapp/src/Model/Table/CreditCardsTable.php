@@ -64,7 +64,7 @@ class CreditCardsTable extends Table
             ->requirePresence('card_number', 'create')
             ->notEmptyString('card_number', '空白になっています。')
             ->naturalNumber('card_number', '半角数字以外の文字が使われています。')
-            ->add('holder_name', 'custom', ['rule' => function ($value, $context) {
+            ->add('card_number', 'custom', ['rule' => function ($value, $context) {
                 if (preg_match("/\A[0-9]{16}\z/", $value)) {
                     return true;
                 } else {
