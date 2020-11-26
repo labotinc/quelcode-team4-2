@@ -25,7 +25,6 @@ $column_alphabets = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K'];
         ]
       ]); ?>
       <?php
-      $errors = $booking->hasErrors();
       // ユーザーIDはログインユーザーから、映画スケジュールIDはDBから取得
       echo $this->Form->hidden('user_id', ['value' => $authuser['id']]);
       echo $this->Form->hidden('schedule_id', ['value' => $movie_schedule['id']]);
