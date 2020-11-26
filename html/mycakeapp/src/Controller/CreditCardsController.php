@@ -122,8 +122,9 @@ class CreditCardsController extends AppController
         return $this->redirect(['action' => 'index']);
     }
 
-    public function complete() 
+    public function complete($user_id = null) 
     {
         $this->viewBuilder()->setLayout('main');
+        $this->set(compact('user_id'));
     }
 }
