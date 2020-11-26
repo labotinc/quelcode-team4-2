@@ -33,7 +33,7 @@ class MoviesInfoController extends AppController
         // 割引テーブル
         $arrayDiscount = $this->Discounts->find('all')
             ->where([
-                'is_applied' => 1
+                'is_applied' => true
             ])->order([
                 'price' => 'desc'
             ])->toArray();
@@ -41,7 +41,7 @@ class MoviesInfoController extends AppController
         // 料金テーブル
         $arrayPrices = $this->Prices->find('all')
             ->where([
-                'is_applied' => 1
+                'is_applied' => true
             ])->order([
                 'price' => 'desc'
             ])->toArray();
