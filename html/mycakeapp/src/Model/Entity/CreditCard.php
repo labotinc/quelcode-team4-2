@@ -1,7 +1,9 @@
 <?php
+
 namespace App\Model\Entity;
 
 use Cake\ORM\Entity;
+use Cake\Core\Configure;
 
 /**
  * CreditCard Entity
@@ -38,4 +40,15 @@ class CreditCard extends Entity
         'modified' => true,
         'user' => true,
     ];
+
+    // $user_idに値をセットする関数
+    public function setUserId($user_id) {
+        $this->user_id = $user_id;
+        return true;
+    }
+    // $is_deletedに値をセットする関数
+    public function setIsDeleted() {
+        $this->is_deleted = 0;
+        return true;
+    }
 }
