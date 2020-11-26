@@ -18,12 +18,35 @@ class MoviesInfoController extends AppController
         $this->loadComponent('Paginator');
         $this->loadModel('Movies');
         $this->loadModel('MovieSchedules');
+        $this->loadModel('Prices');
+        $this->loadModel('Discounts');
 
         // レイアウトをmainに変更
         $this->viewBuilder()->setLayout('main');
     }
     public function index()
     {
+    }
+
+    public function pricelist()
+    {
+        // 割引テーブル
+        $arrayDiscount = $this->Discounts->find('all')
+            ->where([
+                'is_applied' => true
+            ])->order([
+                'price' => 'desc'
+            ])->toArray();
+
+        // 料金テーブル
+        $arrayPrices = $this->Prices->find('all')
+            ->where([
+                'is_applied' => true
+            ])->order([
+                'price' => 'desc'
+            ])->toArray();
+
+        $this->set(compact('arrayPrices', 'arrayDiscount'));
     }
 
     public function schedule()
