@@ -7,7 +7,7 @@
         <!-- ================== 日付が並んでいる部分 start ================== -->
         <ul>
             <?php for ($i = 0; $i < 7; $i++) : ?>
-                <?php if (strpos($weekDate[$i], '水') !== false && strpos($weekDate[$i], '01日') !== false) : ?>
+                <?php if (strpos($weekDate[$i], '水') !== false && strpos($weekDate[$i], '01日') !== false && $firstDay && $senior) : ?>
                     <li class="info-menu" value="<?php echo $weekValue[$i] ?>"><?php echo $weekDate[$i] ?>
                         <p class="info-menu-sub"><?php echo $senior[0]['name'] ?></p>
                         <p class="info-menu-sub"><?php echo $firstDay[0]['name'] ?></p>
@@ -16,19 +16,21 @@
                             <span></span>
                         <?php endif; ?>
                     </li>
-                <?php elseif (strpos($weekDate[$i], '水') !== false) : ?>
+                <?php elseif (strpos($weekDate[$i], '水') !== false && !$firstDay && $senior) : ?>
                     <li class="info-menu" value="<?php echo $weekValue[$i] ?>"><?php echo $weekDate[$i] ?>
                         <p class="info-menu-sub"><?php echo $senior[0]['name'] ?></p>
                         <?php if ($i !== 6) : ?>
                             <span></span>
                         <?php endif; ?>
-                    <?php elseif (strpos($weekDate[$i], '01日') !== false) : ?>
+                    </li>
+                <?php elseif (strpos($weekDate[$i], '01日') !== false && $firstDay && !$senior) : ?>
                     <li class="info-menu" value="<?php echo $weekValue[$i] ?>"><?php echo $weekDate[$i] ?>
                         <p class="info-menu-sub"><?php echo $firstDay[0]['name'] ?></p>
                         <?php if ($i !== 6) : ?>
                             <span></span>
                         <?php endif; ?>
-                    <?php else : ?>
+                    </li>
+                <?php else : ?>
                     <li class="info-menu" value="<?php echo $weekValue[$i] ?>"><?php echo $weekDate[$i] ?>
                         <?php if ($i !== 6) : ?>
                             <span></span>
