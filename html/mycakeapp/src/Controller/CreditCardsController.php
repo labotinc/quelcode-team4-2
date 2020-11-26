@@ -3,9 +3,7 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
-// use Cake\Utility\Security;
 use Cake\Core\Configure;
-// use Cake\Event\Event;
 
 /**
  * CreditCards Controller
@@ -17,17 +15,6 @@ use Cake\Core\Configure;
 class CreditCardsController extends AppController
 {
 
-    //public function beforeFilter(Event $event)
-    //{
-    //    $this->getEventManager()->off($this->Csrf);
-    //}
-    
-    //public function initialize()
-    //{
-    //    parent::initialize();
-    //    $this->loadComponent('Csrf');
-    //    $this->loadComponent('Security');
-    //}
     /**
      * Index method
      *
@@ -38,10 +25,6 @@ class CreditCardsController extends AppController
         $this->paginate = [
             'contain' => ['Users'],
         ];
-        //$key = 'wt1U5MACWJFTXGenFoZoiLwQGrLgdbHA';
-        //$this->CreditCards->card_number = Security::decrypt($this->CreditCards->card_number, $key);
-        //$this->CreditCards->holder_name = Security::decrypt($this->CreditCards->holder_name, $key);
-        //$this->CreditCards->expiration_date = Security::decrypt($this->CreditCards->expiration_date, $key);
         $creditCards = $this->paginate($this->CreditCards);
 
         $this->set(compact('creditCards'));
@@ -70,34 +53,26 @@ class CreditCardsController extends AppController
      */
     public function add()
     {
+        $this->viewBuilder()->setLayout('main');
         $creditCard = $this->CreditCards->newEntity();
-        $key = Configure::read('key');
-        //$salt = Configure::read('salt');
         if ($this->request->is('post')) {
             $creditCard = $this->CreditCards->patchEntity($creditCard, $this->request->getData());
-            // バリデーションエラーが起こらなかった場合
-            if ($creditCard) {
-                $method = "aes-256-cbc";
-                $options = 0;
-                $ivLength = openssl_cipher_iv_length($method);
-                $IV = openssl_random_pseudo_bytes($ivLength);
-                $creditCard['card_number'] = openssl_encrypt($creditCard['card_number'], $method, $key, $options, $IV);
-                $creditCard['holder_name'] = openssl_encrypt($creditCard['holder_name'], $method, $key, $options, $IV);
-                $creditCard['expiration_date'] = openssl_encrypt($creditCard['expiration_date'], $method, $key, $options, $IV);
-                // cakephp3 
-                //$key = 'wt1U5MACWJFTXGenFoZoiLwQGrLgdbHA';
-                //$creditCard['holder_name'] = Security::encrypt($creditCard['holder_name'], $key, null);
-                //$creditCard['card_number'] = Security::encrypt($creditCard['card_number'], $key, null);
-                //$creditCard['expiration_date'] = Security::encrypt($creditCard['expiration_date'], $key, null);
+            // バリデーションエラーが起こらなかった場合に、暗号化を行う
+            if (!$creditCard->getErrors()) {
+                // エンティティにuser_idの値をセット
+                // ログイン機能つけるまではとりあえず *****  1  ******
+                $creditCard->setUserId(1);
+                // エンティティにis_deletedの値をセット
+                $creditCard->setIsDeleted();
+                $creditCard->encrypt();
             }
-            if ($this->CreditCards->save($creditCard)) {
-                $this->Flash->success(__('The credit card has been saved.'));
-
-                return $this->redirect(['action' => 'index']);
-            }
+                if ($this->CreditCards->save($creditCard)) {
+                    $this->Flash->success(__('The credit card has been saved.'));
+                    
+                    return $this->redirect(['action' => 'index']);
+                }
             $this->Flash->error(__('The credit card could not be saved. Please, try again.'));
         }
-        //$methods = openssl_get_cipher_methods();
         $users = $this->CreditCards->Users->find('list', ['limit' => 200]);
         $this->set(compact('creditCard', 'users'));
     }
