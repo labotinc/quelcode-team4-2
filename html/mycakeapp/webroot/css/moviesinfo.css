@@ -173,8 +173,9 @@ footer{
 }
 /* ========== ヘッダー、フッター ========== */
 .list-wrap{
-    margin-top: 130px;
+    padding-top: 130px;
     margin-left: 400px;
+    margin-bottom: 200px;
 }
 
 .list-wrap table{
