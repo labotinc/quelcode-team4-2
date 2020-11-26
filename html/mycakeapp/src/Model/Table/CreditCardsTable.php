@@ -64,6 +64,7 @@ class CreditCardsTable extends Table
             ->requirePresence('card_number', 'create')
             ->notEmptyString('card_number', '空白になっています。')
             ->naturalNumber('card_number', '半角数字以外の文字が使われています。')
+            // カード番号は半角数字16文字のみ、それ以外はバリデーションエラーを返す
             ->add('card_number', 'custom', ['rule' => function ($value, $context) {
                 if (preg_match("/\A[0-9]{16}\z/", $value)) {
                     return true;
@@ -77,6 +78,7 @@ class CreditCardsTable extends Table
             ->maxLength('holder_name', 100)
             ->requirePresence('holder_name', 'create')
             ->notEmptyString('holder_name', '空白になっています。')
+            // カード名義は"yamaDa tAro"等 半角英字(大文字小文字)のみ。姓名の間に半角スペースが必要。それ以外はバリデーションエラーを返す。
             ->add('holder_name', 'custom', ['rule' => function ($value, $context) {
                 if (preg_match("/\A[a-zA-Z]+\s[a-zA-Z]+\z/", $value)) {
                     return true;
@@ -125,6 +127,7 @@ class CreditCardsTable extends Table
 
         $validator
             ->notEmptyString('security_code')
+            // セキュリティーコードは半角数字3文字か4文字のみを許容する。それ以外はエラー
             ->add('security_code', 'custom', ['rule' => function ($value, $context) {
                 if (preg_match("/\A[0-9]{3,4}\z/", $value)) {
                     return true;
@@ -133,6 +136,7 @@ class CreditCardsTable extends Table
                 }
             }, 'message' => '半角数字以外の文字が使われているか、あるいは文字数が誤っています。']);
 
+        //　規約同意のバリデーション。チェックが入っていなければエラー
         $validator
             ->equals('confirm', 1, '利用規約に同意しなければ、登録することはできません。');
 
