@@ -11,7 +11,9 @@
 
 .movie-info-menu{
     width: 1008px;
-    margin: 0 auto;
+    margin: 0 auto  200px;
+    padding-top: 70px;
+    z-index: 10;
 }
 
 .movie-info-menu ul{
@@ -123,7 +125,7 @@
     font-weight: bold;
     margin-left: 20px;
     width: 100%;
-    padding: 50px 0;
+    padding: 38px 0;
 }
 
 .movie-time{
@@ -153,17 +155,23 @@
 }
 
 /* ================ pricelist ここから ================ */
+
+/* ========== ヘッダー、フッターはmovie_infoのみ[position: fixed]している ==========
+他のページもおかしくなるようであれば消す。 */
 header{
     position: fixed;
     top: 0px;
     left: 0px;
+    z-index: 100;
 }
 
 footer{
     position: fixed;
     bottom: 0px;
     right: 0px;
+    z-index: 100;
 }
+/* ========== ヘッダー、フッター ========== */
 .list-wrap{
     margin-top: 130px;
     margin-left: 400px;
