@@ -122,6 +122,11 @@ class CreditCardsController extends AppController
         return $this->redirect(['action' => 'index']);
     }
 
+    /**
+     * Complete method
+     *
+     * @return \Cake\Http\Response|null Redirects on mypage
+     */
     public function complete($user_id = null) 
     {
         $this->viewBuilder()->setLayout('main');
