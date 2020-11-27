@@ -36,7 +36,7 @@ class MovieAuthBaseController extends AppController
         'controller' => 'Users',
         'action' => 'logout',
       ],
-      'authError' => 'ログインしてください。',
+      'authError' => '予約を行う際は、ログインしてください。',
     ]);
   }
 
@@ -77,7 +77,11 @@ class MovieAuthBaseController extends AppController
   {
     parent::beforeFilter($event);
     // ※トップページのアクションが決まり次第ここに記入
-    $this->Auth->allow(['pricelist', 'schedule', 'トップページ', '*']);
+    // ワイルドカードを用いて全ページアクセス可能な状態にしている。本番では削除
+    $this->Auth->allow([
+      'pricelist', 'schedule', 'トップページ',
+      '*'
+    ]);
   }
 
   // 認証時のロールの処理
