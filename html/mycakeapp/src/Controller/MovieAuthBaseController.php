@@ -8,7 +8,7 @@ use App\Form\LoginForm; // added.
 use Cake\Auth\DefaultPasswordHasher; // added.
 use Cake\Event\Event; // added.
 
-class AuctionBaseController extends AppController
+class MovieAuthBaseController extends AppController
 {
 
   // 初期化処理
@@ -77,7 +77,7 @@ class AuctionBaseController extends AppController
   {
     parent::beforeFilter($event);
     // ※トップページのアクションが決まり次第ここに記入
-    $this->Auth->allow(['pricelist', 'schedule', 'トップページ']);
+    $this->Auth->allow(['pricelist', 'schedule', 'トップページ', '*']);
   }
 
   // 認証時のロールの処理
