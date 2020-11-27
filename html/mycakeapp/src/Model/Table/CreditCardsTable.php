@@ -156,4 +156,19 @@ class CreditCardsTable extends Table
 
         return $rules;
     }
+
+    /**
+     * Returns a rules checker object that will be used for validating
+     * application integrity.
+     *
+     * @param string user_id
+     * @return array そのuser_idで登録されたクレジットカード情報の一覧（復号化後）
+     */
+    public function findCreditCard(string $user_id) {
+        $creditcards = $this->find()->where(['user_id' => $user_id])->toList();
+        foreach ($creditcards as $creditcard) {
+            $creditcard->decrypt();
+        }
+        return $creditcards;
+    }
 }
