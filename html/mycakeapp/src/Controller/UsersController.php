@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
-
+use App\Form\LoginForm;
 
 use Cake\Auth\DefaultPasswordHasher; // added.
 use Cake\Event\Event; // added.
@@ -51,18 +51,24 @@ class UsersController extends AppController
     function login()
     {
         $this->layout = 'main';
-        // POST時の処理
-        if ($this->request->isPost()) {
-            $user = $this->Auth->identify();
-            // Authのidentifyをユーザーに設定
-            if (!empty($user)) {
-                $this->Auth->setUser($user);
-                //return $this->redirect($this->Auth->redirectUrl());
-                // *本当はトップページに遷移
-                return $this->redirect(['controller' => 'Moviesinfo', 'action' => 'schedule']);
+
+        $login_form = new LoginForm();
+        if ($this->request->is('post')) {
+            // バリデーションエラーが起きている場合はここでfalseになる
+            // つまりフラッシュメッセージは表示されずにバリデーションエラーメッセージがフォームにでる
+            if ($login_form->execute($this->request->getData())) {
+                $user = $this->Auth->identify();
+                // Authのidentifyをユーザーに設定
+                if ($user) {
+                    $this->Auth->setUser($user);
+                    // *本当はトップページに遷移
+                    return $this->redirect(['controller' => 'Moviesinfo', 'action' => 'schedule']);
+                }
+                $this->Flash->error('ユーザー名かパスワードが間違っています。');
             }
-            $this->Flash->error('ユーザー名かパスワードが間違っています。');
         }
+
+        $this->set(compact('login_form'));
     }
 
     // ログアウト処理
