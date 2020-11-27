@@ -4,15 +4,102 @@ namespace App\Controller;
 
 use App\Controller\AppController;
 
+
+use Cake\Auth\DefaultPasswordHasher; // added.
+use Cake\Event\Event; // added.
+
 /**
  * Users Controller
  *
  * @property \App\Model\Table\UsersTable $Users
  *
- * @method \App\Model\Entity\User[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
+ * @method \App\Model\Entity\User[] paginate($object = null, array $settings = [])
  */
 class UsersController extends AppController
 {
+
+    public function initialize()
+    {
+        parent::initialize();
+        // 各種コンポーネントのロード
+        $this->loadComponent('RequestHandler');
+        $this->loadComponent('Flash');
+        $this->loadComponent('Auth', [
+            'authorize' => ['Controller'],
+            'authenticate' => [
+                'Form' => [
+                    'fields' => [
+                        // fieldのキーには'username'と'password'しか使えない
+                        'username' => 'email',
+                        'password' => 'password'
+                    ]
+                ]
+            ],
+            'loginRedirect' => [
+                'controller' => 'Users',
+                'action' => 'login'
+            ],
+            'logoutRedirect' => [
+                'controller' => 'Users',
+                'action' => 'logout',
+            ],
+            'authError' => 'ログインしてください。',
+        ]);
+    }
+
+    // ログイン処理
+    function login()
+    {
+        $this->layout = 'main';
+        // POST時の処理
+        if ($this->request->isPost()) {
+            $user = $this->Auth->identify();
+            // Authのidentifyをユーザーに設定
+            if (!empty($user)) {
+                $this->Auth->setUser($user);
+                //return $this->redirect($this->Auth->redirectUrl());
+                // *本当はトップページに遷移
+                return $this->redirect(['controller' => 'Moviesinfo', 'action' => 'schedule']);
+            }
+            $this->Flash->error('ユーザー名かパスワードが間違っています。');
+        }
+    }
+
+    // ログアウト処理
+    public function logout()
+    {
+        $this->layout = 'main';
+        // セッションを破棄
+        $this->request->getSession()->destroy();
+        return $this->redirect($this->Auth->logout());
+    }
+
+    // 認証を使わないページの設定
+    public function beforeFilter(Event $event)
+    {
+        parent::beforeFilter($event);
+        // 基本的にログインページと会員登録ページのみ、あとでadd,indexは消す
+        $this->Auth->allow(['index', 'signup', 'thanks', 'add', 'edit']);
+    }
+
+    // 認証時のロールのチェック
+    public function isAuthorized($user)
+    {
+        // ID1,2,3,4は管理者ユーザーとします
+        // 配列比較もできますが、厳密な比較を用いたいのでこのようにしています
+        $user_id = $user['id'];
+        if ($user_id === 1 || $user_id === 2 || $user_id === 3 || $user_id === 4) {
+            return true;
+        }
+        // 一般ユーザーはfalse
+        else {
+            return false;
+        }
+        // 他はすべてfalse
+        return false;
+    }
+
+
     /**
      * Index method
      *
