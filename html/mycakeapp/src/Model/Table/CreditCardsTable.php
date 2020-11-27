@@ -162,12 +162,13 @@ class CreditCardsTable extends Table
      * application integrity.
      *
      * @param string user_id
-     * @return array そのuser_idで登録されたクレジットカード情報の一覧（復号化後）
+     * @return array そのuser_idで登録されたクレジットカード情報の一覧（復号化した後、カード番号に関しては下4桁のみ表示）
      */
     public function findCreditCard(string $user_id) {
-        $creditcards = $this->find()->where(['user_id' => $user_id])->toList();
+        $creditcards = $this->find()->select(['card_number', 'holder_name'])->where(['user_id' => $user_id])->toList();
         foreach ($creditcards as $creditcard) {
             $creditcard->decrypt();
+            $creditcard->card_number = '******' . substr($creditcard->card_number, -4);
         }
         return $creditcards;
     }
