@@ -66,11 +66,11 @@ class CreditCardsController extends AppController
                 $creditCard->setIsDeleted();
                 $creditCard->encrypt();
             }
-                if ($this->CreditCards->save($creditCard)) {
-                    $this->Flash->success(__('The credit card has been saved.'));
-                    
-                    return $this->redirect(['action' => 'complete']);
-                }
+            if ($this->CreditCards->save($creditCard)) {
+                $this->Flash->success(__('The credit card has been saved.'));
+
+                return $this->redirect(['action' => 'completed', 1]); //**ログイン機能実装後、「1」を全て$user_idに変更 */
+            }
             $this->Flash->error(__('The credit card could not be saved. Please, try again.'));
         }
         $users = $this->CreditCards->Users->find('list', ['limit' => 200]);
@@ -127,7 +127,7 @@ class CreditCardsController extends AppController
      *
      * @return \Cake\Http\Response|null Redirects on mypage
      */
-    public function complete($user_id = null) 
+    public function completed($user_id = null)
     {
         $this->viewBuilder()->setLayout('main');
         $this->set(compact('user_id'));
