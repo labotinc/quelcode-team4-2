@@ -10,7 +10,7 @@
     <h1>決済情報</h1>
 </section>
 <section class="form-container">
-    <p class="text-registration-completed">決済情報を削除しました</p>
+    <p class="text-registration-completed">決済情報を削除しました。</p>
     <?= $this->Html->link(
         'マイページに戻る',
         ['controller' => 'MoviesInfo', 'action' => 'mypage', $user_id], //****** リンク要確認 */
