@@ -143,4 +143,16 @@ class CreditCardsController extends AppController
         $this->viewBuilder()->setLayout('main');
         $this->set(compact('user_id'));
     }
+
+
+    /**
+     * DeleteCompleted method
+     *
+     * @return \Cake\Http\Response|null Redirects on mypage 削除完了ページ=>マイページへ遷移
+     */
+    public function deleteCompleted($user_id = null)
+    {
+        $this->viewBuilder()->setLayout('main');
+        $this->set(compact('user_id'));
+    }
 }
