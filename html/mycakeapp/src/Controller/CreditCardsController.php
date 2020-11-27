@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Controller\AppController;
 use Cake\Core\Configure;
+use App\Form\ContactForm; // added.
 
 /**
  * CreditCards Controller
@@ -86,9 +87,11 @@ class CreditCardsController extends AppController
      */
     public function edit($id = null)
     {
+        $this->viewBuilder()->setLayout('main');
         $creditCard = $this->CreditCards->get($id, [
             'contain' => [],
         ]);
+        $creditCard->decrypt();
         if ($this->request->is(['patch', 'post', 'put'])) {
             $creditCard = $this->CreditCards->patchEntity($creditCard, $this->request->getData());
             if ($this->CreditCards->save($creditCard)) {
@@ -136,7 +139,7 @@ class CreditCardsController extends AppController
       /**
      * CreditInfo method
      *
-     * @return \Cake\Http\Response|null 登録情報登録ページにリダイレクト（モーダルウィンドウで削除確認を行う）
+     * @return \Cake\Http\Response|null 登録情報登録ページ or にリダイレクト（モーダルウィンドウで削除確認を行う）
      */
     public function creditInfo($user_id = null)
     {
