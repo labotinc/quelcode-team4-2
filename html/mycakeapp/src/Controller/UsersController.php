@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
-use App\Form\LoginForm;
+use App\Form\LoginForm; // added.
 
 use Cake\Auth\DefaultPasswordHasher; // added.
 use Cake\Event\Event; // added.
@@ -83,7 +83,7 @@ class UsersController extends AppController
     public function beforeFilter(Event $event)
     {
         parent::beforeFilter($event);
-        // 基本的にログインページと会員登録ページのみ、あとでadd,indexは消す
+        // 基本的にログインページと会員登録ページのみ、あとでadd,index,editは消す
         $this->Auth->allow(['index', 'signup', 'thanks', 'add', 'edit']);
     }
 
