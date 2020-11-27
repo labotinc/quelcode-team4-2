@@ -10,13 +10,15 @@
       <fieldset>
         <?= $this->Form->control('email', [
           'placeholder' => 'メールアドレス',
-          'label' => false,
-          'class' => 'email-form'
+          'label' => 'メールアドレスを入力',
+          'class' => 'email-form',
+          'autofocus'
         ]) ?>
         <?= $this->Form->control('password', [
           'placeholder' => 'パスワード',
-          'label' => false,
-          'class' => 'password-form'
+          'label' => "パスワードを入力",
+          'class' => 'password-form',
+          'autofocus'
         ]) ?>
 
       </fieldset>
