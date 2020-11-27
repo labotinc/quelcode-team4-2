@@ -132,4 +132,15 @@ class CreditCardsController extends AppController
         $this->viewBuilder()->setLayout('main');
         $this->set(compact('user_id'));
     }
+
+      /**
+     * CreditInfo method
+     *
+     * @return \Cake\Http\Response|null 登録情報登録ページにリダイレクト（モーダルウィンドウで削除確認を行う）
+     */
+    public function creditInfo($user_id = null)
+    {
+        $this->viewBuilder()->setLayout('main');
+        $this->set(compact('user_id'));
+    }
 }
