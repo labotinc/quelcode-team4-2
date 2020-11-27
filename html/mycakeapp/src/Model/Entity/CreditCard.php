@@ -41,6 +41,30 @@ class CreditCard extends Entity
         'user' => true,
     ];
 
+    public function encrypt()
+    {
+        $key = Configure::read('key');
+        $IV = Configure::read('IV');
+        $method = Configure::read('method');
+        $option = Configure::read('option');
+        $this->card_number = openssl_encrypt($this->card_number, $method, $key, $option, $IV);
+        $this->holder_name = openssl_encrypt($this->holder_name, $method, $key, $option, $IV);
+        $this->expiration_date = openssl_encrypt($this->expiration_date, $method, $key, $option, $IV);
+        return true;
+    }
+
+
+    public function decrypt() {
+        $key = Configure::read('key');
+        $IV = Configure::read('IV');
+        $method = Configure::read('method');
+        $option = Configure::read('option');
+        $this->card_number = openssl_decrypt($this->card_number, $method, $key, $option, $IV);
+        $this->holder_name = openssl_decrypt($this->holder_name, $method, $key, $option, $IV);
+        $this->expiration_date = openssl_decrypt($this->expiration_date, $method, $key, $option, $IV);
+        return true;
+    }
+
     // $user_idに値をセットする関数
     public function setUserId($user_id) {
         $this->user_id = $user_id;
