@@ -36,12 +36,13 @@ class UsersController extends AppController
                 ]
             ],
             'loginRedirect' => [
-                'controller' => 'Users',
-                'action' => 'login'
+                // *本当はトップページに遷移
+                'controller' => 'Moviesinfo',
+                'action' => 'schedule'
             ],
             'logoutRedirect' => [
                 'controller' => 'Users',
-                'action' => 'logout',
+                'action' => 'login',
             ],
             'authError' => 'ログインしてください。',
         ]);
@@ -61,8 +62,8 @@ class UsersController extends AppController
                 // Authのidentifyをユーザーに設定
                 if ($user) {
                     $this->Auth->setUser($user);
-                    // *本当はトップページに遷移
-                    return $this->redirect(['controller' => 'Moviesinfo', 'action' => 'schedule']);
+
+                    return $this->redirect($this->Auth->redirectUrl());
                 }
                 $this->Flash->error('ユーザー名かパスワードが間違っています。');
             }
@@ -83,8 +84,11 @@ class UsersController extends AppController
     public function beforeFilter(Event $event)
     {
         parent::beforeFilter($event);
-        // 基本的にログインページと会員登録ページのみ、あとでadd,index,editは消す
-        $this->Auth->allow(['index', 'signup', 'thanks', 'add', 'edit']);
+        // 基本的にログイン関連ページと会員登録ページのみ、あとでadd,index,editは消す
+        $this->Auth->allow([
+            'index', 'signup', 'logout', 'thanks',
+            'add', 'edit'
+        ]);
     }
 
     // 認証時のロールのチェック
@@ -95,10 +99,6 @@ class UsersController extends AppController
         $user_id = $user['id'];
         if ($user_id === 1 || $user_id === 2 || $user_id === 3 || $user_id === 4) {
             return true;
-        }
-        // 一般ユーザーはfalse
-        else {
-            return false;
         }
         // 他はすべてfalse
         return false;
