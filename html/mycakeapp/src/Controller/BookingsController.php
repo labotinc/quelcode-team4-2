@@ -113,24 +113,24 @@ class BookingsController extends MovieAuthBaseController
         $booked_id_array = Hash::extract($booked_id_seats, '{n}.user_id');
         // ログインユーザーの仮予約の配列
         $booked_temporary = $this->Bookings->findBookedTemporary(
-            $schedule_id,
             //本来はログインユーザーIDを取得するため認証認可完了したらこっちを使う
             $login_user_id
             //$this->Users->get(1)->id
         );
 
+        // ログインユーザーの仮予約を取り出す。
+        foreach ($booked_temporary as $booked_tmp) {
+            $created_format = new Time($booked_tmp['created']);
+            // 予約が昨日以前にされたものだったら削除
+            if (!($created_format->wasWithinLast("15 minutes"))) {
+                $booked_tmp_delete = $this->Bookings->get($booked_tmp['id']);
+                $this->Bookings->delete($booked_tmp_delete);
+                return $this->Flash->set(__('仮予約から15分経過した予約を削除いたしました。再度予約をお願いします。'));
+            }
+        }
+
         // 映画が予約済だった場合、映画上映フラグが立っていない→上映されていない映画を選択した場合は予約ページにリダイレクト
         if (in_array($login_user_id, $booked_id_array) || !($movie_schedule->is_playable)) {
-            // ログインユーザーの仮予約を取り出す。
-            foreach ($booked_temporary as $booked_tmp) {
-                $created_format = new Time($booked_tmp['created']);
-                // 15分以上経過している仮予約は削除する
-                if (!($created_format->wasWithinLast('15 minutes'))) {
-                    $booked_tmp_delete = $this->Bookings->get($booked_tmp['id']);
-                    $this->Bookings->delete($booked_tmp_delete);
-                    $this->Flash->set(__('仮予約から15分経過した予約を削除いたしました。再度予約をお願いします。'));
-                }
-            }
             // ※ページが作成されたら映画スケジュール画面をリダイレクト先にする。action先は未定。
             $this->redirect(['controller' => 'MoviesInfo', 'action' => 'schedule']);
             $this->Flash->set(__('選択した劇場はすでに予約済か、中止となっている場合がございます。再度上映スケジュールページからご希望の上映を選択してください。'));
