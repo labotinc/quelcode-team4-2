@@ -26,7 +26,7 @@
             </ul>
         </nav>
     </div>
-    <div class="login-btn">
+    <div class="auth-toggle-btn">
         <!-- ログイン状態を判別するために認証状態のセッションを確認
         参照:https://level-up-notebook.com/php/2216/ -->
         <?php if ($this->request->getSession()->read('Auth.User.id')) : ?>
