@@ -3,8 +3,6 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
-use Cake\Core\Configure;
-use App\Form\ContactForm; // added.
 
 /**
  * CreditCards Controller
