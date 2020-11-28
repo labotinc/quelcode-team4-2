@@ -15,7 +15,7 @@ $(function(){
 let add_contents = '<div class="modal js-modal">';
     add_contents += '<div class="modal__bg js-modal-close"></div>';
     add_contents += '<div class="modal__content">';
-    add_contents += '<p>本当にこの決済情報を削除しますか？</p>';
-    add_contents += '<a class="js-modal-close" href="">戻る</a>';
-    add_contents += '<button type="submit" class="link-button_small">削除</button>';
+    add_contents += '<p class="modal__text">本当にこの決済情報を削除しますか？</p>';
+    add_contents += '<a class="js-modal-close link-button__middle" href="">戻る</a>';
+    add_contents += '<button type="submit" class="link-button__small">削除</button>';
     add_contents += '</div></div>';
