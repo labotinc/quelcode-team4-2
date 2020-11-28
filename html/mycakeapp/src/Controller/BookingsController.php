@@ -119,8 +119,6 @@ class BookingsController extends MovieAuthBaseController
             //$this->Users->get(1)->id
         );
 
-
-
         // 映画が予約済だった場合、映画上映フラグが立っていない→上映されていない映画を選択した場合は予約ページにリダイレクト
         if (in_array($login_user_id, $booked_id_array) || !($movie_schedule->is_playable)) {
             // ログインユーザーの仮予約を取り出す。

@@ -36,7 +36,7 @@ class MovieAuthBaseController extends AppController
         'controller' => 'Users',
         'action' => 'logout',
       ],
-      'authError' => '予約を行う際は、ログインしてください。',
+      'authError' => 'ログインしてください。',
     ]);
   }
 
