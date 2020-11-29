@@ -65,8 +65,9 @@ class CreditCardsTable extends Table
             ->notEmptyString('card_number', '空白になっています。')
             ->naturalNumber('card_number', '半角数字以外の文字が使われています。')
             // カード番号は半角数字16文字のみ、それ以外はバリデーションエラーを返す
+            // 今回使用が許可されているのはVISAとMasterCardのみ。VISAの頭文字は[4]、MasterCardは[5]のため、それ以外から始まる文字は全て弾く
             ->add('card_number', 'custom', ['rule' => function ($value, $context) {
-                if (preg_match("/\A[0-9]{16}\z/", $value)) {
+                if (preg_match("/\A[4,5][0-9]{15}\z/", $value)) {
                     return true;
                 } else {
                     return false;
