@@ -97,7 +97,7 @@ class BookingsTable extends Table
         return $rules;
     }
 
-    // ユーザーごとの予約済座席（キャンセルはされていない）を検索
+    // 上映ごとの予約済座席（キャンセルはされていない）を検索
     public function findBookingSeats(string $schedule_id)
     {
         $query = $this->find();
@@ -121,13 +121,29 @@ class BookingsTable extends Table
         $query = $this->find();
         $my_booked_temporary = $query
             ->enableHydration(false)
-            ->select(['id', 'created'])
+            ->select(['id', 'schedule_id', 'seat_number'])
             ->where([
                 'user_id' => $authuser_id,
                 'is_main_booked' => false,
                 'is_cancelled' => false
             ]);
-        $my_booked_temporary_array = $my_booked_temporary->toList();
+        $my_booked_temporary_array = $my_booked_temporary->toArray();
         return $my_booked_temporary_array;
+    }
+
+    // ユーザーごとの本予約を取得
+    public function findBookedMain(string $authuser_id)
+    {
+        $query = $this->find();
+        $my_booked_main = $query
+            ->enableHydration(false)
+            ->select(['id', 'schedule_id', 'seat_number', 'created'])
+            ->where([
+                'user_id' => $authuser_id,
+                'is_main_booked' => true,
+                'is_cancelled' => false
+            ]);
+        $my_booked_main_array = $my_booked_main->toArray();
+        return $my_booked_main_array;
     }
 }
