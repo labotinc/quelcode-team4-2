@@ -12,11 +12,16 @@
 <section class="form-container">
     <?= $this->Form->create($creditCard, ['class' => 'forms', 'novalidate']) ?>
     <fieldset>
-        <?php
-        // ユーザーidも送信するの忘れない is_deletedはデフォルト値があるからむし
-        echo $this->Form->control('card_number', ['label' => false, 'placeholder' => 'クレジットカード番号', 'class' => 'card_number']);
-        echo $this->Form->control('holder_name', ['label' => false, 'placeholder' => 'クレジットカード名義', 'class' => 'holder_name']);
-        ?>
+        <div class="flex">
+            <?php
+            // ユーザーidも送信するの忘れない is_deletedはデフォルト値があるからむし
+            echo $this->Form->control('card_number', ['label' => false, 'placeholder' => 'クレジットカード番号', 'class' => 'card_number']);
+            echo $this->Html->image('visa.png', ['class' => 'visa']);
+            echo $this->Html->image('master.png', ['class' => 'master']);
+            ?>
+            </div>
+            <?= $this->Form->control('holder_name', ['label' => false, 'placeholder' => 'クレジットカード名義', 'class' => 'holder_name']);
+            ?>
         <div class="flexbox">
             <?php
             echo $this->Form->control('expiration_date', ['label' => false, 'placeholder' => '有効期限', 'class' => 'expiration_date']);
