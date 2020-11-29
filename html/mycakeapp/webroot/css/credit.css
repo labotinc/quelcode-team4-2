@@ -96,10 +96,12 @@ input::placeholder {
 .text, .label_confirm {
     margin-bottom: 44px;
 }
-.label_confirm {
+.form-container .label_confirm {
     font-size: 11px;
     letter-spacing: 0.18px;
     color: #707070;
+    text-align: left;
+    border: none;
 }
 .info-container {
     padding: 40px 0 20px;
