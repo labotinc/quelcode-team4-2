@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Model\Entity;
 
 use Cake\ORM\Entity;
@@ -48,4 +49,13 @@ class PaymentHistory extends Entity
         'discounts' => true,
         'sales_taxes' => true,
     ];
+
+    // 支払い総計金額の算出
+    protected function _getTotalPrice()
+    {
+        $price_apply = $this->prices['price_id'];
+        $discount_apply = $this->discounts['discount_id'];
+        $sales_tax_apply = $this->sales_taxes['sales_tax_id'];
+        return ($price_apply - $discount_apply) * (100 + $sales_tax_apply) / 100;
+    }
 }
