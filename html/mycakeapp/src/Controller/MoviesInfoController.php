@@ -149,4 +149,8 @@ class MoviesInfoController extends AppController
             exit;
         }
     }
+
+    public function bookingDetails()
+    {
+    }
 }
