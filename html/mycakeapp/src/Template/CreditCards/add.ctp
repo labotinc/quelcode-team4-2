@@ -14,7 +14,6 @@
     <fieldset>
         <div class="flex">
             <?php
-            // ユーザーidも送信するの忘れない is_deletedはデフォルト値があるからむし
             echo $this->Form->control('card_number', ['label' => false, 'placeholder' => 'クレジットカード番号', 'class' => 'card_number']);
             echo $this->Html->image('visa.png', ['class' => 'visa']);
             echo $this->Html->image('master.png', ['class' => 'master']);
