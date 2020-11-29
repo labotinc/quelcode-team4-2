@@ -11,6 +11,7 @@
     <?= $this->Html->css('header') ?>
     <?= $this->Html->css('footer') ?>
     <?= $this->Html->css('users') ?>
+    <?= $this->Html->script('jquery.min'); ?>
     <?= $this->fetch('css') ?>
     <?= $this->fetch('script') ?>
 </head>
