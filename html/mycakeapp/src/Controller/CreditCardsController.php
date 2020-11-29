@@ -60,7 +60,7 @@ class CreditCardsController extends AppController
             if (!$creditCard->getErrors()) {
                 // エンティティにuser_idの値をセット
                 // ログイン機能つけるまではとりあえず *****  1  ******
-                $creditCard->setUserId(1);
+                $creditCard->setUserId(2);
                 // エンティティにis_deletedの値をセット
                 $creditCard->setIsDeleted();
                 $creditCard->encrypt();
@@ -68,7 +68,7 @@ class CreditCardsController extends AppController
             if ($this->CreditCards->save($creditCard)) {
                 $this->Flash->success(__('The credit card has been saved.'));
 
-                return $this->redirect(['action' => 'completed', 1]); //**ログイン機能実装後、「1」を全て$user_idに変更 */
+                return $this->redirect(['action' => 'completed']); 
             }
             $this->Flash->error(__('The credit card could not be saved. Please, try again.'));
         }
@@ -128,9 +128,10 @@ class CreditCardsController extends AppController
      *
      * @return \Cake\Http\Response|null Redirects on mypage
      */
-    public function completed($user_id = null)
+    public function completed()
     {
         $this->viewBuilder()->setLayout('main');
+        $user_id = $this->Auth; /** ログイン機能実装後、ユーザーIDをビューテンプレートに渡す */
         $this->set(compact('user_id'));
     }
 
