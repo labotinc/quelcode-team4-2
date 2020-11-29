@@ -144,8 +144,21 @@ class CreditCardsController extends AppController
         $this->viewBuilder()->setLayout('main');
         $info = $this->CreditCards->findCreditCard(1); // ひとまず 1 ログイン機能追加したら$user_idに変更すること
         if ($this->request->is('post')) {
-            $credit_id = $this->request->getData('Credit.id');
-            return $this->redirect(['action' => 'edit', $credit_id]);
+            // 編集ボタンが押された場合, 編集するidを受け取り編集画面に遷移させる。
+            if (isset($_POST['edit'])) {
+                $credit_id = $this->request->getData('Credit.id');
+                return $this->redirect(['action' => 'edit', $credit_id]);
+            } else { 
+            // 削除ボタンを押された場合、削除するidを受け取りクレジットカード情報を無価値なものに編集後、削除完了画面に遷移させる。
+            // エンティティクラスにて作成した、暗号化された情報を全て "0000" に上書きするメソッド(showAsDeleted)を呼び出しそれを保存する。
+                $credit_id = $this->request->getData('Credit.id');
+                $info = $this->CreditCards->get($credit_id)->showAsDeleted();
+                if ($this->CreditCards->save($info)){
+                    return $this->redirect(['action' => 'deleteCompleted']);
+                } else {
+                    $this->Flash->error(__('削除に失敗しました'));
+                }
+            }
         }
         $this->set(compact('user_id', 'info'));
     }
@@ -156,9 +169,10 @@ class CreditCardsController extends AppController
      *
      * @return \Cake\Http\Response|null Redirects on mypage 削除完了ページ=>マイページへ遷移
      */
-    public function deleteCompleted($user_id = null)
+    public function deleteCompleted()
     {
         $this->viewBuilder()->setLayout('main');
+        $user_id = $this->Auth; //ログイン情報から$user_idを渡す
         $this->set(compact('user_id'));
     }
 }
