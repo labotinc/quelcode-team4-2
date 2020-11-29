@@ -66,11 +66,28 @@ class CreditCardsTable extends Table
             ->naturalNumber('card_number', '半角数字以外の文字が使われています。')
             // カード番号は半角数字16文字のみ、それ以外はバリデーションエラーを返す
             // 今回使用が許可されているのはVISAとMasterCardのみ。VISAの頭文字は[4]、MasterCardは[5]のため、それ以外から始まる文字は全て弾く
+            // [4]or[5]から始まる番号でも、チェックデジットによって確認が取れなければfalseを返す
+            // チェックデジットの追加 参考URL =>  https://www.gizmodo.jp/2011/01/post_8367.html
+            // テスト用カード番号 => https://pay.jp/docs/testcard
+            // アルゴリズムコード参考 => https://en.wikipedia.org/wiki/Luhn_algorithm
             ->add('card_number', 'custom', ['rule' => function ($value, $context) {
-                if (preg_match("/\A[4,5][0-9]{15}\z/", $value)) {
-                    return true;
-                } else {
+                if (!preg_match("/\A[4,5][0-9]{15}\z/", $value)) {
                     return false;
+                } else {
+                    $length = strlen($value);
+                    $sum = (int) $value[$length - 1];
+                    $parity = $length % 2;
+                    for ($index = 0; $index < $length - 1; $index++) {
+                        $digit = (int) $value[$index];
+                        if ($index % 2 == $parity) {
+                            $digit *= 2;
+                        }
+                        if ($digit > 9) {
+                            $digit -= 9;
+                        }
+                        $sum += $digit;
+                    }
+                    return $sum % 10 == 0;
                 }
             }, 'message' => '不正なカード番号です。']);
 
@@ -97,7 +114,7 @@ class CreditCardsTable extends Table
                 // 参考ページ http://php.o0o0.jp/article/php-creditcard
                 // 有効期限（MMYY）
                 if (!preg_match('/\A([0-9]{2})([0-9]{2})\z/', $value, $matches)) {
-                    return false; 
+                    return false;
                 } else {
                     $month = $matches[1];
                     $year = sprintf('20%s', $matches[2]);
@@ -162,7 +179,8 @@ class CreditCardsTable extends Table
      * @param string user_id
      * @return array そのuser_idで登録されたクレジットカード情報の一覧（復号化した後、カード番号に関しては下4桁のみ表示）
      */
-    public function findCreditCard(string $user_id) {
+    public function findCreditCard(string $user_id)
+    {
         $creditcards = $this->find()->select(['id', 'card_number', 'holder_name'])->where(['user_id' => $user_id, 'is_deleted' => 0])->toList();
         foreach ($creditcards as $creditcard) {
             $creditcard->decrypt();
