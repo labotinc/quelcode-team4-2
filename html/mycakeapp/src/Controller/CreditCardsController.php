@@ -143,7 +143,7 @@ class CreditCardsController extends AppController
     public function creditInfo($user_id = null)
     {
         $this->viewBuilder()->setLayout('main');
-        $info = $this->CreditCards->findCreditCard(2); // ひとまず 1 ログイン機能追加したら$user_idに変更すること
+        $info = $this->CreditCards->findCreditCard(1); // ひとまず 1 ログイン機能追加したら$user_idに変更すること
         if ($this->request->is('post')) {
             // 編集ボタンが押された場合, 編集するidを受け取り編集画面に遷移させる。
             if (isset($_POST['edit'])) {
