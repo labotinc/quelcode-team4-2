@@ -207,11 +207,8 @@ Type::build('timestamp')
 
 
 Configure::write('key','HOGEhogeHOGEhogeHOGEhogeHOGEhoge');
-//Configure::write('salt','PIYOpiyoPIYOpiyoPIYOpiyoPIYOpiyo');
 Configure::write('method','aes-256-cbc');
 Configure::write('option', 0);
-//$ivLength = openssl_cipher_iv_length('aes-256-cbc');
-//$IV = openssl_random_pseudo_bytes($ivLength);
 Configure::write('method','aes-256-cbc');
 Configure::write('IV', 'DozCbdi80TCfJQ==');
 
