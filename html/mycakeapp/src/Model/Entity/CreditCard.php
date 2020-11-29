@@ -75,4 +75,13 @@ class CreditCard extends Entity
         $this->is_deleted = 0;
         return true;
     }
+
+    // ユーザーがクレジットカード情報を削除する際、暗号化された情報を全て"0000"で上書きし、削除フラグを更新する。
+    public function showAsDeleted() {
+        $this->card_number = "0000";
+        $this->holder_name = "0000";
+        $this->expiration_date = "0000";
+        $this->is_deleted = 1;
+        return $this;
+    }
 }
