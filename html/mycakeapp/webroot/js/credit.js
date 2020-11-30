@@ -1,6 +1,10 @@
 $(function(){
     $('footer').after(add_contents);
 
+    /**
+     * モーダルウィンドウの作成
+     * 削除ボタンクリック時、モーダルを表示させ背景を固定する（逆も然り）
+     */
     let scrollPosition;
     $('#delete_send').on('click',function(){
         $('.js-modal').fadeIn();
@@ -15,6 +19,9 @@ $(function(){
         return false;
     });
 
+    /**
+     * モーダルの削除ボタン押下時フォームを送信する
+     */
     $('#delete_submit').on('click', function() {
         $("form")[0].submit();
         return false;
