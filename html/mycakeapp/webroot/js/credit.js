@@ -1,5 +1,4 @@
 $(function(){
-    //$('main, footer').wrapAll('<div class="modal js-modal">');
     $('footer').after(add_contents);
 
     $('#delete_send').on('click',function(){
