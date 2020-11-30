@@ -8,7 +8,6 @@ use App\Controller\AppController;
 use Cake\Event\Event; // added.
 use Exception; // added.
 
-// 今のところappcontrollerを継承
 class MoviesInfoController extends MovieAuthBaseController
 {
     // 初期化処理
