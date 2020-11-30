@@ -58,11 +58,19 @@ class CreditCardsController extends AppController
             $creditCard = $this->CreditCards->patchEntity($creditCard, $this->request->getData());
             // バリデーションエラーが起こらなかった場合に、暗号化を行う
             if (!$creditCard->getErrors()) {
-                // エンティティにuser_idの値をセット
-                // ログイン機能つけるまではとりあえず *****  1  ******
+                /**
+                 * 処理の流れ（備考）エンティティ関連の値を操作するメソッドは全てCreditCard.phpに記載
+                 * 1. ユーザーIDをセット(setUserIdメソッド)
+                 * 2. is_deletedをセット(setIsDeletedメソッド)
+                 * 3. 暗号化 (encryptメソッド)
+                 */
+                
+                // 1. user_idの値をセット
+                // ------------- ログイン機能つけるまではとりあえず *****  1  ****** --------------
                 $creditCard->setUserId(2);
-                // エンティティにis_deletedの値をセット
+                // 2. is_deletedの値をセット
                 $creditCard->setIsDeleted();
+                // 3. 暗号化
                 $creditCard->encrypt();
             }
             if ($this->CreditCards->save($creditCard)) {
