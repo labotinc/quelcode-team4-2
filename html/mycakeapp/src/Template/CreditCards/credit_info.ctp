@@ -13,6 +13,7 @@
 <section class="form-container credit-info">
     <!-- ここにクレジットカード情報出す -->
     <div class="info-container">
+        <?= $this->Flash->render('credit'); ?>
         <?= $this->Form->create(); ?>
         <!-- labelと値の配列を作成し、ラジオボタンを作成する -->
         <?php foreach ($info as $key) {
