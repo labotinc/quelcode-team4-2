@@ -1,0 +1,76 @@
+/* toppage共通 */
+*{
+    box-sizing: border-box;
+}
+.main-contents {
+    width: 1088px;
+    margin: 0 auto;
+}
+
+
+.heading-box {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+}
+.bar {
+    width: 8px;
+    height: 32px;
+    margin-right: 8px;
+    background: #FFB100 0% 0% no-repeat padding-box;
+}
+.h1 {
+    font: normal normal bold 16px/22px Noto Sans;
+    letter-spacing: 1.28px;
+    color: #242424;
+    opacity: 1;
+}
+
+/* slideセクション */
+.slide-inner {
+    padding-top: 88px;
+}
+.slide-inner img {
+    width: 100%;
+}
+
+/* movielistセクション */
+.movielist-box {
+    display: flex;
+    justify-content: space-around;
+    padding-bottom: 32px;
+}
+.movielist-box img {
+    width: 350px;
+}
+.movielist-link, .discount-link {
+    display: block;
+    width: 336px;
+    padding: 16px 0;
+    margin: 0 auto 104px;
+    text-align: center;
+    border: 3px #f5ae0b;
+    font-family: Noto Sans;
+    font-weight: bold;
+    letter-spacing: 0.44px;
+    color: #ffffff;
+    background: #f5ae0b 0% 0% no-repeat padding-box;
+}
+
+/*  割引セクション */
+.discount-inner {
+    padding-bottom: 102px;
+}
+.banner-box {
+    display: flex;
+    justify-content: space-between;
+}
+.banner-box.upper {
+    margin-bottom: 16px;
+}
+.banner-box.lower {
+    margin-bottom: 32px;
+}
+.banner-box img {
+    width: 532px;
+}
