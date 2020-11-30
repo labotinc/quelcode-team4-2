@@ -9,6 +9,7 @@ $(function(){
     /**
      * モーダルウィンドウの作成２
      * 削除ボタンクリック時、モーダルを表示させ背景を固定する（逆も然り）
+     * 参考 => https://imasashi.net/modal-window_bg-fixed.html
      */
     let scrollPosition;
     $('#delete_send').on('click',function(){
