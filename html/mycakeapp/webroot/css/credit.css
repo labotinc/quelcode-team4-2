@@ -106,13 +106,16 @@ input::placeholder {
     border: none;
 }
 .info-container {
+    width: 336px;
+    margin: 0 auto;
     padding: 40px 0 20px;
 }
-.form-container .credit-info label {
+.info-container label {
     text-align: center;
     border: 1px solid  #707070;
     padding: 20px 0;
 }
+
 .info-container input[type="radio"] {
     margin-right: 10px;
 }
