@@ -176,7 +176,7 @@ class MoviesInfoController extends AppController
             $this->Users->get(1)->id
         );
 
-        //本登録の処理
+        //本予約の処理
         $booked_main_details = [];
         foreach ($booked_main as $booked_main_value) {
             $seat_number = $booked_main_value['seat_number'];
