@@ -31,7 +31,6 @@ class LoginForm extends Form
 
   protected function _execute(array $data)
   {
-    // メールを送信する
     return true;
   }
 }
