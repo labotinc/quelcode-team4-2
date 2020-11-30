@@ -1,12 +1,17 @@
 $(function(){
     $('footer').after(add_contents);
 
+    let scrollPosition;
     $('#delete_send').on('click',function(){
         $('.js-modal').fadeIn();
+        scrollPosition = $(window).scrollTop();
+        $('body').addClass('fixed').css({'top': -scrollPosition});
         return false;
     });
     $('.js-modal-close').on('click',function(){
         $('.js-modal').fadeOut();
+        $('body').removeClass('fixed').css({'top': 0});
+		window.scrollTo( 0 , scrollPosition );
         return false;
     });
 
