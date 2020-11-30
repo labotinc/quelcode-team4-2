@@ -121,7 +121,7 @@ class BookingsTable extends Table
         $query = $this->find();
         $my_booked_temporary = $query
             ->enableHydration(false)
-            ->select(['id', 'schedule_id', 'seat_number'])
+            ->select(['id', 'schedule_id', 'seat_number', 'created'])
             ->where([
                 'user_id' => $authuser_id,
                 'is_main_booked' => false,
@@ -137,7 +137,7 @@ class BookingsTable extends Table
         $query = $this->find();
         $my_booked_main = $query
             ->enableHydration(false)
-            ->select(['id', 'schedule_id', 'seat_number', 'created'])
+            ->select(['id', 'schedule_id', 'seat_number'])
             ->where([
                 'user_id' => $authuser_id,
                 'is_main_booked' => true,
