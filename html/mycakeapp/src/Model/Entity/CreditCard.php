@@ -50,7 +50,7 @@ class CreditCard extends Entity
         $this->card_number = openssl_encrypt($this->card_number, $method, $key, $option, $IV);
         $this->holder_name = openssl_encrypt($this->holder_name, $method, $key, $option, $IV);
         $this->expiration_date = openssl_encrypt($this->expiration_date, $method, $key, $option, $IV);
-        return true;
+        return $this;
     }
 
 
@@ -62,18 +62,18 @@ class CreditCard extends Entity
         $this->card_number = openssl_decrypt($this->card_number, $method, $key, $option, $IV);
         $this->holder_name = openssl_decrypt($this->holder_name, $method, $key, $option, $IV);
         $this->expiration_date = openssl_decrypt($this->expiration_date, $method, $key, $option, $IV);
-        return true;
+        return $this;
     }
 
     // $user_idに値をセットする関数
     public function setUserId($user_id) {
         $this->user_id = $user_id;
-        return true;
+        return $this;
     }
     // $is_deletedに値をセットする関数
     public function setIsDeleted() {
         $this->is_deleted = 0;
-        return true;
+        return $this;
     }
 
     // ユーザーがクレジットカード情報を削除する際、暗号化された情報を全て"0000"で上書きし、削除フラグを更新する。

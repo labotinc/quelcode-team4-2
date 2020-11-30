@@ -67,11 +67,11 @@ class CreditCardsController extends AppController
                 
                 // 1. user_idの値をセット
                 // ------------- ログイン機能つけるまではとりあえず *****  1  ****** --------------
-                $creditCard->setUserId(2);
+                $creditCard = $creditCard->setUserId(2);
                 // 2. is_deletedの値をセット
-                $creditCard->setIsDeleted();
+                $creditCard = $creditCard->setIsDeleted();
                 // 3. 暗号化
-                $creditCard->encrypt();
+                $creditCard = $creditCard->encrypt();
             }
             if ($this->CreditCards->save($creditCard)) {
                 $this->Flash->success(__('The credit card has been saved.'));
