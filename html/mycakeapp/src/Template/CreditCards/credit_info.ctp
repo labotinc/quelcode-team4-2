@@ -10,7 +10,7 @@
 <section class="h1">
     <h1>決済情報</h1>
 </section>
-<section class="form-container">
+<section class="form-container credit-info">
     <!-- ここにクレジットカード情報出す -->
     <div class="info-container">
         <?= $this->Form->create(); ?>
