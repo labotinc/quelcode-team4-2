@@ -9,11 +9,10 @@
 <section class="h1">
     <h1>決済情報</h1>
 </section>
-<section class="form-container">
+<section class="form-container edit-container">
 
     <?= $this->Form->create($creditCard, ['class' => 'forms', 'novalidate']) ?>
     <?php
-    // ユーザーidも送信するの忘れない is_deletedはデフォルト値があるからむし
     echo $this->Form->control('card_number', ['label' => false, 'class' => 'card_number']);
     echo $this->Form->control('holder_name', ['label' => false, 'class' => 'holder_name']);
     ?>
@@ -31,6 +30,6 @@
         ],
         'type' => 'checkbox'
     ]); ?>
-    <?= $this->Form->button(__('登録'), ['class' => 'submit-button']) ?>
+    <?= $this->Form->button(__('編集'), ['class' => 'submit-button']) ?>
     <?= $this->Form->end() ?>
 </section>
