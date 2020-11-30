@@ -138,26 +138,37 @@ class CreditCardsController extends AppController
       /**
      * CreditInfo method
      *
-     * @return \Cake\Http\Response|null 登録情報登録ページ or にリダイレクト（モーダルウィンドウで削除確認を行う）
+     * @return \Cake\Http\Response|null 登録情報編集ページ or 登録情報削除完了ページにリダイレクト（モーダルウィンドウで削除確認を行った後）
      */
     public function creditInfo($user_id = null)
     {
         $this->viewBuilder()->setLayout('main');
-        $info = $this->CreditCards->findCreditCard(1); // ひとまず 1 ログイン機能追加したら$user_idに変更すること
+        $info = $this->CreditCards->findCreditCard(1); // -----[ログイン機能実装後修正]-----ひとまず[$user_id = 1 ]ログイン機能追加したら$user_idに変更すること
+
+        /**
+         * 処理の流れ
+         * データがpost送信されると、
+         * 1. ユーザが編集を選択した際は編集アクションにリダイレクト
+         * 2. ユーザが削除を選択した際はクレジット情報を[0000]で上書きした後削除完了アクションにリダイレクト
+         * 3. 上記2つでクレカを選択しなかった場合、エラーメッセージを表示させる
+         */
         if ($this->request->is('post')) {
             $credit_id = $this->request->getData('Credit.id');
-            // 編集ボタンが押された場合, 編集するidを受け取り編集画面に遷移させる。
+            // 1. 編集ボタンが押された場合
             if (isset($_POST['edit']) && !empty($credit_id)) {
                 return $this->redirect(['action' => 'edit', $credit_id]);
-            } elseif (isset($_POST['delete']) && !empty($credit_id)) {
-                // 削除ボタンを押された場合、削除するidを受け取りクレジットカード情報を無価値なものに編集後、削除完了画面に遷移させる。
-                // エンティティクラスにて作成した、暗号化された情報を全て "0000" に上書きするメソッド(showAsDeleted)を呼び出しそれを保存する。
-                $info = $this->CreditCards->get($credit_id)->showAsDeleted();
+            
+            // 2. 削除ボタンが押された場合
+            // [うまくいかず]$_POST['edit']ではない場合を elseif (isset($_POST['delete']) && !empty($credit_id))としたかったが機能しなかった
+            } elseif (!empty($credit_id)) {
+                $info = $this->CreditCards->get($credit_id)->showAsDeleted(); // showAsDeletedはエンティティクラスのメソッド
                 if ($this->CreditCards->save($info)){
                     return $this->redirect(['action' => 'deleteCompleted']);
                 } else {
-                    $this->Flash->error(__('削除に失敗しました'));
+                    $this->Flash->error(__('削除に失敗しました')); // 一応例外処理を記入
                 }
+
+            //3. クレカを選択せず「編集」「削除」ボタンを押下した場合
             } else {
                 $this->Flash->error(__('クレジットカードを選択してください。'), ['key' => 'credit']);
             }
