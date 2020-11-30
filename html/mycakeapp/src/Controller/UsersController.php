@@ -37,7 +37,7 @@ class UsersController extends AppController
             ],
             'loginRedirect' => [
                 // *本当はトップページに遷移
-                'controller' => 'Moviesinfo',
+                'controller' => 'MoviesInfo',
                 'action' => 'schedule'
             ],
             'logoutRedirect' => [
