@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use Cake\I18n\Time;
 
 
 use Cake\Event\Event; // added.
@@ -16,10 +17,16 @@ class MoviesInfoController extends AppController
     {
         parent::initialize();
         $this->loadComponent('Paginator');
+        $this->loadModel('Users');
         $this->loadModel('Movies');
         $this->loadModel('MovieSchedules');
         $this->loadModel('Prices');
+        $this->loadModel('Bookings');
+        $this->loadModel('PaymentHistories');
+        $this->loadModel('Prices');
         $this->loadModel('Discounts');
+        $this->loadModel('SalesTaxes');
+
 
         // レイアウトをmainに変更
         $this->viewBuilder()->setLayout('main');
@@ -150,7 +157,100 @@ class MoviesInfoController extends AppController
         }
     }
 
+    // 予約詳細ページ
     public function bookingDetails()
     {
+        // 認証認可が追加されてから
+        //$authuser = $this->Auth->user();
+
+        //本予約一覧
+        $booked_main = $this->Bookings->findBookedMain(
+            //本来はログインユーザーIDを取得するため認証認可完了したらこっちを使う
+            //$authuser->id
+            $this->Users->get(1)->id
+        );
+        // 仮予約一覧
+        $booked_temporary = $this->Bookings->findBookedTemporary(
+            //本来はログインユーザーIDを取得するため認証認可完了したらこっちを使う
+            //$authuser->id
+            $this->Users->get(1)->id
+        );
+
+        //本登録の処理
+        $booked_main_detail = [];
+        foreach ($booked_main as $booked_main_value) {
+            $seat_number = $booked_main_value['seat_number'];
+            // 映画情報の概要と詳細を取得
+            $movie_schedule = $this->MovieSchedules->get($booked_main_value['schedule_id']);
+            $movie_id = $movie_schedule['movie_id'];
+            $movie_info = $this->Movies->get($movie_id);
+            $thumbnail_path = $movie_info['thumbnail_path'];
+            $movie_title = $movie_info['title'];
+            // 開始時間、終了時間を取得
+            $screening_start_time = $movie_schedule->screening_start_datetime->format('H:i');
+            $screening_end_time = $movie_schedule->screening_start_datetime->addMinutes($movie_info->total_minutes_with_trailer)->format('H:i');
+            // 支払情報を取得（総計金額、割引項目）
+            $payment = $this->PaymentHistories->findPaymentHistories($booked_main_value['id']);
+            $payment_contents = $payment[0];
+            $discount_name = $this->Discounts->get($payment_contents['discount_id'])->name;
+            // 支払総計金額の項目取得とその計算
+            $price_apply = $this->Prices->get($payment_contents['price_id'])->price;
+            $discount_apply = $this->Discounts->get($payment_contents['discount_id'])->price;
+            $sales_tax_apply = $this->SalesTaxes->get($payment_contents['sales_tax_id'])->rate;
+            $total_price = ($price_apply - $discount_apply) * (100 + $sales_tax_apply) / 100;
+            //$discount_name = $this->Discounts->get($payment[0]->discount_id)->name;
+            // 映画の詳細に必要な情報を取り出し
+            $booked_main_detail[] = [
+                $seat_number,
+                $thumbnail_path,
+                $movie_title,
+                $screening_start_time,
+                $screening_end_time,
+                $discount_name,
+                $total_price,
+            ];
+        }
+
+
+        // 仮予約の処理
+        // 映画詳細ページに必要な配列の空の配列を準備
+        $booked_temporary_detail = [];
+        // ログインユーザーの仮予約を取り出す。
+        foreach ($booked_temporary as $booked_tmp) {
+            $created_format = new Time($booked_tmp['created']);
+            // 予約が15分以上前にされたものだったら削除
+            if (!($created_format->wasWithinLast("10000 minutes"))) {
+                $booked_tmp_delete = $this->Bookings->get($booked_tmp['id']);
+                $this->Bookings->delete($booked_tmp_delete);
+                return $this->Flash->set(__('仮予約から15分経過した予約を削除いたしました。再度予約をお願いします。'));
+            }
+
+            $seat_number = $booked_tmp['seat_number'];
+            // 映画情報の概要と詳細を取得
+            $movie_schedule = $this->MovieSchedules->get($booked_tmp['schedule_id']);
+            $movie_id = $movie_schedule['movie_id'];
+            $movie_info = $this->Movies->get($movie_id);
+            $thumbnail_path = $movie_info['thumbnail_path'];
+            $movie_title = $movie_info['title'];
+            // 開始時間、終了時間を取得
+            $screening_start_time = $movie_schedule->screening_start_datetime->format('H:i');
+            $screening_end_time = $movie_schedule->screening_start_datetime->addMinutes($movie_info->total_minutes_with_trailer)->format('H:i');
+            // 映画の詳細に必要な情報を取り出し
+            $booked_temporary_details[] = [
+                $seat_number,
+                $thumbnail_path,
+                $movie_title,
+                $screening_start_time,
+                $screening_end_time,
+            ];
+        }
+
+        $this->set(compact('booked_main_detail', 'booked_temporary_details'));
     }
+
+    // 予約キャンセル機能
+
+    // 決済情報登録リンク？
+
+
 }
