@@ -1,8 +1,13 @@
 $(function(){
+    /**
+     * モーダルウィンドウの作成１
+     * credit_info.ctpを描画する時のみfooterタグの下にモーダル用の<div class="modal js-modal">を用意
+     * @var add_contents は一番下に記載 
+     */
     $('footer').after(add_contents);
 
     /**
-     * モーダルウィンドウの作成
+     * モーダルウィンドウの作成２
      * 削除ボタンクリック時、モーダルを表示させ背景を固定する（逆も然り）
      */
     let scrollPosition;
