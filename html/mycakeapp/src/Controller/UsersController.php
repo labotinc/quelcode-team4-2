@@ -51,6 +51,12 @@ class UsersController extends AppController
     // ログイン処理
     function login()
     {
+        // ログイン済の場合はトップページへリダイレクト
+        if ($this->request->getSession()->read('Auth.User.id')) {
+            $this->Flash->set('既にログイン済です。');
+            // ※トップページ未実装のためスケジュールページに
+            return $this->redirect(['controller' => 'MoviesInfo', 'action' => 'schedule']);
+        }
         $this->layout = 'main';
 
         $login_form = new LoginForm();
