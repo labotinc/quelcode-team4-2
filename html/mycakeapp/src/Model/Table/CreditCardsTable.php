@@ -144,7 +144,7 @@ class CreditCardsTable extends Table
             ->notEmptyString('is_deleted');
 
         $validator
-            ->notEmptyString('security_code')
+            ->notEmptyString('security_code', '空白になっています')
             // セキュリティーコードは半角数字3文字か4文字のみを許容する。それ以外はエラー
             ->add('security_code', 'custom', ['rule' => function ($value, $context) {
                 if (preg_match("/\A[0-9]{3,4}\z/", $value)) {
