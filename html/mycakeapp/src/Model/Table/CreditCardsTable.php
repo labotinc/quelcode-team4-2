@@ -71,25 +71,26 @@ class CreditCardsTable extends Table
             // テスト用カード番号 => https://pay.jp/docs/testcard
             // アルゴリズムコード参考 => https://en.wikipedia.org/wiki/Luhn_algorithm
             ->add('card_number', 'custom', ['rule' => function ($value, $context) {
-                if (!preg_match("/\A[4,5][0-9]{15}\z/", $value)) {
-                    return false;
-                } else {
-                    $length = strlen($value);
-                    $sum = (int) $value[$length - 1];
-                    $parity = $length % 2;
-                    for ($index = 0; $index < $length - 1; $index++) {
-                        $digit = (int) $value[$index];
-                        if ($index % 2 === $parity) {
-                            $digit *= 2;
-                        }
-                        if ($digit > 9) {
-                            $digit -= 9;
-                        }
-                        $sum += $digit;
+                if (preg_match("/\A[4,5][0-9]{15}\z/", $value)) {
+                    return true;
+                }
+            }, 'message' => '不正なカード番号です。'])
+            ->add('card_number', 'why', ['rule' => function ($value, $context) {
+                $length = strlen($value);
+                $sum = (int) $value[$length - 1];
+                $parity = $length % 2;
+                for ($index = 0; $index < $length - 1; $index++) {
+                    $digit = (int) $value[$index];
+                    if ($index % 2 === $parity) {
+                        $digit *= 2;
                     }
-                    if ($sum % 10 === 0) {
-                        return true;
+                    if ($digit > 9) {
+                        $digit -= 9;
                     }
+                    $sum += $digit;
+                }
+                if ($sum % 10 === 0) {
+                    return true;
                 }
             }, 'message' => '不正なカード番号です。']);
 
