@@ -31,6 +31,6 @@ class CancellingAccountHistory extends Entity
         'cancelling_category_id' => true,
         'cancelled' => true,
         'user' => true,
-        'cancelling_account_categories' => true,
+        'cancelling_account_category' => true,
     ];
 }
