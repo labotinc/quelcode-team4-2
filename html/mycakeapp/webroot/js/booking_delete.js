@@ -12,7 +12,7 @@ $(function(){
    * 参考 => https://imasashi.net/modal-window_bg-fixed.html
    */
   let scrollPosition;
-  $('#delete_send').on('click',function(){
+  $('#cancel-send').on('click',function(){
       $('.js-modal').fadeIn();
       scrollPosition = $(window).scrollTop();
       $('body').addClass('fixed').css({'top': -scrollPosition});
@@ -28,7 +28,7 @@ $(function(){
   /**
    * モーダルの削除ボタン押下時フォームを送信する
    */
-  $('#delete_submit').on('click', function() {
+  $('#delete-submit').on('click', function() {
       $("form")[0].submit();
       return false;
   });
@@ -40,4 +40,4 @@ let modalContents = '<div class="modal js-modal">';
   modalContents += '<div class="modal__content">';
   modalContents += '<p class="modal__text">本当にこの予約をキャンセルしますか？</p>';
   modalContents += '<a class="js-modal-close link-button__middle" href="">戻る</a>';
-  modalContents += '<button class="link-button__small" id="delete_submit" name="delete_submit">予約キャンセル</button>';
+  modalContents += '<button class="link-button__small" id="cancel-submit" name="cancel-submit">予約キャンセル</button>';
