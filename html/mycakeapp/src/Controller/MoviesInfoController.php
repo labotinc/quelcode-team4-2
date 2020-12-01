@@ -179,6 +179,8 @@ class MoviesInfoController extends AppController
         //本予約の処理
         $booked_main_details = [];
         foreach ($booked_main as $booked_main_value) {
+            // 予約IDと座席番号を取得
+            $booked_id = $booked_main_value['id'];
             $seat_number = $booked_main_value['seat_number'];
             // 映画情報の概要と詳細を取得
             $movie_schedule = $this->MovieSchedules->get($booked_main_value['schedule_id']);
@@ -201,9 +203,9 @@ class MoviesInfoController extends AppController
             $discount_apply = $this->Discounts->get($payment_contents['discount_id'])->price;
             $sales_tax_apply = $this->SalesTaxes->get($payment_contents['sales_tax_id'])->rate;
             $total_price = number_format(($price_apply - $discount_apply) * (100 + $sales_tax_apply) / 100);
-            //$discount_name = $this->Discounts->get($payment[0]->discount_id)->name;
             // 映画の詳細に必要な情報を取り出し
             $booked_main_details[] = [
+                'id' => $booked_id,
                 'seat_number' => $seat_number,
                 'thumbnail_path' => $thumbnail_path,
                 'movie_title' => $movie_title,
@@ -228,7 +230,8 @@ class MoviesInfoController extends AppController
                 $this->Bookings->delete($booked_tmp_delete);
                 return $this->Flash->set(__('仮予約から15分経過した予約を削除いたしました。再度予約をお願いします。'));
             }
-
+            // 予約IDと座席番号を取得
+            $booked_id = $booked_tmp['id'];
             $seat_number = $booked_tmp['seat_number'];
             // 映画情報の概要と詳細を取得
             $movie_schedule = $this->MovieSchedules->get($booked_tmp['schedule_id']);
@@ -244,6 +247,7 @@ class MoviesInfoController extends AppController
             $screening_end_time = $movie_schedule->screening_start_datetime->addMinutes($movie_info->total_minutes_with_trailer)->format('H:i');
             // 映画の詳細に必要な情報を取り出し
             $booked_temporary_details[] = [
+                'id' => $booked_id,
                 'seat_number' => $seat_number,
                 'thumbnail_path' => $thumbnail_path,
                 'movie_title' => $movie_title,
