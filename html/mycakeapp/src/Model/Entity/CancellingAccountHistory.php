@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Model\Entity;
 
 use Cake\ORM\Entity;
@@ -30,6 +31,6 @@ class CancellingAccountHistory extends Entity
         'cancelling_category_id' => true,
         'cancelled' => true,
         'user' => true,
-        'cancelling_category' => true,
+        'cancelling_account_categories' => true,
     ];
 }

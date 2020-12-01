@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Model\Table;
 
 use Cake\ORM\Query;
@@ -41,7 +42,7 @@ class CancellingAccountHistoriesTable extends Table
             'foreignKey' => 'user_id',
             'joinType' => 'INNER',
         ]);
-        $this->belongsTo('CancellingCategories', [
+        $this->belongsTo('cancelling_account_categories', [
             'foreignKey' => 'cancelling_category_id',
             'joinType' => 'INNER',
         ]);
@@ -77,7 +78,7 @@ class CancellingAccountHistoriesTable extends Table
     public function buildRules(RulesChecker $rules)
     {
         $rules->add($rules->existsIn(['user_id'], 'Users'));
-        $rules->add($rules->existsIn(['cancelling_category_id'], 'CancellingCategories'));
+        $rules->add($rules->existsIn(['cancelling_category_id'], 'cancelling_account_categories'));
 
         return $rules;
     }

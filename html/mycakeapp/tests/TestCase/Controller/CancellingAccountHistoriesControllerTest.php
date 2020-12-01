@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Test\TestCase\Controller;
 
 use App\Controller\CancellingAccountHistoriesController;
@@ -22,7 +23,7 @@ class CancellingAccountHistoriesControllerTest extends TestCase
     public $fixtures = [
         'app.CancellingAccountHistories',
         'app.Users',
-        'app.CancellingCategories',
+        'app.cancelling_account_categories',
     ];
 
     /**

@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Test\TestCase\Model\Table;
 
 use App\Model\Table\CancellingAccountHistoriesTable;
@@ -25,7 +26,7 @@ class CancellingAccountHistoriesTableTest extends TestCase
     public $fixtures = [
         'app.CancellingAccountHistories',
         'app.Users',
-        'app.CancellingCategories',
+        'app.cancelling_account_categories',
     ];
 
     /**
