@@ -21,7 +21,7 @@ class CancellingAccountHistoriesController extends AppController
     public function index()
     {
         $this->paginate = [
-            'contain' => ['Users', 'Cancelling_Account_Categories'],
+            'contain' => ['Users', 'CancellingAccountCategories'],
         ];
         $cancellingAccountHistories = $this->paginate($this->CancellingAccountHistories);
 
@@ -38,7 +38,7 @@ class CancellingAccountHistoriesController extends AppController
     public function view($id = null)
     {
         $cancellingAccountHistory = $this->CancellingAccountHistories->get($id, [
-            'contain' => ['Users', 'Cancelling_Account_Categories'],
+            'contain' => ['Users', 'CancellingAccountCategories'],
         ]);
 
         $this->set('cancellingAccountHistory', $cancellingAccountHistory);
@@ -62,7 +62,7 @@ class CancellingAccountHistoriesController extends AppController
             $this->Flash->error(__('The cancelling account history could not be saved. Please, try again.'));
         }
         $users = $this->CancellingAccountHistories->Users->find('list', ['limit' => 200]);
-        $cancellingCategories = $this->CancellingAccountHistories->Cancelling_Account_Categories->find('list', ['limit' => 200]);
+        $cancellingCategories = $this->CancellingAccountHistories->CancellingAccountCategories->find('list', ['limit' => 200]);
         $this->set(compact('cancellingAccountHistory', 'users', 'cancellingCategories'));
     }
 
@@ -88,7 +88,7 @@ class CancellingAccountHistoriesController extends AppController
             $this->Flash->error(__('The cancelling account history could not be saved. Please, try again.'));
         }
         $users = $this->CancellingAccountHistories->Users->find('list', ['limit' => 200]);
-        $cancellingCategories = $this->CancellingAccountHistories->Cancelling_Account_Categories->find('list', ['limit' => 200]);
+        $cancellingCategories = $this->CancellingAccountHistories->CancellingAccountCategories->find('list', ['limit' => 200]);
         $this->set(compact('cancellingAccountHistory', 'users', 'cancellingCategories'));
     }
 

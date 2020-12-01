@@ -42,7 +42,7 @@ class CancellingAccountHistoriesTable extends Table
             'foreignKey' => 'user_id',
             'joinType' => 'INNER',
         ]);
-        $this->belongsTo('cancelling_account_categories', [
+        $this->belongsTo('CancellingAccountCategories', [
             'foreignKey' => 'cancelling_category_id',
             'joinType' => 'INNER',
         ]);
@@ -78,7 +78,7 @@ class CancellingAccountHistoriesTable extends Table
     public function buildRules(RulesChecker $rules)
     {
         $rules->add($rules->existsIn(['user_id'], 'Users'));
-        $rules->add($rules->existsIn(['cancelling_category_id'], 'cancelling_account_categories'));
+        $rules->add($rules->existsIn(['cancelling_category_id'], 'CancellingAccountCategories'));
 
         return $rules;
     }
