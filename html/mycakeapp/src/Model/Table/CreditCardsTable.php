@@ -87,7 +87,9 @@ class CreditCardsTable extends Table
                         }
                         $sum += $digit;
                     }
-                    return $sum % 10 == 0;
+                    if ($sum % 10 == 0) {
+                        return true;
+                    }
                 }
             }, 'message' => '不正なカード番号です。']);
 
