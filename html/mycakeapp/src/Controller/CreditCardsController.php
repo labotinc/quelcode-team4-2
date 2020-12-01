@@ -113,7 +113,9 @@ class CreditCardsController extends AppController
             if ($this->CreditCards->save($creditCard)) {
                 $this->Flash->success(__('The credit card has been saved.'));
 
+                // ひとまずindexページに遷移 mypageができたらマイページに遷移させる
                 return $this->redirect(['action' => 'index']);
+                // return $this->redirect(['controller' => 'MoviesInfo', 'action' => 'mypage', $user_id]);
             }
             $this->Flash->error(__('The credit card could not be saved. Please, try again.'));
         }
