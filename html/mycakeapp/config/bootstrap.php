@@ -213,6 +213,5 @@ Type::build('timestamp')
 Configure::write('key','HOGEhogeHOGEhogeHOGEhogeHOGEhoge');
 Configure::write('method','aes-256-cbc');
 Configure::write('option', 0);
-Configure::write('method','aes-256-cbc');
 Configure::write('IV', 'DozCbdi80TCfJQ==');
 
