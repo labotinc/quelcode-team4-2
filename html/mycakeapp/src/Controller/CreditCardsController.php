@@ -109,6 +109,7 @@ class CreditCardsController extends AppController
         $creditCard->decrypt();
         if ($this->request->is(['patch', 'post', 'put'])) {
             $creditCard = $this->CreditCards->patchEntity($creditCard, $this->request->getData());
+            $creditCard = $creditCard->encrypt();
             if ($this->CreditCards->save($creditCard)) {
                 $this->Flash->success(__('The credit card has been saved.'));
 
