@@ -14,6 +14,12 @@ use App\Controller\AppController;
 class CreditCardsController extends AppController
 {
 
+    public function initialize()
+    {
+        parent::initialize();
+        // ログインしているユーザー情報をauthuserに設定
+        $this->set('authuser', $this->Auth->user());
+    }
     /**
      * Index method
      *
@@ -139,8 +145,6 @@ class CreditCardsController extends AppController
     public function completed()
     {
         $this->viewBuilder()->setLayout('main');
-        $user_id = $this->Auth; /** ログイン機能実装後、ユーザーIDをビューテンプレートに渡す */
-        $this->set(compact('user_id'));
     }
 
       /**
@@ -181,7 +185,7 @@ class CreditCardsController extends AppController
                 $this->Flash->error(__('クレジットカードを選択してください。'), ['key' => 'credit']);
             }
         }
-        $this->set(compact('user_id', 'info'));
+        $this->set(compact('info'));
     }
 
 
@@ -193,7 +197,5 @@ class CreditCardsController extends AppController
     public function deleteCompleted()
     {
         $this->viewBuilder()->setLayout('main');
-        $user_id = $this->Auth; //ログイン情報から$user_idを渡す
-        $this->set(compact('user_id'));
     }
 }
