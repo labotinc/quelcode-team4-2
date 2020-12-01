@@ -14,12 +14,13 @@ use App\Controller\AppController;
 class CreditCardsController extends AppController
 {
 
-    public function initialize()
-    {
-        parent::initialize();
-        // ログインしているユーザー情報をauthuserに設定
-        $this->set('authuser', $this->Auth->user());
-    }
+    // public function initialize()
+    // {
+    //     parent::initialize();
+    //     // ログインしているユーザー情報をauthuserに設定
+    //     $this->set('authuser', $this->Auth->user());
+    // }
+
     /**
      * Index method
      *
