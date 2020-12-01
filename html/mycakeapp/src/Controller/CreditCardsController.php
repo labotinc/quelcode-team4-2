@@ -72,7 +72,9 @@ class CreditCardsController extends AppController
                  */
                 
                 // 1. user_idの値をセット
-                // ------------- ログイン機能つけるまではとりあえず *****  1  ****** --------------
+                $user_id = $this->Auth->user('id');
+                // ------------- ログイン機能つけるまではとりあえず *****  1  ****** ログイン機能つけたら次の行のコメントアウト解除、その下の行削除--------------
+                // $creditCard = $creditCard->setUserId($user_id);
                 $creditCard = $creditCard->setUserId(1);
                 // 2. is_deletedの値をセット
                 $creditCard = $creditCard->setIsDeleted();
