@@ -106,7 +106,7 @@ class CreditCardsController extends AppController
         $creditCard = $this->CreditCards->get($id, [
             'contain' => [],
         ]);
-        $creditCard->decrypt();
+        $creditCard = $creditCard->decrypt();
         if ($this->request->is(['patch', 'post', 'put'])) {
             $creditCard = $this->CreditCards->patchEntity($creditCard, $this->request->getData());
             $creditCard = $creditCard->encrypt();
