@@ -220,3 +220,6 @@ input {
 .form-container.edit-container label {
     font-size: 11px;
 }
+.error-message {
+    width: auto;
+}
