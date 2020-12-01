@@ -66,15 +66,15 @@ class CreditCardsTable extends Table
             ->naturalNumber('card_number', '半角数字以外の文字が使われています。')
             // カード番号は半角数字16文字のみ、それ以外はバリデーションエラーを返す
             // 今回使用が許可されているのはVISAとMasterCardのみ。VISAの頭文字は[4]、MasterCardは[5]のため、それ以外から始まる文字は全て弾く
-            // [4]or[5]から始まる番号でも、チェックデジットによって確認が取れなければfalseを返す
-            // チェックデジットの追加 参考URL =>  https://www.gizmodo.jp/2011/01/post_8367.html
-            // テスト用カード番号 => https://pay.jp/docs/testcard
-            // アルゴリズムコード参考 => https://en.wikipedia.org/wiki/Luhn_algorithm
             ->add('card_number', 'custom', ['rule' => function ($value, $context) {
                 if (preg_match("/\A[4,5][0-9]{15}\z/", $value)) {
                     return true;
                 }
             }, 'message' => '不正なカード番号です。'])
+            // [4]or[5]から始まる番号でも、チェックデジットによって確認が取れなければfalseを返す
+            // チェックデジットの追加 参考URL =>  https://www.gizmodo.jp/2011/01/post_8367.html
+            // テスト用カード番号 => https://pay.jp/docs/testcard
+            // アルゴリズムコード参考 => https://en.wikipedia.org/wiki/Luhn_algorithm
             ->add('card_number', 'why', ['rule' => function ($value, $context) {
                 $length = strlen($value);
                 $sum = (int) $value[$length - 1];
