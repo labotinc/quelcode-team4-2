@@ -79,7 +79,7 @@ class CreditCardsTable extends Table
                     $parity = $length % 2;
                     for ($index = 0; $index < $length - 1; $index++) {
                         $digit = (int) $value[$index];
-                        if ($index % 2 == $parity) {
+                        if ($index % 2 === $parity) {
                             $digit *= 2;
                         }
                         if ($digit > 9) {
@@ -87,7 +87,7 @@ class CreditCardsTable extends Table
                         }
                         $sum += $digit;
                     }
-                    if ($sum % 10 == 0) {
+                    if ($sum % 10 === 0) {
                         return true;
                     }
                 }
