@@ -1,4 +1,5 @@
 <?php
+
 use Migrations\AbstractMigration;
 
 class CreateCancellingAccountCategories extends AbstractMigration
@@ -15,7 +16,7 @@ class CreateCancellingAccountCategories extends AbstractMigration
         $table = $this->table('cancelling_account_categories');
         $table->addColumn('name', 'string', [
             'default' => null,
-            'limit' => 255,
+            'limit' => 100,
             'null' => false,
         ]);
         $table->addColumn('created', 'datetime', [
