@@ -27,9 +27,9 @@
       <div class="movie title">座席番号</div>
       <p class="movie content"><?= h($booking->seat_number) ?></p>
       <div class="user title">性別（割引のための情報となります）</div>
-      <p class="user content"><?= h($authuser->user_sex) ?></p>
+      <p class="user content"><?= h($booking->user->user_sex) ?></p>
       <div class="user title">誕生日（割引のための情報となります）</div>
-      <p class="user content"><?= h($authuser->user_birthdate) ?></p>
+      <p class="user content"><?= h($booking->user->user_birthdate) ?></p>
       <!-- 今後の仕様変更によってボタンのURLを変更します -->
       <a href="<?= $this->Url->build(['action' => 'seat_cancel', $booking['id']]) ?>" class="cancel-button button">キャンセル</a>
       <a href="<?= $this->Url->build(['controller' => 'payment', 'action' => 'index']) ?>" class="accept-button button">決定</a>
