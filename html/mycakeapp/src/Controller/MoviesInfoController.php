@@ -186,6 +186,9 @@ class MoviesInfoController extends AppController
             $movie_info = $this->Movies->get($movie_id);
             $thumbnail_path = $movie_info['thumbnail_path'];
             $movie_title = $movie_info['title'];
+            // 開始日とその曜日を取得
+            $screening_date = $movie_schedule->screening_start_datetime->format('m月d日');
+            $screening_week = $movie_schedule->screening_start_week;
             // 開始時間、終了時間を取得
             $screening_start_time = $movie_schedule->screening_start_datetime->format('H:i');
             $screening_end_time = $movie_schedule->screening_start_datetime->addMinutes($movie_info->total_minutes_with_trailer)->format('H:i');
@@ -197,20 +200,21 @@ class MoviesInfoController extends AppController
             $price_apply = $this->Prices->get($payment_contents['price_id'])->price;
             $discount_apply = $this->Discounts->get($payment_contents['discount_id'])->price;
             $sales_tax_apply = $this->SalesTaxes->get($payment_contents['sales_tax_id'])->rate;
-            $total_price = ($price_apply - $discount_apply) * (100 + $sales_tax_apply) / 100;
+            $total_price = number_format(($price_apply - $discount_apply) * (100 + $sales_tax_apply) / 100);
             //$discount_name = $this->Discounts->get($payment[0]->discount_id)->name;
             // 映画の詳細に必要な情報を取り出し
             $booked_main_details[] = [
                 'seat_number' => $seat_number,
                 'thumbnail_path' => $thumbnail_path,
                 'movie_title' => $movie_title,
+                'screening_date' => $screening_date,
+                'screening_week' => $screening_week,
                 'screening_start_time' => $screening_start_time,
                 'screening_end_time' => $screening_end_time,
                 'discount_name' => $discount_name,
                 'total_price' => $total_price,
             ];
         }
-
 
         // 仮予約の処理
         // 映画詳細ページに必要な配列の空の配列を準備
@@ -232,6 +236,9 @@ class MoviesInfoController extends AppController
             $movie_info = $this->Movies->get($movie_id);
             $thumbnail_path = $movie_info['thumbnail_path'];
             $movie_title = $movie_info['title'];
+            // 開始日とその曜日を取得
+            $screening_date = $movie_schedule->screening_start_datetime->format('m月d日');
+            $screening_week = $movie_schedule->screening_start_week;
             // 開始時間、終了時間を取得
             $screening_start_time = $movie_schedule->screening_start_datetime->format('H:i');
             $screening_end_time = $movie_schedule->screening_start_datetime->addMinutes($movie_info->total_minutes_with_trailer)->format('H:i');
@@ -240,6 +247,8 @@ class MoviesInfoController extends AppController
                 'seat_number' => $seat_number,
                 'thumbnail_path' => $thumbnail_path,
                 'movie_title' => $movie_title,
+                'screening_date' => $screening_date,
+                'screening_week' => $screening_week,
                 'screening_start_time' => $screening_start_time,
                 'screening_end_time' => $screening_end_time,
             ];
