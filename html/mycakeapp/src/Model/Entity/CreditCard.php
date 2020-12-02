@@ -46,9 +46,11 @@ class CreditCard extends Entity
         $IV = Configure::read('IV');
         $method = Configure::read('method');
         $option = Configure::read('option');
-        $this->card_number = openssl_encrypt($this->card_number, $method, $option, $IV);
-        $this->holder_name = openssl_encrypt($this->holder_name, $method, $option, $IV);
-        $this->expiration_date = openssl_encrypt($this->expiration_date, $method, $option, $IV);
+        // 鍵を環境変数から取得
+        $DEV_KEY = getenv("DEV_KEY");
+        $this->card_number = openssl_encrypt($this->card_number, $method, $DEV_KEY, $option, $IV);
+        $this->holder_name = openssl_encrypt($this->holder_name, $method, $DEV_KEY, $option, $IV);
+        $this->expiration_date = openssl_encrypt($this->expiration_date, $method, $DEV_KEY, $option, $IV);
         return $this;
     }
 
@@ -57,9 +59,10 @@ class CreditCard extends Entity
         $IV = Configure::read('IV');
         $method = Configure::read('method');
         $option = Configure::read('option');
-        $this->card_number = openssl_decrypt($this->card_number, $method, $option, $IV);
-        $this->holder_name = openssl_decrypt($this->holder_name, $method, $option, $IV);
-        $this->expiration_date = openssl_decrypt($this->expiration_date, $method, $option, $IV);
+        $DEV_KEY = getenv("DEV_KEY");
+        $this->card_number = openssl_decrypt($this->card_number, $method, $DEV_KEY, $option, $IV);
+        $this->holder_name = openssl_decrypt($this->holder_name, $method, $DEV_KEY, $option, $IV);
+        $this->expiration_date = openssl_decrypt($this->expiration_date, $method, $DEV_KEY, $option, $IV);
         return $this;
     }
 
