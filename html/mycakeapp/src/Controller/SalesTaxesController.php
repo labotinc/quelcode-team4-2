@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Controller;
 
 use App\Controller\AppController;
@@ -10,7 +11,7 @@ use App\Controller\AppController;
  *
  * @method \App\Model\Entity\SalesTax[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
  */
-class SalesTaxesController extends AppController
+class SalesTaxesController extends MovieAuthBaseController
 {
     /**
      * Index method

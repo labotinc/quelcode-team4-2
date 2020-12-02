@@ -7,7 +7,6 @@
     color: tomato;
     font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
     font-weight: bold;
-    padding-left: 60px;
 }
 
 .scheduel-text {
@@ -173,6 +172,7 @@ header {
 }
 
 footer {
+    position: fixed;
     bottom: 0px;
     right: 0px;
     z-index: 100;
