@@ -170,10 +170,11 @@ label:hover {
 }
 
 .credit-choice{    
-    height: 88px;
+    /* height: 88px; */
     border: 0.5px solid #ADADAD;
     border-radius: 5px;
     margin-bottom: 30px;
+    padding: 20px 0;
 }
 
 .credit-choice-flex{
