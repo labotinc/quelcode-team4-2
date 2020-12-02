@@ -13,6 +13,20 @@ use App\Controller\AppController;
  */
 class PaymentHistoriesController extends MovieAuthBaseController
 {
+    // 初期化処理
+    public function initialize()
+    {
+        parent::initialize();
+        $this->loadComponent('Paginator');
+        $this->loadModel('Movies');
+        $this->loadModel('MovieSchedules');
+        $this->loadModel('Prices');
+        $this->loadModel('Discounts');
+        $this->loadModel('CreditCards');
+
+        // レイアウトをmainに変更
+        $this->viewBuilder()->setLayout('main');
+    }
     /**
      * Index method
      *
@@ -33,13 +47,16 @@ class PaymentHistoriesController extends MovieAuthBaseController
         // レイアウトをmainに変更
         $this->viewBuilder()->setLayout('main');
 
+        $user = $this->request->getSession()->read('Auth.User.id');
 
-        // $this->paginate = [
-        //     'contain' => ['Bookings', 'CreditCards', 'Prices', 'Discounts', 'SalesTaxes'],
-        // ];
-        // $paymentHistories = $this->paginate($this->PaymentHistories);
 
-        // $this->set(compact('paymentHistories'));
+        $arrayCreditCards = $this->CreditCards->find('all')
+            ->where([
+                'user_id' => $user
+            ])->toArray();
+        var_dump($arrayCreditCards);
+
+        $this->set(compact('arrayCreditCards'));
     }
 
 
