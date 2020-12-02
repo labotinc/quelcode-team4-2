@@ -173,7 +173,11 @@ label:hover {
     height: 88px;
     border: 0.5px solid #ADADAD;
     border-radius: 5px;
-    opacity: 1;
+    margin-bottom: 30px;
+}
+
+.credit-choice-flex{
+    display: flex;
 }
 
 .point-choice{
