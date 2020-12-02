@@ -194,9 +194,10 @@ class MoviesInfoController extends AppController
             // 開始時間、終了時間を取得
             $screening_start_time = $movie_schedule->screening_start_datetime->format('H:i');
             $screening_end_time = $movie_schedule->screening_start_datetime->addMinutes($movie_info->total_minutes_with_trailer)->format('H:i');
-            // 支払情報を取得（総計金額、割引項目）
+            // 支払情報を取得（支払いID、総計金額、割引項目）
             $payment = $this->PaymentHistories->findPaymentHistories($booked_main_value['id']);
             $payment_contents = $payment[0];
+            $payment_id = $payment_contents['id'];
             $discount_name = $this->Discounts->get($payment_contents['discount_id'])->name;
             // 支払総計金額の項目取得とその計算
             $price_apply = $this->Prices->get($payment_contents['price_id'])->price;
@@ -206,6 +207,7 @@ class MoviesInfoController extends AppController
             // 映画の詳細に必要な情報を取り出し
             $booked_main_details[] = [
                 'id' => $booked_id,
+                'payment_id' => $payment_id,
                 'seat_number' => $seat_number,
                 'thumbnail_path' => $thumbnail_path,
                 'movie_title' => $movie_title,
@@ -259,9 +261,36 @@ class MoviesInfoController extends AppController
         }
 
         $this->set(compact('booked_main_details', 'booked_temporary_details'));
+
+        if ($this->request->is('post')) {
+            if ($this->request->getData('payment_id')) {
+                $booking_id_post = $this->request->getData('booking_id');
+                $payment_id_post = $this->request->getData('payment_id');
+                $info_booking = $this->Bookings->get($booking_id_post)->setIsCancelled();
+                $info_payment = $this->PaymentHistories->get($payment_id_post)->setIsCancelled();
+                // showAsDeletedはエンティティクラスのメソッド
+                if ($this->Bookings->save($info_booking) && $this->PaymentHistories->save($info_payment)) {
+                    return $this->redirect(['action' => 'deleteCompleted']);
+                } else {
+                    $this->Flash->error(__('削除に失敗しました')); // 一応例外処理を記入
+                }
+            } else {
+                $booking_id_post = $this->request->getData('booking_id');
+                $info_booking = $this->Bookings->get($booking_id_post)->setIsCancelled();
+                // showAsDeletedはエンティティクラスのメソッド
+                if ($this->Bookings->save($info_booking)) {
+                    return $this->redirect(['action' => 'deleteCompleted']);
+                } else {
+                    $this->Flash->error(__('削除に失敗しました')); // 一応例外処理を記入
+                }
+            }
+        }
     }
 
     // 予約キャンセル機能
+    public function deleteCompleted()
+    {
+    }
 
     // 決済情報登録リンク？
 

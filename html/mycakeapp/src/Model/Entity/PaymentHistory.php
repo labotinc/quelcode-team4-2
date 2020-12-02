@@ -49,4 +49,11 @@ class PaymentHistory extends Entity
         'discounts' => true,
         'sales_taxes' => true,
     ];
+
+
+    public function setIsCancelled()
+    {
+        $this->is_cancelled = true;
+        return $this;
+    }
 }
