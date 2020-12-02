@@ -45,7 +45,7 @@
                 <?= $this->Form->hidden('payment_id', ['value' => $booked_main_detail['payment_id']]) ?>
               </fieldset>
               <?= $this->Form->end() ?>
-              <?= $this->Form->submit(
+              <?= $this->Form->button(
                 'キャンセル',
                 ['class' => 'link-button__small', 'id' => 'cancel-send-main', 'name' => 'cancel']
               ); ?>
@@ -55,13 +55,12 @@
       <?php endif; ?>
       <!-- アクション先未定 -->
       <?= $this->Html->link('マイページへ戻る', ['controller' => 'MovieInfo', 'action' => 'マイページ'], ['class' => 'button']) ?>
-
     </div>
 
     <div class="wrapper booking-temporary">
       <h2 class="booking-type">未決済のご予約（15分以内に決済がご確認できない際にはキャンセル扱いとなります。）</h2>
       <?php if (empty($booked_temporary_details)) : ?>
-        <div class="non-main-booking">現在予約はありません</div>
+        <div class="non-main-booking">現在未決済の予約はありません</div>
       <?php else : ?>
         <?php foreach ($booked_temporary_details as $booked_temporary_detail) : ?>
           <div class="booking-detail">
@@ -96,7 +95,7 @@
                   <?= $this->Form->hidden('booking_id', ['value' => $booked_temporary_detail['id']]) ?>
                 </fieldset>
                 <?= $this->Form->end() ?>
-                <?= $this->Form->submit(
+                <?= $this->Form->button(
                   'キャンセル',
                   ['class' => 'link-button__small', 'id' => 'cancel-send-temporary', 'name' => 'cancel']
                 ); ?>
