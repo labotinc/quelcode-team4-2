@@ -11,7 +11,7 @@ use App\Controller\AppController;
  *
  * @method \App\Model\Entity\PaymentHistory[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
  */
-class PaymentHistoriesController extends MovieAuthBaseController
+class PaymentHistoriesController extends AppController
 {
     /**
      * Index method

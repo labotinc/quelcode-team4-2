@@ -16,7 +16,7 @@ use Exception;
  *
  * @method \App\Model\Entity\Booking[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
  */
-class BookingsController extends MovieAuthBaseController
+class BookingsController extends AppController
 {
 
     public function initialize()
@@ -28,8 +28,10 @@ class BookingsController extends MovieAuthBaseController
         // ログインユーザー情報を取り出す→本来はログインユーザーを取り出す
         // 今回は仮ユーザーとして各自で登録するユーザーIDが1の情報を使用
         // なので、今回レビューを行う際はまずユーザーを一人登録してください。
-
-        $this->set('authuser', $this->Auth->user());
+        $login_user_info = $this->Users->get(1);
+        $this->set('authuser', $login_user_info);
+        // ※認証認可コントローラー完成次第下記に移行。
+        // $login_user_info = $this->set('authuser', $this->Auth->user());
     }
     /**
      * Index method
@@ -104,8 +106,8 @@ class BookingsController extends MovieAuthBaseController
         }
         // ログインユーザーID
         // 本来はログインユーザーIDを取得するため認証認可完了したらこっちを使う
-        $login_user_id = $this->Auth->user('id');
-        //$login_user_id = $this->Users->get(1)->id;
+        // $login_user_id=$this->Auth->user['id']
+        $login_user_id = $this->Users->get(1)->id;
         // 予約済座席の一覧を配列として取得する。
         $booked_id_seats = $this->Bookings->findBookingSeats($schedule_id);
         // Hashを用いることで連想配列→配列に変換
@@ -114,9 +116,11 @@ class BookingsController extends MovieAuthBaseController
         // ログインユーザーの仮予約の配列
         $booked_temporary = $this->Bookings->findBookedTemporary(
             //本来はログインユーザーIDを取得するため認証認可完了したらこっちを使う
-            $login_user_id
-            //$this->Users->get(1)->id
+            //$this->Auth->user['id']
+            $this->Users->get(1)->id
         );
+
+
 
         // ログインユーザーの仮予約を取り出す。
         foreach ($booked_temporary as $booked_tmp) {

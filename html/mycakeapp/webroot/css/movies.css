@@ -24,7 +24,7 @@ bodyの子要素の子要素 {
 input {
     display: inline-block;
     box-shadow: 0 2px 2px #00000014;
-    padding-left: 10px;
+    text-align: center;
     font-size: 16px;
 }
 

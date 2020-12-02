@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Controller;
 
 use App\Controller\AppController;
@@ -11,7 +10,7 @@ use App\Controller\AppController;
  *
  * @method \App\Model\Entity\MovieSchedule[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
  */
-class MovieSchedulesController extends MovieAuthBaseController
+class MovieSchedulesController extends AppController
 {
     /**
      * Index method

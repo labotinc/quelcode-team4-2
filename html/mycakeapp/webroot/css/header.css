@@ -7,14 +7,12 @@ header {
     width: 100%;
     min-width: 1080px;
     color: #ffffff;
-    background-color: #262626;
+    background-color:#262626;
     letter-spacing: 1px;
     padding: 25px 0;
 }
 
-.header-container,
-.header-nav-list,
-.header-wrap-first {
+.header-container,.header-nav-list,.header-wrap-first{
     display: flex;
     align-items: center;
 }
@@ -24,15 +22,15 @@ header {
     margin: 0 auto;
 }
 
-#header-text-quel {
-    color: #ffb100;
+#header-text-quel{
+    color: #FFB100;
     padding-right: 3px;
 }
 .header-title {
     font-size: 16px;
     font-weight: bold;
 }
-.header-nav-list {
+.header-nav-list{
     margin-left: 140px;
 }
 .header-nav-list li {
@@ -41,11 +39,8 @@ header {
     list-style: none;
 }
 
-.auth-toggle-btn a {
-    display: block;
-    width: 100%;
-    border: solid 1px #ffffff;
+.login-btn{
+    border: solid 1px #FFFFFF;
     border-radius: 3px;
-    padding: 3px 8px;
-    text-align: center;
+    padding: 3px 12px;
 }

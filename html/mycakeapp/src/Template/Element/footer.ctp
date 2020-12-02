@@ -5,20 +5,25 @@
             <li class="footer-nav-list-after">
                 <?= $this->Html->link(
                     __('トップ'),
-                    // トップページに後から修正
-                    ['controller' => 'MoviesInfo', 'action' => '#']
+                    '#' // 仮リンク、リンク作成後は削除
+                    // 完成版はトップページの連想配列を作成
+                    // ['movie' => 'home']
                 ) ?>
             </li>
             <li class="footer-nav-list-after">
                 <?= $this->Html->link(
                     __('上映スケジュール'),
-                    ['controller' => 'MoviesInfo', 'action' => 'schedule']
+                    '#'
+                    // 上映スケジュール（予約開始画面）の連想配列
+                    // ['movie_schedule' => 'home']
                 ) ?>
             </li>
             <li>
                 <?= $this->Html->link(
                     __('料金・割引'),
-                    ['controller' => 'MoviesInfo', 'action' => 'pricelist']
+                    '#'
+                    // 料金表の連想配列
+                    //['price' => 'home']
                 ) ?>
             </li>
         </ul>

@@ -9,7 +9,8 @@ use Cake\I18n\Time;
 use Cake\Event\Event; // added.
 use Exception; // added.
 
-class MoviesInfoController extends MovieAuthBaseController
+// 今のところappcontrollerを継承
+class MoviesInfoController extends AppController
 {
     // 初期化処理
     public function initialize()

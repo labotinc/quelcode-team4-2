@@ -12,7 +12,7 @@ use App\Controller\AppController;
  *
  * @method \App\Model\Entity\Movie[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
  */
-class MoviesController extends MovieAuthBaseController
+class MoviesController extends AppController
 {
     /**
      * Index method
