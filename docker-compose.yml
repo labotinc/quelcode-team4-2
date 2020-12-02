@@ -15,6 +15,8 @@ services:
     volumes:
       - ./docker/php/php.ini:/usr/local/etc/php/php.ini
       - ./html:/var/www/html
+    environment:
+      DEV_KEY: HOGEhogeHOGEhogeHOGEhogeHOGEhoge
   mysql:
     build: ./docker/mysql
     environment:
