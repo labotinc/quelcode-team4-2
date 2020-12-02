@@ -129,13 +129,13 @@ class BookingsController extends AppController
             if (!($created_format->wasWithinLast("15 minutes"))) {
                 $booked_tmp_delete = $this->Bookings->get($booked_tmp['id']);
                 $this->Bookings->delete($booked_tmp_delete);
-                return $this->Flash->set(__('仮予約から15分経過した予約を削除いたしました。再度予約をお願いします。'));
+                $this->Flash->set(__('仮予約から15分経過した予約を削除いたしました。再度予約をお願いします。'));
+                return $this->redirect(['controller' => 'MoviesInfo', 'action' => 'schedule']);
             }
         }
 
         // 映画が予約済だった場合、映画上映フラグが立っていない→上映されていない映画を選択した場合は予約ページにリダイレクト
         if (in_array($login_user_id, $booked_id_array) || !($movie_schedule->is_playable)) {
-            // ※ページが作成されたら映画スケジュール画面をリダイレクト先にする。action先は未定。
             $this->redirect(['controller' => 'MoviesInfo', 'action' => 'schedule']);
             $this->Flash->set(__('選択した劇場はすでに予約済か、中止となっている場合がございます。再度上映スケジュールページからご希望の上映を選択してください。'));
         }
