@@ -21,18 +21,18 @@
         }
         echo $this->Form->radio('Credit.id', $options);
         ?>
-    </div>
-    <div class="button-container">
-        <?= $this->Form->button(
-            '削除',
-            ['class' => 'link-button__small', 'id' => 'delete_send', 'name' => 'delete']
-        );
-        ?>
-        <?= $this->Form->button(
-            '編集',
-            ['class' => 'link-button__middle', 'name' => 'edit']
-        );
-        ?>
-        <?= $this->Form->end() ?>
+        <div class="button-container">
+            <?= $this->Form->button(
+                '削除',
+                ['class' => 'link-button__small', 'id' => 'delete_send', 'name' => 'delete']
+            );
+            ?>
+            <?= $this->Form->button(
+                '編集',
+                ['class' => 'link-button__middle', 'name' => 'edit']
+            );
+            ?>
+            <?= $this->Form->end() ?>
+        </div>
     </div>
 </section>
