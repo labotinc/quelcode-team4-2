@@ -20,7 +20,7 @@ function infoMenuAction(infoMenuDOM, infoMenuId) {
         // thisは、クリックされたオブジェクト
         // クリックされた日付と配列番号を呼び出してinfo-menu-activeクラスの追加と削除
         this.classList.add('info-menu-active');
-        scheduledDate.innerHTML = (this.innerHTML.substr(0, 9));
+        scheduledDate.innerHTML = (this.innerHTML.substr(0, 10));
 
         // クリックされていないボタンにinfo-menu-activeがついていたら外す
         for (var i = 0; i < infoMenu.length; i++) {
