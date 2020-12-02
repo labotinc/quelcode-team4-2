@@ -35,6 +35,6 @@
             'type' => 'checkbox'
         ]); ?>
     </fieldset>
-    <?= $this->Form->button(__('登録'), ['class' => 'submit-button']) ?>
+    <?= $this->Form->button(__('登録'), ['class' => 'submit-button add']) ?>
     <?= $this->Form->end() ?>
 </section>

@@ -30,6 +30,6 @@
         ],
         'type' => 'checkbox'
     ]); ?>
-    <?= $this->Form->button(__('編集'), ['class' => 'submit-button']) ?>
+    <?= $this->Form->button(__('編集'), ['class' => 'submit-button edit']) ?>
     <?= $this->Form->end() ?>
 </section>

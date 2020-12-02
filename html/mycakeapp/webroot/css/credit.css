@@ -5,6 +5,7 @@
 }
 label {
     width: auto;
+    display: block;
 }
 .modal{
     display: none;
@@ -101,8 +102,11 @@ input::placeholder {
     display: flex;
     justify-content: space-between;
 }
-.text, .label_confirm {
+.text{
     margin-bottom: 44px;
+}
+.submit-button.add, .submit-button.edit {
+    margin-top: 44px;
 }
 .form-container .label_confirm {
     font-size: 11px;
@@ -123,6 +127,7 @@ input::placeholder {
     text-align: center;
     border: 1px solid  #707070;
     padding: 20px 0;
+    margin-bottom: 10px;
 }
 
 .info-container input[type="radio"] {
@@ -219,7 +224,12 @@ input {
 
 .form-container.edit-container label {
     font-size: 11px;
+    margin-bottom: 8px;
 }
 .error-message {
     width: auto;
+    color: #F46161;
+    font-size: 11px;
+    margin: 8px auto;
+    text-align: left;
 }
