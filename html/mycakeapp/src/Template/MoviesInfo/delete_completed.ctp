@@ -5,7 +5,7 @@
  * @var \App\Model\Entity\MovieInfo $booking
  */
 ?>
-<?= $this->Html->css('credit', ['block' => true]); ?>
+<?= $this->Html->css('moviesinfo', ['block' => true]); ?>
 <section class="h1">
   <h1>予約情報</h1>
 </section>
