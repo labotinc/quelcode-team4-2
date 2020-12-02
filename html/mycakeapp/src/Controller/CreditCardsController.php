@@ -178,6 +178,7 @@ class CreditCardsController extends AppController
             
             // 2. 削除ボタンが押された場合
             // [うまくいかず]$_POST['edit']ではない場合を elseif (isset($_POST['delete']) && !empty($credit_id))としたかったが機能しなかった
+            // どのボタンを押されたかjQueryで判別する方法がありそうだが、今回は$_POST['edit']か否かで条件分岐する 参考URL:http://www.koikikukan.com/archives/2018/11/29-000300.php
             } elseif (!empty($credit_id)) {
                 $info = $this->CreditCards->get($credit_id)->showAsDeleted(); // showAsDeletedはエンティティクラスのメソッド
                 if ($this->CreditCards->save($info)){
