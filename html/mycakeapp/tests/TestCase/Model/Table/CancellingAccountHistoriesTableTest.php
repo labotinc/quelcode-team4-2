@@ -26,7 +26,7 @@ class CancellingAccountHistoriesTableTest extends TestCase
     public $fixtures = [
         'app.CancellingAccountHistories',
         'app.Users',
-        'app.cancelling_account_categories',
+        'app.CancelleingAcountCategories',
     ];
 
     /**
