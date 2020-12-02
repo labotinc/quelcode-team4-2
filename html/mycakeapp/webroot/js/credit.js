@@ -29,7 +29,7 @@ $(function(){
      * モーダルの削除ボタン押下時フォームを送信する
      */
     $('#delete_submit').on('click', function() {
-        $("form")[0].submit();
+        $("form").submit();
         return false;
     });
     
