@@ -32,7 +32,7 @@
       <p class="user content"><?= h($booking->user->user_birthdate) ?></p>
       <!-- 今後の仕様変更によってボタンのURLを変更します -->
       <a href="<?= $this->Url->build(['action' => 'seat_cancel', $booking['id']]) ?>" class="cancel-button button">キャンセル</a>
-      <a href="<?= $this->Url->build(['controller' => 'payment', 'action' => 'index']) ?>" class="accept-button button">決定</a>
+      <a href="<?= $this->Url->build(['controller' => 'PaymentHistories', 'action' => 'method']) ?>" class="accept-button button">決定</a>
     </div>
   </div>
 </section>

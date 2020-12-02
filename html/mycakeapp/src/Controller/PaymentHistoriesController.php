@@ -28,6 +28,21 @@ class PaymentHistoriesController extends MovieAuthBaseController
         $this->set(compact('paymentHistories'));
     }
 
+    public function method()
+    {
+        // レイアウトをmainに変更
+        $this->viewBuilder()->setLayout('main');
+
+
+        // $this->paginate = [
+        //     'contain' => ['Bookings', 'CreditCards', 'Prices', 'Discounts', 'SalesTaxes'],
+        // ];
+        // $paymentHistories = $this->paginate($this->PaymentHistories);
+
+        // $this->set(compact('paymentHistories'));
+    }
+
+
     /**
      * View method
      *

@@ -150,3 +150,35 @@ label:hover {
     text-align: center;
     padding-top: 91px;
 }
+
+/* ================ 決済部分 ================ */
+.credit-wrapper{
+    background: #ffffff;
+    width: 736px;
+    padding: 45px 0;
+    margin: 0 auto 60px;  
+}
+.credit-box{
+    width: 325px;
+    font-size: 11px;
+    margin: 0 auto;    
+}
+
+.credit-card-registration{
+    text-align: left;
+    color: #707070;
+}
+
+.credit-choice{    
+    height: 88px;
+    border: 0.5px solid #ADADAD;
+    border-radius: 5px;
+    opacity: 1;
+}
+
+.point-choice{
+    margin-bottom: 30px;
+}
+.select-btn{
+text-align: center;
+}
