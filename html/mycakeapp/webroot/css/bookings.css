@@ -186,6 +186,21 @@ label:hover {
 }
 .select-btn{
 text-align: center;
+display: flex;
+}
+
+.credit-box .submit{
+    padding-bottom: 0;
+    margin: 0;
+}
+
+.credit-box .submit input{
+    padding: 11px 0;
+    margin-left: 10px;
+    width:192px;
+    background: #f5ae0b 0% 0% no-repeat padding-box;
+    border: none;
+    color: #ffffff;
 }
 
 .price-box{

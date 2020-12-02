@@ -24,7 +24,9 @@
 
                 <!-- 今は仮のリンク -->
                 <a href="<?= $this->Url->build(['controller' => 'Bookings', 'action' => 'index']) ?>" class="cancel-button button">キャンセル</a>
-                <a href="<?= $this->Url->build(['action' => 'overview']) ?>" class="accept-button button">決定</a>
+                <?= $this->Form->create(); ?>
+                <?= $this->Form->submit('決定') ?>
+                <?= $this->Form->end() ?>
             </div>
         </div>
     </div>

@@ -42,21 +42,24 @@ class PaymentHistoriesController extends MovieAuthBaseController
         $this->set(compact('paymentHistories'));
     }
 
-    public function method()
+    public function method($id)
     {
         // レイアウトをmainに変更
         $this->viewBuilder()->setLayout('main');
 
-        $user = $this->request->getSession()->read('Auth.User.id');
-
+        $user = $this->Auth->user('id');
 
         $arrayCreditCards = $this->CreditCards->find('all')
             ->where([
                 'user_id' => $user
             ])->toArray();
-        var_dump($arrayCreditCards);
-
+        // これは予約のid
+        $booking_id = $id;
         $this->set(compact('arrayCreditCards'));
+
+        if ($this->request->is('post')) {
+            var_dump($user);
+        }
     }
     public function overview()
     {
@@ -70,7 +73,7 @@ class PaymentHistoriesController extends MovieAuthBaseController
             ->where([
                 'user_id' => $user
             ])->toArray();
-        var_dump($arrayCreditCards);
+
 
         $this->set(compact('arrayCreditCards'));
     }
