@@ -43,25 +43,23 @@ class CreditCard extends Entity
 
     public function encrypt()
     {
-        $key = Configure::read('key');
         $IV = Configure::read('IV');
         $method = Configure::read('method');
         $option = Configure::read('option');
-        $this->card_number = openssl_encrypt($this->card_number, $method, $key, $option, $IV);
-        $this->holder_name = openssl_encrypt($this->holder_name, $method, $key, $option, $IV);
-        $this->expiration_date = openssl_encrypt($this->expiration_date, $method, $key, $option, $IV);
+        $this->card_number = openssl_encrypt($this->card_number, $method, $option, $IV);
+        $this->holder_name = openssl_encrypt($this->holder_name, $method, $option, $IV);
+        $this->expiration_date = openssl_encrypt($this->expiration_date, $method, $option, $IV);
         return $this;
     }
 
 
     public function decrypt() {
-        $key = Configure::read('key');
         $IV = Configure::read('IV');
         $method = Configure::read('method');
         $option = Configure::read('option');
-        $this->card_number = openssl_decrypt($this->card_number, $method, $key, $option, $IV);
-        $this->holder_name = openssl_decrypt($this->holder_name, $method, $key, $option, $IV);
-        $this->expiration_date = openssl_decrypt($this->expiration_date, $method, $key, $option, $IV);
+        $this->card_number = openssl_decrypt($this->card_number, $method, $option, $IV);
+        $this->holder_name = openssl_decrypt($this->holder_name, $method, $option, $IV);
+        $this->expiration_date = openssl_decrypt($this->expiration_date, $method, $option, $IV);
         return $this;
     }
 
