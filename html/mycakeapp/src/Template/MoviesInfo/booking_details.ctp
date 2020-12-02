@@ -7,15 +7,16 @@
 ?>
 <?= $this->Flash->render(); ?>
 <?= $this->Html->script('booking_delete', ['block' => true]); ?>
+<?= $this->Html->script('jquery.min.js', ['block' => true]) ?>
 <?= $this->Html->css('moviesinfo', ['block' => true]); ?>
 <section>
   <div class="movie-info-wrap">
     <h1 class="heading">予約詳細</h1>
 
     <div class="wrapper booking-main">
-      <h2 class="booking-type">決済済のご予約</h2>
-      <?php if (is_null($booked_main_details)) : ?>
-        <div class="non-main-booking">現在予約はありません</div>
+      <h2 class="booking-type">決済が完了しているご予約</h2>
+      <?php if (empty($booked_main_details)) : ?>
+        <div class="non-main-booking">現在決済が完了しているご予約はありません</div>
       <?php else : ?>
         <?php foreach ($booked_main_details as $booked_main_detail) : ?>
           <div class="booking-detail">
@@ -37,17 +38,29 @@
                 <p class="detail discount"><?= h($booked_main_detail['discount_name']) ?></p>
               <?php endif; ?>
             </div>
-            <div class="cancel-button">
-              <a class="delete_send">キャンセル</a>
+            <div class="cancel-button main">
+              <?= $this->Form->create() ?>
+              <fieldset>
+                <?= $this->Form->hidden('booking_id', ['value' => $booked_main_detail['id']]) ?>
+                <?= $this->Form->hidden('payment_id', ['value' => $booked_main_detail['payment_id']]) ?>
+              </fieldset>
+              <?= $this->Form->end() ?>
+              <?= $this->Form->submit(
+                'キャンセル',
+                ['class' => 'link-button__small', 'id' => 'cancel-send-main', 'name' => 'cancel']
+              ); ?>
             </div>
           </div>
         <?php endforeach; ?>
       <?php endif; ?>
+      <!-- アクション先未定 -->
+      <?= $this->Html->link('マイページへ戻る', ['controller' => 'MovieInfo', 'action' => 'マイページ'], ['class' => 'button']) ?>
+
     </div>
 
     <div class="wrapper booking-temporary">
       <h2 class="booking-type">未決済のご予約（15分以内に決済がご確認できない際にはキャンセル扱いとなります。）</h2>
-      <?php if (is_null($booked_temporary_details)) : ?>
+      <?php if (empty($booked_temporary_details)) : ?>
         <div class="non-main-booking">現在予約はありません</div>
       <?php else : ?>
         <?php foreach ($booked_temporary_details as $booked_temporary_detail) : ?>
@@ -67,11 +80,6 @@
               </p>
             </div>
             <div class="procedures">
-              <div class="cancel-button">
-                <?= $this->Form->postButton('キャンセル', [$booked_temporary_detail['id']], ['class' => 'cancel-send']) ?>
-                <button class="cancel-send">キャンセル</button>
-              </div>
-              <!-- 基本設計書P51に遷移 -->
               <div class="payment-button-wrapper">
                 <div class="payment-button">
                   <?= $this->Html->link(
@@ -82,10 +90,29 @@
                   ) ?>
                 </div>
               </div>
+              <div class="cancel-button temporary">
+                <?= $this->Form->create() ?>
+                <fieldset>
+                  <?= $this->Form->hidden('booking_id', ['value' => $booked_temporary_detail['id']]) ?>
+                </fieldset>
+                <?= $this->Form->end() ?>
+                <?= $this->Form->submit(
+                  'キャンセル',
+                  ['class' => 'link-button__small', 'id' => 'cancel-send-temporary', 'name' => 'cancel']
+                ); ?>
+              </div>
+              <!-- 基本設計書P51に遷移 -->
+
             </div>
           </div>
         <?php endforeach; ?>
       <?php endif; ?>
+      <!-- アクション先未定 -->
+      <?= $this->Html->link(
+        'マイページへ戻る',
+        ['controller' => 'MovieInfo', 'action' => 'マイページ'],
+        ['class' => 'button']
+      ) ?>
 
     </div>
   </div>
