@@ -6,11 +6,12 @@
 * 2 content詳細(font-sizeなど。大体は「文字」「色」「背景」の順番)
 */
 
-html,
-body {
+
+html, body {
     width: 100%;
-    background-color: #ebebeb;
+    background-color: #EBEBEB;
 }
+
 
 bodyの子要素の子要素 {
     width: 100%;
@@ -24,7 +25,6 @@ bodyの子要素の子要素 {
 input {
     display: inline-block;
     box-shadow: 0 2px 2px #00000014;
-    text-align: center;
     font-size: 16px;
 }
 
@@ -34,12 +34,12 @@ input {
 input ボタン {
     width: 336px;
     height: 48px;
-    border: 3px #f5ae0b;
+    border: 3px #F5AE0B;
     font-family: Noto Sans;
     font-weight: bold;
     letter-spacing: 0.44px;
-    color: #ffffff;
-    background: #f5ae0b 0% 0% no-repeat padding-box;
+    color: #FFFFFF;
+    background: #F5AE0B 0% 0% no-repeat padding-box;
 }
 
 /**
@@ -50,8 +50,8 @@ input 決定ボタン {
     height: 48px;
     font-family: GothamMedium;
     letter-spacing: 0.44px;
-    color: #ffffff;
-    background: #f5ae0b 0% 0% no-repeat padding-box;
+    color: #FFFFFF;
+    background: #F5AE0B 0% 0% no-repeat padding-box;
 }
 
 /**
@@ -63,7 +63,7 @@ input キャンセリングボタン {
     font-family: GothamMedium;
     letter-spacing: 0.44px;
     color: #707070;
-    background: #efefef 0% 0% no-repeat padding-box;
+    background: #EFEFEF 0% 0% no-repeat padding-box;
 }
 
 /**
@@ -75,6 +75,6 @@ input 幅自由に伸びるボタン {
     font-family: Noto Sans;
     font-weight: 600;
     letter-spacing: 0.25px;
-    color: #ffffff;
-    background: #f5ae0b 0% 0% no-repeat padding-box;
+    color: #FFFFFF;
+    background: #F5AE0B 0% 0% no-repeat padding-box;
 }
