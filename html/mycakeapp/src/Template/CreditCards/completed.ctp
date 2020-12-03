@@ -13,7 +13,7 @@
     <p class="text-registration-completed">決済情報の登録が完了しました。</p>
     <?= $this->Html->link(
         'マイページに戻る',
-        ['controller' => 'MoviesInfo', 'action' => 'mypage', $user_id], //****** リンク要確認 */
+        ['controller' => 'MoviesInfo', 'action' => 'mypage'],
         ['class' => 'link-button']
     );
     ?>
