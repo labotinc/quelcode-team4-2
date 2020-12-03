@@ -237,7 +237,7 @@ footer {
 
 .my-content {
     display: flex;
-    width: 356px;
+    width: 380px;
     height: 36px;
     margin: 0 auto 28px;
     justify-content: space-between;
@@ -249,20 +249,22 @@ footer {
 
 .my-content-title {
     display: inline;
+    margin-right: 110px;
+    padding-top: 12px;
 }
 
 .mypage-button-wrapper {
     height: 32px;
     background: #f5ae0b 0% 0% no-repeat padding-box;
     box-shadow: 0px 2px 2px #00000014;
-    margin-left: 175px;
 }
 
 .mypage-button {
     display: block;
-    height: 32px;
+    height: 24px;
     background: #f5ae0b 0% 0% no-repeat padding-box;
     box-shadow: 0px 2px 2px #00000014;
+    padding-top: 8px;
 }
 
 .booking-button {
@@ -270,5 +272,14 @@ footer {
 }
 
 .credit-button {
-    width: 96px;
+    width: 118px;
+}
+
+.my-card-number {
+    margin-right: 10px;
+    padding-top: 12px;
+}
+
+.my-point-count {
+    padding-top: 12px;
 }

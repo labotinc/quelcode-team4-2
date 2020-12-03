@@ -6,7 +6,7 @@
       <!-- ポイント機能は追加実装 -->
       <div class="my-point my-content">
         <p class="my-content-title">ポイント</p>
-        <p>0</p>
+        <p class="my-point-count">0</p>
       </div>
       <div class="my-booking my-content">
         <p class="my-content-title">予約詳細</p>
@@ -21,7 +21,7 @@
       <div class="my-card my-content">
         <p class="my-content-title">決済情報</p>
         <?php if ($my_credit_card_number) : ?>
-          <p class="my_card_number">
+          <p class="my-card-number">
             <?= $my_credit_card_number ?>
           </p>
         <?php endif; ?>
