@@ -158,19 +158,15 @@ class MoviesInfoController extends MovieAuthBaseController
     public function bookingDetails()
     {
         // 認証認可が追加されてから
-        //$authuser = $this->Auth->user();
+        $authuser = $this->Auth->user();
 
         //本予約一覧
         $booked_main = $this->Bookings->findBookedMain(
-            //本来はログインユーザーIDを取得するため認証認可完了したらこっちを使う
-            //$authuser->id
-            $this->Users->get(1)->id
+            $authuser['id']
         );
         // 仮予約一覧
         $booked_temporary = $this->Bookings->findBookedTemporary(
-            //本来はログインユーザーIDを取得するため認証認可完了したらこっちを使う
-            //$authuser->id
-            $this->Users->get(1)->id
+            $authuser['id']
         );
 
         //本予約の処理
