@@ -220,7 +220,7 @@ class MoviesInfoController extends MovieAuthBaseController
         foreach ($booked_temporary as $booked_tmp) {
             $created_format = new Time($booked_tmp['created']);
             // 予約が15分以上前にされたものだったら削除
-            if (!($created_format->wasWithinLast("10000 minutes"))) {
+            if (!($created_format->wasWithinLast("15 minutes"))) {
                 $booked_tmp_delete = $this->Bookings->get($booked_tmp['id']);
                 $this->Bookings->delete($booked_tmp_delete);
                 return $this->Flash->set(__('仮予約から15分経過した予約を削除いたしました。再度予約をお願いします。'));
