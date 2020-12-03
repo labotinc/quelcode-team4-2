@@ -133,7 +133,8 @@ class BookingsTable extends Table
                 'is_main_booked' => false,
                 'is_cancelled' => false,
                 'MovieSchedules.screening_start_datetime >= NOW()',
-            ]);
+            ])
+            ->order(['MovieSchedules.screening_start_datetime' => 'DESC']);
         $my_booked_temporary_array = $my_booked_temporary->toArray();
         return $my_booked_temporary_array;
     }
@@ -155,7 +156,8 @@ class BookingsTable extends Table
                 'is_main_booked' => true,
                 'is_cancelled' => false,
                 'MovieSchedules.screening_start_datetime >= NOW()',
-            ]);
+            ])
+            ->order(['MovieSchedules.screening_start_datetime' => 'DESC']);;
         $my_booked_main_array = $my_booked_main->toArray();
         return $my_booked_main_array;
     }
