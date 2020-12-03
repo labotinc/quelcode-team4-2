@@ -28,6 +28,17 @@ class MoviesInfoController extends MovieAuthBaseController
         // レイアウトをmainに変更
         $this->viewBuilder()->setLayout('main');
     }
+
+    // 認証をしないページの設定
+    public function beforeFilter(Event $event)
+    {
+        parent::beforeFilter($event);
+        // トップページは認証を行わない
+        $this->Auth->allow(
+            'index'
+        );
+    }
+
     public function index()
     {
     }

@@ -204,3 +204,13 @@ Type::build('timestamp')
 //Inflector::rules('transliteration', ['/å/' => 'aa']);
 
 \App\Application::addPlugin('Migrations');
+
+/**
+ * 暗号化に使用する定数を追加
+ * 参考 => https://book.cakephp.org/3/ja/development/configuration.html#namespace-Cake\Core
+ * 参考 => https://blog.s-giken.net/352.html
+ */
+Configure::write('method','aes-256-cbc');
+Configure::write('option', 0);
+Configure::write('IV', 'DozCbdi80TCfJQ==');
+
