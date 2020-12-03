@@ -19,12 +19,20 @@ class MoviesInfoController extends MovieAuthBaseController
         $this->loadModel('MovieSchedules');
         $this->loadModel('Prices');
         $this->loadModel('Discounts');
+        $this->loadModel('CreditCards');
 
         // レイアウトをmainに変更
         $this->viewBuilder()->setLayout('main');
     }
     public function index()
     {
+    }
+
+    public function mypage()
+    {
+        $user_id = $this->Auth->user('id');
+        $my_credit_card = $this->CreditCards->findCreditCard($user_id);
+        $this->set(compact('my_credit_card'));
     }
 
     public function pricelist()

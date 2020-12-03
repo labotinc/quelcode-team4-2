@@ -157,7 +157,6 @@
     text-align: center;
     color: #000000;
     background-color: #f1ff34;
-    border: solid 1px #000000;
 }
 
 /* ================ pricelist ここから ================ */
@@ -209,4 +208,67 @@ footer {
 
 .list-wrap .price-list {
     margin-bottom: 100px;
+}
+
+/* マイページ */
+
+.heading {
+    text-align: center;
+    color: #707070;
+    font-size: 25px;
+    letter-spacing: 0.89px;
+    line-height: 34px;
+    margin: 50px 0 36px 0;
+}
+
+.mypage-wrapper {
+    margin: 154px auto 0;
+    text-align: center;
+}
+
+.mypage-container {
+    display: inline-block;
+    width: 736px;
+    height: 389px;
+    text-align: center;
+    background: #ffffff 0% 0% no-repeat padding-box;
+    box-shadow: 0px 0px 6px #00000029;
+}
+
+.my-content {
+    display: flex;
+    width: 356px;
+    height: 36px;
+    margin: 0 auto 28px;
+    justify-content: space-between;
+}
+
+.my-point {
+    margin-top: 110px;
+}
+
+.my-content-title {
+    display: inline;
+}
+
+.mypage-button-wrapper {
+    height: 32px;
+    background: #f5ae0b 0% 0% no-repeat padding-box;
+    box-shadow: 0px 2px 2px #00000014;
+    margin-left: 175px;
+}
+
+.mypage-button {
+    display: block;
+    height: 32px;
+    background: #f5ae0b 0% 0% no-repeat padding-box;
+    box-shadow: 0px 2px 2px #00000014;
+}
+
+.booking-button {
+    width: 64px;
+}
+
+.credit-button {
+    width: 96px;
 }
