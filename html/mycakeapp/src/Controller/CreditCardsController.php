@@ -14,12 +14,7 @@ use App\Controller\AppController;
 class CreditCardsController extends MovieAuthBaseController
 {
 
-    // public function initialize()
-    // {
-    //     parent::initialize();
-    //     // ログインしているユーザー情報をauthuserに設定
-    //     $this->set('authuser', $this->Auth->user());
-    // }
+
 
     /**
      * Index method
@@ -71,12 +66,11 @@ class CreditCardsController extends MovieAuthBaseController
                  * 2. is_deletedをセット(setIsDeletedメソッド)
                  * 3. 暗号化 (encryptメソッド)
                  */
-                
+
                 // 1. user_idの値をセット
-                //$user_id = $this->Auth->user('id');
-                // ------------- ログイン機能つけるまではとりあえず *****  1  ****** ログイン機能つけたら次の行のコメントアウト解除、その下の行削除--------------
-                // $creditCard = $creditCard->setUserId($user_id);
-                $creditCard = $creditCard->setUserId(1);
+                $user_id = $this->Auth->user('id');
+                $creditCard = $creditCard->setUserId($user_id);
+
                 // 2. is_deletedの値をセット
                 $creditCard = $creditCard->setIsDeleted();
                 // 3. 暗号化
@@ -85,7 +79,7 @@ class CreditCardsController extends MovieAuthBaseController
             if ($this->CreditCards->save($creditCard)) {
                 $this->Flash->success(__('The credit card has been saved.'));
 
-                return $this->redirect(['action' => 'completed']); 
+                return $this->redirect(['action' => 'completed']);
             }
             $this->Flash->error(__('The credit card could not be saved. Please, try again.'));
         }
@@ -114,9 +108,7 @@ class CreditCardsController extends MovieAuthBaseController
             if ($this->CreditCards->save($creditCard)) {
                 $this->Flash->success(__('The credit card has been saved.'));
 
-                // ひとまずindexページに遷移 mypageができたらマイページに遷移させる
-                return $this->redirect(['action' => 'index']);
-                // return $this->redirect(['controller' => 'MoviesInfo', 'action' => 'mypage', $user_id]);
+                return $this->redirect(['controller' => 'MoviesInfo', 'action' => 'mypage']);
             }
             $this->Flash->error(__('The credit card could not be saved. Please, try again.'));
         }
@@ -155,15 +147,16 @@ class CreditCardsController extends MovieAuthBaseController
         $this->viewBuilder()->setLayout('main');
     }
 
-      /**
+    /**
      * CreditInfo method
      *
      * @return \Cake\Http\Response|null 登録情報編集ページ or 登録情報削除完了ページにリダイレクト（モーダルウィンドウで削除確認を行った後）
      */
-    public function creditInfo($user_id = null)
+    public function creditInfo()
     {
         $this->viewBuilder()->setLayout('main');
-        $info = $this->CreditCards->findCreditCard(1); // -----[ログイン機能実装後修正]-----ひとまず[$user_id = 1 ]ログイン機能追加したら$user_idに変更すること
+        $user_id = $this->Auth->user('id');
+        $info = $this->CreditCards->findCreditCard($user_id);
 
         /**
          * 処理の流れ
@@ -177,19 +170,19 @@ class CreditCardsController extends MovieAuthBaseController
             // 1. 編集ボタンが押された場合
             if (isset($_POST['edit']) && !empty($credit_id)) {
                 return $this->redirect(['action' => 'edit', $credit_id]);
-            
-            // 2. 削除ボタンが押された場合
-            // [うまくいかず]$_POST['edit']ではない場合を elseif (isset($_POST['delete']) && !empty($credit_id))としたかったが機能しなかった
-            // どのボタンを押されたかjQueryで判別する方法がありそうだが、今回は$_POST['edit']か否かで条件分岐する 参考URL:http://www.koikikukan.com/archives/2018/11/29-000300.php
+
+                // 2. 削除ボタンが押された場合
+                // [うまくいかず]$_POST['edit']ではない場合を elseif (isset($_POST['delete']) && !empty($credit_id))としたかったが機能しなかった
+                // どのボタンを押されたかjQueryで判別する方法がありそうだが、今回は$_POST['edit']か否かで条件分岐する 参考URL:http://www.koikikukan.com/archives/2018/11/29-000300.php
             } elseif (!empty($credit_id)) {
                 $info = $this->CreditCards->get($credit_id)->showAsDeleted(); // showAsDeletedはエンティティクラスのメソッド
-                if ($this->CreditCards->save($info)){
+                if ($this->CreditCards->save($info)) {
                     return $this->redirect(['action' => 'deleteCompleted']);
                 } else {
                     $this->Flash->error(__('削除に失敗しました')); // 一応例外処理を記入
                 }
 
-            //3. クレカを選択せず「編集」「削除」ボタンを押下した場合
+                //3. クレカを選択せず「編集」「削除」ボタンを押下した場合
             } else {
                 $this->Flash->error(__('クレジットカードを選択してください。'), ['key' => 'credit']);
             }
