@@ -11,6 +11,12 @@
             </li>
             <li class="footer-nav-list-after">
                 <?= $this->Html->link(
+                    __('マイページ'),
+                    ['controller' => 'MoviesInfo', 'action' => 'mypage']
+                ) ?>
+            </li>
+            <li class="footer-nav-list-after">
+                <?= $this->Html->link(
                     __('上映スケジュール'),
                     ['controller' => 'MoviesInfo', 'action' => 'schedule']
                 ) ?>
