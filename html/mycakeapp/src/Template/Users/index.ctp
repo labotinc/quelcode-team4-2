@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\User[]|\Cake\Collection\CollectionInterface $users
@@ -8,6 +9,12 @@
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
         <li><?= $this->Html->link(__('New User'), ['action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('List Movies'), ['controller' => 'Movies', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New Movie'), ['controller' => 'Movies', 'action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('List Movie Schedules'), ['controller' => 'MovieSchedules', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New Movie Schedules'), ['controller' => 'MovieSchedules', 'action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('List Bookings'), ['controller' => 'Bookings', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New Bookings'), ['controller' => 'Bookings', 'action' => 'add']) ?></li>
     </ul>
 </nav>
 <div class="users index large-9 medium-8 columns content">
@@ -27,22 +34,22 @@
             </tr>
         </thead>
         <tbody>
-            <?php foreach ($users as $user): ?>
-            <tr>
-                <td><?= $this->Number->format($user->id) ?></td>
-                <td><?= h($user->email) ?></td>
-                <td><?= h($user->password) ?></td>
-                <td><?= h($user->birthdate) ?></td>
-                <td><?= h($user->sex) ?></td>
-                <td><?= h($user->is_deleted) ?></td>
-                <td><?= h($user->created) ?></td>
-                <td><?= h($user->modified) ?></td>
-                <td class="actions">
-                    <?= $this->Html->link(__('View'), ['action' => 'view', $user->id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['action' => 'edit', $user->id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $user->id], ['confirm' => __('Are you sure you want to delete # {0}?', $user->id)]) ?>
-                </td>
-            </tr>
+            <?php foreach ($users as $user) : ?>
+                <tr>
+                    <td><?= $this->Number->format($user->id) ?></td>
+                    <td><?= h($user->email) ?></td>
+                    <td><?= h($user->password) ?></td>
+                    <td><?= h($user->birthdate) ?></td>
+                    <td><?= h($user->sex) ?></td>
+                    <td><?= h($user->is_deleted) ?></td>
+                    <td><?= h($user->created) ?></td>
+                    <td><?= h($user->modified) ?></td>
+                    <td class="actions">
+                        <?= $this->Html->link(__('View'), ['action' => 'view', $user->id]) ?>
+                        <?= $this->Html->link(__('Edit'), ['action' => 'edit', $user->id]) ?>
+                        <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $user->id], ['confirm' => __('Are you sure you want to delete # {0}?', $user->id)]) ?>
+                    </td>
+                </tr>
             <?php endforeach; ?>
         </tbody>
     </table>

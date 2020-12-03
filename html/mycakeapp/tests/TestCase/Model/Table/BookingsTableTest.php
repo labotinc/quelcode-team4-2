@@ -25,7 +25,7 @@ class BookingsTableTest extends TestCase
     public $fixtures = [
         'app.Bookings',
         'app.Users',
-        'app.Schedules',
+        'app.MovieSchedules',
     ];
 
     /**
@@ -78,6 +78,16 @@ class BookingsTableTest extends TestCase
      * @return void
      */
     public function testBuildRules()
+    {
+        $this->markTestIncomplete('Not implemented yet.');
+    }
+
+    /**
+     * Test findBookingSeats method
+     *
+     * @return void
+     */
+    public function testFindBookingSeats()
     {
         $this->markTestIncomplete('Not implemented yet.');
     }

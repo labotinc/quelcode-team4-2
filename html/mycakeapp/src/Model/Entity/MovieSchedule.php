@@ -1,6 +1,9 @@
 <?php
+
 namespace App\Model\Entity;
 
+use Cake\Chronos\Chronos;
+use Cake\I18n\Time;
 use Cake\ORM\Entity;
 
 /**
@@ -34,4 +37,13 @@ class MovieSchedule extends Entity
         'modified' => true,
         'movie' => true,
     ];
+
+    // 曜日のフォーマット関数 p50で使用
+    public function _getScreeningStartWeek()
+    {
+        $week = array('日', '月', '火', '水', '木', '金', '土');
+        $screening_start_datetime = new Time($this->screening_start_datetime);
+        $screening_start_week = $week[$screening_start_datetime->format("w")];
+        return $screening_start_week;
+    }
 }

@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Model\Entity;
 
 use Cake\Auth\DefaultPasswordHasher;
@@ -53,7 +54,29 @@ class User extends Entity
     protected function _setPassword($password)
     {
         if (strlen($password) > 0) {
-          return (new DefaultPasswordHasher)->hash($password);
+            return (new DefaultPasswordHasher)->hash($password);
         }
+    }
+
+    // -- 仮想プロパティの作成 --
+    // ユーザーの性別を日本語表記に変換
+    protected function _getUserSex()
+    {
+        $sex_number = $this->sex;
+        if ($sex_number === '0') {
+            return $this->sex = '未選択';
+        } elseif ($sex_number === '1') {
+            return $this->sex = '男性';
+        } elseif ($sex_number === '2') {
+            return $this->sex = '女性';
+        } elseif ($sex_number === '9') {
+            return $this->sex = 'その他';
+        }
+    }
+
+    // 誕生日をYYYYMMDDに変換
+    protected function _getUserBirthdate()
+    {
+        return $this->birthdate->format('Y年m月d日');
     }
 }
