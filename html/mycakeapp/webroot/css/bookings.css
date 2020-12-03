@@ -1,0 +1,152 @@
+.container {
+    margin: 0 auto;
+    width: 496px;
+}
+
+.submit {
+    margin-top: 50px;
+    padding-bottom: 80px;
+}
+
+.registration {
+    width: 336px;
+    height: 48px;
+    border: 3px #f5ae0b;
+    font-family: Noto Sans;
+    font-size: 16px;
+    font-weight: bold;
+    letter-spacing: 0.44px;
+    color: #ffffff;
+    background: #f5ae0b 0% 0% no-repeat padding-box;
+}
+
+.error-message {
+    color: #f46161;
+    font-size: 11px;
+    margin: 8px auto;
+    width: 336px;
+    text-align: left;
+}
+
+/*--- 座席一覧テーブル ---*/
+.movie-seats {
+    width: 496px;
+    height: 348px;
+    text-align: center;
+}
+
+tr {
+    vertical-align: inherit;
+}
+
+.table-text {
+    font-size: 13px;
+    color: #99918c;
+}
+
+.locked {
+    opacity: 0.75;
+    color: #aaa;
+}
+
+input[type="checkbox"] {
+    display: none;
+}
+
+input[type="checkbox"]:checked + label {
+    background: #ffb100;
+}
+
+input[type="checkbox"] + label {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    background: #c9c9c9 no-repeat;
+    border-radius: 3px;
+}
+
+label:hover {
+    background: #00000015;
+}
+
+.table-text {
+    font-size: 13px;
+    color: #99918c;
+}
+
+.reserved {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    background: #5a5858 no-repeat;
+    border-radius: 3px;
+}
+
+.non-reserved-sample .reserved-sample {
+    vertical-align: middle;
+}
+
+.reserved-sample {
+    padding: 10px 0 30px 0;
+}
+
+.non-reserved-sample::before {
+    content: "";
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    background: #c9c9c9 no-repeat;
+    border-radius: 3px;
+    position: relative;
+    top: 7px;
+}
+
+.reserved-sample::before {
+    content: "";
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    background: #5a5858 no-repeat;
+    border-radius: 3px;
+    position: relative;
+    top: 7px;
+}
+
+/* seat_confirmationページの実装 */
+.confirmation-container {
+    padding-bottom: 80px;
+}
+
+.movie,
+.user {
+    color: #707070;
+    font-weight: bold;
+    font-family: Noto Sans;
+}
+
+.title {
+    font-size: 16px;
+    padding-bottom: 8px;
+}
+
+.content {
+    font-size: 14px;
+    padding-bottom: 18px;
+}
+
+.heading {
+    text-align: center;
+    color: #707070;
+    font-size: 25px;
+    letter-spacing: 0.89px;
+    line-height: 34px;
+    margin: 80px 0 39px 0;
+}
+
+.wrapper {
+    background: #ffffff;
+    width: 736px;
+    margin: 0 auto 60px;
+    text-align: center;
+    padding-top: 91px;
+}

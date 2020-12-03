@@ -18,6 +18,7 @@ use Cake\Core\Configure;
  * @property \Cake\I18n\Time $modified
  *
  * @property \App\Model\Entity\User $user
+ * @property \App\Model\Entity\PaymentHistory $payment_history
  */
 class CreditCard extends Entity
 {
@@ -39,6 +40,7 @@ class CreditCard extends Entity
         'created' => true,
         'modified' => true,
         'user' => true,
+        'payment_history' => true,
     ];
 
     public function encrypt()

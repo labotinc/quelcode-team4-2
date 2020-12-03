@@ -1,3 +1,4 @@
+<?= $this->Html->css('users', ['block' => true]) ?>
 <section>
     <h1 class="heading">会員登録</h1>
     <div class="wrapper">
@@ -118,7 +119,7 @@
                 } ?>
                 <?= $this->Form->error('sex') ?>
             </div>
-            <?= $this->Form->submit('会員登録', ['class' => 'ragistration']) ?>
+            <?= $this->Form->submit('会員登録', ['class' => 'registration']) ?>
             <?= $this->Form->end() ?>
         </div>
     </div>

@@ -47,8 +47,8 @@ class CreditCardsFixture extends TestFixture
                 'holder_name' => 'Lorem ipsum dolor sit amet',
                 'expiration_date' => 'Lorem ipsum dolor sit amet',
                 'is_deleted' => 1,
-                'created' => '2020-11-20 10:33:12',
-                'modified' => '2020-11-20 10:33:12',
+                'created' => '2020-11-24 18:35:38',
+                'modified' => '2020-11-24 18:35:38',
             ],
         ];
         parent::init();

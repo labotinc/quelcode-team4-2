@@ -11,6 +11,7 @@ use Cake\Validation\Validator;
  * CreditCards Model
  *
  * @property \App\Model\Table\UsersTable&\Cake\ORM\Association\BelongsTo $Users
+ * @property \App\Model\Table\PaymentHistoriesTable&\Cake\ORM\Association\HasMany $PaymentHistories
  *
  * @method \App\Model\Entity\CreditCard get($primaryKey, $options = [])
  * @method \App\Model\Entity\CreditCard newEntity($data = null, array $options = [])
@@ -44,6 +45,9 @@ class CreditCardsTable extends Table
         $this->belongsTo('Users', [
             'foreignKey' => 'user_id',
             'joinType' => 'INNER',
+        ]);
+        $this->hasMany('PaymentHistories', [
+            'foreignKey' => 'credit_card_id',
         ]);
     }
 

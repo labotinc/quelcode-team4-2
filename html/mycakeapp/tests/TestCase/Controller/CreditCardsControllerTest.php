@@ -22,6 +22,7 @@ class CreditCardsControllerTest extends TestCase
     public $fixtures = [
         'app.CreditCards',
         'app.Users',
+        'app.PaymentHistories',
     ];
 
     /**
