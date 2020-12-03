@@ -20,16 +20,22 @@
       </div>
       <div class="my-card my-content">
         <p class="my-content-title">決済情報</p>
+        <?php if ($my_credit_card_number) : ?>
+          <p class="my_card_number">
+            <?= $my_credit_card_number ?>
+          </p>
+        <?php endif; ?>
         <div class="mypage-button-wrapper booking-button-wrapper">
-
-          <?php if (empty($my_credit_card)) : ?>
+          <?php if (empty($my_credit_card_number)) : ?>
             <?= $this->Html->link(
               '登録する',
               ['controller' => 'credit_cards', 'action' => 'add'],
               ['class' => 'mypage-button credit-button']
             ) ?>
           <?php else : ?>
-            <?= $my_credit_card ?>
+            <!-- <p class="my_card_number">
+              <?= $my_credit_card_number ?>
+            </p> -->
             <?= $this->Html->link(
               '登録・編集する',
               ['controller' => 'credit_cards', 'action' => 'credit_info'],

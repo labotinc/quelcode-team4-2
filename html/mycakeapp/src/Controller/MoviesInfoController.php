@@ -31,8 +31,9 @@ class MoviesInfoController extends MovieAuthBaseController
     public function mypage()
     {
         $user_id = $this->Auth->user('id');
-        $my_credit_card = $this->CreditCards->findCreditCard($user_id);
-        $this->set(compact('my_credit_card'));
+        // クレジットカードの登録している中の一枚のIDを表示
+        $my_credit_card_number = $this->CreditCards->findCreditCard($user_id)[0]['card_number'];
+        $this->set(compact('my_credit_card_number'));
     }
 
     public function pricelist()
