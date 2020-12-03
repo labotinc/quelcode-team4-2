@@ -29,12 +29,13 @@ class MovieAuthBaseController extends AppController
         ]
       ],
       'loginRedirect' => [
-        'controller' => 'Users',
-        'action' => 'login'
+        // *本当はトップページに遷移
+        'controller' => 'MoviesInfo',
+        'action' => 'schedule'
       ],
       'logoutRedirect' => [
         'controller' => 'Users',
-        'action' => 'logout',
+        'action' => 'login',
       ],
       'authError' => 'ログインしてください。',
     ]);
@@ -76,11 +77,14 @@ class MovieAuthBaseController extends AppController
   public function beforeFilter(Event $event)
   {
     parent::beforeFilter($event);
-    // ワイルドカードを用いて全ページアクセス可能な状態にしている。本番では削除
+
+feature/booking_confirmation2
+
     $this->Auth->allow([
-      'pricelist', 'schedule',
-      '*'
+      // トップページはMovieInfoControllerで認証回避の追加を行う
+      'pricelist', 'schedule'
     ]);
+
   }
 
   // 認証時のロールの処理
