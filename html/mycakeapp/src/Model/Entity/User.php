@@ -79,4 +79,12 @@ class User extends Entity
     {
         return $this->birthdate->format('Y年m月d日');
     }
+
+    /**
+     * ユーザー退会時、退会フラグを立てるメソッド
+     */
+    public function setIdDeleted($user_id) {
+        $this->is_deleted = 1;
+        return $this;
+    }
 }
