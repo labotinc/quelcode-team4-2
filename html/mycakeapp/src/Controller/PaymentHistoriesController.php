@@ -28,6 +28,11 @@ class PaymentHistoriesController extends MovieAuthBaseController
         $this->set(compact('paymentHistories'));
     }
 
+    public function method()
+    {
+        $this->viewBuilder()->setLayout('main');
+    }
+
     /**
      * View method
      *
