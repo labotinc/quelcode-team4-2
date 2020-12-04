@@ -15,14 +15,11 @@ use App\Model\Entity\Booking;
 class PaymentHistoriesController extends MovieAuthBaseController
 {
 
-    // public function initialize()
-    // {
-    //     parent::initialize();
-    //     $this->loadModel('Bookings');
-    //     // $this->loadModel('Users');
-    //     // $this->loadModel('MovieSchedules');
-    //     // $this->loadModel('Movies');
-    // }
+    public function initialize()
+    {
+        parent::initialize();
+        $this->loadModel('CreditCards');
+    }
     /**
      * Index method
      *
@@ -44,7 +41,7 @@ class PaymentHistoriesController extends MovieAuthBaseController
 
 
 
-        // $user_id = $this->Auth->user('id');
+        $user_id = $this->Auth->user('id');
         // var_dump($user_id);
 
 
@@ -53,7 +50,8 @@ class PaymentHistoriesController extends MovieAuthBaseController
         var_dump($booking_id);
 
         // カード情報
-
+        $cardInfo = $this->CreditCards->findCreditCardToPaymentHistories($user_id);
+        var_dump($cardInfo);
         // 価格(price_id)
 
         // 割引(discount_id)

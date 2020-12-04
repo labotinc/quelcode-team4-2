@@ -195,4 +195,15 @@ class CreditCardsTable extends Table
         }
         return $creditcards;
     }
+
+
+    public function findCreditCardToPaymentHistories(string $user_id)
+    {
+        $creditcards = $this->find()
+            ->select(['id', 'card_number', 'holder_name'])
+            ->where(['user_id' => $user_id])
+            ->toList();
+
+        return $creditcards;
+    }
 }
