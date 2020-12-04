@@ -200,8 +200,8 @@ class CreditCardsTable extends Table
     public function findCreditCardToPaymentHistories(string $user_id)
     {
         $creditcards = $this->find()
-            ->select(['id', 'card_number', 'holder_name'])
-            ->where(['user_id' => $user_id])
+            ->select(['id', 'card_number', 'holder_name', 'expiration_date'])
+            ->where(['user_id' => $user_id, 'is_deleted' => 0])
             ->toList();
 
         return $creditcards;

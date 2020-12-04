@@ -151,7 +151,7 @@ label:hover {
     padding-top: 91px;
 }
 
-/* =================================== */
+/* =============== ここから決済方法 ==================== */
 .payment-method .wrapper{
     padding-top: 60px;
 }
@@ -168,6 +168,19 @@ label:hover {
     text-align: left;
     /* background-color: #f46161; */
 }
+
+/* カードがなかったとき ==== */
+.not-have-card{
+    text-align: center;
+}
+
+.not-have-card a{
+    background-color: #e5f50b;
+    color: #2e2b2b;
+    border: dotted 2px #2e2b2b;
+    padding: 10px 30px;
+}
+/* end ==== */
 
 .point{
     /* background-color: #619cf4; */

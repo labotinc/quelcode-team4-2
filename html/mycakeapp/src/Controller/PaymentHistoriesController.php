@@ -38,20 +38,15 @@ class PaymentHistoriesController extends MovieAuthBaseController
     public function method($booking_id)
     {
         $this->viewBuilder()->setLayout('main');
-
-
-
         $user_id = $this->Auth->user('id');
-        // var_dump($user_id);
-
-
         // そもそもの欲しい情報とは
         // Bookings_id⬇︎
-        var_dump($booking_id);
+        // var_dump($booking_id);
 
         // カード情報
         $cardInfo = $this->CreditCards->findCreditCardToPaymentHistories($user_id);
         var_dump($cardInfo);
+        $this->set(compact('cardInfo'));
         // 価格(price_id)
 
         // 割引(discount_id)
