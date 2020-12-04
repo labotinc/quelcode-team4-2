@@ -40,13 +40,15 @@ class PaymentHistoriesController extends MovieAuthBaseController
         $this->viewBuilder()->setLayout('main');
         $user_id = $this->Auth->user('id');
         // そもそもの欲しい情報とは
-        // Bookings_id⬇︎
-        // var_dump($booking_id);
+
 
         // カード情報
         $cardInfos = $this->CreditCards->findCreditCardToPaymentHistories($user_id);
         // var_dump($cardInfos);
         $this->set(compact('cardInfos'));
+
+        // Bookings_id⬇︎
+        // var_dump($booking_id);
         // 価格(price_id)
 
         // 割引(discount_id)
@@ -54,7 +56,7 @@ class PaymentHistoriesController extends MovieAuthBaseController
         // 税金(sales_tax_id)
 
         if ($this->request->is('post')) {
-            var_dump($_POST['example']);
+            var_dump($_POST['cardInfoId']);
         }
     }
 

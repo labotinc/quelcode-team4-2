@@ -14,9 +14,16 @@
                     </div>
                 <?php else : ?>
                     <p class="title">ご登録のクレジットカード</p>
+
+
                     <?php foreach ($cardInfos as $cardInfo) : ?>
                         <div class="card-info">
-                            <input type="radio" name="example" value="<?php echo $cardInfo->id ?>">
+                            <?php if (empty($inputRadio)) : ?>
+                                <input type="radio" name="cardInfoId" value="<?php echo $cardInfo->id ?>" checked>
+                                <?php $inputRadio = 'checked' ?>
+                            <?php else : ?>
+                                <input type="radio" name="cardInfoId" value="<?php echo $cardInfo->id ?>">
+                            <?php endif; ?>
                             <div class="card-info-details">
                                 <p class="name">
                                     <!-- <?= h($cardInfo->holder_name) ?> -->
