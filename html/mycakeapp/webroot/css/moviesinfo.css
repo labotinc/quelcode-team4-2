@@ -16,7 +16,7 @@
 
 .movie-info-menu {
     width: 1008px;
-    margin: 0 auto 200px;
+    margin: 0 auto 81px;
     padding-top: 25px;
     z-index: 10;
 }
@@ -157,7 +157,6 @@
     text-align: center;
     color: #000000;
     background-color: #f1ff34;
-    border: solid 1px #000000;
 }
 
 /* ================ pricelist ここから ================ */
@@ -211,6 +210,8 @@ footer {
 }
 
 /* 予約詳細ページ */
+/* マイページ */
+
 .wrapper {
     background: #ffffff;
     width: 736px;
@@ -219,12 +220,87 @@ footer {
     padding: 60px 0 20px 0;
 }
 
+
 .heading {
     text-align: center;
     color: #707070;
     font-size: 25px;
     letter-spacing: 0.89px;
     line-height: 34px;
+    margin: 50px 0 36px 0;
+}
+
+.mypage-wrapper {
+    margin: 154px auto 304px;
+    text-align: center;
+}
+
+.mypage-container {
+    display: inline-block;
+    width: 736px;
+    height: 389px;
+    text-align: center;
+    background: #ffffff 0% 0% no-repeat padding-box;
+    box-shadow: 0px 0px 6px #00000029;
+}
+
+.my-content {
+    display: flex;
+    width: 380px;
+    height: 36px;
+    margin: 0 0 28px 178px;
+    justify-content: space-between;
+}
+
+.my-point {
+    margin-top: 110px;
+}
+
+.my-content-title {
+    display: inline;
+    margin-right: 110px;
+    padding-top: 12px;
+}
+
+.mypage-button {
+    display: block;
+    height: 24px;
+    background: #f5ae0b 0% 0% no-repeat padding-box;
+    box-shadow: 0px 2px 2px #00000014;
+    padding-top: 8px;
+}
+
+.booking-button {
+    width: 64px;
+}
+
+.credit-button {
+    width: 118px;
+}
+
+.credit-button-add {
+    width: 118px;
+    margin-top: 10px;
+}
+
+.my-card-number {
+    margin-right: 10px;
+    padding-top: 12px;
+}
+
+.my-point-count {
+    padding-top: 12px;
+}
+
+.user-delete-link {
+    margin-top: 27px;
+}
+
+.user-delete {
+    text-decoration: underline;
+    letter-spacing: 0.5px;
+    color: #707070;
+
     margin: 154px 0 39px 0;
 }
 
@@ -491,4 +567,5 @@ input {
     letter-spacing: 0.44px;
     color: #707070;
     opacity: 1;
+
 }

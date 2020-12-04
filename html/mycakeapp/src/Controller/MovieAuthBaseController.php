@@ -78,13 +78,10 @@ class MovieAuthBaseController extends AppController
   {
     parent::beforeFilter($event);
 
-feature/booking_confirmation2
-
     $this->Auth->allow([
       // トップページはMovieInfoControllerで認証回避の追加を行う
       'pricelist', 'schedule'
     ]);
-
   }
 
   // 認証時のロールの処理
@@ -98,7 +95,7 @@ feature/booking_confirmation2
     }
     // 一般ユーザーはBookingsControllerとMoviesinfoControllerのみtrue、他はfalse,他必要なコントローラは順次追加する
     else {
-      if ($this->name == 'Bookings' || $this->name === 'Moviesinfo') {
+      if ($this->name === 'Bookings' || $this->name === 'MoviesInfo' || $this->name === 'CreditCards') {
         return true;
       } else {
         return false;
