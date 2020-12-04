@@ -19,6 +19,8 @@ class PaymentHistoriesController extends MovieAuthBaseController
     {
         parent::initialize();
         $this->loadModel('CreditCards');
+        $this->loadModel('Users');
+        $this->loadModel('Prices');
     }
     /**
      * Index method
@@ -41,22 +43,70 @@ class PaymentHistoriesController extends MovieAuthBaseController
         $user_id = $this->Auth->user('id');
         // そもそもの欲しい情報とは
 
-
         // カード情報
         $cardInfos = $this->CreditCards->findCreditCardToPaymentHistories($user_id);
-        // var_dump($cardInfos);
+
         $this->set(compact('cardInfos'));
 
-        // Bookings_id⬇︎
-        // var_dump($booking_id);
-        // 価格(price_id)
+        // パクリサイト https://gray-code.com/php/calc-age-from-birthday/ == strat ============
+        // ユーザーの誕生日情報を取得
+        $userInfos = $this->Users->findUser($user_id);
+        // 生年月日からタイムスタンプを取得
+        $birthday = strtotime($userInfos[0]['birthdate']);
+
+        $birth_year = (int)date("Y", $birthday);
+        $birth_month = (int)date("m", $birthday);
+        $birth_day = (int)date("d", $birthday);
+
+        // 現在の年月日を取得
+        $now_year = (int)date("Y");
+        $now_month = (int)date("m");
+        $now_day = (int)date("d");
+
+        // 年齢を計算
+        $age = $now_year - $birth_year;
+
+        // 「月」「日」で年齢を調整
+        if ($birth_month === $now_month) {
+            if ($now_day < $birth_day) {
+                $age--;
+            }
+        } elseif ($now_month < $birth_month) {
+            $age--;
+        };
+
+        if ($age > 22) {
+            $price = '一般';
+        } elseif ($age < 23 && $age > 18) {
+            $price = '大学生';
+        } elseif ($age < 19 && $age > 15) {
+            $price = '高校生';
+        } elseif ($age < 16 && $age > 6) {
+            $price = '小中学生';
+        } else {
+            $price = '幼児';
+        }
+        $priceName = $this->Prices->findUser($price);
+        // == end ============
+
 
         // 割引(discount_id)
+        // 割引取り出すのむずい。後からやる
 
-        // 税金(sales_tax_id)
 
         if ($this->request->is('post')) {
+
+            // Bookings_id⬇︎
+            var_dump($booking_id);
+
+            // カードのid
             var_dump($_POST['cardInfoId']);
+
+            // 価格(price_id)
+            var_dump($priceName[0]['price']);
+
+            // 割引(discount_id) 今は　1　にしとこう
+
         }
     }
 
