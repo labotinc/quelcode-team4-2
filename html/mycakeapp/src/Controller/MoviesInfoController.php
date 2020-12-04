@@ -32,7 +32,10 @@ class MoviesInfoController extends MovieAuthBaseController
     {
         $user_id = $this->Auth->user('id');
         // クレジットカードの登録している中の一枚のIDを表示
-        $my_credit_card_number = $this->CreditCards->findCreditCard($user_id)[0]['card_number'];
+        $my_credit_card_number = $this->CreditCards->findCreditCard($user_id);
+        if (!empty($my_credit_card_number)) {
+            $my_credit_card_number = $my_credit_card_number[0]['card_number'];
+        }
         $this->set(compact('my_credit_card_number'));
     }
 
