@@ -221,4 +221,11 @@ class UsersController extends AppController
 
         return $this->redirect(['action' => 'index']);
     }
+
+    /**
+     * CancelCompleted method
+     */
+    public function cancelCompleted() {
+
+    }
 }
