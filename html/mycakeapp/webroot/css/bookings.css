@@ -150,3 +150,31 @@ label:hover {
     text-align: center;
     padding-top: 91px;
 }
+
+/* =================================== */
+.payment-method .wrapper{
+    padding-top: 60px;
+}
+
+.payment-method .confirmation-container{
+    padding-bottom: 30px;
+}
+
+.credit,.point{
+    width: 500px;
+    margin: 0 auto 40px;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: left;
+    /* background-color: #f46161; */
+}
+
+.point{
+    /* background-color: #619cf4; */
+}
+
+.card-info{
+    border: solid 2px #5a5858;
+    display: flex;
+    align-items: center;
+}

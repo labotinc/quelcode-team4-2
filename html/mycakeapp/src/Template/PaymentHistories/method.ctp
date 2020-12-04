@@ -1,33 +1,35 @@
 <?= $this->Html->css('bookings'); ?>
-<section>
+<section class="payment-method">
     <h1 class="heading">決済方法</h1>
-    <div class="credit-wrapper">
-        <div class="credit-box">
-            <p class="credit-summary">ご登録のクレジットカード</p>
+    <div class="wrapper">
+        <div class="confirmation-container">
 
-            <div class="credit-choice">
-                <?php for ($i = 0; $i < count($arrayCreditCards); $i++) : ?>
-                    <?php $options = array($arrayCreditCards[$i]['card_number']); ?>
-                    <p class="credit-choice-radio"><?php echo $this->Form->radio('CardNumber', $options); ?></p>
-                    <div class="credit-choice-flex">
-                        <p><?php echo $arrayCreditCards[$i]['holder_name'] ?></p>
-                        <p>有効期限<?php echo $arrayCreditCards[$i]['expiration_date'] ?></p>
+
+            <div class="credit">
+                <p class="title">ご登録のクレジットカード</p>
+                <div class="card-info">
+                    <input type="radio" name="example" value="サンプル">
+                    <div class="card-info-details">
+                        <p>名前</p>
+                        <p>カード情報</p>
                     </div>
-                <?php endfor; ?>
+                </div>
             </div>
 
-            <!-- ========= 将来的に実装予定 ========= -->
-            <!-- <p class="credit-summary">ご利用ポイント</p>
-            <p class="point-choice">一部利用する。(今はテキストで入れる)</p> -->
-            <!-- ========= 将来的に実装予定 end========= -->
-            <div class="select-btn">
 
-                <!-- 今は仮のリンク -->
-                <a href="<?= $this->Url->build(['controller' => 'Bookings', 'action' => 'index']) ?>" class="cancel-button button">キャンセル</a>
-                <?= $this->Form->create(); ?>
-                <?= $this->Form->submit('決定') ?>
-                <?= $this->Form->end() ?>
+            <div class="point">
+                <p class="title">ご利用ポイント</p>
+                <div class="">
+                    <select name="" id="">
+                        <option value="">aa</option>
+                        <option value="">bb</option>
+                        <option value="">cc</option>
+                        <option value="">dd</option>
+                    </select>
+                </div>
             </div>
+
+
         </div>
     </div>
 </section>
