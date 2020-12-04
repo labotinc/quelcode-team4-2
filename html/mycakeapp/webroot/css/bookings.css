@@ -188,6 +188,31 @@ label:hover {
 
 .card-info{
     border: solid 2px #5a5858;
+    border-radius: 5px;
     display: flex;
     align-items: center;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.card-info input[type=radio]{
+    box-shadow: none;
+    width: 30px;
+    height: 30px;
+}
+
+.card-info-details{
+    margin-left: 50px;
+}
+
+.card-info-details .flex{
+    display: flex;
+}
+
+.card-info-ExpirationDate{
+    margin-left: 20px;
+}
+
+.name{
+    margin-bottom: 15px;
 }
