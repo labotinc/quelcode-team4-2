@@ -21,6 +21,7 @@ class PaymentHistoriesController extends MovieAuthBaseController
         $this->loadModel('CreditCards');
         $this->loadModel('Users');
         $this->loadModel('Prices');
+        $this->loadModel('SalesTaxes');
     }
     /**
      * Index method
@@ -94,6 +95,10 @@ class PaymentHistoriesController extends MovieAuthBaseController
         // 割引取り出すのむずい。後からやる
 
 
+        // 税金(sales_tax_id)
+        $salesTax = $this->SalesTaxes->findTax();
+
+
         if ($this->request->is('post')) {
 
             // Bookings_id⬇︎
@@ -107,6 +112,8 @@ class PaymentHistoriesController extends MovieAuthBaseController
 
             // 割引(discount_id) 今は　1　にしとこう
 
+            // 税金(sales_tax_id)
+            var_dump($salesTax[0]['rate']);
         }
     }
 

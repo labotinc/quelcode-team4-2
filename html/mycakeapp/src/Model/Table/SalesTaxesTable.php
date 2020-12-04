@@ -65,4 +65,14 @@ class SalesTaxesTable extends Table
 
         return $validator;
     }
+
+    public function findTax()
+    {
+        $taxs = $this->find()
+            ->select(['id', 'rate'])
+            ->where(['is_applied' => 1])
+            ->toList();
+
+        return $taxs;
+    }
 }
