@@ -171,7 +171,6 @@ header {
 }
 
 footer {
-    position: fixed;
     bottom: 0px;
     right: 0px;
     z-index: 100;
@@ -222,7 +221,7 @@ footer {
 }
 
 .mypage-wrapper {
-    margin: 154px auto 0;
+    margin: 154px auto 304px;
     text-align: center;
 }
 
@@ -275,6 +274,11 @@ footer {
     width: 118px;
 }
 
+.credit-button-add {
+    width: 118px;
+    margin-top: 10px;
+}
+
 .my-card-number {
     margin-right: 10px;
     padding-top: 12px;
@@ -282,4 +286,14 @@ footer {
 
 .my-point-count {
     padding-top: 12px;
+}
+
+.user-delete-link {
+    margin-top: 27px;
+}
+
+.user-delete {
+    text-decoration: underline;
+    letter-spacing: 0.5px;
+    color: #707070;
 }

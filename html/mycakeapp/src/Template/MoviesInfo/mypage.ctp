@@ -9,7 +9,7 @@
         <p class="my-point-count">0</p>
       </div>
       <div class="my-booking my-content">
-        <p class="my-content-title">予約詳細</p>
+        <p class="my-content-title">予約確認</p>
         <div class="mypage-button-wrapper booking-button-wrapper">
           <?= $this->Html->link(
             '詳細',
@@ -24,27 +24,36 @@
           <p class="my-card-number">
             <?= $my_credit_card_number ?>
           </p>
-        <?php endif; ?>
-        <div class="mypage-button-wrapper booking-button-wrapper">
-          <?php if (empty($my_credit_card_number)) : ?>
+          <div class="mypage-button-wrapper booking-button-wrapper">
+            <?= $this->Html->link(
+              '編集する',
+              ['controller' => 'credit_cards', 'action' => 'credit_info'],
+              ['class' => 'mypage-button credit-button']
+            ) ?>
+            <?= $this->Html->link(
+              '追加登録する',
+              ['controller' => 'credit_cards', 'action' => 'add'],
+              ['class' => 'mypage-button credit-button-add']
+            ) ?>
+          </div>
+        <?php else : ?>
+          <div class="mypage-button-wrapper booking-button-wrapper">
             <?= $this->Html->link(
               '登録する',
               ['controller' => 'credit_cards', 'action' => 'add'],
               ['class' => 'mypage-button credit-button']
             ) ?>
-          <?php else : ?>
-            <!-- <p class="my_card_number">
-              <?= $my_credit_card_number ?>
-            </p> -->
-            <?= $this->Html->link(
-              '登録・編集する',
-              ['controller' => 'credit_cards', 'action' => 'credit_info'],
-              ['class' => 'mypage-button credit-button']
-            ) ?>
-          <?php endif; ?>
-        </div>
+          </div>
+        <?php endif; ?>
       </div>
     </div>
-
+    <div class="user-delete-link">
+      <?= $this->Html->link(
+        'アカウントを削除',
+        ['action' => 'user_delete'],
+        ['class' => 'user-delete']
+      );
+      ?>
+    </div>
   </div>
 </section>
