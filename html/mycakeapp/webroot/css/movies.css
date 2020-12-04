@@ -12,12 +12,6 @@ body {
     background-color: #ebebeb;
 }
 
-bodyの子要素の子要素 {
-    width: 100%;
-    min-width: 1080px;
-    margin: 0 auto;
-}
-
 /**
 * 全ボタン共通
 */

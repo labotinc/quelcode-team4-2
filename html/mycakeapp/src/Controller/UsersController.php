@@ -36,9 +36,8 @@ class UsersController extends AppController
                 ]
             ],
             'loginRedirect' => [
-                // *本当はトップページに遷移
                 'controller' => 'MoviesInfo',
-                'action' => 'schedule'
+                'action' => 'index'
             ],
             'logoutRedirect' => [
                 'controller' => 'Users',
@@ -54,8 +53,7 @@ class UsersController extends AppController
         // ログイン済の場合はトップページへリダイレクト
         if ($this->request->getSession()->read('Auth.User.id')) {
             $this->Flash->set('既にログイン済です。');
-            // ※トップページ未実装のためスケジュールページに
-            return $this->redirect(['controller' => 'MoviesInfo', 'action' => 'schedule']);
+            return $this->redirect(['controller' => 'MoviesInfo', 'action' => 'index']);
         }
         $this->layout = 'main';
 

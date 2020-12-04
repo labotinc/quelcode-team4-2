@@ -77,11 +77,11 @@ class MovieAuthBaseController extends AppController
   public function beforeFilter(Event $event)
   {
     parent::beforeFilter($event);
-    // ※トップページのアクションが決まり次第ここに記入
-    // ワイルドカードを用いて全ページアクセス可能な状態にしている。本番では削除
-    $this->Auth->allow(
-      ['pricelist', 'schedule']
-    );
+
+    $this->Auth->allow([
+      // トップページはMovieInfoControllerで認証回避の追加を行う
+      'pricelist', 'schedule'
+    ]);
   }
 
   // 認証時のロールの処理
