@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use App\Model\Entity\Booking;
 
 /**
  * PaymentHistories Controller
@@ -13,6 +14,15 @@ use App\Controller\AppController;
  */
 class PaymentHistoriesController extends MovieAuthBaseController
 {
+
+    // public function initialize()
+    // {
+    //     parent::initialize();
+    //     $this->loadModel('Bookings');
+    //     // $this->loadModel('Users');
+    //     // $this->loadModel('MovieSchedules');
+    //     // $this->loadModel('Movies');
+    // }
     /**
      * Index method
      *
@@ -28,9 +38,27 @@ class PaymentHistoriesController extends MovieAuthBaseController
         $this->set(compact('paymentHistories'));
     }
 
-    public function method()
+    public function method($booking_id)
     {
         $this->viewBuilder()->setLayout('main');
+
+
+
+        // $user_id = $this->Auth->user('id');
+        // var_dump($user_id);
+
+
+        // そもそもの欲しい情報とは
+        // Bookings_id⬇︎
+        var_dump($booking_id);
+
+        // カード情報
+
+        // 価格(price_id)
+
+        // 割引(discount_id)
+
+        // 税金(sales_tax_id)
     }
 
     /**
