@@ -6,7 +6,7 @@
       <!-- ポイント機能は追加実装 -->
       <div class="my-point my-content">
         <p class="my-content-title">ポイント</p>
-        <p class="my-point-count">0</p>
+        <p class="my-point-count">0pt</p>
       </div>
       <div class="my-booking my-content">
         <p class="my-content-title">予約確認</p>
