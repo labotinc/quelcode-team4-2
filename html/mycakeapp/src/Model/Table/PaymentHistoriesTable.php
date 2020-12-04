@@ -112,4 +112,22 @@ class PaymentHistoriesTable extends Table
 
         return $rules;
     }
+
+    // マイページ用の決済情報情報を取得
+    // 予約IDからクエリービルダーを用いて料金情報のみを取得
+    public function findPaymentHistories(string $booking_id)
+    {
+        $query = $this->find();
+        $payment_histories = $query
+            ->enableHydration(false)
+            ->select(
+                //['id', 'price_id', 'discount_id', 'sales_tax_id']
+            )
+            ->where([
+                'booking_id' => $booking_id,
+                'is_cancelled' => false
+            ]);
+        $payment_histories_array = $payment_histories->toArray();
+        return $payment_histories_array;
+    }
 }

@@ -41,4 +41,10 @@ class Booking extends Entity
         'schedule' => true,
         'is_main_booked' => true,
     ];
+
+    public function setIsCancelled()
+    {
+        $this->is_cancelled = true;
+        return $this;
+    }
 }

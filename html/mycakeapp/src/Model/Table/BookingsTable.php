@@ -2,10 +2,12 @@
 
 namespace App\Model\Table;
 
+use Cake\I18n\Time;
 use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
+use DateTime;
 use phpDocumentor\Reflection\Types\Integer;
 
 /**
@@ -43,6 +45,9 @@ class BookingsTable extends Table
 
         $this->addBehavior('Timestamp');
 
+        $this->hasMany('PaymentHistories', [
+            'foreignKey' => 'booking_id'
+        ]);
         $this->belongsTo('Users', [
             'foreignKey' => 'user_id',
             'joinType' => 'INNER',
@@ -97,7 +102,7 @@ class BookingsTable extends Table
         return $rules;
     }
 
-    // ユーザーごとの予約済座席（キャンセルはされていない）を検索
+    // 上映ごとの予約済座席（キャンセルはされていない）を検索
     public function findBookingSeats(string $schedule_id)
     {
         $query = $this->find();
@@ -118,16 +123,42 @@ class BookingsTable extends Table
     // ユーザーごとの仮予約を取得
     public function findBookedTemporary(string $authuser_id)
     {
-        $query = $this->find();
+        $query = $this->find('all', ['contain' => ['MovieSchedules']]);
         $my_booked_temporary = $query
+            // 現在時刻よりも新しい映画予約を取得
             ->enableHydration(false)
-            ->select(['id', 'created'])
+            ->select(['id', 'schedule_id', 'seat_number', 'created'])
             ->where([
                 'user_id' => $authuser_id,
                 'is_main_booked' => false,
-                'is_cancelled' => false
-            ]);
-        $my_booked_temporary_array = $my_booked_temporary->toList();
+                'is_cancelled' => false,
+                'MovieSchedules.screening_start_datetime >= NOW()',
+            ])
+            ->order(['MovieSchedules.screening_start_datetime' => 'DESC']);
+        $my_booked_temporary_array = $my_booked_temporary->toArray();
         return $my_booked_temporary_array;
+    }
+
+    // ユーザーごとの本予約を取得
+    public function findBookedMain(string $authuser_id)
+    {
+        $query = $this
+            ->find('all', ['contain' => ['MovieSchedules',]]);
+        $my_booked_main = $query
+            // 現在時刻よりも新しい映画予約を取得
+
+            ->enableHydration(false)
+            ->select([
+                'id', 'schedule_id', 'seat_number',
+            ])
+            ->where([
+                'user_id' => $authuser_id,
+                'is_main_booked' => true,
+                'is_cancelled' => false,
+                'MovieSchedules.screening_start_datetime >= NOW()',
+            ])
+            ->order(['MovieSchedules.screening_start_datetime' => 'DESC']);;
+        $my_booked_main_array = $my_booked_main->toArray();
+        return $my_booked_main_array;
     }
 }
