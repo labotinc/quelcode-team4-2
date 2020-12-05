@@ -195,4 +195,18 @@ class CreditCardsTable extends Table
         }
         return $creditcards;
     }
+
+    /**
+     * 退会時ユーザーの持つクレカ情報を無効化するメソッド
+     * @param string user_id
+     * @return $this
+     */
+    public function deleteCards(string $user_id)
+    {
+        $creditcards = $this->find()->select(['id', 'card_number', 'holder_name'])->where(['user_id' => $user_id, 'is_deleted' => 0])->toList();
+        foreach ($creditcards as $creditcard) {
+            $creditcard = $creditcard->showAsDeleted();
+        } 
+        return $this;
+    }
 }
