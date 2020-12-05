@@ -225,7 +225,8 @@ class UsersController extends AppController
     /**
      * CancelCompleted method
      */
-    public function cancelCompleted() {
-
+    public function cancelCompleted()
+    {
+        $this->layout = 'main';
     }
 }
