@@ -22,6 +22,7 @@ class PaymentHistoriesController extends MovieAuthBaseController
         $this->loadModel('Users');
         $this->loadModel('Prices');
         $this->loadModel('SalesTaxes');
+        $this->loadModel('PaymentHistories');
     }
     /**
      * Index method
@@ -100,20 +101,30 @@ class PaymentHistoriesController extends MovieAuthBaseController
 
 
         if ($this->request->is('post')) {
+            $data = [
+                // 予約 id⬇︎
+                'booking_id' => $booking_id,
+                // カードのid
+                'credit_card_id' => $_POST['cardInfoId'],
+                // 価格(price_id)
+                'price_id' => (string)$priceName[0]['id'],
+                // 割引(discount_id) 今は　1　にしとこう
+                'discount_id' => 1,
+                // 税金(sales_tax_id)
+                'sales_tax_id' => (string)$salesTax[0]['id'],
+                // falseでキャンセルはしていない。
+                'is_cancelled' => false,
+            ];
 
-            // Bookings_id⬇︎
-            var_dump($booking_id);
+            $entity = $this->PaymentHistories->newEntity();
+            $arrayPayment = $this->PaymentHistories->patchEntity($entity, $data);
 
-            // カードのid
-            var_dump($_POST['cardInfoId']);
-
-            // 価格(price_id)
-            var_dump($priceName[0]['price']);
-
-            // 割引(discount_id) 今は　1　にしとこう
-
-            // 税金(sales_tax_id)
-            var_dump($salesTax[0]['rate']);
+            // とりあえずsaveOrFailにすることでエラーをはけた
+            if ($this->PaymentHistories->saveOrFail($arrayPayment)) {
+                $this->Flash->success(__('セーブ。'));
+                // とりあえず、indexに飛ばしてる
+                return $this->redirect(['action' => 'index']);
+            }
         }
     }
 
