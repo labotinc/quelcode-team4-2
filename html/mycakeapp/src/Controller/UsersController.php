@@ -228,5 +228,6 @@ class UsersController extends AppController
     public function cancelCompleted()
     {
         $this->layout = 'main';
+        $this->request->getSession()->destroy();
     }
 }
