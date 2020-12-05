@@ -48,11 +48,13 @@
       </div>
     </div>
     <div class="user-delete-link">
-      <?= $this->Html->link(
+      <?php
+      echo $this->Form->create();
+      echo $this->Form->button(
         'アカウントを削除',
-        ['action' => 'user_delete'],
-        ['class' => 'user-delete']
+        ['class' => 'user-delete__button', 'name' => 'delete']
       );
+      echo $this->Form->end();
       ?>
     </div>
   </div>
