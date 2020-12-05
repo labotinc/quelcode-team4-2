@@ -199,7 +199,7 @@ class CreditCardsTable extends Table
     /**
      * 退会時ユーザーの持つクレカ情報を無効化するメソッド
      * @param string user_id
-     * @return $this
+     * @return $creditcards
      */
     public function deleteCards(string $user_id)
     {
@@ -207,6 +207,6 @@ class CreditCardsTable extends Table
         foreach ($creditcards as $creditcard) {
             $creditcard = $creditcard->showAsDeleted();
         } 
-        return $this;
+        return $creditcards;
     }
 }
