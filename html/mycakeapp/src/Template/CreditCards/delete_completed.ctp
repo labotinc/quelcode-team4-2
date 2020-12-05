@@ -13,7 +13,7 @@
     <p class="text-registration-completed">決済情報を削除しました。</p>
     <?= $this->Html->link(
         'マイページに戻る',
-        ['controller' => 'MoviesInfo', 'action' => 'mypage', $user_id], //****** リンク要確認 */
+        ['controller' => 'MoviesInfo', 'action' => 'mypage'],
         ['class' => 'link-button']
     );
     ?>

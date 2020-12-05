@@ -8,7 +8,13 @@
                     <?= $this->Html->link(
                         __('トップ'),
                         // トップページに後から修正
-                        ['controller' => 'MoviesInfo', 'action' => '#']
+                        ['controller' => 'MoviesInfo', 'action' => 'index']
+                    ) ?>
+                </li>
+                <li>
+                    <?= $this->Html->link(
+                        __('マイページ'),
+                        ['controller' => 'MoviesInfo', 'action' => 'mypage']
                     ) ?>
                 </li>
                 <li>
@@ -23,6 +29,7 @@
                         ['controller' => 'MoviesInfo', 'action' => 'pricelist']
                     ) ?>
                 </li>
+
             </ul>
         </nav>
     </div>
