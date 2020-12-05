@@ -1,4 +1,5 @@
 <?= $this->Html->css('moviesinfo', ['block' => true]) ?>
+<?= $this->Html->script('user_cancel', ['block' => true]) ?>
 <section>
   <div class="mypage-wrapper">
     <h1 class="heading">マイページ</h1>
@@ -52,7 +53,7 @@
       echo $this->Form->create();
       echo $this->Form->button(
         'アカウントを削除',
-        ['class' => 'user-delete__button', 'name' => 'delete']
+        ['class' => 'user-delete__button', 'id' => 'user-delete__button', 'name' => 'delete']
       );
       echo $this->Form->end();
       ?>
