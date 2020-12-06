@@ -111,7 +111,7 @@ class UsersTable extends Table
     public function findUser($user_id)
     {
         $users = $this->find()
-            ->select(['id', 'birthdate'])
+            ->select(['id', 'birthdate', 'sex'])
             ->where(['id' => $user_id])
             ->toList();
 

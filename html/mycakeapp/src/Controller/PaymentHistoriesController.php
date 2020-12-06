@@ -18,10 +18,13 @@ class PaymentHistoriesController extends MovieAuthBaseController
     public function initialize()
     {
         parent::initialize();
-        $this->loadModel('CreditCards');
         $this->loadModel('Users');
         $this->loadModel('Prices');
+        $this->loadModel('Bookings');
+        $this->loadModel('Discounts');
         $this->loadModel('SalesTaxes');
+        $this->loadModel('CreditCards');
+        $this->loadModel('MovieSchedules');
         $this->loadModel('PaymentHistories');
     }
     /**
@@ -88,13 +91,60 @@ class PaymentHistoriesController extends MovieAuthBaseController
         } else {
             $price = '幼児';
         }
-        $priceName = $this->Prices->findUser($price);
+        $Price = $this->Prices->findUser($price);
         // == end ============
 
-
+        // =================================== 割引判定 start ===================================
         // 割引(discount_id)
-        // 割引取り出すのむずい。後からやる
+        // 　今はファーストデイと子供シニア割引き、割引なしのみDBに入っていると仮定
 
+        // ファーストデイかどうかを取り出したいので日付を取り出して判定
+        $Booking = $this->Bookings->findBookedScheduleId($booking_id);
+        $bookingScheduleId = $Booking[0]['schedule_id'];
+
+        $MovieSchedule = $this->MovieSchedules->findMovieSchedulesDate($bookingScheduleId);
+        $movieScheduleDatetime = $MovieSchedule[0]['screening_start_datetime'];
+        $dayStrtotime = strtotime($movieScheduleDatetime);
+        $scheduleDay = (int)date("d", $dayStrtotime);
+
+        // 1日だったらファーストディ
+        if ($scheduleDay === 1) {
+            $arrayDiscount[] = 'ファーストデイ割引';
+        }
+        $userSex = $userInfos[0]['sex'];
+        // シニアは65歳以上を定義/ここで子供女性シニア割引
+        if ($price === '小中学生' || $price == '幼児' || $userSex === 2 || $age >= 65) {
+            $arrayDiscount[] = '子供女性シニア割引';
+        }
+
+
+        // $arrayDiscountに値が入っていたら
+        if (isset($arrayDiscount)) {
+            // ここでModelを呼び出し
+            $Discount = $this->Discounts->findDiscount();
+            for ($i = 0; $i < count($Discount); $i++) {
+                for ($j = 0; $j < count($arrayDiscount); $j++) {
+                    if ($Discount[$i]['name'] === $arrayDiscount[$j]) {
+                        $discount[] = $Discount[$i];
+                    }
+                }
+            }
+
+            // ここで割引額が高い方を入れる
+            $discountPrice = '';
+            for ($x = 0; $x < count($discount); $x++) {
+                if (empty($hoge2)) {
+                    $discountPrice = $discount[$x];
+                } elseif ($discount[$x]['price'] > $discountPrice['price']) {
+                    $discountPrice = $discount[$x];
+                }
+            }
+        } else {
+            // 割引なしのidが3と仮定
+            $discountPrice = 3;
+        }
+
+        // =================================== 割引判定 end ===================================
 
         // 税金(sales_tax_id)
         $salesTax = $this->SalesTaxes->findTax();
@@ -107,9 +157,9 @@ class PaymentHistoriesController extends MovieAuthBaseController
                 // カードのid
                 'credit_card_id' => $_POST['cardInfoId'],
                 // 価格(price_id)
-                'price_id' => (string)$priceName[0]['id'],
-                // 割引(discount_id) 今は　1　にしとこう
-                'discount_id' => 1,
+                'price_id' => (string)$Price[0]['id'],
+                // 割引(discount_id) 
+                'discount_id' =>  $discountPrice,
                 // 税金(sales_tax_id)
                 'sales_tax_id' => (string)$salesTax[0]['id'],
                 // falseでキャンセルはしていない。
