@@ -44,8 +44,10 @@
                     <?php endforeach; ?>
                 <?php endif; ?>
             </div>
-
-            <?= $this->Form->submit('決定', ['class' => 'registration']) ?>
+            <div class="btn">
+                <a href="<?= $this->Url->build(['controller' => 'Bookings', 'action' => 'seat-confirmation', $booking_id]) ?>" class="cancel-button button">キャンセル</a>
+                <?= $this->Form->submit('決定', ['class' => 'registration']) ?>
+            </div>
             <?= $this->Form->end() ?>
 
         </div>

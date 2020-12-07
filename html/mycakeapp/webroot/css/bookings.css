@@ -160,6 +160,22 @@ label:hover {
     padding-bottom: 30px;
 }
 
+.payment-method .btn{
+    width: 490px;
+    margin: 0  auto;
+    display: flex;
+    justify-content: space-between;
+}
+
+.payment-method .btn a{
+    padding:18px 10px;
+}
+
+.payment-method .submit{
+    margin: 0;
+    padding: 0;
+}
+
 .credit,.point{
     width: 500px;
     margin: 0 auto 40px;

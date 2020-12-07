@@ -176,6 +176,7 @@ class PaymentHistoriesController extends MovieAuthBaseController
                 return $this->redirect(['action' => 'overview', $booking_id]);
             }
         }
+        $this->set(compact('booking_id'));
     }
 
 
