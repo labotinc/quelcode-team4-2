@@ -169,10 +169,7 @@ class PaymentHistoriesController extends MovieAuthBaseController
             $entity = $this->PaymentHistories->newEntity();
             $arrayPayment = $this->PaymentHistories->patchEntity($entity, $data);
 
-            // とりあえずsaveOrFailにすることでエラーをはけた
             if ($this->PaymentHistories->save($arrayPayment)) {
-                $this->Flash->success(__('セーブ。'));
-
                 return $this->redirect(['action' => 'overview', $booking_id]);
             }
         }
@@ -209,6 +206,20 @@ class PaymentHistoriesController extends MovieAuthBaseController
         $this->set(compact('price', 'discount', 'TaxIncludedPrice', 'booking_id'));
     }
 
+    // 基本設計P54でキャンセルボタンを押した時の処理
+    public function PaymentCancel($booking_id)
+    {
+        try {
+            $cancel_PaymentId = $this->PaymentHistories->findPaymentHistories($booking_id)[0]['id'];
+            $entity = $this->PaymentHistories->get($cancel_PaymentId);
+            $this->PaymentHistories->delete($entity);
+            return $this->redirect((['action' => 'method', $booking_id]));
+        } catch (Exception $e) {
+            $this->Flash->set(__('正常にキャンセル処理ができませんでした。カスタマーセンターまでお問い合わせください。'));
+            // ※トップページが作成されたら映画スケジュール画面をリダイレクト先にする。action先は未定。
+            return $this->redirect(['controller' => 'MoviesInfo', 'action' => 'schedule']);
+        }
+    }
 
     public function completion()
     {
