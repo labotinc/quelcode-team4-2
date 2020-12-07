@@ -151,25 +151,29 @@ class PaymentHistoriesController extends MovieAuthBaseController
 
 
         if ($this->request->is('post')) {
-            $data = [
-                // 予約 id⬇︎
-                'booking_id' => $booking_id,
-                // カードのid
-                'credit_card_id' => $_POST['cardInfoId'],
-                // 価格(price_id)
-                'price_id' => (string)$Price[0]['id'],
-                // 割引(discount_id) 
-                'discount_id' =>  $discountPrice,
-                // 税金(sales_tax_id)
-                'sales_tax_id' => (string)$salesTax[0]['id'],
-                // falseでキャンセルはしていない。
-                'is_cancelled' => false,
-            ];
+            $paymentHistories_booking_id = $this->PaymentHistories->findPaymentHistories($booking_id);
+            if (empty($paymentHistories_booking_id)) {
+                $data = [
+                    // 予約 id⬇︎
+                    'booking_id' => $booking_id,
+                    // カードのid
+                    'credit_card_id' => $_POST['cardInfoId'],
+                    // 価格(price_id)
+                    'price_id' => (string)$Price[0]['id'],
+                    // 割引(discount_id) 
+                    'discount_id' =>  $discountPrice,
+                    // 税金(sales_tax_id)
+                    'sales_tax_id' => (string)$salesTax[0]['id'],
+                    // falseでキャンセルはしていない。
+                    'is_cancelled' => false,
+                ];
+                $entity = $this->PaymentHistories->newEntity();
+                $arrayPayment = $this->PaymentHistories->patchEntity($entity, $data);
 
-            $entity = $this->PaymentHistories->newEntity();
-            $arrayPayment = $this->PaymentHistories->patchEntity($entity, $data);
-
-            if ($this->PaymentHistories->save($arrayPayment)) {
+                if ($this->PaymentHistories->save($arrayPayment)) {
+                    return $this->redirect(['action' => 'overview', $booking_id]);
+                }
+            } else {
                 return $this->redirect(['action' => 'overview', $booking_id]);
             }
         }
