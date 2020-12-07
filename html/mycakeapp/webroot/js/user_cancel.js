@@ -19,6 +19,7 @@ $(function(){
         $('.js-modal').fadeIn();
         scrollPosition = $(window).scrollTop();
         $('body').addClass('fixed').css({'top': -scrollPosition});
+        $('header').css({'z-index': '0'});
         return false;
     });
     $('.js-modal-close').on('click',function(){
