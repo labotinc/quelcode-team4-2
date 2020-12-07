@@ -9,17 +9,21 @@
         <div class="price-box">
             <div class="price-flex ticket-price">
                 <p>チケット金額</p>
-                <p><?php echo ($price); ?></p>
+                <p><?php echo ($price); ?>円</p>
+            </div>
+            <div class="price-flex discount-price">
+                <p>割引額</p>
+                <p><?php echo ($discount); ?>円</p>
             </div>
             <div class="price-flex total-price">
-                <p>小計</p>
-                <p><?php echo ($TotalFee); ?></p>
+                <p>小計（税込）</p>
+                <p><?php echo ($TaxIncludedPrice); ?>円</p>
             </div>
         </div>
 
         <div class="select-btn">
             <!-- 今は仮のリンク -->
-            <a href="<?= $this->Url->build(['controller' => 'Bookings', 'action' => 'index']) ?>" class="cancel-button button">キャンセル</a>
+            <a href="<?= $this->Url->build(['action' => 'method', $booking_id]) ?>" class="cancel-button button">キャンセル</a>
             <a href="<?= $this->Url->build(['action' => 'completion']) ?>" class="accept-button button">決定</a>
         </div>
     </div>

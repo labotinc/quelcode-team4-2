@@ -183,7 +183,7 @@ class PaymentHistoriesController extends MovieAuthBaseController
     public function overview($booking_id)
     {
         $this->viewBuilder()->setLayout('main');
-        // 金額と、割引を取り出して計算して出力したい
+        // 金額と、割引と税金を取り出して計算して出力したい
         $paymentHistories = $this->PaymentHistories->findPaymentHistories($booking_id);
         $priceId = $paymentHistories[0]['price_id'];
         // 料金の取り出し
@@ -197,10 +197,15 @@ class PaymentHistoriesController extends MovieAuthBaseController
                 break;
             }
         }
-        // 合計金額の計算
-        $TotalFee = $price - $discount;
+        // 税金の取り出し
+        $salesTax = $this->SalesTaxes->findTax()[0]['rate'];
 
-        $this->set(compact('price', 'TotalFee'));
+        // 合計金額の計算
+        $TotalFee = ($price - $discount);
+        $priceTax = $TotalFee * ($salesTax * 0.01);
+        $TaxIncludedPrice = $TotalFee - $priceTax;
+
+        $this->set(compact('price', 'discount', 'TaxIncludedPrice', 'booking_id'));
     }
 
 

@@ -45,18 +45,6 @@
                 <?php endif; ?>
             </div>
 
-
-            <div class="point">
-                <p class="title">ご利用ポイント</p>
-                <div class="">
-                    <select name="" id="">
-                        <option value="">aa</option>
-                        <option value="">bb</option>
-                        <option value="">cc</option>
-                        <option value="">dd</option>
-                    </select>
-                </div>
-            </div>
             <?= $this->Form->submit('決定', ['class' => 'registration']) ?>
             <?= $this->Form->end() ?>
 
