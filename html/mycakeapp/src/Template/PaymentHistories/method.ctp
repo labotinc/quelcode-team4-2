@@ -26,17 +26,21 @@
                             <?php endif; ?>
                             <div class="card-info-details">
                                 <p class="name">
-                                    <!-- <?= h($cardInfo->holder_name) ?> -->
-                                    名前
+                                    <?= h($cardInfo->holder_name) ?>
                                 </p>
                                 <div class="flex">
                                     <p class="card-info-CardNumber">
-                                        <!-- <?= h($cardInfo->card_number) ?> -->
-                                        カード番号
+                                        <?= h($cardInfo->card_number) ?>
                                     </p>
                                     <p class="card-info-ExpirationDate">
-                                        <!-- <?= h($cardInfo->expiration_date) ?> -->
                                         有効期限
+                                        <?php
+                                        $mouth = substr($cardInfo->expiration_date, 0, 2);
+                                        $year = '20' . (string)substr($cardInfo->expiration_date, 2, 2);
+                                        ?>
+                                        <?= h($mouth) ?>
+                                        /
+                                        <?= h($year) ?>
                                     </p>
                                 </div>
                             </div>

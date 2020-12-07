@@ -203,7 +203,10 @@ class CreditCardsTable extends Table
             ->select(['id', 'card_number', 'holder_name', 'expiration_date'])
             ->where(['user_id' => $user_id, 'is_deleted' => 0])
             ->toList();
-
+        foreach ($creditcards as $creditcard) {
+            $creditcard = $creditcard->decrypt();
+            $creditcard->card_number = '******' . substr($creditcard->card_number, -4);
+        }
         return $creditcards;
     }
 }
