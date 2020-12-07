@@ -91,7 +91,7 @@ class UsersController extends AppController
         // 基本的にログイン関連ページと会員登録ページのみ、あとでadd,index,editは消す
         $this->Auth->allow([
             'index', 'signup', 'logout', 'thanks',
-            'add', 'edit'
+            'add', 'edit', 'cancelCompleted'
         ]);
     }
 
