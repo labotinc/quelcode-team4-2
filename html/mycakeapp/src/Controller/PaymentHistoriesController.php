@@ -170,12 +170,37 @@ class PaymentHistoriesController extends MovieAuthBaseController
             $arrayPayment = $this->PaymentHistories->patchEntity($entity, $data);
 
             // とりあえずsaveOrFailにすることでエラーをはけた
-            if ($this->PaymentHistories->saveOrFail($arrayPayment)) {
+            if ($this->PaymentHistories->save($arrayPayment)) {
                 $this->Flash->success(__('セーブ。'));
-                // とりあえず、indexに飛ばしてる
-                return $this->redirect(['action' => 'index']);
+
+                return $this->redirect(['action' => 'overview', $booking_id]);
             }
         }
+    }
+
+
+
+    public function overview($booking_id)
+    {
+        $this->viewBuilder()->setLayout('main');
+        // 金額と、割引を取り出して計算して出力したい
+        $paymentHistories = $this->PaymentHistories->findPaymentHistories($booking_id);
+        $priceId = $paymentHistories[0]['price_id'];
+        // 料金の取り出し
+        $price = $this->Prices->findPaymentHistoriesPriceId($priceId)[0]['price'];
+
+        // 割引の取り出し
+        $arrayDiscount = $this->Discounts->findDiscount();
+        for ($i = 0; $i < count($arrayDiscount); $i++) {
+            if ($arrayDiscount[$i]['id'] === $paymentHistories[0]['discount_id']) {
+                $discount = $arrayDiscount[$i]['price'];
+                break;
+            }
+        }
+        // 合計金額の計算
+        $TotalFee = $price - $discount;
+
+        $this->set(compact('price', 'TotalFee'));
     }
 
     /**

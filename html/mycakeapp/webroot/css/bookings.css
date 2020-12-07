@@ -216,3 +216,14 @@ label:hover {
 .name{
     margin-bottom: 15px;
 }
+
+/* ============== ここから決済概要 ============== */
+.overview{
+    padding-bottom: 40px;
+}
+.price-flex{
+    width: 400px;
+    display: flex;
+    justify-content: space-between;
+    margin: 0 auto 50px;
+}

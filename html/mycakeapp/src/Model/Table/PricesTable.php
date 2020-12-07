@@ -83,4 +83,14 @@ class PricesTable extends Table
 
         return $prices;
     }
+
+    public function findPaymentHistoriesPriceId($priceId)
+    {
+        $prices = $this->find()
+            ->select(['id', 'price'])
+            ->where(['id' => $priceId, 'is_applied' => 1])
+            ->toList();
+
+        return $prices;
+    }
 }
