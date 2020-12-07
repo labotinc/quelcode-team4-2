@@ -227,3 +227,19 @@ label:hover {
     justify-content: space-between;
     margin: 0 auto 50px;
 }
+
+/* ============== ここから決済完了 ============== */
+.completion{
+    margin-top: 100px;
+    padding-bottom: 60px;
+}
+
+.completion p{
+    color: #5a5858;
+    font-weight: bold;
+    margin-bottom: 30px;
+}
+
+.completion .accept-button{
+    width: 350px;
+}

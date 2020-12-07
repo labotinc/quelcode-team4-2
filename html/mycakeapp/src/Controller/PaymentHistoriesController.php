@@ -203,6 +203,12 @@ class PaymentHistoriesController extends MovieAuthBaseController
         $this->set(compact('price', 'TotalFee'));
     }
 
+
+    public function completion()
+    {
+        $this->viewBuilder()->setLayout('main');
+    }
+
     /**
      * View method
      *
