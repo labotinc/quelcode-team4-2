@@ -84,7 +84,7 @@
                   <?= $this->Html->link(
                     '決済情報入力',
                     // 決済情報に必要な値を取得する（ユーザーidなど）
-                    ['controller' => 'PaymentHistories', 'action' => 'method', $booked_temporary_detail['id']],
+                    ['controller' => 'PaymentHistories', 'action' => 'choose_card', $booked_temporary_detail['id']],
                     ['class' => 'payment-send']
                   ) ?>
                 </div>
