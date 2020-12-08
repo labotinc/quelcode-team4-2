@@ -108,6 +108,7 @@ class UsersTable extends Table
         return $rules;
     }
 
+
     public function findUser($user_id)
     {
         $users = $this->find()
@@ -116,5 +117,13 @@ class UsersTable extends Table
             ->toList();
 
         return $users;
+    }
+    // ユーザーが論理削除されていないものを認証の対象とするクエリービルダー
+    public function findAuth(\Cake\ORM\Query $query, array $options)
+    {
+        $query->where(['Users.is_deleted' => 0]);
+
+        return $query;
+
     }
 }

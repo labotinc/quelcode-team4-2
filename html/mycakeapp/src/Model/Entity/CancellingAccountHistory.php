@@ -33,4 +33,17 @@ class CancellingAccountHistory extends Entity
         'user' => true,
         'cancelling_account_category' => true,
     ];
+
+    /**
+     * 自主退会するユーザーのエンティティの値をセットするメソッド
+     * --------cancelling_category_id = 1 を自主退会とする ------------
+     * @return エンティティ
+     */
+     public function setHistory(string $user_id)
+    {
+        $this->user_id = $user_id;
+        $this->cancelling_category_id = 1;
+        $this->cancelled = date("Y-m-d H:i:s");
+        return $this;
+    }
 }
