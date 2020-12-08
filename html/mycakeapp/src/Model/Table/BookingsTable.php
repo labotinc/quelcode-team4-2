@@ -161,4 +161,13 @@ class BookingsTable extends Table
         $my_booked_main_array = $my_booked_main->toArray();
         return $my_booked_main_array;
     }
+
+    public function findBookedScheduleId($schedule_id)
+    {
+        $bookings = $this->find()
+            ->select(['schedule_id'])
+            ->where(['id' => $schedule_id, 'is_cancelled' => false])
+            ->toList();
+        return $bookings;
+    }
 }

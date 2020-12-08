@@ -130,4 +130,16 @@ class PaymentHistoriesTable extends Table
         $payment_histories_array = $payment_histories->toArray();
         return $payment_histories_array;
     }
+
+    public function findTemporaryPaymentHistories($booking_id)
+    {
+        $query = $this->find();
+        $payment_histories = $query
+            ->enableHydration(false)
+            ->where([
+                'booking_id' => $booking_id,
+            ]);
+        $payment_histories_array = $payment_histories->toArray();
+        return $payment_histories_array;
+    }
 }

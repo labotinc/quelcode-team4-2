@@ -55,4 +55,10 @@ class PaymentHistory extends Entity
         $this->is_cancelled = true;
         return $this;
     }
+
+    public function setTrueIsCancelled()
+    {
+        $this->is_cancelled = false;
+        return $this;
+    }
 }
