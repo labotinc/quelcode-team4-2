@@ -161,4 +161,21 @@ class BookingsTable extends Table
         $my_booked_main_array = $my_booked_main->toArray();
         return $my_booked_main_array;
     }
+
+    /**
+     * ユーザー退会時の予約取り消しメソッド
+     * 1. そのユーザーの
+     * 2. まだキャンセルされてない
+     * 3. 現在時刻より将来の
+     * 予約をキャンセルする。
+     */
+    public function cancelBookings(string $user_id)
+    {
+        $now = date('Y-m-d h:i:s');
+        $bookings = $this->find('all', ['contain' => ['MovieSchedules']])->where(['user_id' => $user_id, 'is_cancelled' => 0, 'MovieSchedules.screening_start_datetime >' => $now]);
+        foreach ($bookings as $booking) {
+            $booking = $booking->setIsCancelled();
+        }
+        return $bookings;
+    }
 }
