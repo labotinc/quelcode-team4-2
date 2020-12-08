@@ -25,7 +25,8 @@ input {
 /**
 * @ボタン 最大サイズボタン(名称仮)基本設計書P24等に登場
 */
-input ボタン {
+/* 消したいのですが、消していいのかわからないので一時的にコメントアウトします */
+/* input ボタン {
     width: 336px;
     height: 48px;
     border: 3px #f5ae0b;
@@ -34,7 +35,7 @@ input ボタン {
     letter-spacing: 0.44px;
     color: #ffffff;
     background: #f5ae0b 0% 0% no-repeat padding-box;
-}
+} */
 
 .button {
     box-shadow: 0 2px 2px #00000014;
@@ -73,12 +74,12 @@ input ボタン {
 /**
 * @ボタン 他ボタン基本設計書P33,34ページに登場
 */
-
-input 幅自由に伸びるボタン {
+/* 28行目と同じ */
+/* input 幅自由に伸びるボタン {
     padding: 8px 16px 9px 18px;
     font-family: Noto Sans;
     font-weight: 600;
     letter-spacing: 0.25px;
     color: #ffffff;
     background: #f5ae0b 0% 0% no-repeat padding-box;
-}
+} */
