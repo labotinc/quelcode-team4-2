@@ -166,12 +166,12 @@ class PaymentHistoriesController extends MovieAuthBaseController
                     // 税金(sales_tax_id)
                     'sales_tax_id' => (string)$salesTax[0]['id'],
                     // falseでキャンセルはしていない。
-                    'is_cancelled' => false,
+                    'is_cancelled' => true,
                 ];
                 $entity = $this->PaymentHistories->newEntity();
                 $arrayPayment = $this->PaymentHistories->patchEntity($entity, $data);
-                $info_booking = $this->Bookings->get($booking_id)->setIsMainBooked();
-                if ($this->PaymentHistories->save($arrayPayment) && $this->Bookings->save($info_booking)) {
+
+                if ($this->PaymentHistories->save($arrayPayment)) {
                     return $this->redirect(['action' => 'overview', $booking_id]);
                 }
             } else {
@@ -187,7 +187,7 @@ class PaymentHistoriesController extends MovieAuthBaseController
     {
         $this->viewBuilder()->setLayout('main');
         // 金額と、割引と税金を取り出して計算して出力したい
-        $paymentHistories = $this->PaymentHistories->findPaymentHistories($booking_id);
+        $paymentHistories = $this->PaymentHistories->findTemporaryPaymentHistories($booking_id);
         $priceId = $paymentHistories[0]['price_id'];
         // 料金の取り出し
         $price = $this->Prices->findPaymentHistoriesPriceId($priceId)[0]['price'];
@@ -215,7 +215,7 @@ class PaymentHistoriesController extends MovieAuthBaseController
     public function PaymentCancel($booking_id)
     {
         try {
-            $cancel_PaymentId = $this->PaymentHistories->findPaymentHistories($booking_id)[0]['id'];
+            $cancel_PaymentId = $this->PaymentHistories->findTemporaryPaymentHistories($booking_id)[0]['id'];
             $entity = $this->PaymentHistories->get($cancel_PaymentId);
             $this->PaymentHistories->delete($entity);
             return $this->redirect((['action' => 'method', $booking_id]));
@@ -226,9 +226,22 @@ class PaymentHistoriesController extends MovieAuthBaseController
         }
     }
 
-    public function completion()
+    public function completion($booking_id)
     {
         $this->viewBuilder()->setLayout('main');
+        try {
+            // 決済履歴のフラグ
+            $completionPaymentId = $this->PaymentHistories->findTemporaryPaymentHistories($booking_id)[0]['id'];
+            $entity = $this->PaymentHistories->get($completionPaymentId)->setTrueIsCancelled();
+            $this->PaymentHistories->save($entity);
+
+            // ここで本予約にフラグ変更
+            $info_booking = $this->Bookings->get($booking_id)->setIsMainBooked();
+            $this->Bookings->save($info_booking);
+        } catch (Exception $e) {
+            $this->Flash->set(__('正常にキャンセル処理ができませんでした。カスタマーセンターまでお問い合わせください。'));
+            return $this->redirect(['controller' => 'MoviesInfo', 'action' => 'schedule']);
+        }
     }
 
     /**
