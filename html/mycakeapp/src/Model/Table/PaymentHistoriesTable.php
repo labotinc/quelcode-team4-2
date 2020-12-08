@@ -142,4 +142,17 @@ class PaymentHistoriesTable extends Table
         $payment_histories_array = $payment_histories->toArray();
         return $payment_histories_array;
     }
+
+    /**
+     * ユーザー退会時、決済したもののキャンセルフラグを立てる
+     */
+    public function cancelPayments(string $user_id)
+    {
+        $now = date('Y:m:d h:i:s');
+        $payments = $this->find('all', ['contain' => 'bookings'])->where(['Bookings.user_id' => $user_id, 'Bookings.screening_start_datetime >' => $now]);
+        foreach ($payments as $payment) {
+            $payment = $payment->setIsCancelled();
+        }
+        return $payments;
+    }
 }
