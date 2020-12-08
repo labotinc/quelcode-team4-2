@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
-use App\Model\Entity\Booking;
 
 /**
  * PaymentHistories Controller
