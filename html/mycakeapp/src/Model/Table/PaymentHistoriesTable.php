@@ -148,7 +148,7 @@ class PaymentHistoriesTable extends Table
      */
     public function cancelPayments(string $user_id)
     {
-        $now = date('Y:m:d h:i:s');
+        $now = date('Y-m-d h:i:s');
         $payments = $this->find('all', ['contain' => 'bookings'])->where(['Bookings.user_id' => $user_id, 'Bookings.screening_start_datetime >' => $now]);
         foreach ($payments as $payment) {
             $payment = $payment->setIsCancelled();
