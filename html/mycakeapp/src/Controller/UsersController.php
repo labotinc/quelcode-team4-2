@@ -88,10 +88,9 @@ class UsersController extends AppController
     public function beforeFilter(Event $event)
     {
         parent::beforeFilter($event);
-        // 基本的にログイン関連ページと会員登録ページのみ、あとでadd,index,editは消す
+        // 基本的にログイン関連ページと会員登録ページ、退会完了ページのみ
         $this->Auth->allow([
-            'index', 'signup', 'logout', 'thanks',
-            'add', 'edit', 'cancelCompleted'
+            'signup', 'logout', 'thanks', 'cancelCompleted'
         ]);
     }
 
