@@ -49,7 +49,11 @@
                 <?php endif; ?>
             </div>
             <div class="btn">
-                <a href="<?= $this->Url->build(['controller' => 'Bookings', 'action' => 'seat-confirmation', $booking_id]) ?>" class="cancel-button button">キャンセル</a>
+                <?php if (strpos($_SERVER['HTTP_REFERER'], 'booking-details') == true) : ?>
+                    <?php echo '<a href="' . $_SERVER['HTTP_REFERER'] . '" class="cancel-button button">キャンセル</a>'; ?>
+                <?php else : ?>
+                    <a href="<?= $this->Url->build(['controller' => 'Bookings', 'action' => 'seat-confirmation', $booking_id]) ?>" class="cancel-button button">キャンセル</a>
+                <?php endif; ?>
                 <?= $this->Form->submit('決定', ['class' => 'registration']) ?>
             </div>
             <?= $this->Form->end() ?>
