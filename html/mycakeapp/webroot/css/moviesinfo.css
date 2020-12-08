@@ -161,7 +161,7 @@
 
 /* ================ pricelist ここから ================ */
 
-/* ========== ヘッダー、フッターはmovie_infoのみ[position: fixed]している ==========
+/* ========== ヘッダー、はmovie_infoのみ[position: fixed]している ==========
 他のページもおかしくなるようであれば消す。 */
 header {
     position: fixed;
@@ -170,11 +170,6 @@ header {
     z-index: 100;
 }
 
-footer {
-    bottom: 0px;
-    right: 0px;
-    z-index: 100;
-}
 /* ========== ヘッダー、フッター ========== */
 .list-wrap {
     padding-top: 130px;
@@ -219,7 +214,6 @@ footer {
     text-align: center;
     padding: 60px 0 20px 0;
 }
-
 
 .heading {
     text-align: center;
@@ -385,11 +379,6 @@ footer {
     font-size: 14px;
 }
 
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
 label {
     width: auto;
 }
@@ -568,7 +557,6 @@ input {
     letter-spacing: 0.44px;
     color: #707070;
     opacity: 1;
-
 }
 
 /* ユーザー退会関連CSS */

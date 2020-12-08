@@ -32,7 +32,10 @@ class UsersController extends AppController
                         // fieldのキーには'username'と'password'しか使えない
                         'username' => 'email',
                         'password' => 'password'
-                    ]
+                    ],
+                    // 論理削除済みのユーザーを認証対象から除外するためのメソッド名
+                    // UsersTableにメソッドは記載
+                    'finder' => 'auth'
                 ]
             ],
             'loginRedirect' => [
@@ -88,10 +91,9 @@ class UsersController extends AppController
     public function beforeFilter(Event $event)
     {
         parent::beforeFilter($event);
-        // 基本的にログイン関連ページと会員登録ページのみ、あとでadd,index,editは消す
+        // 基本的にログイン関連ページと会員登録ページ、退会完了ページのみ
         $this->Auth->allow([
-            'index', 'signup', 'logout', 'thanks',
-            'add', 'edit', 'cancelCompleted'
+            'signup', 'logout', 'thanks', 'cancelCompleted'
         ]);
     }
 
