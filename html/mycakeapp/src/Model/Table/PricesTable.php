@@ -74,7 +74,7 @@ class PricesTable extends Table
         return $validator;
     }
 
-    public function findUser($price)
+    public function findPrice($price)
     {
         $prices = $this->find()
             ->select(['id', 'price'])

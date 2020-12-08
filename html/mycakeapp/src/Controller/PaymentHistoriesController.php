@@ -90,7 +90,7 @@ class PaymentHistoriesController extends MovieAuthBaseController
         } else {
             $price = '幼児';
         }
-        $arrayPrice = $this->Prices->findUser($price);
+        $arrayPrice = $this->Prices->findPrice($price);
         // == end ============
 
         // =================================== 割引判定 start ===================================
