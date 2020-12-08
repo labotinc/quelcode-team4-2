@@ -91,7 +91,7 @@ class UsersController extends AppController
         // 基本的にログイン関連ページと会員登録ページのみ、あとでadd,index,editは消す
         $this->Auth->allow([
             'index', 'signup', 'logout', 'thanks',
-            'add', 'edit'
+            'add', 'edit', 'cancelCompleted'
         ]);
     }
 
@@ -220,5 +220,14 @@ class UsersController extends AppController
         }
 
         return $this->redirect(['action' => 'index']);
+    }
+
+    /**
+     * CancelCompleted method
+     */
+    public function cancelCompleted()
+    {
+        $this->layout = 'main';
+        $this->request->getSession()->destroy();
     }
 }

@@ -25,6 +25,8 @@ class MoviesInfoController extends MovieAuthBaseController
         $this->loadModel('Discounts');
         $this->loadModel('CreditCards');
         $this->loadModel('SalesTaxes');
+        $this->loadModel('CancellingAccountHistories');
+        $this->loadModel('CancellingAccountCategories');
 
         // レイアウトをmainに変更
         $this->viewBuilder()->setLayout('main');
@@ -51,6 +53,35 @@ class MoviesInfoController extends MovieAuthBaseController
         $my_credit_card_number = $this->CreditCards->findCreditCard($user_id);
         if (!empty($my_credit_card_number)) {
             $my_credit_card_number = $my_credit_card_number[0]['card_number'];
+        }
+        /**
+         * POST送信されてきた場合(退会ボタンが押下された場合)
+         * 1. userエンティティの退会フラグを立てる
+         * 2. creditcardエンティティのカード番号などを上書きして削除フラグを立てる
+         * 3. cancellingAccountHistoryのnewEntityを作成する
+         * 4. 上記のエンティティを全て保存する
+         */
+        if ($this->request->is('post')) {
+            // 1. user
+            $user = $this->Users->get($user_id);
+            $user = $user->setIdDeleted($user_id);
+
+            // 2. creditcard
+            $creditCards = $this->CreditCards->deleteCards($user_id);
+
+            // 3. cancellingAccountHistory
+            $entity = $this->CancellingAccountHistories->newEntity();
+            $entity = $entity->setHistory($user_id);
+
+            // 4. 1~3を保存する
+            if ($this->Users->save($user) &&  $this->CancellingAccountHistories->save($entity)) {
+                foreach ($creditCards as $creditCard) {
+                    $this->CreditCards->save($creditCard);
+                }
+                return $this->redirect(['controller' => 'users', 'action' => 'cancelCompleted']);
+            } else {
+                return $this->Flash->error('退会に失敗しました。ヘルプセンターにご連絡ください。');
+            }
         }
         $this->set(compact('my_credit_card_number'));
     }
