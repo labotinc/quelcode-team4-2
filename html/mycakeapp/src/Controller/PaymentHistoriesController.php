@@ -90,7 +90,7 @@ class PaymentHistoriesController extends MovieAuthBaseController
         } else {
             $price = '幼児';
         }
-        $Price = $this->Prices->findUser($price);
+        $arrayPrice = $this->Prices->findUser($price);
         // == end ============
 
         // =================================== 割引判定 start ===================================
@@ -98,8 +98,8 @@ class PaymentHistoriesController extends MovieAuthBaseController
         // 　今はファーストデイと子供シニア割引き、割引なしのみDBに入っていると仮定
 
         // ファーストデイかどうかを取り出したいので日付を取り出して判定
-        $Booking = $this->Bookings->findBookedScheduleId($booking_id);
-        $bookingScheduleId = $Booking[0]['schedule_id'];
+        $arrayBooking = $this->Bookings->findBookedScheduleId($booking_id);
+        $bookingScheduleId = $arrayBooking[0]['schedule_id'];
 
         $MovieSchedule = $this->MovieSchedules->findMovieSchedulesDate($bookingScheduleId);
         $movieScheduleDatetime = $MovieSchedule[0]['screening_start_datetime'];
@@ -159,7 +159,7 @@ class PaymentHistoriesController extends MovieAuthBaseController
                     // カードのid
                     'credit_card_id' => $_POST['cardInfoId'],
                     // 価格(price_id)
-                    'price_id' => (string)$Price[0]['id'],
+                    'price_id' => (string)$arrayPrice[0]['id'],
                     // 割引(discount_id) 
                     'discount_id' =>  $discountPrice['id'],
                     // 税金(sales_tax_id)
