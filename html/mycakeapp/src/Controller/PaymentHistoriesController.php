@@ -106,6 +106,7 @@ class PaymentHistoriesController extends MovieAuthBaseController
         $movieScheduleDatetime = $MovieSchedule[0]['screening_start_datetime'];
         $dayStrtotime = strtotime($movieScheduleDatetime);
         $scheduleDay = (int)date("d", $dayStrtotime);
+        $week = (int)date("w", $dayStrtotime);
 
         // 1日だったらファーストディ
         if ($scheduleDay === 1) {
@@ -113,7 +114,7 @@ class PaymentHistoriesController extends MovieAuthBaseController
         }
         $userSex = $userInfos[0]['sex'];
         // シニアは65歳以上を定義/ここで子供女性シニア割引
-        if ($price === '小中学生' || $price == '幼児' || $userSex === 2 || $age >= 65) {
+        if (($price === '小中学生' || $price == '幼児' || (int)$userSex === 2 || $age >= 65) && $week === 3) {
             $arrayDiscount[] = '子供女性シニア割引';
         }
 
@@ -133,7 +134,7 @@ class PaymentHistoriesController extends MovieAuthBaseController
             // ここで割引額が高い方を入れる
             $discountPrice = '';
             for ($x = 0; $x < count($discount); $x++) {
-                if (empty($hoge2)) {
+                if (empty($discountPrice)) {
                     $discountPrice = $discount[$x];
                 } elseif ($discount[$x]['price'] > $discountPrice['price']) {
                     $discountPrice = $discount[$x];
@@ -141,7 +142,7 @@ class PaymentHistoriesController extends MovieAuthBaseController
             }
         } else {
             // 割引なしのidが3と仮定
-            $discountPrice = 3;
+            $discountPrice['id'] = 3;
         }
 
         // =================================== 割引判定 end ===================================
@@ -161,7 +162,7 @@ class PaymentHistoriesController extends MovieAuthBaseController
                     // 価格(price_id)
                     'price_id' => (string)$Price[0]['id'],
                     // 割引(discount_id) 
-                    'discount_id' =>  $discountPrice,
+                    'discount_id' =>  $discountPrice['id'],
                     // 税金(sales_tax_id)
                     'sales_tax_id' => (string)$salesTax[0]['id'],
                     // falseでキャンセルはしていない。
@@ -205,7 +206,7 @@ class PaymentHistoriesController extends MovieAuthBaseController
         // 合計金額の計算
         $TotalFee = ($price - $discount);
         $priceTax = $TotalFee * ($salesTax * 0.01);
-        $TaxIncludedPrice = $TotalFee - $priceTax;
+        $TaxIncludedPrice = $TotalFee + $priceTax;
 
         $this->set(compact('price', 'discount', 'TaxIncludedPrice', 'booking_id'));
     }
