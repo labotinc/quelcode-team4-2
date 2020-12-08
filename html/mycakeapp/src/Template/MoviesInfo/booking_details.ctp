@@ -53,8 +53,7 @@
           </div>
         <?php endforeach; ?>
       <?php endif; ?>
-      <!-- アクション先未定 -->
-      <?= $this->Html->link('マイページへ戻る', ['controller' => 'MovieInfo', 'action' => 'マイページ'], ['class' => 'button']) ?>
+      <?= $this->Html->link('マイページへ戻る', ['controller' => 'MoviesInfo', 'action' => 'mypage'], ['class' => 'button']) ?>
     </div>
 
     <div class="wrapper booking-temporary">
@@ -106,12 +105,7 @@
           </div>
         <?php endforeach; ?>
       <?php endif; ?>
-      <!-- アクション先未定 -->
-      <?= $this->Html->link(
-        'マイページへ戻る',
-        ['controller' => 'MovieInfo', 'action' => 'マイページ'],
-        ['class' => 'button']
-      ) ?>
+      <?= $this->Html->link('マイページへ戻る', ['controller' => 'MoviesInfo', 'action' => 'mypage'], ['class' => 'button']) ?>
 
     </div>
   </div>
