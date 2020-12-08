@@ -395,7 +395,7 @@ label {
 }
 .modal {
     display: none;
-    height: 110vh;
+    height: 100vh;
     position: fixed;
     top: 0px;
     width: 100%;
