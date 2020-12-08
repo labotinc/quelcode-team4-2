@@ -6,6 +6,12 @@
 * 2 content詳細(font-sizeなど。大体は「文字」「色」「背景」の順番)
 */
 
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
 html,
 body {
     width: 100%;
@@ -50,7 +56,6 @@ input {
     display: inline-block;
     padding: 16px 0 16px 0;
     width: 192px;
-    height: 12px;
     font-family: GothamMedium;
     letter-spacing: 0.44px;
     color: #ffffff;
@@ -64,7 +69,6 @@ input {
     display: inline-block;
     padding: 16px 0 16px 0;
     width: 128px;
-    height: 12px;
     font-family: GothamMedium;
     letter-spacing: 0.44px;
     color: #707070;
