@@ -169,8 +169,8 @@ class PaymentHistoriesController extends MovieAuthBaseController
                 ];
                 $entity = $this->PaymentHistories->newEntity();
                 $arrayPayment = $this->PaymentHistories->patchEntity($entity, $data);
-
-                if ($this->PaymentHistories->save($arrayPayment)) {
+                $info_booking = $this->Bookings->get($booking_id)->setIsMainBooked();
+                if ($this->PaymentHistories->save($arrayPayment) && $this->Bookings->save($info_booking)) {
                     return $this->redirect(['action' => 'overview', $booking_id]);
                 }
             } else {
