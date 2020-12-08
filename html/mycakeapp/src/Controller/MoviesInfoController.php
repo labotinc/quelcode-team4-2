@@ -59,7 +59,8 @@ class MoviesInfoController extends MovieAuthBaseController
          * 1. userエンティティの退会フラグを立てる
          * 2. creditcardエンティティのカード番号などを上書きして削除フラグを立てる
          * 3. cancellingAccountHistoryのnewEntityを作成する
-         * 4. 上記のエンティティを全て保存する
+         * 4. ユーザーの予約状況を確認し、予約があれば取り消す 
+         * 5. 上記のエンティティを全て保存する
          */
         if ($this->request->is('post')) {
             // 1. user
