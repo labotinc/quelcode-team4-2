@@ -32,7 +32,10 @@ class UsersController extends AppController
                         // fieldのキーには'username'と'password'しか使えない
                         'username' => 'email',
                         'password' => 'password'
-                    ]
+                    ],
+                    // 論理削除済みのユーザーを認証対象から除外するためのメソッド名
+                    // UsersTableにメソッドは記載
+                    'finder' => 'auth'
                 ]
             ],
             'loginRedirect' => [
