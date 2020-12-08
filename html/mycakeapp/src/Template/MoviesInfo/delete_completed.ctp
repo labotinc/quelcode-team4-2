@@ -12,7 +12,6 @@
   <p class="text-registration-completed">予約をキャンセルしました。</p>
   <?= $this->Html->link(
     'マイページに戻る',
-    ['controller' => 'MoviesInfo', 'action' => 'mypage', $user_id], //****** リンク要確認 */
     ['class' => 'link-button']
   );
   ?>
