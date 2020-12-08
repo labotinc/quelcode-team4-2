@@ -42,7 +42,7 @@ class PaymentHistoriesController extends MovieAuthBaseController
         $this->set(compact('paymentHistories'));
     }
 
-    public function method($booking_id)
+    public function chooseCard($booking_id)
     {
         $this->viewBuilder()->setLayout('main');
         $user_id = $this->Auth->user('id');
@@ -218,7 +218,7 @@ class PaymentHistoriesController extends MovieAuthBaseController
             $cancel_PaymentId = $this->PaymentHistories->findTemporaryPaymentHistories($booking_id)[0]['id'];
             $entity = $this->PaymentHistories->get($cancel_PaymentId);
             $this->PaymentHistories->delete($entity);
-            return $this->redirect((['action' => 'method', $booking_id]));
+            return $this->redirect((['action' => 'choose_card', $booking_id]));
         } catch (Exception $e) {
             $this->Flash->set(__('正常にキャンセル処理ができませんでした。カスタマーセンターまでお問い合わせください。'));
             // ※トップページが作成されたら映画スケジュール画面をリダイレクト先にする。action先は未定。
