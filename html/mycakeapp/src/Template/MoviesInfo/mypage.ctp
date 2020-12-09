@@ -14,11 +14,7 @@
         <div class="mypage-button-wrapper booking-button-wrapper">
           <?= $this->Html->link(
             '詳細',
-<<<<<<< HEAD
-            ['action' => 'bookingDetails'],
-=======
             ['action' => 'booking_details'],
->>>>>>> fix リンク切れ修正
             ['class' => 'mypage-button booking-button']
           ) ?>
         </div>
