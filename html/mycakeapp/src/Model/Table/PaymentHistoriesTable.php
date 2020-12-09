@@ -132,12 +132,28 @@ class PaymentHistoriesTable extends Table
     }
 
     /**
-     * ユーザー退会時、決済したもののキャンセルフラグを立てる
+     * ユーザー退会時の処理
+     * 1. そのユーザーの
+     * 2. まだ映画が上映されていないスケジュール
+     * のキャンセルフラグを立てる。
+     * 参考URL：https://book.cakephp.org/3/ja/orm/query-builder.html#join
      */
     public function cancelPayments(string $user_id)
     {
         $now = date('Y-m-d h:i:s');
-        $payments = $this->find('all', ['contain' => 'bookings'])->where(['Bookings.user_id' => $user_id, 'Bookings.screening_start_datetime >' => $now]);
+        $payments = $this->find()->join([
+            'b' => [
+                'table' => 'bookings',
+                'type' => 'LEFT',
+                'conditions' => 'PaymentHistories.booking_id = b.id',
+            ],
+            'm' => [
+                'table' => 'movie_schedules',
+                'type' => 'LEFT',
+                'conditions' => 'b.schedule_id = m.id',
+            ]
+        ])->where(['b.user_id' => $user_id, 'm.screening_start_datetime >=' => $now]);
+
         foreach ($payments as $payment) {
             $payment = $payment->setIsCancelled();
         }
