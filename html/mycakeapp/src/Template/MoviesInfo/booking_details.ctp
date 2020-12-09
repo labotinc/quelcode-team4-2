@@ -83,7 +83,7 @@
                   <?= $this->Html->link(
                     '決済情報入力',
                     // 決済情報に必要な値を取得する（ユーザーidなど）
-                    ['controller' => 'booking', 'action' => '決済情報'],
+                    ['controller' => 'credit-cards', 'action' => 'add'],
                     ['class' => 'payment-send']
                   ) ?>
                 </div>
