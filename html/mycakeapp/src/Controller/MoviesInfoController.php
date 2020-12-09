@@ -74,10 +74,20 @@ class MoviesInfoController extends MovieAuthBaseController
             $entity = $this->CancellingAccountHistories->newEntity();
             $entity = $entity->setHistory($user_id);
 
-            // 4. 1~3を保存する
+            // 4. booking and paymentHistories
+            $bookings = $this->Bookings->cancelBookings($user_id);
+            $paymentHistories = $this->PaymentHistories->cancelPayments($user_id);
+
+            // 4. 1~4を保存する
             if ($this->Users->save($user) &&  $this->CancellingAccountHistories->save($entity)) {
                 foreach ($creditCards as $creditCard) {
                     $this->CreditCards->save($creditCard);
+                }
+                foreach ($bookings as $booking) {
+                    $this->Bookings->save($booking);
+                }
+                foreach ($paymentHistories as $paymentHistory) {
+                    $this->PaymentHistories->save($paymentHistory);
                 }
                 return $this->redirect(['controller' => 'users', 'action' => 'cancelCompleted']);
             } else {
