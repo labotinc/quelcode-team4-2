@@ -73,4 +73,24 @@ class PricesTable extends Table
 
         return $validator;
     }
+
+    public function findPrice($price)
+    {
+        $prices = $this->find()
+            ->select(['id', 'price'])
+            ->where(['name' => $price, 'is_applied' => 1])
+            ->toList();
+
+        return $prices;
+    }
+
+    public function findPaymentHistoriesPriceId($priceId)
+    {
+        $prices = $this->find()
+            ->select(['id', 'price'])
+            ->where(['id' => $priceId, 'is_applied' => 1])
+            ->toList();
+
+        return $prices;
+    }
 }

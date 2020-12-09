@@ -120,4 +120,13 @@ class MovieSchedulesTable extends Table
         $screeningsNotEnd = $query->where(['screening_end_date >=' => $today]);
         return $screeningsNotEnd;
     }
+
+    public function findMovieSchedulesDate($bookingScheduleId)
+    {
+        $movieSchedules = $this->find()
+            ->select(['screening_start_datetime'])
+            ->where(['id' => $bookingScheduleId, 'is_playable' => true])
+            ->toList();
+        return $movieSchedules;
+    }
 }

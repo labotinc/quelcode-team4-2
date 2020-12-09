@@ -161,7 +161,7 @@
 
 /* ================ pricelist ここから ================ */
 
-/* ========== ヘッダー、フッターはmovie_infoのみ[position: fixed]している ==========
+/* ========== ヘッダー、はmovie_infoのみ[position: fixed]している ==========
 他のページもおかしくなるようであれば消す。 */
 header {
     position: fixed;
@@ -170,11 +170,6 @@ header {
     z-index: 100;
 }
 
-footer {
-    bottom: 0px;
-    right: 0px;
-    z-index: 100;
-}
 /* ========== ヘッダー、フッター ========== */
 .list-wrap {
     padding-top: 130px;
@@ -220,7 +215,6 @@ footer {
     padding: 60px 0 20px 0;
 }
 
-
 .heading {
     text-align: center;
     color: #707070;
@@ -264,6 +258,7 @@ footer {
 
 .mypage-button {
     display: block;
+    box-sizing: content-box;
     height: 24px;
     background: #f5ae0b 0% 0% no-repeat padding-box;
     box-shadow: 0px 2px 2px #00000014;
@@ -384,19 +379,14 @@ footer {
     font-size: 14px;
 }
 
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
 label {
     width: auto;
 }
 .modal {
     display: none;
-    height: 56vh;
+    height: 100vh;
     position: fixed;
-    top: 74px;
+    top: 0px;
     width: 100%;
 }
 body.fixed {
@@ -470,7 +460,8 @@ input {
 .link-button__middle {
     display: inline-block;
     text-align: center;
-    padding-top: 4px;
+    padding-top: 16px;
+    padding-bottom: 16px;
     box-shadow: 0px 2px 2px #00000014;
     line-height: 22px;
     border: none;
@@ -478,7 +469,6 @@ input {
 
 .link-button__small {
     width: 96px;
-    height: 32px;
     border: 1.5px solid var(--unnamed-color-afafaf);
     color: #707070;
     background: #efefef 0% 0% no-repeat padding-box;
@@ -567,5 +557,12 @@ input {
     letter-spacing: 0.44px;
     color: #707070;
     opacity: 1;
+}
 
+/* ユーザー退会関連CSS */
+.user-delete__button {
+    border-top: none;
+    border-right: none;
+    border-left: none;
+    color: #707070;
 }

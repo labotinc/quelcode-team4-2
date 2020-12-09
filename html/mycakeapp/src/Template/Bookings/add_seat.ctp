@@ -302,8 +302,10 @@ $column_alphabets = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K'];
       </table>
       <?= $this->Form->hidden('is_cancelled', ['value' => 0]); ?>
       <?= $this->Form->hidden('is_main_booked', ['value' => 0]); ?>
+      <p>※別の席に変更する際は選択中の席を選択解除してください。</p>
       <?= $this->Form->submit('決定', ['class' => 'registration']) ?>
       <?= $this->Form->end() ?>
     </div>
+
   </div>
 </section>

@@ -4,7 +4,7 @@
 }
 
 .submit {
-    margin-top: 50px;
+    margin-top: 20px;
     padding-bottom: 80px;
 }
 
@@ -33,6 +33,7 @@
     width: 496px;
     height: 348px;
     text-align: center;
+    margin-bottom: 20px;
 }
 
 tr {
@@ -149,4 +150,113 @@ label:hover {
     margin: 0 auto 60px;
     text-align: center;
     padding-top: 91px;
+}
+
+/* =============== ここから決済方法 ==================== */
+.payment-method .wrapper{
+    padding-top: 60px;
+}
+
+.payment-method .confirmation-container{
+    padding-bottom: 30px;
+}
+
+.payment-method .btn{
+    width: 490px;
+    margin: 0  auto;
+    display: flex;
+    justify-content: space-between;
+}
+
+.payment-method .btn a{
+    padding:18px 10px;
+}
+
+.payment-method .submit{
+    margin: 0;
+    padding: 0;
+}
+
+.credit,.point{
+    width: 500px;
+    margin: 0 auto 40px;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: left;
+    /* background-color: #f46161; */
+}
+
+/* カードがなかったとき ==== */
+.not-have-card{
+    text-align: center;
+}
+
+.not-have-card a{
+    background-color: #e5f50b;
+    color: #2e2b2b;
+    border: dotted 2px #2e2b2b;
+    padding: 10px 30px;
+}
+/* end ==== */
+
+.point{
+    /* background-color: #619cf4; */
+}
+
+.card-info{
+    border: solid 2px #5a5858;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.card-info input[type=radio]{
+    box-shadow: none;
+    width: 30px;
+    height: 30px;
+}
+
+.card-info-details{
+    margin-left: 50px;
+}
+
+.card-info-details .flex{
+    display: flex;
+}
+
+.card-info-ExpirationDate{
+    margin-left: 20px;
+}
+
+.name{
+    margin-bottom: 15px;
+}
+
+/* ============== ここから決済概要 ============== */
+.overview{
+    padding-bottom: 40px;
+}
+.price-flex{
+    width: 400px;
+    display: flex;
+    justify-content: space-between;
+    margin: 0 auto 50px;
+}
+
+/* ============== ここから決済完了 ============== */
+.completion{
+    margin-top: 100px;
+    padding-bottom: 60px;
+}
+
+.completion p{
+    color: #5a5858;
+    font-weight: bold;
+    margin-bottom: 30px;
+}
+
+.completion .accept-button{
+    width: 350px;
 }

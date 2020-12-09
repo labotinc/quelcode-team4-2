@@ -1,4 +1,5 @@
 <?= $this->Html->css('moviesinfo', ['block' => true]) ?>
+<?= $this->Html->script('user_cancel', ['block' => true]) ?>
 <section>
   <div class="mypage-wrapper">
     <h1 class="heading">マイページ</h1>
@@ -13,7 +14,7 @@
         <div class="mypage-button-wrapper booking-button-wrapper">
           <?= $this->Html->link(
             '詳細',
-            ['action' => 'booking_detail'],
+            ['action' => 'bookingDetails'],
             ['class' => 'mypage-button booking-button']
           ) ?>
         </div>
@@ -48,11 +49,13 @@
       </div>
     </div>
     <div class="user-delete-link">
-      <?= $this->Html->link(
+      <?php
+      echo $this->Form->create();
+      echo $this->Form->button(
         'アカウントを削除',
-        ['action' => 'user_delete'],
-        ['class' => 'user-delete']
+        ['class' => 'user-delete__button', 'id' => 'user-delete__button', 'name' => 'delete']
       );
+      echo $this->Form->end();
       ?>
     </div>
   </div>

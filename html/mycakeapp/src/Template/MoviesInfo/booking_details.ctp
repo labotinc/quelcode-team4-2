@@ -53,8 +53,7 @@
           </div>
         <?php endforeach; ?>
       <?php endif; ?>
-      <!-- アクション先未定 -->
-      <?= $this->Html->link('マイページへ戻る', ['controller' => 'MovieInfo', 'action' => 'マイページ'], ['class' => 'button']) ?>
+      <?= $this->Html->link('マイページへ戻る', ['controller' => 'MoviesInfo', 'action' => 'mypage'], ['class' => 'button']) ?>
     </div>
 
     <div class="wrapper booking-temporary">
@@ -84,7 +83,7 @@
                   <?= $this->Html->link(
                     '決済情報入力',
                     // 決済情報に必要な値を取得する（ユーザーidなど）
-                    ['controller' => 'booking', 'action' => '決済情報'],
+                    ['controller' => 'PaymentHistories', 'action' => 'choose_card', $booked_temporary_detail['id']],
                     ['class' => 'payment-send']
                   ) ?>
                 </div>
@@ -106,12 +105,9 @@
           </div>
         <?php endforeach; ?>
       <?php endif; ?>
-      <!-- アクション先未定 -->
-      <?= $this->Html->link(
-        'マイページへ戻る',
-        ['controller' => 'MovieInfo', 'action' => 'マイページ'],
-        ['class' => 'button']
-      ) ?>
+
+      <?= $this->Html->link('マイページへ戻る', ['controller' => 'MoviesInfo', 'action' => 'mypage'], ['class' => 'button']) ?>
+
 
     </div>
   </div>

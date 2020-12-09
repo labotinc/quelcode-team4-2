@@ -195,4 +195,32 @@ class CreditCardsTable extends Table
         }
         return $creditcards;
     }
+
+
+
+    public function findCreditCardToPaymentHistories(string $user_id)
+    {
+        $creditcards = $this->find()
+            ->select(['id', 'card_number', 'holder_name', 'expiration_date'])
+            ->where(['user_id' => $user_id, 'is_deleted' => 0])
+            ->toList();
+        foreach ($creditcards as $creditcard) {
+            $creditcard = $creditcard->decrypt();
+            $creditcard->card_number = '******' . substr($creditcard->card_number, -4);
+        }
+    }
+    /**
+     * 退会時ユーザーの持つクレカ情報を無効化するメソッド
+     * @param string user_id
+     * @return $creditcards
+     */
+    public function deleteCards(string $user_id)
+    {
+        $creditcards = $this->find()->select(['id', 'card_number', 'holder_name'])->where(['user_id' => $user_id, 'is_deleted' => 0])->toList();
+        foreach ($creditcards as $creditcard) {
+            $creditcard = $creditcard->showAsDeleted();
+        } 
+
+        return $creditcards;
+    }
 }

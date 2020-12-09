@@ -32,7 +32,10 @@ class UsersController extends AppController
                         // fieldのキーには'username'と'password'しか使えない
                         'username' => 'email',
                         'password' => 'password'
-                    ]
+                    ],
+                    // 論理削除済みのユーザーを認証対象から除外するためのメソッド名
+                    // UsersTableにメソッドは記載
+                    'finder' => 'auth'
                 ]
             ],
             'loginRedirect' => [
@@ -88,10 +91,9 @@ class UsersController extends AppController
     public function beforeFilter(Event $event)
     {
         parent::beforeFilter($event);
-        // 基本的にログイン関連ページと会員登録ページのみ、あとでadd,index,editは消す
+        // 基本的にログイン関連ページと会員登録ページ、退会完了ページのみ
         $this->Auth->allow([
-            'index', 'signup', 'logout', 'thanks',
-            'add', 'edit'
+            'signup', 'logout', 'thanks', 'cancelCompleted'
         ]);
     }
 
@@ -164,11 +166,8 @@ class UsersController extends AppController
         if ($this->request->is('post')) {
             $user = $this->Users->patchEntity($user, $this->request->getData());
             if ($this->Users->save($user)) {
-                $this->Flash->success(__('The user has been saved.'));
-
                 return $this->redirect(['action' => 'thanks']);
             }
-            $this->Flash->error(__('The user could not be saved. Please, try again.'));
         }
         $this->set(compact('user'));
     }
@@ -220,5 +219,14 @@ class UsersController extends AppController
         }
 
         return $this->redirect(['action' => 'index']);
+    }
+
+    /**
+     * CancelCompleted method
+     */
+    public function cancelCompleted()
+    {
+        $this->layout = 'main';
+        $this->request->getSession()->destroy();
     }
 }

@@ -71,4 +71,12 @@ class DiscountsTable extends Table
 
         return $validator;
     }
+
+    public function findDiscount()
+    {
+        $discounts = $this->find()
+            ->where(['is_applied' => 1])
+            ->toList();
+        return $discounts;
+    }
 }

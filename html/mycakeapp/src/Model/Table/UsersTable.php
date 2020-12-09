@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Model\Table;
 
 use Cake\ORM\Query;
@@ -63,10 +64,12 @@ class UsersTable extends Table
             ->notEmptyString('password', '空白になっています。')
             ->add('password', [
                 'alphaNumeric' => [
-                'rule' => function ($value, $context) {
-                    return preg_match("/\A[0-9A-Za-z]*\z/", $value) ? true : false;
+                    'rule' => function ($value, $context) {
+                        return preg_match("/\A[0-9A-Za-z]*\z/", $value) ? true : false;
                     },
-                'message' => 'パスワードに使えない文字が入力されています']]);
+                    'message' => 'パスワードに使えない文字が入力されています'
+                ]
+            ]);
 
         $validator
             ->scalar('check_password')
@@ -103,5 +106,24 @@ class UsersTable extends Table
         $rules->add($rules->isUnique(['email']));
 
         return $rules;
+    }
+
+
+    public function findUser($user_id)
+    {
+        $users = $this->find()
+            ->select(['id', 'birthdate', 'sex'])
+            ->where(['id' => $user_id])
+            ->toList();
+
+        return $users;
+    }
+    // ユーザーが論理削除されていないものを認証の対象とするクエリービルダー
+    public function findAuth(\Cake\ORM\Query $query, array $options)
+    {
+        $query->where(['Users.is_deleted' => 0]);
+
+        return $query;
+
     }
 }
