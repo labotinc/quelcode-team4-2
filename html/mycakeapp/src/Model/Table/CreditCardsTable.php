@@ -208,6 +208,8 @@ class CreditCardsTable extends Table
             $creditcard = $creditcard->decrypt();
             $creditcard->card_number = '******' . substr($creditcard->card_number, -4);
         }
+
+        return $creditcards;
     }
     /**
      * 退会時ユーザーの持つクレカ情報を無効化するメソッド
@@ -219,7 +221,7 @@ class CreditCardsTable extends Table
         $creditcards = $this->find()->select(['id', 'card_number', 'holder_name'])->where(['user_id' => $user_id, 'is_deleted' => 0])->toList();
         foreach ($creditcards as $creditcard) {
             $creditcard = $creditcard->showAsDeleted();
-        } 
+        }
 
         return $creditcards;
     }
