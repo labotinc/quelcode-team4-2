@@ -79,7 +79,11 @@ class MoviesInfoController extends MovieAuthBaseController
             $paymentHistories = $this->PaymentHistories->cancelPayments($user_id);
 
             // 5. 1~4を保存する
-            if ($this->Users->save($user) &&  $this->CancellingAccountHistories->save($entity) && $this->CreditCards->saveMany($creditCards) && $this->Bookings->saveMany($bookings) &&  $this->PaymentHistories->saveMany($paymentHistories)) {
+            if (
+                $this->Users->save($user) &&  $this->CancellingAccountHistories->save($entity)
+                && $this->CreditCards->saveMany($creditCards) && $this->Bookings->saveMany($bookings)
+                &&  $this->PaymentHistories->saveMany($paymentHistories)
+            ) {
                 return $this->redirect(['controller' => 'users', 'action' => 'cancelCompleted']);
             } else {
                 return $this->Flash->error('退会に失敗しました。ヘルプセンターにご連絡ください。');
