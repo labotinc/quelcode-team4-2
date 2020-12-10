@@ -59,7 +59,8 @@ class MoviesInfoController extends MovieAuthBaseController
          * 1. userエンティティの退会フラグを立てる
          * 2. creditcardエンティティのカード番号などを上書きして削除フラグを立てる
          * 3. cancellingAccountHistoryのnewEntityを作成する
-         * 4. 上記のエンティティを全て保存する
+         * 4. ユーザーの予約状況を確認し、予約があれば取り消す 
+         * 5. 上記のエンティティを全て保存する
          */
         if ($this->request->is('post')) {
             // 1. user
@@ -73,11 +74,16 @@ class MoviesInfoController extends MovieAuthBaseController
             $entity = $this->CancellingAccountHistories->newEntity();
             $entity = $entity->setHistory($user_id);
 
-            // 4. 1~3を保存する
-            if ($this->Users->save($user) &&  $this->CancellingAccountHistories->save($entity)) {
-                foreach ($creditCards as $creditCard) {
-                    $this->CreditCards->save($creditCard);
-                }
+            // 4. booking and paymentHistories
+            $bookings = $this->Bookings->cancelBookings($user_id);
+            $paymentHistories = $this->PaymentHistories->cancelPayments($user_id);
+
+            // 5. 1~4を保存する
+            if (
+                $this->Users->save($user) &&  $this->CancellingAccountHistories->save($entity)
+                && $this->CreditCards->saveMany($creditCards) && $this->Bookings->saveMany($bookings)
+                &&  $this->PaymentHistories->saveMany($paymentHistories)
+            ) {
                 return $this->redirect(['controller' => 'users', 'action' => 'cancelCompleted']);
             } else {
                 return $this->Flash->error('退会に失敗しました。ヘルプセンターにご連絡ください。');
