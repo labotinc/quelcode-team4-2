@@ -93,7 +93,7 @@ class MovieAuthBaseController extends AppController
     if ($user_id === 1 || $user_id === 2 || $user_id === 3 || $user_id === 4) {
       return true;
     }
-    // 一般ユーザーはBookingsControllerとMoviesinfoControllerのみtrue、他はfalse,他必要なコントローラは順次追加する
+    // 一般ユーザーは'Bookings','MoviesInfo', 'CreditCards', 'PaymentHistories' のControllerのみtrue、他はfalse,他必要なコントローラは順次追加する
     else {
       if ($this->name === 'Bookings' || $this->name === 'MoviesInfo' || $this->name === 'CreditCards' || $this->name === 'PaymentHistories') {
         return true;
