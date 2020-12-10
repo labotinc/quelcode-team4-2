@@ -156,12 +156,12 @@ class PaymentHistoriesTable extends Table
         $payments = $this->find()->join([
             'b' => [
                 'table' => 'bookings',
-                'type' => 'LEFT',
+                'type' => 'INNER',
                 'conditions' => 'PaymentHistories.booking_id = b.id',
             ],
             'm' => [
                 'table' => 'movie_schedules',
-                'type' => 'LEFT',
+                'type' => 'INNER',
                 'conditions' => 'b.schedule_id = m.id',
             ]
         ])->where(['b.user_id' => $user_id, 'm.screening_start_datetime >=' => $now]);
