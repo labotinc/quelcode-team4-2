@@ -80,7 +80,7 @@ class MovieAuthBaseController extends AppController
 
     $this->Auth->allow([
       // トップページはMovieInfoControllerで認証回避の追加を行う
-      'pricelist', 'schedule'
+      'pricelist', 'schedule', 'ajaxMovieSchedules', 'ajaxMovieList'
     ]);
   }
 
