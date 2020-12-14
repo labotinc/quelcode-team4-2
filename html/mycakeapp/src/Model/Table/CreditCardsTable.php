@@ -227,8 +227,15 @@ class CreditCardsTable extends Table
             ->select(['id', 'card_number', 'holder_name', 'expiration_date'])
             ->where(['user_id' => $user_id, 'is_deleted' => 0])
             ->toList();
-        foreach ($creditcards as $creditcard) {
+        $endOfMonth = date('Y-m-d', mktime(0, 0, 0, date('m') + 1, 0, date('Y')));
+        foreach ($creditcards as $key => $creditcard) {
             $creditcard = $creditcard->decrypt();
+            $month = substr($creditcard->expiration_date, 0, 2);
+            $year = sprintf('20%s', substr($creditcard->expiration_date, 2, 2));
+            $expiration = date('Y-m-d', mktime(0, 0, 0, (int)$month + 1, 0, $year));
+            if ($expiration < $endOfMonth) {
+                unset($creditcards[$key]);
+            }
             $creditcard->card_number = '******' . substr($creditcard->card_number, -4);
         }
 
