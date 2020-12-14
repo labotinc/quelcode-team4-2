@@ -74,11 +74,13 @@ class CreditCardsTable extends Table
                 if (preg_match("/\A[4,5][0-9]{15}\z/", $value)) {
                     return true;
                 }
-            }, 'message' => '不正なカード番号です。'])
+                return '不正なカード番号です。';
+            }])
             // [4]or[5]から始まる番号でも、チェックデジットによって確認が取れなければfalseを返す
             // チェックデジットの追加 参考URL =>  https://www.gizmodo.jp/2011/01/post_8367.html
             // テスト用カード番号 => https://pay.jp/docs/testcard
             // アルゴリズムコード参考 => https://en.wikipedia.org/wiki/Luhn_algorithm
+            //->add('card_number', 'why', ['rule' => function ($value, $context) {
             ->add('card_number', 'why', ['rule' => function ($value, $context) {
                 $length = strlen($value);
                 $sum = (int) $value[$length - 1];
@@ -96,7 +98,8 @@ class CreditCardsTable extends Table
                 if ($sum % 10 === 0) {
                     return true;
                 }
-            }, 'message' => '不正なカード番号です。']);
+                return '不正なカード番号です。';
+            }]);
 
         $validator
             ->scalar('holder_name')
