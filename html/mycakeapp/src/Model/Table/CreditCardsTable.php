@@ -185,12 +185,32 @@ class CreditCardsTable extends Table
     /**
      * @param string user_id
      * @return array そのuser_idで登録されたクレジットカード情報の一覧（復号化した後、カード番号に関しては下4桁のみ表示）
+     * 処理流れ（復号化と、有効期限比較）
+     * 1. ユーザーIDが一致&削除されていないクレカ情報を取得
+     * 2. 今月末の日付情報を取得('Y-m-d')
+     * 3. 復号化
+     * 4. 復号化された有効期限を、'Y-m-d'のdate型に変換
+     * 5. 2.で取得した今月末の日付情報と4.を比較し、今月末の日付情報の方が新しいクレカ情報は配列から削除しforeachを続ける
+     * 6. クレカ番号を加工
      */
     public function findCreditCard(string $user_id)
     {
-        $creditcards = $this->find()->select(['id', 'card_number', 'holder_name'])->where(['user_id' => $user_id, 'is_deleted' => 0])->toList();
-        foreach ($creditcards as $creditcard) {
+        // 1.クレカ情報取得
+        $creditcards = $this->find()->select(['id', 'card_number', 'holder_name', 'expiration_date'])->where(['user_id' => $user_id, 'is_deleted' => 0])->toList();
+        // 2. 今月末の日付情報取得
+        $endOfMonth = date('Y-m-d', mktime(0, 0, 0, date('m') + 1, 0, date('Y')));
+        foreach ($creditcards as $key => $creditcard) {
+            // 3.復号化
             $creditcard = $creditcard->decrypt();
+            // 4.復号化された有効期限をY-m-dにする
+            $month = substr($creditcard->expiration_date, 0, 2);
+            $year = sprintf('20%s', substr($creditcard->expiration_date, 2, 2));
+            $expiration = date('Y-m-d', mktime(0, 0, 0, (int)$month + 1, 0, $year));
+            // 5.有効期限が過ぎたものは配列から削除
+            if ($expiration < $endOfMonth) {
+                unset($creditcards[$key]);
+            }
+            // 6.カード番号加工
             $creditcard->card_number = '******' . substr($creditcard->card_number, -4);
         }
         return $creditcards;
