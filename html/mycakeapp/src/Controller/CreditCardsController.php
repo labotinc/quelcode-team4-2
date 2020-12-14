@@ -221,6 +221,7 @@ class CreditCardsController extends MovieAuthBaseController
             }
         }
         //   ベースコントローラーに返す
+        $this->Auth->config('authError', 'エラー');
         return parent::isAuthorized($user);
     }
 }
