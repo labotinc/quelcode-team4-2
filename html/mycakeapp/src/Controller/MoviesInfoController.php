@@ -37,9 +37,7 @@ class MoviesInfoController extends MovieAuthBaseController
     {
         parent::beforeFilter($event);
         // トップページは認証を行わない
-        $this->Auth->allow(
-            'index'
-        );
+        $this->Auth->allow(['index', 'pricelist']);
     }
 
     public function index()
@@ -343,5 +341,18 @@ class MoviesInfoController extends MovieAuthBaseController
     // 予約キャンセル完了画面
     public function deleteCompleted()
     {
+    }
+
+    public function isAuthorized($user) // ここでの$userはログインユーザー情報
+    {
+        // 単一のアクションを追加したい場合
+        if (
+            $this->request->getParam('action') === 'schedule'
+            || $this->request->getParam('action') === 'mypage'
+            || $this->request->getParam('action') === 'bookingDetails'
+            || $this->request->getParam('action') === 'deleteCompleted'
+        ) { // ここで||を用いて複数アクションにすることもできる？
+            return true;
+        }
     }
 }
