@@ -77,11 +77,9 @@ class CreditCardsController extends MovieAuthBaseController
                 $creditCard = $creditCard->encrypt();
             }
             if ($this->CreditCards->save($creditCard)) {
-                $this->Flash->success(__('The credit card has been saved.'));
 
                 return $this->redirect(['action' => 'completed']);
             }
-            $this->Flash->error(__('The credit card could not be saved. Please, try again.'));
         }
         $users = $this->CreditCards->Users->find('list', ['limit' => 200]);
         $paymentHistories = $this->CreditCards->PaymentHistories->find('list', ['limit' => 200]);
@@ -106,11 +104,9 @@ class CreditCardsController extends MovieAuthBaseController
             $creditCard = $this->CreditCards->patchEntity($creditCard, $this->request->getData());
             $creditCard = $creditCard->encrypt();
             if ($this->CreditCards->save($creditCard)) {
-                $this->Flash->success(__('The credit card has been saved.'));
 
                 return $this->redirect(['controller' => 'MoviesInfo', 'action' => 'mypage']);
             }
-            $this->Flash->error(__('The credit card could not be saved. Please, try again.'));
         }
         $users = $this->CreditCards->Users->find('list', ['limit' => 200]);
         $paymentHistories = $this->CreditCards->PaymentHistories->find('list', ['limit' => 200]);
