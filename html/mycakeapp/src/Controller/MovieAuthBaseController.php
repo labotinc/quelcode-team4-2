@@ -95,7 +95,7 @@ class MovieAuthBaseController extends AppController
     }
     // 一般ユーザーは'Bookings','MoviesInfo', 'CreditCards', 'PaymentHistories' のControllerのみtrue、他はfalse,他必要なコントローラは順次追加する
     else {
-      if ($this->name === 'Bookings' || $this->name === 'MoviesInfo' || $this->name === 'CreditCards' || $this->name === 'PaymentHistories') {
+      if ($this->name === 'Bookings' || $this->name === 'MoviesInfo' || $this->name === 'PaymentHistories') {
         return true;
       } else {
         return false;
