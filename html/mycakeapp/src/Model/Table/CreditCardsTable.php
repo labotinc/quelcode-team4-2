@@ -178,6 +178,7 @@ class CreditCardsTable extends Table
     public function buildRules(RulesChecker $rules)
     {
         $rules->add($rules->existsIn(['user_id'], 'Users'));
+        $rules->add($rules->isUnique(['card_number'], 'すでに登録されているカードです。'));
 
         return $rules;
     }
