@@ -187,7 +187,7 @@ class CreditCardsTable extends Table
      * @return array そのuser_idで登録されたクレジットカード情報の一覧（復号化した後、カード番号に関しては下4桁のみ表示）
      * 処理流れ（復号化と、有効期限比較）
      * 1. ユーザーIDが一致&削除されていないクレカ情報を取得
-     * 2. 今月末の日付情報を取得('Y-m-d')
+     * 2. 今月末の日付情報を取得('Y-m-d') 参考URL(の例3)：https://www.php.net/manual/ja/function.mktime
      * 3. 復号化
      * 4. 復号化された有効期限を、'Y-m-d'のdate型に変換
      * 5. 2.で取得した今月末の日付情報と4.を比較し、今月末の日付情報の方が新しいクレカ情報は配列から削除しforeachを続ける
