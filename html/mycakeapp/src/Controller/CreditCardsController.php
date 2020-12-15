@@ -64,16 +64,18 @@ class CreditCardsController extends MovieAuthBaseController
                  * 処理の流れ（備考）エンティティ関連の値を操作するメソッドは全てCreditCard.phpに記載
                  * 1. ユーザーIDをセット(setUserIdメソッド)
                  * 2. is_deletedをセット(setIsDeletedメソッド)
-                 * 3. 暗号化 (encryptメソッド)
+                 * 3. 名前を全て大文字にする
+                 * 4. 暗号化 (encryptメソッド)
                  */
 
                 // 1. user_idの値をセット
                 $user_id = $this->Auth->user('id');
                 $creditCard = $creditCard->setUserId($user_id);
-
                 // 2. is_deletedの値をセット
                 $creditCard = $creditCard->setIsDeleted();
-                // 3. 暗号化
+                // 3. 名義人文字列を全て大文字化
+                $creditCard->holder_name = strtoupper($creditCard->holder_name);
+                // 4. 暗号化
                 $creditCard = $creditCard->encrypt();
             }
             if ($this->CreditCards->save($creditCard)) {
