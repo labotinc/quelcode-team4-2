@@ -347,8 +347,7 @@ class MoviesInfoController extends MovieAuthBaseController
     {
         // 単一のアクションを追加したい場合
         if (
-            $this->request->getParam('action') === 'schedule'
-            || $this->request->getParam('action') === 'mypage'
+            $this->request->getParam('action') === 'mypage'
             || $this->request->getParam('action') === 'bookingDetails'
             || $this->request->getParam('action') === 'deleteCompleted'
         ) { // ここで||を用いて複数アクションにすることもできる？
