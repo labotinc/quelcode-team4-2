@@ -74,12 +74,13 @@ class CreditCardsTable extends Table
                 if (preg_match("/\A[4,5][0-9]{15}\z/", $value)) {
                     return true;
                 }
-            }, 'message' => '不正なカード番号です。'])
+                return '不正なカード番号です。';
+            }])
             // [4]or[5]から始まる番号でも、チェックデジットによって確認が取れなければfalseを返す
             // チェックデジットの追加 参考URL =>  https://www.gizmodo.jp/2011/01/post_8367.html
             // テスト用カード番号 => https://pay.jp/docs/testcard
             // アルゴリズムコード参考 => https://en.wikipedia.org/wiki/Luhn_algorithm
-            ->add('card_number', 'why', ['rule' => function ($value, $context) {
+            ->add('card_number', 'custom', ['rule' => function ($value, $context) {
                 $length = strlen($value);
                 $sum = (int) $value[$length - 1];
                 $parity = $length % 2;
@@ -96,7 +97,8 @@ class CreditCardsTable extends Table
                 if ($sum % 10 === 0) {
                     return true;
                 }
-            }, 'message' => '不正なカード番号です。']);
+                return '不正なカード番号です。';
+            }]);
 
         $validator
             ->scalar('holder_name')
@@ -178,6 +180,7 @@ class CreditCardsTable extends Table
     public function buildRules(RulesChecker $rules)
     {
         $rules->add($rules->existsIn(['user_id'], 'Users'));
+        $rules->add($rules->isUnique(['card_number'], 'すでに登録されているカードです。'));
 
         return $rules;
     }
@@ -185,12 +188,32 @@ class CreditCardsTable extends Table
     /**
      * @param string user_id
      * @return array そのuser_idで登録されたクレジットカード情報の一覧（復号化した後、カード番号に関しては下4桁のみ表示）
+     * 処理流れ（復号化と、有効期限比較）
+     * 1. ユーザーIDが一致&削除されていないクレカ情報を取得
+     * 2. 今月末の日付情報を取得('Y-m-d') 参考URL(の例3)：https://www.php.net/manual/ja/function.mktime
+     * 3. 復号化
+     * 4. 復号化された有効期限を、'Y-m-d'のdate型に変換
+     * 5. 2.で取得した今月末の日付情報と4.を比較し、今月末の日付情報の方が新しいクレカ情報は配列から削除しforeachを続ける
+     * 6. クレカ番号を加工
      */
     public function findCreditCard(string $user_id)
     {
-        $creditcards = $this->find()->select(['id', 'card_number', 'holder_name'])->where(['user_id' => $user_id, 'is_deleted' => 0])->toList();
-        foreach ($creditcards as $creditcard) {
+        // 1.クレカ情報取得
+        $creditcards = $this->find()->select(['id', 'card_number', 'holder_name', 'expiration_date'])->where(['user_id' => $user_id, 'is_deleted' => 0])->toList();
+        // 2. 今月末の日付情報取得
+        $endOfMonth = date('Y-m-d', mktime(0, 0, 0, date('m') + 1, 0, date('Y')));
+        foreach ($creditcards as $key => $creditcard) {
+            // 3.復号化
             $creditcard = $creditcard->decrypt();
+            // 4.復号化された有効期限をY-m-dにする
+            $month = substr($creditcard->expiration_date, 0, 2);
+            $year = sprintf('20%s', substr($creditcard->expiration_date, 2, 2));
+            $expiration = date('Y-m-d', mktime(0, 0, 0, (int)$month + 1, 0, $year));
+            // 5.有効期限が過ぎたものは配列から削除
+            if ($expiration < $endOfMonth) {
+                unset($creditcards[$key]);
+            }
+            // 6.カード番号加工
             $creditcard->card_number = '******' . substr($creditcard->card_number, -4);
         }
         return $creditcards;
@@ -204,8 +227,15 @@ class CreditCardsTable extends Table
             ->select(['id', 'card_number', 'holder_name', 'expiration_date'])
             ->where(['user_id' => $user_id, 'is_deleted' => 0])
             ->toList();
-        foreach ($creditcards as $creditcard) {
+        $endOfMonth = date('Y-m-d', mktime(0, 0, 0, date('m') + 1, 0, date('Y')));
+        foreach ($creditcards as $key => $creditcard) {
             $creditcard = $creditcard->decrypt();
+            $month = substr($creditcard->expiration_date, 0, 2);
+            $year = sprintf('20%s', substr($creditcard->expiration_date, 2, 2));
+            $expiration = date('Y-m-d', mktime(0, 0, 0, (int)$month + 1, 0, $year));
+            if ($expiration < $endOfMonth) {
+                unset($creditcards[$key]);
+            }
             $creditcard->card_number = '******' . substr($creditcard->card_number, -4);
         }
 

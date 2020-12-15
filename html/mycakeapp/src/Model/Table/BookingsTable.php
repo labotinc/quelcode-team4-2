@@ -171,7 +171,7 @@ class BookingsTable extends Table
         return $bookings;
     }
 
-     /**
+    /**
      * ユーザー退会時の予約取り消しメソッド
      * 1. そのユーザーの
      * 2. まだキャンセルされてない
@@ -186,5 +186,13 @@ class BookingsTable extends Table
             $booking = $booking->setIsCancelled();
         }
         return $bookings;
+    }
+
+    /**
+     * 予約したユーザーを検索
+     */
+    public function isOwnedBy($bookingId, $userId)
+    {
+        return $this->exists(['id' => $bookingId, 'user_id' => $userId]);
     }
 }

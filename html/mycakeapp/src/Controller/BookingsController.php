@@ -31,6 +31,26 @@ class BookingsController extends MovieAuthBaseController
 
         $this->set('authuser', $this->Auth->user());
     }
+
+    /**
+     * 一般ユーザーがアクセスできるのをaddSeatアクションのみに指定
+     * 予約したユーザーのみ、その予約確認画面にアクセス・キャンセル可能ユーザーに指定
+     */
+    public function isAuthorized($user)
+    {
+        // 登録ユーザー全員が予約可
+        if ($this->request->getParam('action') === 'addSeat') {
+            return true;
+        }
+        // 予約の所有者は確認画面にアクセス・キャンセル可能
+        if (in_array($this->request->getParam('action'), ['seatConfirmation', 'seatCancel'])) {
+            $bookingId = (int)$this->request->getParam('pass.0');
+            if ($this->Bookings->isOwnedBy($bookingId, $user['id'])) {
+                return true;
+            }
+        }
+        return parent::isAuthorized($user);
+    }
     /**
      * Index method
      *
