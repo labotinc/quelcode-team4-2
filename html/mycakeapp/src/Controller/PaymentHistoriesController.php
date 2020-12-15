@@ -337,20 +337,15 @@ class PaymentHistoriesController extends MovieAuthBaseController
 
     public function isAuthorized($user) // ここでの$userはログインユーザー情報
     {
-        // 単一のアクションを追加したい場合
-        if (
-            $this->request->getParam('action') === 'chooseCard'
-            || $this->request->getParam('action') === 'overview'
-            || $this->request->getParam('action') === 'PaymentCancel'
-            || $this->request->getParam('action') === 'completion'
-        ) {
-            return true;
-        } elseif ($user === 1 || $user === 2 || $user === 3 || $user === 4) {
-            return true;
-        } else {
-            //   ベースコントローラーに返す
-            $this->Auth->config('authError', 'エラー');
-            return parent::isAuthorized($user);
+        if (in_array($this->request->getParam('action'), ['chooseCard', 'overview', 'PaymentCancel', 'completion'])) {
+            $bookingId = (int)$this->request->getParam('pass.0');
+            if ($this->Bookings->isOwnedBy($bookingId, $user['id'])) {
+                return true;
+            }
         }
+
+        //   ベースコントローラーに返す
+        $this->Auth->config('authError', 'エラー');
+        return parent::isAuthorized($user);
     }
 }

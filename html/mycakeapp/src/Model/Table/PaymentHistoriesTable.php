@@ -143,7 +143,7 @@ class PaymentHistoriesTable extends Table
         return $payment_histories_array;
     }
 
-     /**
+    /**
      * ユーザー退会時の決済キャンセルフラグ用メソッド
      * 1. そのユーザーの
      * 2. まだ映画が上映されていないスケジュール
@@ -170,5 +170,10 @@ class PaymentHistoriesTable extends Table
             $payment = $payment->setIsCancelled();
         }
         return $payments;
+    }
+
+    public function isOwnedBy($bookingId, $userId)
+    {
+        return $this->exists(['id' => $bookingId, 'user_id' => $userId]);
     }
 }
