@@ -37,7 +37,9 @@ class MoviesInfoController extends MovieAuthBaseController
     {
         parent::beforeFilter($event);
         // トップページは認証を行わない
-        $this->Auth->allow(['index', 'pricelist']);
+        $this->Auth->allow(
+            'index'
+        );
     }
 
     public function index()
