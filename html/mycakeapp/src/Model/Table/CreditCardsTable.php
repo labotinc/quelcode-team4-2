@@ -255,4 +255,10 @@ class CreditCardsTable extends Table
 
         return $creditcards;
     }
+
+    public function isOwnedBy($creditCardId, $userId)
+    {
+        // 指定したクレカID、ユーザーIDに当てはまるデータが存在するか調べる。
+        return $this->exists(['id' => $creditCardId, 'user_id' => $userId]);
+    }
 }

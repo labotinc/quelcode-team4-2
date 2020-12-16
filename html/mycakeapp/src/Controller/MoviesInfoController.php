@@ -344,4 +344,16 @@ class MoviesInfoController extends MovieAuthBaseController
     public function deleteCompleted()
     {
     }
+
+    public function isAuthorized($user) // ここでの$userはログインユーザー情報
+    {
+        // 単一のアクションを追加したい場合
+        if (
+            $this->request->getParam('action') === 'mypage'
+            || $this->request->getParam('action') === 'bookingDetails'
+            || $this->request->getParam('action') === 'deleteCompleted'
+        ) { // ここで||を用いて複数アクションにすることもできる？
+            return true;
+        }
+    }
 }

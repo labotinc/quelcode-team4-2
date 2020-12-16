@@ -333,4 +333,19 @@ class PaymentHistoriesController extends MovieAuthBaseController
 
         return $this->redirect(['action' => 'index']);
     }
+
+
+    public function isAuthorized($user) // ここでの$userはログインユーザー情報
+    {
+        if (in_array($this->request->getParam('action'), ['chooseCard', 'overview', 'PaymentCancel', 'completion'])) {
+            $bookingId = (int)$this->request->getParam('pass.0');
+            if ($this->Bookings->isOwnedBy($bookingId, $user['id'])) {
+                return true;
+            }
+        }
+
+        //   ベースコントローラーに返す
+        $this->Auth->config('authError', 'エラー');
+        return parent::isAuthorized($user);
+    }
 }
