@@ -214,7 +214,7 @@ class CreditCardsController extends MovieAuthBaseController
             return true;
         }
         // 重要な処理（クレカの削除、編集など？）
-        if (in_array($this->request->getParam('action'), ['index', 'view', 'edit', 'delete'])) {
+        if (in_array($this->request->getParam('action'), ['edit', 'delete'])) {
             $creditCardId = (int)$this->request->getParam('pass.0'); // そのページで渡された引数 参考:https://book.cakephp.org/3/ja/controllers/request-response.html#id3
             if ($this->CreditCards->isOwnedBy($creditCardId, $user['id'])) { // クレジットカードテーブルにメソッド記載
                 return true;
