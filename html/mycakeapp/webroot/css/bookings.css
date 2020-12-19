@@ -153,31 +153,32 @@ label:hover {
 }
 
 /* =============== ここから決済方法 ==================== */
-.payment-method .wrapper{
+.payment-method .wrapper {
     padding-top: 60px;
 }
 
-.payment-method .confirmation-container{
+.payment-method .confirmation-container {
     padding-bottom: 30px;
 }
 
-.payment-method .btn{
+.payment-method .btn {
     width: 490px;
-    margin: 0  auto;
+    margin: 0 auto;
     display: flex;
     justify-content: space-between;
 }
 
-.payment-method .btn a{
-    padding:18px 10px;
+.payment-method .btn a {
+    padding: 18px 10px;
 }
 
-.payment-method .submit{
+.payment-method .submit {
     margin: 0;
     padding: 0;
 }
 
-.credit,.point{
+.credit,
+.point {
     width: 500px;
     margin: 0 auto 40px;
     font-size: 16px;
@@ -187,11 +188,11 @@ label:hover {
 }
 
 /* カードがなかったとき ==== */
-.not-have-card{
+.not-have-card {
     text-align: center;
 }
 
-.not-have-card a{
+.not-have-card a {
     background-color: #e5f50b;
     color: #2e2b2b;
     border: dotted 2px #2e2b2b;
@@ -199,11 +200,11 @@ label:hover {
 }
 /* end ==== */
 
-.point{
+.point {
     /* background-color: #619cf4; */
 }
 
-.card-info{
+.card-info {
     border: solid 2px #5a5858;
     border-radius: 5px;
     display: flex;
@@ -212,33 +213,33 @@ label:hover {
     margin-bottom: 10px;
 }
 
-.card-info input[type=radio]{
+.card-info input[type="radio"] {
     box-shadow: none;
     width: 30px;
     height: 30px;
 }
 
-.card-info-details{
+.card-info-details {
     margin-left: 50px;
 }
 
-.card-info-details .flex{
+.card-info-details .flex {
     display: flex;
 }
 
-.card-info-ExpirationDate{
+.card-info-ExpirationDate {
     margin-left: 20px;
 }
 
-.name{
+.name {
     margin-bottom: 15px;
 }
 
 /* ============== ここから決済概要 ============== */
-.overview{
+.overview {
     padding-bottom: 40px;
 }
-.price-flex{
+.price-flex {
     width: 400px;
     display: flex;
     justify-content: space-between;
@@ -246,17 +247,22 @@ label:hover {
 }
 
 /* ============== ここから決済完了 ============== */
-.completion{
+.completion {
     margin-top: 100px;
     padding-bottom: 60px;
 }
 
-.completion p{
+.completion p {
     color: #5a5858;
     font-weight: bold;
     margin-bottom: 30px;
 }
 
-.completion .accept-button{
+.completion .accept-button {
     width: 350px;
+}
+
+.error {
+    color: red;
+    padding-bottom: 8px;
 }
