@@ -78,6 +78,8 @@ class BookingsTable extends Table
             ->add('seat_number', 'custom', ['rule' => function ($value, $context) {
                 if (preg_match("/\A[A-K]{1}[1-8]{1}\z/", $value)) {
                     return true;
+                } else {
+                    return false;
                 }
             }, 'message' => '座席番号が不正です。']);
 
