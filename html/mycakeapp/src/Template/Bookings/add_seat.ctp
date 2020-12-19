@@ -11,12 +11,9 @@ $column_alphabets = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K'];
 <?= $this->Html->script('booking', ['block' => true]); ?>
 <section>
   <h1 class="heading">座席予約</h1>
-
   <div class="wrapper">
     <?= $this->Flash->render(); ?>
-
     <div class="container">
-
       <div class="non-reserved-sample">予約可能</div>
       <div class="reserved-sample">予約済</div>
       <?= $this->Form->create($booking, [
@@ -97,6 +94,5 @@ $column_alphabets = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K'];
       <?= $this->Form->submit('決定', ['class' => 'registration']) ?>
       <?= $this->Form->end() ?>
     </div>
-
   </div>
 </section>
