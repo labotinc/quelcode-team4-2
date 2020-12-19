@@ -202,18 +202,15 @@ class CreditCardsController extends MovieAuthBaseController
     {
         $this->viewBuilder()->setLayout('main');
     }
+
+    // ログイン後にアクセス可能なページ群
     public function isAuthorized($user) // ここでの$userはログインユーザー情報
     {
         // 単一のアクションを追加したい場合
-        if (
-            $this->request->getParam('action') === 'add'
-            || $this->request->getParam('action') === 'creditInfo'
-            || $this->request->getParam('action') === 'completed'
-            || $this->request->getParam('action') === 'deleteCompleted'
-        ) { // ここで||を用いて複数アクションにすることもできる？
+        if (in_array($this->request->getParam('action'), ['add', 'creditInfo', 'completed', 'deleteCompleted'])) {
             return true;
         }
-        // 重要な処理（クレカの削除、編集など？）
+        // 情報確認が必要な処理
         if (in_array($this->request->getParam('action'), ['edit', 'delete'])) {
             $creditCardId = (int)$this->request->getParam('pass.0'); // そのページで渡された引数 参考:https://book.cakephp.org/3/ja/controllers/request-response.html#id3
             if ($this->CreditCards->isOwnedBy($creditCardId, $user['id'])) { // クレジットカードテーブルにメソッド記載
@@ -221,7 +218,6 @@ class CreditCardsController extends MovieAuthBaseController
             }
         }
         //   ベースコントローラーに返す
-        $this->Auth->config('authError', 'エラー');
         return parent::isAuthorized($user);
     }
 }

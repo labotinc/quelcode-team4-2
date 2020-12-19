@@ -59,7 +59,7 @@ class MoviesInfoController extends MovieAuthBaseController
          * 1. userエンティティの退会フラグを立てる
          * 2. creditcardエンティティのカード番号などを上書きして削除フラグを立てる
          * 3. cancellingAccountHistoryのnewEntityを作成する
-         * 4. ユーザーの予約状況を確認し、予約があれば取り消す 
+         * 4. ユーザーの予約状況を確認し、予約があれば取り消す
          * 5. 上記のエンティティを全て保存する
          */
         if ($this->request->is('post')) {
@@ -345,14 +345,10 @@ class MoviesInfoController extends MovieAuthBaseController
     {
     }
 
+    // ログイン後にアクセス可能なページ群
     public function isAuthorized($user) // ここでの$userはログインユーザー情報
     {
-        // 単一のアクションを追加したい場合
-        if (
-            $this->request->getParam('action') === 'mypage'
-            || $this->request->getParam('action') === 'bookingDetails'
-            || $this->request->getParam('action') === 'deleteCompleted'
-        ) { // ここで||を用いて複数アクションにすることもできる？
+        if (in_array($this->request->getParam('action'), ['mypage', 'bookingDetails', 'deleteCompleted'])) {
             return true;
         }
     }
