@@ -179,7 +179,7 @@ class BookingsController extends MovieAuthBaseController
             if ($this->Bookings->save($booking)) {
                 return $this->redirect(['action' => 'seat_confirmation', $booking->id]);
             }
-            $this->Flash->error(__('The booking could not be saved. Please, try again.'));
+            $this->Flash->error(__('予期せぬエラーが発生しました。再度予約をお願いします。'));
         }
 
         $this->set(compact(

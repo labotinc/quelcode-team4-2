@@ -72,9 +72,16 @@ class BookingsTable extends Table
 
         $validator
             ->scalar('seat_number')
-            ->maxLength('seat_number', 2)
+            ->maxLength('seat_number', 2, '座席番号が不正です。')
             ->requirePresence('seat_number', 'create')
-            ->notEmptyString('seat_number', '座席を選択してください。');
+            ->notEmptyString('seat_number', '座席を選択してください。')
+            ->add('seat_number', 'custom', ['rule' => function ($value, $context) {
+                if (preg_match("/\A[A-K]{1}[1-8]{1}\z/", $value)) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }, 'message' => '座席番号が不正です。']);
 
         $validator
             ->boolean('is_cancelled')
