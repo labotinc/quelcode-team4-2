@@ -12,6 +12,7 @@
   <p class="text-registration-completed">予約をキャンセルしました。</p>
   <?= $this->Html->link(
     'マイページに戻る',
+    ['action' => 'mypage'],
     ['class' => 'link-button']
   );
   ?>

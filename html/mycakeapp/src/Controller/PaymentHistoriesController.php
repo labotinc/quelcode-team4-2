@@ -161,7 +161,7 @@ class PaymentHistoriesController extends MovieAuthBaseController
                     'credit_card_id' => $_POST['cardInfoId'],
                     // 価格(price_id)
                     'price_id' => (string)$arrayPrice[0]['id'],
-                    // 割引(discount_id) 
+                    // 割引(discount_id)
                     'discount_id' =>  $discountPrice['id'],
                     // 税金(sales_tax_id)
                     'sales_tax_id' => (string)$salesTax[0]['id'],
@@ -334,7 +334,7 @@ class PaymentHistoriesController extends MovieAuthBaseController
         return $this->redirect(['action' => 'index']);
     }
 
-
+    // ログイン後にアクセス可能なページ群
     public function isAuthorized($user) // ここでの$userはログインユーザー情報
     {
         if (in_array($this->request->getParam('action'), ['chooseCard', 'overview', 'PaymentCancel', 'completion'])) {
@@ -344,8 +344,6 @@ class PaymentHistoriesController extends MovieAuthBaseController
             }
         }
 
-        //   ベースコントローラーに返す
-        $this->Auth->config('authError', 'エラー');
         return parent::isAuthorized($user);
     }
 }
