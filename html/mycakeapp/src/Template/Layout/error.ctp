@@ -52,10 +52,10 @@
             // }
             ?>
             <div id="content">
-                <?= var_dump($this->fetch('content')) ?>
+                <?= $this->fetch('content') ?>
             </div>
 
-            <?= $this->Html->link(__('Back'), 'javascript:history.back()') ?>
+            <?= $this->Html->link(__('戻る'), 'javascript:history.back()') ?>
         </div>
     </main>
     <footer>
