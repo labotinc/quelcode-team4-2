@@ -7,6 +7,9 @@ use Cake\Error\ExceptionRenderer;
 use Cake\Log\Engine\FileLog;
 use Cake\Mailer\Transport\MailTransport;
 
+// あらかじめ設定したデバックモードの判定
+$debug = (bool)getenv('CAKEPHP_DEBUG');
+
 return [
 	/**
 	 * Debug Level:
@@ -17,7 +20,8 @@ return [
 	 * Development Mode:
 	 * true: Errors and warnings shown.
 	 */
-	'debug' => filter_var(env('DEBUG', false), FILTER_VALIDATE_BOOLEAN),
+
+	'debug' => filter_var(env('DEBUG', $debug), FILTER_VALIDATE_BOOLEAN),
 
     /**
      * Configure basic information about the application.
@@ -335,6 +339,8 @@ return [
             'className' => FileLog::class,
             'path' => LOGS,
             'file' => 'error',
+            'size' => '50MB', // 指定したサイズまでログ出力
+            'rotate' => 30, // 残すログファイル数
             'url' => env('LOG_ERROR_URL', null),
             'scopes' => false,
             'levels' => ['warning', 'error', 'critical', 'alert', 'emergency'],
