@@ -17,12 +17,20 @@ services:
   #     - ./html:/var/www/html
   #   environment:
   #     DEV_KEY: HOGEhogeHOGEhogeHOGEhogeHOGEhoge
+  #     CAKE_ENV: develop
+  #     CAKEPHP_DEBUG: 1
   php:
     build:
       context: .
       dockerfile: ./Dockerfile
   mysql:
     build: ./docker/mysql
+    # environment:
+    #   MYSQL_DATABASE: docker_db
+    #   MYSQL_ROOT_PASSWORD: root
+    #   MYSQL_USER: docker_db_user
+    #   MYSQL_PASSWORD: docker_db_user_pass
+    #   TZ: Asia/Tokyo
     volumes:
       - ./docker/mysql/data:/var/lib/mysql
   phpmyadmin:
