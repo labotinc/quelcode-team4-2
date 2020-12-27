@@ -1,0 +1,20 @@
+.error-container {
+    margin: 80px 100px 100px;
+}
+
+h1 {
+    font-size: 20px;
+    padding-bottom: 20px;
+}
+
+.http-status {
+    padding-bottom: 16px;
+}
+
+p.error {
+    display: none;
+}
+
+.error-page-back {
+    color: #f5ae0b;
+}

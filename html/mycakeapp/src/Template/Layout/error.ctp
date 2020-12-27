@@ -24,12 +24,11 @@
     </title>
     <?= $this->Html->meta('icon') ?>
 
-    <?= $this->Html->css('base.css') ?>
-    <?= $this->Html->css('style.css') ?>
     <?= $this->Html->css('movies') ?>
     <?= $this->Html->css('normalize') ?>
     <?= $this->Html->css('header') ?>
     <?= $this->Html->css('footer') ?>
+    <?= $this->Html->css('error') ?>
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>
     <?= $this->fetch('script') ?>
@@ -40,22 +39,13 @@
         <?= $this->element('header') ?>
     </header>
     <main>
-        <div id="container">
-
+        <div class="error-container">
             <h1><?= __('Error') ?></h1>
-            <?php
-            // $http_response = $this->response->getStatusCode();
-            // if ($http_response === 404) {
-            //     echo $http_response . "Not Found";
-            // } elseif ($http_response === 500) {
-            //     echo $http_response . "An Internal Error Has Occurred";
-            // }
-            ?>
-            <div id="content">
-                <?= $this->fetch('content') ?>
+            <div class="http-status">
+                <?= $this->response->getStatusCode() . $this->fetch('content'); ?>
             </div>
 
-            <?= $this->Html->link(__('戻る'), 'javascript:history.back()') ?>
+            <?= $this->Html->link(__('戻る'), 'javascript:history.back()', ['class' => 'error-page-back']) ?>
         </div>
     </main>
     <footer>
