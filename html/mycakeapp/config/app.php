@@ -8,7 +8,12 @@ use Cake\Log\Engine\FileLog;
 use Cake\Mailer\Transport\MailTransport;
 
 // あらかじめ設定したデバックモードの判定
-$debug = (bool)getenv('CAKEPHP_DEBUG');
+if (!defined('RDS_HOSTNAME')) {
+    define('RDS_HOSTNAME', $_SERVER['RDS_HOSTNAME']);
+    define('RDS_USERNAME', $_SERVER['RDS_USERNAME']);
+    define('RDS_PASSWORD', $_SERVER['RDS_PASSWORD']);
+    define('RDS_DB_NAME', $_SERVER['RDS_DB_NAME']);
+};
 
 return [
 	/**
@@ -21,7 +26,7 @@ return [
 	 * true: Errors and warnings shown.
 	 */
 
-	'debug' => filter_var(env('DEBUG', $debug), FILTER_VALIDATE_BOOLEAN),
+	'debug' => (bool)getenv('CAKEPHP_DEBUG'),
 
     /**
      * Configure basic information about the application.
@@ -260,16 +265,16 @@ return [
             'className' => Connection::class,
             'driver' => Mysql::class,
             'persistent' => false,
-            'host' => 'mysql',
+            'host' => getenv(RDS_HOSTNAME),
             /*
              * CakePHP will use the default DB port based on the driver selected
              * MySQL on MAMP uses port 8889, MAMP users will want to uncomment
              * the following line and set the port accordingly
              */
             //'port' => 'non_standard_port_number',
-            'username' => 'docker_db_user',
-            'password' => 'docker_db_user_pass',
-            'database' => 'docker_db',
+            'username' => getenv(RDS_USERNAME),
+            'password' => getenv(RDS_PASSWORD),
+            'database' => getenv(RDS_DB_NAME),
             /*
              * You do not need to set this flag to use full utf-8 encoding (internal default since CakePHP 3.6).
              */
@@ -327,14 +332,14 @@ return [
      * Configures logging options
      */
     'Log' => [
-        'debug' => [
-            'className' => FileLog::class,
-            'path' => LOGS,
-            'file' => 'debug',
-            'url' => env('LOG_DEBUG_URL', null),
-            'scopes' => false,
-            'levels' => ['notice', 'info', 'debug'],
-        ],
+        // 'debug' => [
+        //     'className' => FileLog::class,
+        //     'path' => LOGS,
+        //     'file' => 'debug',
+        //     'url' => env('LOG_DEBUG_URL', null),
+        //     'scopes' => false,
+        //     'levels' => ['notice', 'info', 'debug'],
+        // ],
         'error' => [
             'className' => FileLog::class,
             'path' => LOGS,
