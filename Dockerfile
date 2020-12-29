@@ -1,4 +1,6 @@
-FROM php:7.3-fpm
+FROM php:7.3-apache
+
+EXPOSE 80
 
 # 本番環境であることを示す環境変数
 ENV CURRENT_ENVIRONMENT=production
@@ -29,10 +31,19 @@ RUN apt-get update \
   && apt-get install -y libicu-dev \
   && docker-php-ext-install pdo_mysql intl mbstring
 
+RUN a2enmod rewrite
 # 作業ディレクトリを変更する
 WORKDIR /var/www/html/mycakeapp
 
+# アプリケーションファイルを追加
 ADD html/ /var/www/html
+# 設定ファイルを追加
+ADD docker/nginx/default.conf /var/www/docker/nginx/default.conf
 ADD docker/php/php.ini /var/www/docker/php/php.ini
+
+ENV APACHE_DOCUMENT_ROOT /var/www/html/mycakeapp/webroot
+RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf
+RUN sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
+
 # composerのインストールを行う
 RUN composer install
