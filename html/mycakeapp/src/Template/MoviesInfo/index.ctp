@@ -22,9 +22,9 @@
             <h1 class="h1">上映映画一覧</h1>
         </div>
         <div class="movielist-box">
-            <?= $this->Html->image('top/onair/see-you-again.jpg') ?>
-            <?= $this->Html->image('top/onair/marilyn-monroe.png') ?>
             <?= $this->Html->image('top/onair/film.jpg') ?>
+            <?= $this->Html->image('top/onair/goods.jpg') ?>
+            <?= $this->Html->image('top/onair/dice.jpg') ?>
         </div>
         <a href="#" class="movielist-link">詳しく見る</a>
     </div>
@@ -38,10 +38,6 @@
         <div class="banner-box upper">
             <?= $this->Html->image('top/banner/sale1.jpg') ?>
             <?= $this->Html->image('top/banner/sale2.jpg') ?>
-        </div>
-        <div class="banner-box lower">
-            <?= $this->Html->image('top/banner/sale3.jpg') ?>
-            <?= $this->Html->image('top/banner/sale4.jpg') ?>
         </div>
         <a href="#" class="discount-link">詳しく見る</a>
     </div>
