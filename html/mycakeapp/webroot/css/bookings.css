@@ -1,0 +1,268 @@
+.container {
+    margin: 0 auto;
+    width: 496px;
+}
+
+.submit {
+    margin-top: 20px;
+    padding-bottom: 80px;
+}
+
+.registration {
+    width: 336px;
+    height: 48px;
+    border: 3px #f5ae0b;
+    font-family: Noto Sans;
+    font-size: 16px;
+    font-weight: bold;
+    letter-spacing: 0.44px;
+    color: #ffffff;
+    background: #f5ae0b 0% 0% no-repeat padding-box;
+}
+
+.error-message {
+    color: #f46161;
+    font-size: 11px;
+    margin: 8px auto;
+    width: 336px;
+    text-align: left;
+}
+
+/*--- 座席一覧テーブル ---*/
+.movie-seats {
+    width: 496px;
+    height: 348px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+tr {
+    vertical-align: inherit;
+}
+
+.table-text {
+    font-size: 13px;
+    color: #99918c;
+}
+
+.locked {
+    opacity: 0.75;
+    color: #aaa;
+}
+
+input[type="checkbox"] {
+    display: none;
+}
+
+input[type="checkbox"]:checked + label {
+    background: #ffb100;
+}
+
+input[type="checkbox"] + label {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    background: #c9c9c9 no-repeat;
+    border-radius: 3px;
+}
+
+label:hover {
+    background: #00000015;
+}
+
+.table-text {
+    font-size: 13px;
+    color: #99918c;
+}
+
+.reserved {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    background: #5a5858 no-repeat;
+    border-radius: 3px;
+}
+
+.non-reserved-sample .reserved-sample {
+    vertical-align: middle;
+}
+
+.reserved-sample {
+    padding: 10px 0 30px 0;
+}
+
+.non-reserved-sample::before {
+    content: "";
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    background: #c9c9c9 no-repeat;
+    border-radius: 3px;
+    position: relative;
+    top: 7px;
+}
+
+.reserved-sample::before {
+    content: "";
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    background: #5a5858 no-repeat;
+    border-radius: 3px;
+    position: relative;
+    top: 7px;
+}
+
+/* seat_confirmationページの実装 */
+.confirmation-container {
+    padding-bottom: 80px;
+}
+
+.movie,
+.user {
+    color: #707070;
+    font-weight: bold;
+    font-family: Noto Sans;
+}
+
+.title {
+    font-size: 16px;
+    padding-bottom: 8px;
+}
+
+.content {
+    font-size: 14px;
+    padding-bottom: 18px;
+}
+
+.heading {
+    text-align: center;
+    color: #707070;
+    font-size: 25px;
+    letter-spacing: 0.89px;
+    line-height: 34px;
+    margin: 80px 0 39px 0;
+}
+
+.wrapper {
+    background: #ffffff;
+    width: 736px;
+    margin: 0 auto 60px;
+    text-align: center;
+    padding-top: 91px;
+}
+
+/* =============== ここから決済方法 ==================== */
+.payment-method .wrapper {
+    padding-top: 60px;
+}
+
+.payment-method .confirmation-container {
+    padding-bottom: 30px;
+}
+
+.payment-method .btn {
+    width: 490px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+}
+
+.payment-method .btn a {
+    padding: 18px 10px;
+}
+
+.payment-method .submit {
+    margin: 0;
+    padding: 0;
+}
+
+.credit,
+.point {
+    width: 500px;
+    margin: 0 auto 40px;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: left;
+    /* background-color: #f46161; */
+}
+
+/* カードがなかったとき ==== */
+.not-have-card {
+    text-align: center;
+}
+
+.not-have-card a {
+    background-color: #e5f50b;
+    color: #2e2b2b;
+    border: dotted 2px #2e2b2b;
+    padding: 10px 30px;
+}
+/* end ==== */
+
+.point {
+    /* background-color: #619cf4; */
+}
+
+.card-info {
+    border: solid 2px #5a5858;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.card-info input[type="radio"] {
+    box-shadow: none;
+    width: 30px;
+    height: 30px;
+}
+
+.card-info-details {
+    margin-left: 50px;
+}
+
+.card-info-details .flex {
+    display: flex;
+}
+
+.card-info-ExpirationDate {
+    margin-left: 20px;
+}
+
+.name {
+    margin-bottom: 15px;
+}
+
+/* ============== ここから決済概要 ============== */
+.overview {
+    padding-bottom: 40px;
+}
+.price-flex {
+    width: 400px;
+    display: flex;
+    justify-content: space-between;
+    margin: 0 auto 50px;
+}
+
+/* ============== ここから決済完了 ============== */
+.completion {
+    margin-top: 100px;
+    padding-bottom: 60px;
+}
+
+.completion p {
+    color: #5a5858;
+    font-weight: bold;
+    margin-bottom: 30px;
+}
+
+.completion .accept-button {
+    width: 350px;
+}
+
+.error {
+    color: red;
+    padding-bottom: 8px;
+}

@@ -73,6 +73,12 @@ use Cake\Utility\Security;
 try {
     Configure::config('default', new PhpConfig());
     Configure::load('app', 'default', false);
+    // 定数ファイルを読み込み
+    if (isset($_SERVER["CAKE_ENV"]) && $_SERVER["CAKE_ENV"] == "develop") {
+        Configure::load("const_develop");
+    } else {
+        Configure::load("const_production");
+    }
 } catch (\Exception $e) {
     exit($e->getMessage() . "\n");
 }
@@ -204,3 +210,12 @@ Type::build('timestamp')
 //Inflector::rules('transliteration', ['/å/' => 'aa']);
 
 \App\Application::addPlugin('Migrations');
+
+/**
+ * 暗号化に使用する定数を追加
+ * 参考 => https://book.cakephp.org/3/ja/development/configuration.html#namespace-Cake\Core
+ * 参考 => https://blog.s-giken.net/352.html
+ */
+Configure::write('method', 'aes-256-cbc');
+Configure::write('option', 0);
+Configure::write('IV', 'DozCbdi80TCfJQ==');
