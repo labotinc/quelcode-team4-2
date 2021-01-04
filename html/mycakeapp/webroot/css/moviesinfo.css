@@ -164,7 +164,6 @@
 /* ========== ヘッダー、はmovie_infoのみ[position: fixed]している ==========
 他のページもおかしくなるようであれば消す。 */
 header {
-    position: fixed;
     top: 0px;
     left: 0px;
     z-index: 100;
