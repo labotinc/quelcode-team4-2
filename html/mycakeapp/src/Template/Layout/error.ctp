@@ -1,4 +1,5 @@
 <?php
+
 /**
  * CakePHP(tm) : Rapid Development Framework (https://cakephp.org)
  * Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
@@ -15,6 +16,7 @@
 ?>
 <!DOCTYPE html>
 <html>
+
 <head>
     <?= $this->Html->charset() ?>
     <title>
@@ -22,26 +24,33 @@
     </title>
     <?= $this->Html->meta('icon') ?>
 
-    <?= $this->Html->css('base.css') ?>
-    <?= $this->Html->css('style.css') ?>
-
+    <?= $this->Html->css('movies') ?>
+    <?= $this->Html->css('normalize') ?>
+    <?= $this->Html->css('header') ?>
+    <?= $this->Html->css('footer') ?>
+    <?= $this->Html->css('error') ?>
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>
     <?= $this->fetch('script') ?>
 </head>
-<body>
-    <div id="container">
-        <div id="header">
-            <h1><?= __('Error') ?></h1>
-        </div>
-        <div id="content">
-            <?= $this->Flash->render() ?>
 
-            <?= $this->fetch('content') ?>
+<body>
+    <header>
+        <?= $this->element('header') ?>
+    </header>
+    <main>
+        <div class="error-container">
+            <h1><?= __('Error') ?></h1>
+            <div class="http-status">
+                <?= $this->response->getStatusCode() . $this->fetch('content'); ?>
+            </div>
+
+            <?= $this->Html->link(__('戻る'), 'javascript:history.back()', ['class' => 'error-page-back']) ?>
         </div>
-        <div id="footer">
-            <?= $this->Html->link(__('Back'), 'javascript:history.back()') ?>
-        </div>
-    </div>
+    </main>
+    <footer>
+        <?= $this->element('footer') ?>
+    </footer>
 </body>
+
 </html>

@@ -1,0 +1,152 @@
+.heading {
+    text-align: center;
+    color: #707070;
+    font-size: 25px;
+    letter-spacing: 0.89px;
+    line-height: 34px;
+    margin: 50px 0 36px 0;
+}
+
+.wrapper {
+    background: #ffffff;
+    width: 736px;
+    margin: 0 auto 60px;
+    text-align: center;
+    padding-top: 50px;
+}
+
+.container {
+    margin: 0 auto;
+    width: 336px;
+}
+
+.email,
+.password {
+    margin: 0 auto 40px;
+}
+
+.email-form,
+.password-form,
+.check-password {
+    width: 336px;
+    height: 36px;
+    border-top: transparent;
+    border-left: transparent;
+    border-right: transparent;
+    border-bottom: 1px solid rgb(226, 230, 232);
+}
+
+select {
+    width: 70px;
+    height: 36px;
+    border: 1px solid rgb(226, 230, 232);
+    color: #707070;
+}
+
+::placeholder {
+    text-align: left;
+    font-size: 16px;
+    letter-spacing: 0.27px;
+}
+
+.container {
+    width: 336px;
+    margin: 0 auto;
+}
+
+.date {
+    text-align: left;
+}
+
+.sexuality {
+    text-align: left;
+    margin-top: 20px;
+}
+
+.submit {
+    margin-top: 50px;
+    padding-bottom: 50px;
+}
+
+.registration {
+    width: 336px;
+    height: 48px;
+    border: 3px #f5ae0b;
+    font-family: Noto Sans;
+    font-size: 16px;
+    font-weight: bold;
+    letter-spacing: 0.44px;
+    color: #ffffff;
+    background: #f5ae0b 0% 0% no-repeat padding-box;
+}
+
+.error-message {
+    color: #f46161;
+    font-size: 11px;
+    margin: 8px auto;
+    width: 336px;
+    text-align: left;
+}
+
+/*-------------------tanks.ctpのcss---------------------------------*/
+
+.thanks-wrapper {
+    background: #ffffff;
+    width: 736px;
+    margin: 144px auto 367px;
+    text-align: center;
+    padding-top: 121px;
+}
+
+.thanks-heading {
+    color: #707070;
+    font-size: 25px;
+    margin-bottom: 30px;
+}
+
+.thanks-message {
+    color: #707070;
+    font-size: 14px;
+    line-height: 24px;
+}
+
+.button {
+    display: inline-block;
+    margin: 50px 0 120px;
+    width: 336px;
+    height: 48px;
+    line-height: 48px;
+    font-size: 16px;
+    letter-spacing: 0.44px;
+    background: #f5ae0b 0% 0% no-repeat padding-box;
+    box-shadow: 0px 3px 6px #00000036;
+    border: 3px solid #f5ae0b;
+    opacity: 1;
+}
+
+label {
+    display: block;
+    text-align: left;
+    width: 336px;
+    margin: 0 auto 5px;
+    color: #707070;
+}
+
+/*-------------------login.ctpのcss---------------------------------*/
+.login-link {
+    display: block;
+    color: #707070;
+    font-size: 14px;
+    letter-spacing: 0.5px;
+    padding-bottom: 26px;
+}
+
+button {
+    margin-bottom: 32px;
+}
+
+.error {
+    font-size: 12px;
+    color: #f46161;
+    padding-bottom: 5px;
+}

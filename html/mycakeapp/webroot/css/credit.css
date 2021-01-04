@@ -1,0 +1,235 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+label {
+    width: auto;
+    display: block;
+}
+.modal{
+    display: none;
+    height: 56vh;
+    position: fixed;
+    top: 74px;
+    width: 100%;
+}
+body.fixed {
+    position: fixed;
+	width: 100%;
+	height: 100%;
+	left: 0;
+}
+.modal__bg{
+    background: rgba(0,0,0,0.8);
+    height: 100vh;
+    position: absolute;
+    width: 100%;
+}
+.modal__content{
+    background: #fff;
+    left: 50%;
+    padding: 120px 200px 68px 200px;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    width: 736px;
+}
+.modal__text {
+    text-align: center;
+    padding-bottom: 60px;
+    font: normal normal normal 16px/22px Noto Sans;
+    letter-spacing: 0.44px;
+    color: #707070;
+    opacity: 1;
+}
+.js-modal-close {
+    margin-right: 16px;
+}
+.main-contents {
+    width: 736px;
+    margin: 0 auto;
+    font: normal normal normal Noto Sans;
+}
+
+.h1 {
+    padding: 78px 0 32px 0;
+}
+h1 {
+    font-size: 25px;
+    text-align: center;
+    font: 25px;
+    font-weight: bold;
+    letter-spacing: 0.89px;
+    color: #707070;
+    opacity: 1;
+}
+
+.form-container {
+    background-color: #FFFFFF;
+    box-shadow: 6px #00000029;
+    margin-bottom: 160px;
+}
+
+.forms {
+    width: 336px;
+    padding: 92px 0 88px 0;
+    margin: 0 auto;
+}
+
+input[type="text"] {
+    border-top: none;
+    border-right: none;
+    border-left: none;
+    border: 1px;
+}
+input::placeholder {
+    font: 16px/22px;
+    letter-spacing: 0.27px;
+    color: #000000;
+    opacity: 0.3;
+}
+.card_number {
+    width: 100%;
+}
+.holder_name {
+    width: 100%;
+}
+.expiration_date, .security_code {
+    width: 152px;
+}
+.flexbox {
+    display: flex;
+    justify-content: space-between;
+}
+.text{
+    margin-bottom: 44px;
+}
+.submit-button.add, .submit-button.edit {
+    margin-top: 44px;
+}
+.form-container .label_confirm {
+    font-size: 11px;
+    letter-spacing: 0.18px;
+    color: #707070;
+    text-align: left;
+    border: none;
+}
+.info-container {
+    width: 336px;
+    margin: 0 auto;
+    padding: 40px 0 20px;
+}
+.info-container .error {
+    color: red;
+}
+.info-container label {
+    text-align: center;
+    border: 1px solid  #707070;
+    padding: 20px 0;
+    margin-bottom: 10px;
+}
+
+.info-container input[type="radio"] {
+    margin-right: 10px;
+}
+/**
+* 全ボタン共通
+*/
+input {
+    display: inline-block;
+    box-shadow: 0 2px 2px #00000014;
+    font-size: 16px;
+}
+
+/**
+* @ボタン 最大サイズボタン(名称仮)基本設計書P24等に登場
+*/
+.submit-button {
+    width: 336px;
+    height: 48px;
+    border: 3px #F5AE0B;
+    font-weight: bold;
+    letter-spacing: 0.44px;
+    color: #FFFFFF;
+    background: #F5AE0B 0% 0% no-repeat padding-box;
+}
+
+.link-button {
+    display: inline-block;
+    margin: 0 200px 88px 200px;
+    padding: 16px 0;
+    text-align: center;
+    width: 336px;
+    border: 3px #F5AE0B;
+    font-weight: bold;
+    letter-spacing: 0.44px;
+    color: #FFFFFF;
+    background: #F5AE0B 0% 0% no-repeat padding-box;
+}
+
+ .link-button__small, .link-button__middle {
+ display: inline-block;
+ text-align: center;
+ padding: 16px 0;
+ box-shadow: 0px 2px 2px #00000014;
+ line-height: 22px;
+ border: none;
+}
+
+.link-button__small {
+ width: 128px;
+ font-family: GothamMedium;
+ letter-spacing: 0.44px;
+ border-style: none;
+ color: #707070;
+ background: #EFEFEF 0% 0% no-repeat padding-box;
+}
+.link-button__middle {
+ width: 192px;
+ font-family: GothamMedium;
+ letter-spacing: 0.44px;
+ color: #FFFFFF;
+ background: #F5AE0B 0% 0% no-repeat padding-box; }
+/** ボタン終わり*/
+
+.button-container {
+    width: 336px;
+    margin: 0 auto;
+    padding: 70px 0 60px 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+.text-registration-completed {
+    padding: 120px 0 40px 0;
+    text-align: center;
+    font: 16px/22px;
+    letter-spacing: 0.44px;
+    color: #707070;
+    opacity: 1;
+}
+
+.visa, .master {
+    width: 32px;
+    height: 24.14px;
+}
+.flex {
+    display: flex;
+}
+.flex .text {
+    margin-right: auto;
+    width: 100%;
+}
+
+.form-container.edit-container label {
+    font-size: 11px;
+    margin-bottom: 8px;
+}
+.error-message {
+    width: auto;
+    color: #F46161;
+    font-size: 11px;
+    margin: 8px auto;
+    text-align: left;
+}

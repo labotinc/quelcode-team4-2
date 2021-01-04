@@ -1,0 +1,61 @@
+@charset "UTF-8";
+
+/**
+* プロパティの記述順序
+* 1 ボックスの詳細(content, padding, border, margin)
+* 2 content詳細(font-sizeなど。大体は「文字」「色」「背景」の順番)
+*/
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    width: 100%;
+    background-color: #ebebeb;
+}
+
+/**
+* 全ボタン共通
+*/
+input {
+    display: inline-block;
+    box-shadow: 0 2px 2px #00000014;
+    padding-left: 10px;
+    font-size: 16px;
+}
+
+.button {
+    box-shadow: 0 2px 2px #00000014;
+    text-align: center;
+    font-size: 16px;
+}
+
+/**
+* @ボタン 中サイズボタン(仮)基本設計書P51等に登場
+*/
+.accept-button {
+    display: inline-block;
+    padding: 16px 0 16px 0;
+    width: 192px;
+    font-family: GothamMedium;
+    letter-spacing: 0.44px;
+    color: #ffffff;
+    background: #f5ae0b 0% 0% no-repeat padding-box;
+}
+
+/**
+* @ボタン キャンセルボタン(仮)基本設計書P51等に登場
+*/
+.cancel-button {
+    display: inline-block;
+    padding: 16px 0 16px 0;
+    width: 128px;
+    font-family: GothamMedium;
+    letter-spacing: 0.44px;
+    color: #707070;
+    background: #efefef 0% 0% no-repeat padding-box;
+}
