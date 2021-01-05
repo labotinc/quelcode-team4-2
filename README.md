@@ -19,7 +19,7 @@
 
 ### http://quelcinemas.tk
 
-## ⛏　HOW TO USE
+## ⛏HOW TO USE
 ### サンプルユーザー（サンプルのクレジット情報を登録済みです）
   <dl>
    <dt>メールアドレス</dt>
@@ -46,8 +46,12 @@
 本開発は3人でのチーム開発で行いました。チーム開発ではレビューの精度を高めるために話し合いを行なっておりました。
 いくつか私がプルリクを提出したものと、レビューしたもののリンクを添付します。
 - プルリク
+
 https://github.com/labotinc/quelcode-team4-2/pull/25
+
 https://github.com/labotinc/quelcode-team4-2/pull/36
 - レビュー
+
 https://github.com/labotinc/quelcode-team4-2/pull/46
+
 https://github.com/labotinc/quelcode-team4-2/pull/52
