@@ -4,6 +4,17 @@
    オンライン映画予約サービスのデモサイトです。
    会員登録→上映映画選択→支払い情報登録（クレジットカード）→映画予約まで一連の操作が可能となっております。
 
+### 使用技術
+- HTML /CSS
+- Javascript / jQuery / Ajax
+- PHP7.3
+- CakePHP3.8
+- AWS(EC2,VPC,RDS,ElasticBeanstalk,Route53)
+- Docker / Docker-compose(ローカル開発環境用)
+- Nginx
+- MySQL8.0
+- Git/GitHub
+
 ## 🌐 App URL
 
 ### http://quelcinemas.tk
