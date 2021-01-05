@@ -66,7 +66,7 @@ Router::scope('/', function (RouteBuilder $routes) {
      */
 
     // $routes->connect('/', ['controller' => 'Pages', 'action' => 'display', 'home']);
-    -$routes->get('/', ['controller' => 'MoviesInfo', 'action' => 'index']);
+    $routes->get('/', ['controller' => 'MoviesInfo', 'action' => 'index']);
 
     /**
      * ...and connect the rest of 'Pages' controller's URLs.
