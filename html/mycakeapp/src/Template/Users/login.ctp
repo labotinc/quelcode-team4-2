@@ -29,11 +29,6 @@
         ['action' => 'signup'],
         ['class' => 'login-link'],
       ); ?>
-      <div class="sample-user">
-        <h3>サンプルユーザー（映画予約まで可能です）</h3>
-        <p>mail:sample@sample.sample</p>
-        <p>pass:sample</p>
-      </div>
       <!-- 将来的に実装 -->
       <!-- <?= $this->Html->link('パスワードを忘れた方はコチラ', ['action' => 'reset'], ['class' => 'login-link']) ?> -->
     </div>
