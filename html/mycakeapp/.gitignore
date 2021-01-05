@@ -43,5 +43,5 @@ nbproject/*
 # Sass preprocessor
 .sass-cache/
 # Movie_thumbnail_images & directly
-webroot/img/MovieThumbnails/*
-!webroot/img/MovieThumbnails/.gitkeep
+# webroot/img/MovieThumbnails/*
+# !webroot/img/MovieThumbnails/.gitkeep
