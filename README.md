@@ -10,7 +10,8 @@
 - PHP7.3
 - CakePHP3.8
 - AWS(EC2,VPC,RDS,ElasticBeanstalk,Route53)
-- Docker / Docker-compose(ローカル開発環境用)
+- Docker
+- Docker-compose(ローカル開発環境用)
 - Nginx
 - MySQL8.0
 - Git/GitHub
