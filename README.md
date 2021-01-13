@@ -9,7 +9,7 @@
 - Javascript / jQuery / Ajax
 - PHP7.3
 - CakePHP3.8
-- AWS(EC2,VPC,RDS,ElasticBeanstalk,Route53)
+- AWS(EC2,VPC,RDS,ElasticBeanstalk,Route53,ACM)
 - Docker
 - Docker-compose(ローカル開発環境用)
 - Nginx
@@ -18,7 +18,7 @@
 
 ## 🌐 App URL
 
-### http://quelcinemas.tk
+### https://quelcinemas.tk
 
 ## ⛏HOW TO USE
 ※ゲストログイン機能を近日中に実装する予定です。
