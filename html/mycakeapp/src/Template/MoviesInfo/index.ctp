@@ -26,7 +26,7 @@
             <?= $this->Html->image('top/onair/goods.jpg') ?>
             <?= $this->Html->image('top/onair/dice.jpg') ?>
         </div>
-        <a href="#" class="movielist-link">詳しく見る</a>
+        <?= $this->Html->link('上映一覧（予約にはログインが必要です）', ['controller' => 'MoviesInfo', 'action' => 'schedule'], ['class' => 'movielist-link']); ?>
     </div>
 </section>
 <section>
@@ -39,6 +39,6 @@
             <?= $this->Html->image('top/banner/sale1.jpg') ?>
             <?= $this->Html->image('top/banner/sale2.jpg') ?>
         </div>
-        <a href="#" class="discount-link">詳しく見る</a>
+        <?= $this->Html->link('料金表', ['controller' => 'prices', 'action' => 'index'], ['class' => 'discount-link']); ?>
     </div>
 </section>
